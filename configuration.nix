@@ -45,10 +45,6 @@
 
   networking.hostName = "iron";
   networking.networkmanager.enable = true;
-  networking.extraHosts =
-  ''
-    127.0.0.1 nightly.changelog.com
-  '';
 
   # Set your time zone.
   time.timeZone = "Asia/Kolkata";
