@@ -3,11 +3,11 @@
 ## TODO
 
 - [ ] move to selfhosted forgejo and mirror to gh
-- [ ] forgejo runners (selfhosted)
+  - [ ] forgejo runners (selfhosted)
   - [ ] cron mirror git command
   - [ ] push on every commit
-- [ ] gha
-- gitlab, cirrus ci, bitbucket pipeline setups
+- [x] gha
+- [ ] gitlab, cirrus ci, bitbucket pipeline setups
 
 ## Tasks
 
