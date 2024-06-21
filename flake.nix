@@ -56,6 +56,9 @@
     lemurs.inputs.nixpkgs.follows = "nixpkgs";
     lemurs.inputs.utils.follows = "flake-utils";
     lemurs.inputs.rust-overlay.follows = "rust-overlay";
+
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
@@ -69,6 +72,7 @@
       nixos-cosmic,
       nix-index-database,
       system-manager,
+      treefmt-nix,
       lemurs,
       ...
     }@inputs:
@@ -105,6 +109,7 @@
             inherit hostname;
           };
         };
+      treefmtEval.${system} = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
     in
     rec {
       inherit (inputs.flake-schemas) schemas;
@@ -180,13 +185,15 @@
       devShells.${system} = {
         default = pkgs.mkShell {
           buildInputs = with pkgs; [
-            dprint
-            nixfmt-rfc-style
             nh
             xc
+	    statix
           ];
         };
       };
-      formatter.${system} = pkgs.nixfmt-rfc-style;
+      formatter.${system} = treefmtEval.${system}.config.build.wrapper;
+      checks.${system} = {
+        formatting = treefmtEval.${system}.config.build.check self;
+      };
     };
 }

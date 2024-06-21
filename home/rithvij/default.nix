@@ -120,8 +120,15 @@ in
   programs.bat.enable = true;
   programs.bun.enable = true;
 
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+    config = {
+      global.disable_stdin = true;
+      global.strict_env = true;
+      global.hide_env_diff = true;
+    };
+  };
 
   programs.eza.enable = true;
   programs.fd.enable = true;
