@@ -4,9 +4,11 @@ main system configuration including dotfiles, will recreate repo with private do
 
 ## TODO
 
+- [ ] NOTES.md or my own documentation
 - [ ] modules, profiles, applications
   - see https://github.com/Guanran928/flake
-  - allows others to import?
+  - allows others to import? more importantly I can import from outside
+  - own pkgs repo, synced with nixpkgs auto pr if own gha successful?
 - [ ] home-manager for different hosts
   - shared /nix partition r/w?
     - garbage collection might get fked
@@ -145,9 +147,7 @@ main system configuration including dotfiles, will recreate repo with private do
   - For creating Containers
 - [ ] Styx
   - binary cache substitutor something novel
-- [ ] Attic
-- [ ] Harmonia
-- [ ] Nix-serve
+- [ ] nix-serve ++ attic ++ harmonia
 - [ ] gha backed magic cache
   - https://github.com/alexellis/actions-batch
   - https://github.com/fawazahmed0/action-debug
@@ -164,12 +164,15 @@ main system configuration including dotfiles, will recreate repo with private do
       - [ ] nix-serve ++ attic ++ harmonia
       - [ ] headscale ++ tailscaled
       - [ ] rustdesk-server
+      - [ ] serf? or headscale enough?
   - [ ] gha config
     - [x] init
     - hm (when using debug time action either upterm or cloudflared tunnel)
     - [ ] cloudflared service
+      - for quick debugs
+    - [ ] tailscaled, ephemeral autologin
     - [ ] nix-serve
-    - [ ]
+    - [ ] serf?
 - [ ] nix-on-droid
   - two identical?
   - [ ] remote build on linux
@@ -193,6 +196,8 @@ main system configuration including dotfiles, will recreate repo with private do
   - on vps and local (i.e system-manager module and nixos module, services)
   - maintainer on nixpkgs it's not there
   - Fork and add drag drop, existing listings, remember upload location and send pr for 1, 3
+  - htmx rewrite fork, already in go
+  - flake/npins setup
 - [ ] cloudflared tunnel nixos service
   - multiple service (redis like)
   - write endpoint to /run/secrets or something so others can use it
