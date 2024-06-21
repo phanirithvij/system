@@ -11,16 +11,7 @@
 
 ## Tasks
 
-### preswitch
-
-requires: flkupdcmt, fmt
-RunDeps: async
-
 ### switch
-
-requires: preswitch, switchreal
-
-### switchreal
 
 requires: home-switch, os-switch
 RunDeps: async
@@ -40,7 +31,7 @@ nh os switch .
 ### home-switch
 
 ```
-nh home switch . -b bak -c rithvij
+nh home switch . -b bak -c rithvij@iron
 ```
 
 ### flkupdcmt
@@ -58,7 +49,7 @@ nom build .#nixosConfigurations.defaultIso.config.system.build.isoImage
 ### home-build
 
 ```
-nom build .#homeConfigurations.rithvij.activationPackage
+nom build .#homeConfigurations."rithvij@iron".activationPackage
 nh home build .
 ```
 
@@ -80,13 +71,6 @@ nom build .#nixOnDroidConfigurations.default.activationPackage --impure
 
 ```
 sudo nix-collect-garbage -d
-```
-
-### fmt
-
-```
-dprint fmt
-nix fmt
 ```
 
 ### nix-olde

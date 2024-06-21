@@ -1,28 +1,33 @@
 % nixos
 
-# build
+# build all
 nh os build . -H iron
 nh home build . -c rithvij@iron
+nom build .#nixosConfigurations.defaultIso.config.system.build.isoImage
 
-# switch
+# switch all
 nh os switch . -H iron
 nh home switch . -b bak -c rithvij@iron
 
 # os switch
 nh os switch . -H iron
-sudo nixos-rebuild switch --fast --flake .#iron
+
+# os build
+nh os build . -H iron
+nom build .#nixosConfigurations.iron.config.system.build.toplevel
+nixos-rebuild build --fast --flake #iron
+nix build .#nixosConfigurations.iron.config.system.build.toplevel
 
 % home-manager
 
 # home switch
 nh home switch . -b bak -c rithvij@iron
-home-manager switch --flake .#rithvij@iron
 
 # home build
-nix build .#homeConfigurations."rithvij@iron".activationPackage
+nh home build . -c rithvij@iron
 nom build .#homeConfigurations."rithvij@iron".activationPackage
 home-manager build --flake .#rithvij@iron
-nh home build . -c rithvij@iron
+nix build .#homeConfigurations."rithvij@iron".activationPackage
 
 % nix-du
 
@@ -36,4 +41,4 @@ xdg-open du.svg
 % static-analyse
 
 # statix
-nix run nixpkgs#statix -- check
+statix check
