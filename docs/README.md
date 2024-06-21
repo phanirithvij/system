@@ -87,7 +87,7 @@ main system configuration including dotfiles, will recreate repo with private do
   - hardware-configuration.nix needs to be untouched
   - [ ] disko
   - [ ] binfmt etc can be in different files
-  - flake schemas is a new halted rfc because of the Elco
+  - flake schemas is a new halted rfc because of the Eelco
 - [ ] jupyenv/jupyterhub/jupyterlab
   - [ ] hm/sys service based on if hub/lab/single instance
   - [ ] project level config flake templates
@@ -218,8 +218,8 @@ main system configuration including dotfiles, will recreate repo with private do
 - nix flake show can be used with `| less`
   - for home-manager it crashes (too big?)
 - nix schema supported nix can be installed form detsys's nix fork with schema support
-  - Again at the mercy of the Elco
-- cppnix meson refactor blocked by the Elco, would make it easy to compile it seems with the only con of having python as a build dep but that's ok.
-- nix upgrade-nix blocked by the Elco in favor of detsys/nix-installer
+  - Again at the mercy of the Eelco
+- cppnix meson refactor blocked by the Eelco, would make it easy to compile it seems with the only con of having python as a build dep but that's ok.
+- nix upgrade-nix blocked by the Eelco in favor of detsys/nix-installer
 - nix portable exists which installs nix without sudo
   - would've been very useful when I was in uni with sudo disabled
