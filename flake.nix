@@ -177,6 +177,16 @@
         gha = system-manager.lib.makeSystemConfig { modules = [ ./hosts/sm/gha/configuration.nix ]; };
         vps = system-manager.lib.makeSystemConfig { modules = [ ./hosts/sm/vps/configuration.nix ]; };
       };
+      devShells.${system} = {
+        default = pkgs.mkShell {
+          buildInputs = with pkgs; [
+            dprint
+            nixfmt-rfc-style
+            nh
+            xc
+          ];
+        };
+      };
       formatter.${system} = pkgs.nixfmt-rfc-style;
     };
 }

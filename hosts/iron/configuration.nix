@@ -215,15 +215,7 @@ in
       docker-compose
       distrobox
 
-      # nix related
-      #
-      # it provides the command `nom` works just like `nix`
-      # with more details log output
       nix-output-monitor
-      nvd
-      nh
-      nixfmt-rfc-style
-      xc
 
       libsmbios
       dmidecode
