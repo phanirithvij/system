@@ -110,12 +110,6 @@ in
 
   services.flatpak.enable = true;
 
-  services.logind = {
-    lidSwitch = "ignore";
-    lidSwitchDocked = "ignore";
-    lidSwitchExternalPower = "ignore";
-  };
-
   nix = {
     package = pkgs.nixFlakes;
     settings =
