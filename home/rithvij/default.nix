@@ -61,7 +61,8 @@ in
     qbittorrent
     koreader
     qimgv
-    beekeeper-studio
+    #4.4.0 broken, TODO wait till 4.6.0
+    #beekeeper-studio
     yacreader
     localsend
     rclone-browser
