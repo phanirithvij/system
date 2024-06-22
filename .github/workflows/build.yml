@@ -48,6 +48,7 @@ jobs:
           path: |
             ~/.cache/nix/
           key: ${{ runner.os }}
+      - run: nix flake check
       - run: nix profile install github:numtide/system-manager github:viperML/nh
       - run: sudo $(which system-manager) switch --flake .#gha
       #- run: system-manager build --flake .#gha
