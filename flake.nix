@@ -109,7 +109,7 @@
             inherit hostname;
           };
         };
-      treefmtEval.${system} = treefmt-nix.lib.evalModule pkgs ./treefmt.nix;
+      treefmtCfg = (treefmt-nix.lib.evalModule pkgs ./treefmt.nix).config.build;
     in
     rec {
       inherit (inputs.flake-schemas) schemas;
@@ -184,16 +184,21 @@
       };
       devShells.${system} = {
         default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            nh
-            xc
-	    statix
-          ];
+          packages =
+            [
+              pkgs.nh
+              pkgs.xc
+              pkgs.statix
+            ]
+            ++ [
+              treefmtCfg.wrapper
+              (pkgs.lib.attrValues treefmtCfg.programs)
+            ];
         };
       };
-      formatter.${system} = treefmtEval.${system}.config.build.wrapper;
+      formatter.${system} = treefmtCfg.wrapper;
       checks.${system} = {
-        formatting = treefmtEval.${system}.config.build.check self;
+        formatting = treefmtCfg.check self;
       };
     };
 }
