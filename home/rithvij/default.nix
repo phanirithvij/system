@@ -114,7 +114,17 @@ in
   ];
 
   programs.bottom.enable = true;
-  programs.alacritty.enable = true;
+  programs.alacritty = {
+    enable = true;
+    settings = {
+      font = {
+        size = 11.25;
+        normal = {
+          family = "JetBrainsMono Nerd Font";
+        };
+      };
+    };
+  };
   programs.aria2.enable = true;
   programs.bashmount.enable = true;
   programs.bat.enable = true;

@@ -63,6 +63,8 @@ in
     useXkbConfig = true; # use xkb.options in tty.
   };
 
+  fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
+
   services.xserver.enable = true;
 
   services.keyd = {
