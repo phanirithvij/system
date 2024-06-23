@@ -56,10 +56,11 @@
           };
 
           xserver.enable = true;
+          xserver.displayManager.startx.enable = true;
           xserver.displayManager.lightdm.enable = lib.mkForce false;
 
           desktopManager.plasma6.enable = true;
-          flatpak.enable = lib.mkForce false;
+          #flatpak.enable = lib.mkForce false;
         };
       };
       inheritParentConfig = true;
