@@ -42,7 +42,7 @@ in
     duf
     dprint
 
-    joplin # slow node tui app
+    #joplin # slow node tui app
 
     ctpv
     #xdragon
