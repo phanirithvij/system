@@ -40,7 +40,7 @@ in
     yq
     viddy
     duf
-    dprint
+    # dprint # use treefmt with it per project from now on
 
     #joplin # slow node tui app
 
