@@ -4,7 +4,43 @@ main system configuration including dotfiles, will recreate repo with private do
 
 ## TODO
 
+### ideas
+
+- [ ] github board like https://github.com/users/kachick/projects/3?query=sort%3Aupdated-desc+is%3Aopen
+  - would prefer something selfhosted (find one)
+  - for now settle on this todo.md
+  - link to private notes msft to tasks.org migration
+  - logseq? need reminders and alarms
+
+### docs
+
 - [ ] NOTES.md or my own documentation
+- [ ] SETUP.md for initial setup
+  - also setup secrets and private repos
+  - Make it clear repo is only for me
+
+### system (one and only inspiron7570 or iron)
+
+### vps (stand-in for non-nixos)
+
+### per project
+
+- system is a project as well but track it above
+
+### automato
+
+#### gha
+
+#### forgejo-runners
+
+#### drone
+
+#### hydra
+
+#### buildbot
+
+#### selfhosted binary caches
+
 - [ ] modules, profiles, applications
   - see https://github.com/Guanran928/flake
   - allows others to import? more importantly I can import from outside
@@ -201,30 +237,3 @@ main system configuration including dotfiles, will recreate repo with private do
 - [ ] cloudflared tunnel nixos service
   - multiple service (redis like)
   - write endpoint to /run/secrets or something so others can use it
-
-## NOTES
-
-- home-manager manages itself for now in a single user env
-  - Allows users to manage their own version
-- in a multi-user scenario a single global home-manager can be enabled in the flake modules
-  ```nix
-  nixosConfigurations = {
-    iron = nixpkgs.lib.nixosSystem {
-      modules = [
-        {
-          environment.systemPackages = [
-            home-manager.packages.${system}.default
-          ];
-        }
-      ];
-    };
-  };
-  ```
-- nix flake show can be used with `| less`
-  - for home-manager it crashes (too big?)
-- nix schema supported nix can be installed form detsys's nix fork with schema support
-  - Again at the mercy of the Eelco
-- cppnix meson refactor blocked by the Eelco, would make it easy to compile it seems with the only con of having python as a build dep but that's ok.
-- nix upgrade-nix blocked by the Eelco in favor of detsys/nix-installer
-- nix portable exists which installs nix without sudo
-  - would've been very useful when I was in uni with sudo disabled

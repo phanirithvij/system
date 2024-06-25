@@ -1,3 +1,27 @@
+# notes to self
+
+- home-manager manages itself for now in a single user env
+  - Allows users to manage their own version
+- in a multi-user scenario a single global home-manager can be enabled in the flake modules
+  ```nix
+  nixosConfigurations = {
+    iron = nixpkgs.lib.nixosSystem {
+      modules = [
+        {
+          environment.systemPackages = [
+            home-manager.packages.${system}.default
+          ];
+        }
+      ];
+    };
+  };
+  ```
+- nix flake show can be used with `| less`
+  - for home-manager it crashes (too big?)
+- nix schema supported nix can be installed form detsys's nix fork with schema support
+- nix portable exists which installs nix without sudo
+  - would've been very useful when I was in uni with sudo disabled
+
 # nixey by other people
 
 Useful links along with my annotations.
@@ -47,9 +71,10 @@ Useful links along with my annotations.
   - https://github.com/a-h/system-manager-test/tree/main
   - https://github.com/a-h/nix-airgapped-vm
 - [ ] nix-olde, nix-du, nix-inspect, nix-tree etc
-- [ ] nom, nh
+- [ ] nom, nh, nvd
 - [ ] hm
 - [ ] direnv
+- [ ] nixos-infect
 
 ## Discourse/gh prs/gh issues
 
@@ -57,24 +82,55 @@ Useful links along with my annotations.
 
 ### blocked/halted
 
-- lazy trees
-- flake schemas
+- lazy trees - only helps with local flakes, shallow clones or github:x/x can't utilise it
+- flake schemas - useful for flake checks it seems
+- cppnix meson refactor blocked, would make it easy to compile it seems with the only con of having python as a build dep but that's ok.
+- nix upgrade-nix blocked in favor of detsys/nix-installer
 
 ### beginner
 
 - overlay
-- cargo sha256 workaroung
-- python packages with syntax
+- cargo sha256 workaround
+- python packageswith syntax
 
 ## Meta
 
-### drama
+### important underlying issues (reddit term is drama)
 
-- jonringer ban, commit bits drama
-- youtuber ban, shea levy
-- srid ban
+- eelco tech decisions
+- flakes
+- flakes merged (experimental)
+- flakehub
+- detsys grahamc flakes are stable post
+  - _no_
+
+- srid permaban
+  - red meat + woke critisism
+
+- jonringer audril MIC post
+  - community divide
+  - open letter for eeclo to step down
+  - detsys blogpost eelco without permission
+    - corporate speak
+    - asks users to move communities (i am inclined to)
+- jonringer tempban
+- youtuber tempban, shea levy tempban
+  - over nazisim semantics discussion with nat418
+
+- ratioberatus quit, lix
+  - nix update mic92, no proper stable upgrade process
+- jonringer commit bits
+  - anticipates backlash, gets backlash
+    - "lies" about timeline
+    - walks back and apologises (no one cares)
+  - samueldr ragequit nixos mobile abdandon
+  - xe ragequit
+- jonringer permaban
+  - jonringer steps down from discord and reddit
 
 ### awesome
 
 - year in nix
 - reproducible
+- nix cli stabilisation
+- flakes stabilisation
