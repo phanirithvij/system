@@ -1,6 +1,7 @@
 # system
 
-main system configuration including dotfiles, will recreate repo with private dotfiles removed and then make it public
+main system configuration including other whacky ideas
+more are in my zet but that is to be made public
 
 ## TODO
 
@@ -10,41 +11,79 @@ main system configuration including dotfiles, will recreate repo with private do
   - would prefer something selfhosted (find one)
   - for now settle on this todo.md
   - link to private notes msft to tasks.org migration
-  - logseq? need reminders and alarms
+  - logseq? but I need reminders and alarms
+  - zet and secondbrain ofc but still todo tracker is different?
+- [ ] checkout jj, git alternative
+- [ ] bookmarks
+  - [ ] remove xc? somehow get navi cheats to work via cli without duplication
+    - nix attrsets for commands and converted to navi, espanso, etc? or ref by id/slug each command?
+    - or just yaml -> json -> nix lib.importJSON/builtins.fromJson
+      - builtins.fromyaml non-existent, there's an open pr NixOS/nix#7340
+    - raw text for cheats, etc
+  - [ ] buku
+    - webserver as nixos service and sysm service
+  - [ ] espanso (outside shell or when navi is not enough)
+    - buku so I can not have a flocuss folder incident
+      - buku has no nested folders???
+    - navi so I can paste navi commands online?
+  - [ ] All these useful nix commands in navi/tmuxp/dmux/espanso/jupntbks/mprocs
+    - Under home-manager bookmarks
+    - Also nh tool is useful
+      - comes with nom, nvd integration
+    - hm switch
+    - nixos switch
+    - nix profile
+    - nix-shell, nix shell
+    - nix-shell with python jupyerlab
+    - detsys nix install script
+- [ ] secrets+passwords+privaterepos
+  - sops secrets, age? o.O
+  - authpass so I can paste passwds online
+    - optional espanso integration
+  - gopass + lesspass (gopass-hibp?)
+    - lesspass db server rockpass, lesspass.rs
+  - whacky: gopass totp, gopass reads .kdbx?
+  - clone private repos to respective dirs auto
+  - [ ] https://github.com/ItalyPaleAle/hereditas
+    - incase I go bye bye
+    - or a simple pdf doc in a pendrive?
+  - [ ] ssh keys, ssh certs
+  - yubikey try
 
 ### docs
 
+- [ ] split docs per topic, esp secrets, bookmarks (notes mainly)
+  - part of own wiki after a topic is done
+  - own wiki like wiki.nikiv.dev
+  - maybe see hugo, srid/emanote, Xe site with mdx typsit
 - [ ] NOTES.md or my own documentation
 - [ ] SETUP.md for initial setup
   - also setup secrets and private repos
   - Make it clear repo is only for me
+  - [ ] initial installation setup for nixos and non-nixos linux
+  - Scripts and writeups
+    - navi, writeshellscriptBin, nh
+  - Bootstrapping nix
+    - Comes with iso for nixos minimal iso
+    - DeterminateSystems nix installer on non-nixos
+  - Bootstrapping home-manager
+    - `nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch --flake /home/rithvij/Projects/system#rithvij`
+    - To bootstrap home.nix config [see here](https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-standalone)
+      - `nix run home-manager/master -- init #--switch`
+- [ ] glossary
+  - sysm
+  - hm
+- [ ] toc
 
 ### system (one and only inspiron7570 or iron)
 
-### vps (stand-in for non-nixos)
+#### iron nixos
 
-### per project
-
-- system is a project as well but track it above
-
-### automato
-
-#### gha
-
-#### forgejo-runners
-
-#### drone
-
-#### hydra
-
-#### buildbot
-
-#### selfhosted binary caches
-
-- [ ] modules, profiles, applications
+- [ ] modules, profiles, apps, packages
   - see https://github.com/Guanran928/flake
   - allows others to import? more importantly I can import from outside
   - own pkgs repo, synced with nixpkgs auto pr if own gha successful?
+  - nur + ff extensions
 - [ ] home-manager for different hosts
   - shared /nix partition r/w?
     - garbage collection might get fked
@@ -54,34 +93,6 @@ main system configuration including dotfiles, will recreate repo with private do
       - and never gc it?
       - makes no sense, substitutor won't solve the space issue
         - nfs mount?
-- [ ] shell.nix
-  - xc, dprint, navi, fzf, lazygit
-  - move away from xc? taskfile, justfile, makefile, magefile, navi
-- [ ] gha steps
-  - disable hardware-configuration.nix before building?
-  - caching limit needs to be taken into consideration
-    - disable qbittorrent, firefox, large packages
-    - minecraft (prismlauncher, steam-run)
-    - linux kernel takes some time
-    - also non-free pkgs
-    - or simply anything not caches by cache.nixos.org?
-    - [ ] gui profile? disable when running gha?
-  - or have a full build action which does not use cache
-    - or in a different repo? but can 10GB hold it
-    - iron hm seems to be 7GB
-  - whacky
-    - [ ] gha runner home-manager profile
-    - [ ] repo/cache per host?
-  - [ ] detect files changed and do only nixos or hm build to not waste gha resources
-  - [ ] pre-commit hooks and pre-commit hooks step in gha like npins
-    - xc fmt
-    - detect if non code change and append [skip ci] to commit msg
-    - https://github.com/K900/vscode-remote-workaround/blob/main/flake.nix
-  - [ ] remove xc? somehow get navi cheats to work via cli without duplication
-    - nix attrsets for commands and converted to navi, espanso, etc? or ref by id/slug each command?
-    - or just yaml -> json -> nix lib.importJSON/builtins.fromJson
-      - builtins.fromyaml non-existent, there's an open pr NixOS/nix#7340
-    - raw text for cheats, etc
 - [ ] minimal profile
   - remove alsa, 32bit
   - documentation enable false
@@ -89,17 +100,101 @@ main system configuration including dotfiles, will recreate repo with private do
 - [ ] mouse heavy wf
   - awesomewm
   - dunst
-- [ ] buku
-  - webserver as nixos module?
-- [ ] espanso (outside shell or when navi is not enough)
-  - buku so I can not have a flocuss folder incident
-  - navi so I can paste navi commands online?
-  - authpass so I can paste passwds online
-  - gopass + lesspass (gopass-hibp?)
-  - whacky: gopass totp, gopass reads .kdbx?
-  - sops secrets, age? o.O
-- [x] formatter is nixfmt-rfc-style
-  - dprint for other things
+- [ ] flake compat
+  - get it working with default.nix and shell.nix
+  - for old nix version support
+  - eg https://github.com/thiagokokada/nix-alien/blob/master/compat.nix
+- [x] devshell
+  - treefmt, dprint, nixfmt-rfc-style
+- [ ] extraoptions, username, email, hostname etc. global
+- [ ] modular restructuring
+  - allows enabling disabling things
+  - hardware-configuration.nix needs to be untouched
+  - [ ] disko
+  - [ ] binfmt etc can be in different files
+
+#### iron arch
+
+- [ ] hm
+- [ ] sysm
+
+### vps (stand-in for non-nixos)
+
+- [ ] hm
+  - [ ] caddy?
+- [ ] sysm
+  - [x] syncplay
+  - [ ] caddy
+  - [ ] nix-serve ++ attic ++ harmonia
+  - [ ] headscale ++ headscale-ui ++ tailscaled
+  - [ ] rustdesk-server
+  - [ ] serf? or headscale enough?
+
+### per project
+
+- [x] system is a project as well but track it above
+- [ ] shell.nix
+  - xc, treefmt, navi (,fzf, lazygit - global?)
+  - move away from xc? taskfile, justfile, makefile, magefile, navi
+- [ ] devenv services
+
+### automatons
+
+- [ ] Tailscale
+  - Headscale or ui auto approve (device)
+  - gotify or ntfy.sh approve?
+  - [ ] tailscaled, ephemeral autologin
+  - sysm or nixos depending on host
+
+#### gha
+
+- [ ] gha steps
+  - disable hardware-configuration.nix before building?
+  - have a full build action which does not use cache
+    - or in a different repo? but can 10GB hold it
+    - iron hm seems to be 7GB (nix-tree)
+  - [ ] gha runner home-manager profile
+  - [ ] repo/cache per host?
+  - [ ] detect files changed and do only nixos or hm build to not waste gha resources
+  - [ ] pre-commit hooks and pre-commit hooks step in gha like npins
+    - nix fmt
+    - flake checks etc in precommithooks
+    - detect if non code change and append [skip ci] to commit msg
+    - https://github.com/K900/vscode-remote-workaround/blob/main/flake.nix
+- [ ] selfhosted
+  - nixos
+  - sysm
+  - docker?
+- [ ] gha config
+  - hm (when using debug time action either upterm or cloudflared tunnel)
+  - sysm
+  - [ ] cloudflared service
+    - for quick debugs
+  - [ ] nix-serve, nix-serve-ng
+  - [ ] serf?
+
+#### forgejo-runners
+
+- [ ] self hosted forgejo
+- [ ] self host runners
+- [ ] mirror repos from gh to forgejo
+- [ ] multiuser setup
+
+#### drone/concourse/etc.
+
+- [ ] hmm
+
+#### hydra
+
+- tried but failed to run properly
+- push to attic?
+
+#### buildbot
+
+- [ ] see numtide repos and how they do it
+
+#### selfhosted binary caches
+
 - [ ] installer iso two variations
   - One with my full setup
   - Other is minimal, absolutely necessary steps only
@@ -117,22 +212,9 @@ main system configuration including dotfiles, will recreate repo with private do
 - [ ] Nixvim - neovim
 - [ ] home-manager services
   - [x] espanso
-- [ ] devenv services
-  - per project
-- [ ] extraoptions, username, email, hostname etc. global
-- [ ] modular restructuring
-  - allows enabling disabling things
-  - hardware-configuration.nix needs to be untouched
-  - [ ] disko
-  - [ ] binfmt etc can be in different files
-  - flake schemas is a new halted rfc because of the Eelco
 - [ ] jupyenv/jupyterhub/jupyterlab
   - [ ] hm/sys service based on if hub/lab/single instance
   - [ ] project level config flake templates
-- [ ] flake compat
-  - get it working with default.nix and shell.nix
-  - for old nix version support
-  - eg https://github.com/thiagokokada/nix-alien/blob/master/compat.nix
 - [ ] flakes modular
   - flake-parts
   - snowfalllib (meh, completely changes everything)
@@ -143,31 +225,11 @@ main system configuration including dotfiles, will recreate repo with private do
   - so the bug is hard to track down given I know nothing about plasma
 - [x] Separate home-manager to work on non-nixos
   - [ ] TODO test on old manjaro this config
-- [ ] initial installation setup for nixos and non-nixos linux
-  - Scripts and writeups
-    - navi, writeshellscriptBin, nh
-  - Bootstrapping nix
-    - Comes with iso for nixos minimal iso
-    - DeterminateSystems nix installer on non-nixos
-  - Bootstrapping home-manager
-    - `nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch --flake /home/rithvij/Projects/system#rithvij`
-    - To bootstrap home.nix config [see here](https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-standalone)
-      - `nix run home-manager/master -- init #--switch`
-- [ ] ssh keys, ssh certs
-  - yubikey try
+
 - [ ] tailscale on local instead of vps
   - also vps configuration in nix/dockerfiles separate repo?
   - rustdesk-server, syncplay, tailscale, headscale
-- [ ] All these useful nix commands in navi/tmuxp/dmux/espanso/jupntbks/mprocs
-  - Under home-manager bookmarks
-  - Also nh tool is useful
-    - comes with nom, nvd integration
-  - hm switch
-  - nixos switch
-  - nix profile
-  - nix-shell, nix shell
-  - nix-shell with python jupyerlab
-  - detsys nix install script
+
 - [ ] ragenix/sops-nix/rage
   - there is a awesome-age repo
   - yubikey try
@@ -188,39 +250,25 @@ main system configuration including dotfiles, will recreate repo with private do
   - https://github.com/alexellis/actions-batch
   - https://github.com/fawazahmed0/action-debug
   - https://github.com/phanirithvij/debug-action
-  - [ ] Tailscale
-    - Headscale auto approve (device)
-- [ ] system-manager
-  - https://github.com/numtide/system-manager
-  - [ ] vps config
-    - [x] init
-    - hm
-    - services:
-      - [x] syncplay
-      - [ ] nix-serve ++ attic ++ harmonia
-      - [ ] headscale ++ tailscaled
-      - [ ] rustdesk-server
-      - [ ] serf? or headscale enough?
-  - [ ] gha config
-    - [x] init
-    - hm (when using debug time action either upterm or cloudflared tunnel)
-    - [ ] cloudflared service
-      - for quick debugs
-    - [ ] tailscaled, ephemeral autologin
-    - [ ] nix-serve
-    - [ ] serf?
+
+
+## termux/android
+
 - [ ] nix-on-droid
   - two identical?
   - [ ] remote build on linux
   - [ ] distributed builds on both devices
   - proot is unusably slow
+
+## non nix nix
+
 - [ ] Ansible playbooks??
   - Not related to nix
   - Mainly for installing nix on vps
   - Same purpose as gha action yml
   - And Termux ofc, not possible to use nix
 
-## TODO nixpkgs+external
+## nixpkgs+external+contribs
 
 - [ ] https://elatov.github.io/2022/01/building-a-nix-package
   - add distrobox-tui, gh-i

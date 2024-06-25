@@ -21,6 +21,8 @@
 - nix schema supported nix can be installed form detsys's nix fork with schema support
 - nix portable exists which installs nix without sudo
   - would've been very useful when I was in uni with sudo disabled
+- formatter is nixfmt-rfc-style
+  - treefmt+dprint for other things
 
 # nixey by other people
 

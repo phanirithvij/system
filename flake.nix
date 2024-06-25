@@ -121,6 +121,7 @@
         program = "${pkgs.nix-schema}/bin/nix-schema";
       };
       apps."aarch64-linux".nix = apps.${system}.nix;
+      packages.${system}.nix-schema = pkgs.nix-schema;
       homeConfigurations = {
         "${user}@${host}" = homeConfig {
           username = user;
@@ -185,7 +186,7 @@
             ]
             ++ [
               treefmtCfg.wrapper
-              (pkgs.lib.attrValues treefmtCfg.programs)
+              #(pkgs.lib.attrValues treefmtCfg.programs)
             ];
         };
       };
