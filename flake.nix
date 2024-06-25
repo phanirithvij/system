@@ -173,8 +173,8 @@
       };
       systemConfigs = rec {
         default = gha;
-        gha = system-manager.lib.makeSystemConfig { modules = [ ./hosts/sm/gha/configuration.nix ]; };
-        vps = system-manager.lib.makeSystemConfig { modules = [ ./hosts/sm/vps/configuration.nix ]; };
+        gha = system-manager.lib.makeSystemConfig { modules = [ ./hosts/sysm/gha/configuration.nix ]; };
+        vps = system-manager.lib.makeSystemConfig { modules = [ ./hosts/sysm/vps/configuration.nix ]; };
       };
       devShells.${system} = {
         default = pkgs.mkShell {
