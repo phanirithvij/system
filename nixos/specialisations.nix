@@ -49,19 +49,14 @@
       configuration = {
         services = {
           displayManager.sddm.enable = lib.mkForce false;
-          displayManager = {
-            enable = true;
-          };
-
+          xserver.displayManager.lightdm.enable = lib.mkForce false;
+          xserver.enable = true;
+          displayManager.enable = true;
           lemurs = {
             enable = true;
             x11.enable = true;
             wayland.enable = true;
           };
-
-          xserver.enable = true;
-          xserver.displayManager.lightdm.enable = lib.mkForce false;
-
           desktopManager.plasma6.enable = true;
         };
       };
