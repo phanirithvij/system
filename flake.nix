@@ -107,7 +107,7 @@
             { programs.nix-index-database.comma.enable = true; }
           ];
           extraSpecialArgs = {
-            inherit navi_config;
+            inherit inputs;
             inherit username;
             inherit hostname;
           };
