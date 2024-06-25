@@ -274,15 +274,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1716218275,
-        "narHash": "sha256-xqgxpRIwDWs1vkyB560W3PVnT3MUEIJ04AUCP702mo0=",
-        "owner": "NullCub3",
+        "lastModified": 1712489306,
+        "narHash": "sha256-z8CdfJhB/W3DmPiaZgENn7SVjHtQL5jF7tpc9gobRgs=",
+        "owner": "coastalwhite",
         "repo": "lemurs",
-        "rev": "0246919b3549bf1e6be6c05a19b4734d761ec89f",
+        "rev": "176aca6994dd2047fc0e9ec68c63c8bf1e2cd916",
         "type": "github"
       },
       "original": {
-        "owner": "NullCub3",
+        "owner": "coastalwhite",
         "ref": "nixosmodule",
         "repo": "lemurs",
         "type": "github"

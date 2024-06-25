@@ -55,7 +55,7 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
-    lemurs.url = "github:NullCub3/lemurs/nixosmodule";
+    lemurs.url = "github:coastalwhite/lemurs/nixosmodule";
     lemurs.inputs.nixpkgs.follows = "nixpkgs";
     lemurs.inputs.utils.follows = "flake-utils";
     lemurs.inputs.rust-overlay.follows = "rust-overlay";
