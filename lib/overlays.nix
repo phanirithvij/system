@@ -19,7 +19,6 @@ let
       src = p.fetchFromGitHub {
         owner = "denisidoro";
         repo = "navi";
-        rev = "52e90ad8f993c9db458915b681a3ddf165b8002b";
         hash = "sha256-8e2sbKc6eYDerf/q0JwS6GPXkqDXLerbPqWK6oemSqM=";
       };
       cargoDeps = old.cargoDeps.overrideAttrs (
