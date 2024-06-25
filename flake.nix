@@ -13,6 +13,9 @@
     system-manager = {
       url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+      inputs.rust-overlay.follows = "rust-overlay";
     };
 
     # https://github.com/gvolpe/nix-config/blob/d983b5e6d8c4d57152ef31fa7141d3aad465123a/flake.nix#L17
