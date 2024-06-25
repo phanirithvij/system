@@ -186,7 +186,7 @@
             ]
             ++ [
               treefmtCfg.wrapper
-              #(pkgs.lib.attrValues treefmtCfg.programs)
+              (pkgs.lib.attrValues treefmtCfg.programs)
             ];
         };
       };
