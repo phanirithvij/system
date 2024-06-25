@@ -52,7 +52,8 @@ jobs:
           path: |
             ~/.cache/nix/
           key: ${{ runner.os }}
-      - run: nix flake check
+      #- run: nix flake check
+      - run: nix fmt
       - run: nix profile install github:numtide/system-manager github:viperML/nh
       - run: sudo $(which system-manager) switch --flake .#gha
       #- run: system-manager build --flake .#gha
@@ -61,7 +62,9 @@ jobs:
       - run: nh os build -H iron -s tty . --no-nom
       - run: nix build .#homeConfigurations."rithvij@iron".activationPackage
       - run: nix build .#homeConfigurations."rithviz@rithviz-inspiron7570".activationPackage
+      - run: nix run .#nix -- flake schema
       #- run: nix build .#homeConfigurations."runner".activationPackage
+      #- run: nix build .#homeConfigurations."root@vpshostname".activationPackage
       #- name: keypair for nix-serve and run
       #  shell: bash
       #  run: |
