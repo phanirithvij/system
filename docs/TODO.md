@@ -251,7 +251,6 @@ more are in my zet but that is to be made public
   - https://github.com/fawazahmed0/action-debug
   - https://github.com/phanirithvij/debug-action
 
-
 ## termux/android
 
 - [ ] nix-on-droid

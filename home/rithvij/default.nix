@@ -140,19 +140,9 @@ in
     };
   };
 
-  programs.eza.enable = true;
-  programs.fd.enable = true;
   programs.firefox.enable = true;
-  programs.fzf = {
-    enable = true;
-    defaultCommand = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
-    fileWidgetCommand = "fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
-  };
   programs.gallery-dl.enable = true;
   programs.jq.enable = true;
-
-  programs.lf.enable = true; # godsend
-  home.file.".config/lf".source = ./config/lf;
 
   programs.micro.enable = true;
 

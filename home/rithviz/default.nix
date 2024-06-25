@@ -14,6 +14,9 @@
   imports = [
     ../modules/git
     ../modules/bookmarks
+    ../modules/media
+    ../modules/shells
+    ../modules/tmux.nix
   ];
 
   home.packages = with pkgs; [
@@ -29,7 +32,6 @@
     eget # download binaries from github releases
     eza # fancy ls
     exercism # TODO remove, some progamming exercises or shit
-    fzf # fuzzy file finder
     gdu # disk usage analyzer tui
     git-filter-repo # git history rewrite
     go-task # TODO ?
@@ -64,8 +66,6 @@
     starship # prompt custom
     sysz # systemctl tui
     timeshift # system restore points
-    tmate # share ssh with tmux
-    tmux # no nohup
     unar # rar format
     ulauncher # TODO remove after checking if useful alts rofi, dmenu, voidlinux-youtuber-dotfiles, espanso
     viddy # watch alternative
