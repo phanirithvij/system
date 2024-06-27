@@ -54,6 +54,6 @@
     backupFileExtension = ".hm.bak";
     useGlobalPkgs = true;
 
-    config = ../home/droid.nix;
+    config = ../home/nix-on-droid;
   };
 }
