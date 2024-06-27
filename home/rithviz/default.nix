@@ -17,6 +17,7 @@
     ../modules/media
     ../modules/shells
     ../modules/tmux.nix
+    ../modules/tui.nix
   ];
 
   home.packages = with pkgs; [

@@ -23,6 +23,7 @@ in
     ../modules/rss.nix
     ../modules/shells
     ../modules/tmux.nix
+    ../modules/tui.nix
   ];
 
   home.username = username;
