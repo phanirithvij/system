@@ -148,6 +148,7 @@
               environment.systemPackages = [
                 blobdrop.packages.${system}.default
                 home-manager.packages.${system}.default
+                system-manager.packages.${system}.default
               ];
             }
             ./hosts/${host}/configuration.nix
