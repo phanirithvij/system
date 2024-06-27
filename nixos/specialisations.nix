@@ -9,6 +9,18 @@
 {
   # systemd-profiles idea I had can now be achieved
   specialisation = {
+    xfce = {
+      configuration = {
+        xdg.portal = {
+          enable = true;
+          gtkUsePortal = true;
+          extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+        };
+        services.xserver.desktopManager.xfce.enable = true;
+        services.desktopManager.plasma6.enable = lib.mkForce false;
+      };
+      inheritParentConfig = true;
+    };
     tty = {
       configuration = {
         # The bug below with noXlibs occurs due to importing minimal profile
