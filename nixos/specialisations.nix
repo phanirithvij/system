@@ -2,7 +2,6 @@
   lib,
   pkgs,
   modulesPath,
-  lemurs,
   system,
   ...
 }:

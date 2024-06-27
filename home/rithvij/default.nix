@@ -1,11 +1,11 @@
 {
   config,
   pkgs,
-  username,
   hostname,
   ...
 }:
 let
+  username = "rithvij";
   homeDir = "/home/${username}";
   configDir = "${homeDir}/Projects/system"; # TODO impure??
 in

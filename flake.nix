@@ -155,7 +155,6 @@
           ];
           specialArgs = {
             inherit inputs;
-            inherit lemurs;
             inherit system;
             username = user;
             hostname = host;
