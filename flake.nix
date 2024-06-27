@@ -8,6 +8,7 @@
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
 
     system-manager = {
@@ -22,7 +23,7 @@
     flake-schemas.url = "github:gvolpe/flake-schemas";
     # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
     nix-schema = {
-      inputs.flake-schemas.follows = "flake-schemas";
+      #inputs.flake-schemas.follows = "flake-schemas";
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:DeterminateSystems/nix-src/flake-schemas";
     };
@@ -152,7 +153,7 @@
             ./hosts/${host}/configuration.nix
           ];
           specialArgs = {
-            inherit navi_config;
+            inherit inputs;
             inherit lemurs;
             inherit system;
             username = user;

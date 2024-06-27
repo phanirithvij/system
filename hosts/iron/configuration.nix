@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -113,6 +114,10 @@ in
   services.flatpak.enable = true;
 
   nix = {
+    registry = {
+      nixpkgs.flake = inputs.nixpkgs;
+      n.flake = inputs.nixpkgs;
+    };
     package = pkgs.nixFlakes;
     settings =
       let
