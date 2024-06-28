@@ -117,12 +117,17 @@
     in
     rec {
       inherit (inputs.flake-schemas) schemas;
-      apps.${system}.nix = {
-        type = "app";
-        program = "${pkgs.nix-schema}/bin/nix-schema";
+      apps.${system} = {
+        nix = {
+          type = "app";
+          program = "${pkgs.nix-schema}/bin/nix-schema";
+        };
       };
       apps."aarch64-linux".nix = apps.${system}.nix;
-      packages.${system}.nix-schema = pkgs.nix-schema;
+      packages.${system} = {
+        nix-schema = pkgs.nix-schema;
+        bluez = pkgs.bluez;
+      };
       homeConfigurations = {
         "${user}@${host}" = homeConfig {
           username = user;

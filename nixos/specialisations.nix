@@ -23,7 +23,7 @@
           xfce.thunar
           xfce.xfce4-whiskermenu-plugin
         ];
-	programs.xfconf.enable = true;
+        programs.xfconf.enable = true;
       };
       inheritParentConfig = true;
     };
