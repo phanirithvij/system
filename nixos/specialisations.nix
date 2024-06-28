@@ -21,9 +21,9 @@
           plata-theme
           rofi
           xfce.thunar
-          xfce.xfconf
           xfce.xfce4-whiskermenu-plugin
         ];
+	programs.xfconf.enable = true;
       };
       inheritParentConfig = true;
     };

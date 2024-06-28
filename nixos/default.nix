@@ -11,4 +11,5 @@
     buildMachinesFiles = [ ];
     useSubstitutes = true;
   };
+  programs.steam.enable = true;
 }

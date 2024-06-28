@@ -15,6 +15,9 @@ in
     ../modules/android.nix
     ../modules/bookmarks
     ../modules/editors.nix
+    # TODO if inside specialization detect that?
+    # maybe cfg.xfce enabled? something
+    ../modules/config/xfconf.nix
 
     ../modules/git
     ../modules/games
