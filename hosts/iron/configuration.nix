@@ -107,7 +107,6 @@ in
 
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
-  environment.plasma6.excludePackages = [ pkgs.plasma-browser-integration ];
 
   #services.desktopManager.cosmic.enable = true;
   #services.displayManager.cosmic-greeter.enable = true;
