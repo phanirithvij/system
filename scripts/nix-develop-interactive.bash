@@ -38,8 +38,22 @@ for phase in ${all_phases[*]}; do
     phases_pretty=$(echo "${all_phases[*]}" | sed "s|$phase|**$phase**|g" | tr -s '[:blank:]')
     echo -e "\n>>> Phase:   $phases_pretty"
     echo ">>> Command:  runPhase $phase"
+    echo ">>> Press ENTER/s to skip, q/ctrl+c to quit, r to run"
+    read -n 1 input
+    echo
+
+    case $input in
+      [Rr])
+        runPhase $phase
+        ;;
+      [Qq])
+        break
+        ;;
+      *)
+        echo "Skipping..."
+        ;;
+    esac
 
     # https://discourse.nixos.org/t/nix-build-phases-run-nix-build-phases-interactively/36090/4
-    runPhase $phase
 done
 
