@@ -97,6 +97,9 @@
         };
       };
       overlays = import ./lib/overlays.nix { inherit inputs system; };
+      overlayModule = {
+        nixpkgs.overlays = overlays;
+      };
       homeConfig =
         { username, hostname }:
         home-manager.lib.homeManagerConfiguration {
@@ -157,6 +160,7 @@
               ];
             }
             ./hosts/${host}/configuration.nix
+            overlayModule
           ];
           specialArgs = {
             inherit inputs;
