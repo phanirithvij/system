@@ -146,11 +146,11 @@ in
           "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
         ];
       };
-    gc = {
+    /*gc = {
       automatic = true;
       dates = "weekly";
       options = "--delete-older-than 7d";
-    };
+    };*/
   };
   nixpkgs.config.allowUnfree = true;
 
