@@ -23,16 +23,6 @@ jobs:
           sudo rm -rf /var/lib/docker/overlay2
           sudo rm -rf /home/linuxbrew
           sudo rm -rf /home/runner/.rustup
-      - name: "Maximize Disk Space 😈"
-        uses: easimon/maximize-build-space@v8
-        with:
-          build-mount-path: /nix
-          remove-dotnet: "true"
-          remove-android: "true"
-          remove-haskell: "true"
-          remove-codeql: "true"
-          remove-docker-images: "true"
-      - run: sudo chown 0 /nix
       - uses: actions/checkout@v4
        # enables flakes, nix-command, sets runner as trusted user
       - uses: DeterminateSystems/nix-installer-action@v12
