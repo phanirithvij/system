@@ -48,8 +48,7 @@
     ly = {
       configuration = {
         services = {
-          # disable temporary zig build fails
-          displayManager.ly.enable = false;
+          displayManager.ly.enable = true;
           displayManager.ly.settings = {
             load = false;
             save = false;
