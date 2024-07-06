@@ -50,14 +50,12 @@
         services = {
           displayManager.ly.enable = true;
           displayManager.ly.settings = {
-            load = false;
-            save = false;
+            load = true;
+            save = true;
           };
           displayManager.sddm.enable = lib.mkForce false;
-          xserver.enable = true;
+          #xserver.enable = true;
           xserver.displayManager.lightdm.enable = lib.mkForce false;
-          desktopManager.plasma6.enable = true;
-          flatpak.enable = lib.mkForce false;
         };
       };
       inheritParentConfig = true;
