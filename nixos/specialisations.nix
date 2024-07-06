@@ -7,8 +7,25 @@
 }:
 {
   # systemd-profiles idea I had can now be achieved
+  # mainly a server profile (no audio, gui, etc)
+  # and multiple modes to choose from in boot menu
   specialisation = {
+    ly = {
+      inheritParentConfig = true;
+      configuration = {
+        services = {
+          displayManager.ly.enable = true;
+          displayManager.ly.settings = {
+            load = true;
+            save = true;
+          };
+          displayManager.sddm.enable = lib.mkForce false;
+          xserver.displayManager.lightdm.enable = lib.mkForce false;
+        };
+      };
+    };
     xfce = {
+      inheritParentConfig = true;
       configuration = {
         xdg.portal = {
           enable = true;
@@ -25,9 +42,9 @@
         ];
         programs.xfconf.enable = true;
       };
-      inheritParentConfig = true;
     };
     tty = {
+      inheritParentConfig = true;
       configuration = {
         # The bug below with noXlibs occurs due to importing minimal profile
         # it fails to compile ghc-8.6
@@ -43,24 +60,9 @@
           # TODO disable graphical profile
         };
       };
-      inheritParentConfig = true;
-    };
-    ly = {
-      configuration = {
-        services = {
-          displayManager.ly.enable = true;
-          displayManager.ly.settings = {
-            load = true;
-            save = true;
-          };
-          displayManager.sddm.enable = lib.mkForce false;
-          #xserver.enable = true;
-          xserver.displayManager.lightdm.enable = lib.mkForce false;
-        };
-      };
-      inheritParentConfig = true;
     };
     lemurs = {
+      inheritParentConfig = true;
       configuration = {
         services = {
           displayManager.sddm.enable = lib.mkForce false;
@@ -75,9 +77,9 @@
           desktopManager.plasma6.enable = true;
         };
       };
-      inheritParentConfig = true;
     };
     tuigreet = {
+      inheritParentConfig = true;
       configuration = {
         services = {
           displayManager.sddm.enable = lib.mkForce false;
@@ -103,7 +105,6 @@
           flatpak.enable = lib.mkForce false;
         };
       };
-      inheritParentConfig = true;
     };
   };
 }
