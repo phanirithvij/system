@@ -40,6 +40,11 @@
     ];
   };
 
+  fileSystems."/shed" = {
+    device = "/dev/disk/by-label/shed";
+    fsType = "btrfs";
+  };
+
   swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
