@@ -85,6 +85,10 @@ in
   # Enable CUPS to print documents.
   # TODO scanner stuff
   services.printing.enable = true;
+  services.printing.drivers = [ pkgs.hplipWithPlugin ];
+
+  # remove hp later TODO foss
+  #services.printing.drivers = [ pkgs.gutenprint ];
 
   hardware.bluetooth = {
     enable = true;
