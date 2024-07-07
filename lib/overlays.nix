@@ -46,5 +46,5 @@ in
 [
   schemaOverlay
   naviOverlay
-  bluezOverlay
+  # bluezOverlay # TODO wait for official builds
 ]
