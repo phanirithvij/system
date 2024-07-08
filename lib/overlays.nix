@@ -20,7 +20,7 @@ let
         owner = "denisidoro";
         repo = "navi";
         rev = version;
-        hash = "sha256-8e2sbKc6eYDerf/q0JwS6GPXkqDXLerbPqWK6oemSqM=";
+        hash = "sha256-h7lF+jvrwjiMMmaqOGifJnBbTgjCK0WW2yocq7vO7zU=";
       };
       cargoDeps = old.cargoDeps.overrideAttrs (
         p.lib.const {
