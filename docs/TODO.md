@@ -207,8 +207,9 @@ more are in my zet but that is to be made public
     - Ideally can be used if I learn to work without a mouse
     - Full nvim
     - [ ] TODO disable audio, printing etc, non-server things
-  - [ ] ly in a specialisation
+  - [x] ly in a specialisation
     - ly flake config from https://github.com/NixOS/nixpkgs/pull/297434
+    - [ ] make default after merged into unstable, remove my own fork as dependency
 - [ ] Nixvim - neovim
 - [ ] home-manager services
   - [x] espanso
