@@ -129,6 +129,7 @@
       apps."aarch64-linux".nix = apps.${system}.nix;
       packages.${system} = {
         nix-schema = pkgs.nix-schema;
+	navi-master = pkgs.navi;
         bluez = pkgs.bluez;
       };
       homeConfigurations = {
