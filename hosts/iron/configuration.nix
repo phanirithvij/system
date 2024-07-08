@@ -279,6 +279,11 @@ in
       "tailscale0"
       "wlp3s0"
     ];
+    allowedUDPPorts = [ 26439 ];
+    allowedTCPPorts = [
+      26439
+      3249
+    ];
   };
   networking.nameservers = nameservers;
 
