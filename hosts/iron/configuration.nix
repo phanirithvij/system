@@ -276,19 +276,23 @@ in
   networking.firewall = {
     enable = true;
     trustedInterfaces = [
-      "tailscale0"
+      #"tailscale0"
       "wlp3s0"
     ];
-    allowedUDPPorts = [ 26439 ];
+    allowedUDPPorts = [
+      26439
+      5159
+    ];
     allowedTCPPorts = [
       26439
       3249
+      5159
     ];
   };
   networking.nameservers = nameservers;
 
   services.tailscale = {
-    enable = true;
+    enable = false;
     useRoutingFeatures = "client";
     openFirewall = true;
     extraUpFlags = [ "--login-server http://armyofrats.in" ];
