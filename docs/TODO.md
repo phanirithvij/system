@@ -79,8 +79,6 @@ more are in my zet but that is to be made public
 
 #### iron nixos
 
-- [ ] expect installed in profile, move it to nixos system
-  - reason: nixpkgs broken due to python update, wait till the issues are resolved
 - [ ] modules, profiles, apps, packages
   - see https://github.com/Guanran928/flake
   - allows others to import? more importantly I can import from outside
