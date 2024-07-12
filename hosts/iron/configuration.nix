@@ -229,6 +229,7 @@ in
       distrobox
 
       nix-output-monitor
+      nix-schema # overlay
 
       libsmbios
       dmidecode
