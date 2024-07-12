@@ -134,26 +134,11 @@
     },
     "flake-schemas": {
       "locked": {
-        "lastModified": 1713165510,
-        "narHash": "sha256-pR0sT1MGGTi1+u74gssJcq83TpUfcJbbsP69qhFg1O4=",
-        "owner": "gvolpe",
-        "repo": "flake-schemas",
-        "rev": "e72d8de98fab07bd852204141d2e8b731e3f2039",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gvolpe",
-        "repo": "flake-schemas",
-        "type": "github"
-      }
-    },
-    "flake-schemas_2": {
-      "locked": {
-        "lastModified": 1719857163,
-        "narHash": "sha256-wM+8JtoKBkahHiKn+EM1ikurMnitwRQrZ91hipJIJK8=",
+        "lastModified": 1720708513,
+        "narHash": "sha256-YvjKivjjzc2j5wk9BpmzIaMO8nKIF2B/rZMumZVLqMs=",
         "owner": "DeterminateSystems",
         "repo": "flake-schemas",
-        "rev": "61a02d7183d4241962025e6c6307a22a0bb72a21",
+        "rev": "bf0332c33e832cdd4d533b5d2923423761d079e0",
         "type": "github"
       },
       "original": {
@@ -389,7 +374,9 @@
       "inputs": {
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
-        "flake-schemas": "flake-schemas_2",
+        "flake-schemas": [
+          "flake-schemas"
+        ],
         "libgit2": "libgit2",
         "nixpkgs": [
           "nixpkgs"

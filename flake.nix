@@ -20,10 +20,11 @@
     };
 
     # https://github.com/gvolpe/nix-config/blob/d983b5e6d8c4d57152ef31fa7141d3aad465123a/flake.nix#L17
-    flake-schemas.url = "github:gvolpe/flake-schemas";
+    flake-schemas.url = "github:DeterminateSystems/flake-schemas";
+    #flake-schemas.url = "github:gvolpe/flake-schemas";
     # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
     nix-schema = {
-      #inputs.flake-schemas.follows = "flake-schemas";
+      inputs.flake-schemas.follows = "flake-schemas";
       inputs.nixpkgs.follows = "nixpkgs";
       url = "github:DeterminateSystems/nix-src/flake-schemas";
     };
