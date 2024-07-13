@@ -25,6 +25,7 @@ in
 
     ../modules/rss.nix
     ../modules/shells
+    ../modules/terminals.nix
     ../modules/tmux.nix
     ../modules/tui.nix
   ];
@@ -151,9 +152,6 @@ in
   programs.micro.enable = true;
 
   programs.poetry.enable = true;
-
-  programs.wezterm.enable = true;
-  home.file.".config/wezterm".source = ./config/wezterm;
 
   programs.ripgrep.enable = true;
 
