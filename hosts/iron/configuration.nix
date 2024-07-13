@@ -196,6 +196,7 @@ in
       "audio"
       "networkmanager"
       "docker"
+      "input"
     ];
   };
 
