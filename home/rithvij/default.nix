@@ -2,6 +2,7 @@
   config,
   pkgs,
   hostname,
+  lib,
   ...
 }:
 let
@@ -23,6 +24,7 @@ in
     ../modules/games
     ../modules/media
 
+    ../modules/hyprland.nix
     ../modules/rss.nix
     ../modules/shells
     ../modules/terminals.nix
