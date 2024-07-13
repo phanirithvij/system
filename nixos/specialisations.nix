@@ -19,6 +19,7 @@
           package = inputs.hyprland.packages.${system}.hyprland;
         };
         services.desktopManager.plasma6.enable = lib.mkForce false;
+        environment.systemPackages = [ pkgs.nwg-displays ];
       };
     };
     ly = {
