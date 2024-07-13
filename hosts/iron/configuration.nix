@@ -165,10 +165,13 @@ in
     # waydroid.enable = true;
     docker = {
       enable = true;
+      enableOnBoot = true;
+      package = pkgs.docker_25;
       daemon.settings = {
         dns = nameservers;
       };
     };
+    containers.cdi.dynamic.nvidia.enable = true;
   };
 
   users.users.tempwl = {
