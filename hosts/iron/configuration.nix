@@ -172,8 +172,8 @@ in
         dns = nameservers;
       };
     };
-    containers.cdi.dynamic.nvidia.enable = true;
   };
+  hardware.nvidia-container-toolkit.enable = true;
 
   users.users.rithvij = {
     isNormalUser = true;
