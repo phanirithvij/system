@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.syncplay ];
+  home.packages = [
+    pkgs.syncplay
+    pkgs.playerctl
+  ];
   programs.mpv = {
     enable = true;
     config = {
