@@ -98,6 +98,12 @@
           allowUnfree = true;
           # TODO allowlist of unfree pkgs, for home-manager too
           allowUnfreePredicate = _: true;
+          packageOverrides = pkgs: {
+            espanso = pkgs.espanso.override {
+              x11Support = false;
+              waylandSupport = true;
+            };
+          };
         };
       };
       overlays = import ./lib/overlays.nix { inherit inputs system; };
