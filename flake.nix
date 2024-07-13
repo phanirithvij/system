@@ -62,6 +62,9 @@
     lemurs.inputs.utils.follows = "flake-utils";
     lemurs.inputs.rust-overlay.follows = "rust-overlay";
 
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
+
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };

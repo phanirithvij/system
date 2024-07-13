@@ -2,6 +2,7 @@
   lib,
   pkgs,
   modulesPath,
+  inputs,
   system,
   ...
 }:
@@ -10,6 +11,16 @@
   # mainly a server profile (no audio, gui, etc)
   # and multiple modes to choose from in boot menu
   specialisation = {
+    hyprland = {
+      inheritParentConfig = true;
+      configuration = {
+        programs.hyprland = {
+          enable = true;
+          package = inputs.hyprland.packages.${system}.hyprland;
+        };
+        services.desktopManager.plasma6.enable = lib.mkForce false;
+      };
+    };
     ly = {
       inheritParentConfig = true;
       configuration = {
