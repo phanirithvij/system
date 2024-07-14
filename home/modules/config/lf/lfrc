@@ -178,13 +178,21 @@ cmd recol ${{
 :recol
 map <c-r> :recol :reload
 
+# dragon drop using blobdrop
+# https://sourcegraph.com/search?q=context:global+file:lfrc+dragon&patternType=standard&sm=1
+cmd dragon %blobdrop -x all $fx
+cmd dragon-stay %blobdrop $fx
+cmd dragon-individual %blobdrop $fx
+
+# Dragon Mapping
+map Dd dragon
+map Ds dragon-stay
+map Di dragon-individual
 
 ### TODO
-# dragon drop using blobdrop
 # bat or ctpv as previewer
 # TODO: read https://github.com/gokcehan/lf/wiki/Tips and customize
 # Also http://0x0.st/ is mentioned in the tips which is opensource and can be self hosted
 # Tagging
-	# https://sourcegraph.com/github.com/lmburns/dotfiles/-/blob/.config/lf/lfrc?subtree=true
-	# https://github.com/phanirithvij/dotfiles-yadm/blob/6279f5dfd07369c3b34a46f29d12baaa39b97b86/.config/lf/lfrc#L17C1-L17C90
-
+#   https://sourcegraph.com/github.com/lmburns/dotfiles/-/blob/.config/lf/lfrc?subtree=true
+#   https://github.com/phanirithvij/dotfiles-yadm/blob/6279f5dfd07369c3b34a46f29d12baaa39b97b86/.config/lf/lfrc#L17C1-L17C90
