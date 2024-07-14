@@ -4,5 +4,6 @@
   home.packages = [
     pkgs.wl-clipboard-rs
     pkgs.cliphist
+    pkgs.wofi
   ];
 }
