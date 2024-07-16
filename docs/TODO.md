@@ -99,6 +99,7 @@ more are in my zet but that is to be made public
   - man pages
 - [ ] mouse heavy wf
   - awesomewm
+  - hyprland
   - dunst
 - [ ] flake compat
   - get it working with default.nix and shell.nix
@@ -111,6 +112,7 @@ more are in my zet but that is to be made public
   - allows enabling disabling things
   - hardware-configuration.nix needs to be untouched
   - [ ] disko
+    - a bit risky maybe, data loss?
   - [ ] binfmt etc can be in different files
 
 #### iron arch
@@ -120,10 +122,11 @@ more are in my zet but that is to be made public
 
 ### vps (stand-in for non-nixos)
 
+- [ ] No longer have a vps, do it in a local vm/docker
 - [ ] hm
   - [ ] caddy?
 - [ ] sysm
-  - [x] syncplay
+  - [ ] syncplay
   - [ ] caddy
   - [ ] nix-serve ++ attic ++ harmonia
   - [ ] headscale ++ headscale-ui ++ tailscaled
@@ -180,9 +183,12 @@ more are in my zet but that is to be made public
 - [ ] mirror repos from gh to forgejo
 - [ ] multiuser setup
 
-#### drone/concourse/etc.
+#### woodpecker/concourse/etc.
 
 - [ ] hmm
+- [ ] argo cd
+- [ ] jenkins
+- [ ] gocd
 
 #### hydra
 
