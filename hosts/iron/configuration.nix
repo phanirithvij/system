@@ -15,7 +15,7 @@ in
 {
   imports = [
     ./hardware-configuration.nix
-    ../../nixos
+    ../../nixos/profiles
   ];
 
   boot.loader = {
