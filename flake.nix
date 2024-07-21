@@ -162,7 +162,6 @@
         ${host} = nixpkgs.lib.nixosSystem rec {
           inherit system;
           modules = [
-            lemurs.nixosModules.default
             {
               environment.systemPackages = [
                 blobdrop.packages.${system}.default
@@ -172,6 +171,8 @@
             }
             ./hosts/${host}/configuration.nix
             overlayModule
+            lemurs.nixosModules.default
+            nixos-cosmic.nixosModules.default
           ];
           specialArgs = {
             inherit inputs;
