@@ -52,5 +52,5 @@ in
   schemaOverlay
   naviOverlay
   # bluezOverlay # TODO wait for official builds
-  atuinOverlay
+  # atuinOverlay # TODO remove later once I get sync working?
 ]
