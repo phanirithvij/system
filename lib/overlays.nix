@@ -42,9 +42,15 @@ let
       };
     });
   };
+  atuinOverlay = f: p: {
+    atuin = p.atuin.overrideAttrs (old: {
+      buildFeatures = [ "client" ];
+    });
+  };
 in
 [
   schemaOverlay
   naviOverlay
   # bluezOverlay # TODO wait for official builds
+  atuinOverlay
 ]
