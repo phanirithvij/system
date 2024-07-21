@@ -100,8 +100,8 @@
           allowUnfreePredicate = _: true;
           packageOverrides = pkgs: {
             espanso = pkgs.espanso.override {
-              x11Support = false;
-              waylandSupport = true;
+              x11Support = true;
+              waylandSupport = false;
             };
           };
         };
