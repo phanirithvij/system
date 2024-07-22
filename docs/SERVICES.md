@@ -11,6 +11,11 @@ A selfhosted heaven all in nixos
 - [ ] Caddy
 - [ ] Teldrive
   - I need to make it
+- [ ] android-file-transfer automount
+  - disable kio kde thing
+  - found https://bbs.archlinux.org/viewtopic.php?pid=1944871#p1944871
+  - I need to make it
+  - Is it worth it for ~12MiBps extra?
 
 Another doc for selfhosted docker/podman stuff
 
