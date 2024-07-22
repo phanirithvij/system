@@ -138,9 +138,8 @@
       };
       apps."aarch64-linux".nix = apps.${system}.nix;
       packages.${system} = {
-        nix-schema = pkgs.nix-schema;
+        inherit (pkgs) nix-schema bluez;
         navi-master = pkgs.navi;
-        bluez = pkgs.bluez;
       };
       homeConfigurations = {
         "${user}@${host}" = homeConfig {
