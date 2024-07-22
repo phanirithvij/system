@@ -20,6 +20,7 @@ _: {
       { url = "http://nil.wallyjones.com/feeds/all.atom.xml"; }
       { url = "https://perens.com/feed/"; }
       { url = "https://python.libhunt.com/newsletter/feed"; }
+      { url = "https://rootknecht.net/index.xml"; }
       { url = "https://rsapkf.org/weblog/rss.xml"; }
       { url = "https://sparkfun.com/feeds/news"; }
       { url = "https://this-week-in-rust.org/rss.xml"; }
