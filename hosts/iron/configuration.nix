@@ -270,6 +270,7 @@ in
     trustedInterfaces = [
       #"tailscale0"
       "wlp3s0"
+      "enp0s20f0u1" # usb tethering
     ];
     allowedUDPPorts = [
       26439
