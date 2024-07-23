@@ -30,22 +30,19 @@ in
       default = "saved";
       device = "nodev";
       extraEntries = ''
-             menuentry "Reboot" {
-        reboot
-             }
-             menuentry "Poweroff" {
-        halt
-             }
+        menuentry "Reboot" {
+          reboot
+        }
+        menuentry "Poweroff" {
+          halt
+        }
       '';
     };
   };
   boot.binfmt = {
     emulatedSystems = [ "aarch64-linux" ];
   };
-  programs.appimage = {
-    enable = true;
-    binfmt = true;
-  };
+
   # REISUB
   boot.kernel.sysctl = {
     "kernel.sysrq" = 1;
@@ -64,8 +61,6 @@ in
   };
 
   fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
-
-  services.xserver.enable = true;
 
   services.keyd = {
     enable = true;
@@ -91,7 +86,7 @@ in
 
   hardware.bluetooth = {
     enable = true;
-    powerOnBoot = false;
+    powerOnBoot = true;
   };
 
   hardware.opentabletdriver.enable = true;
@@ -108,10 +103,15 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   services.libinput.enable = true;
 
+  services.xserver.enable = true;
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
   services.flatpak.enable = true;
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
 
   nix = {
     registry = {
@@ -124,7 +124,6 @@ in
         users = [
           "root"
           "rithvij"
-          "tempwl"
           "hydra" # TODO maybe hydra needs @wheel
         ];
       in
