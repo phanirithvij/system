@@ -23,4 +23,3 @@ Another doc for selfhosted docker/podman stuff
 
 - All the above services
   - just in case I leave nixos due to the toxicity
-
