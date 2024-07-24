@@ -89,12 +89,9 @@ in
     powerOnBoot = true;
   };
 
-  system.activationScripts = {
-    rfkillUnblockBt = {
-      text = "${lib.getBin pkgs.util-linux}/bin/rfkill unblock bluetooth";
-      deps = [ ];
-    };
-  };
+  powerManagement.powerUpCommands = ''
+    ${lib.getBin pkgs.util-linux}/bin/rfkill unblock bluetooth
+  '';
 
   hardware.opentabletdriver.enable = true;
 
