@@ -166,8 +166,8 @@
             }
             ./hosts/${host}/configuration.nix
             overlayModule
-            lemurs.nixosModules.default
-            nixos-cosmic.nixosModules.default
+            #lemurs.nixosModules.default
+            #nixos-cosmic.nixosModules.default
           ];
           specialArgs = {
             inherit inputs;

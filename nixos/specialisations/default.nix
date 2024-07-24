@@ -3,13 +3,13 @@ _: {
   # mainly a server profile (no audio, gui, etc)
   # and multiple modes to choose from in boot menu
   imports = [
-    ./cosmic.nix
+    #./cosmic.nix
     ./hyprland.nix
-    ./lemurs.nix
+    #./lemurs.nix
     ./ly.nix
     ./ratpoison.nix
     ./tty.nix
-    ./tuigreet.nix
+    #./tuigreet.nix
     ./xfce.nix
   ];
 }
