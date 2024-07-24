@@ -91,9 +91,7 @@ in
 
   system.activationScripts = {
     rfkillUnblockBt = {
-      text = ''
-        rfkill unblock bluetooth
-      '';
+      text = "${lib.getBin pkgs.util-linux}/bin/rfkill unblock bluetooth";
       deps = [ ];
     };
   };
