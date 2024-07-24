@@ -1,6 +1,1 @@
-_: {
-  imports = [
-    ../specialisations
-    ./desktop.nix
-  ];
-}
+_: { imports = [ ./desktop.nix ]; }
