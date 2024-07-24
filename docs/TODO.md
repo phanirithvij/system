@@ -115,6 +115,15 @@ more are in my zet but that is to be made public
     - a bit risky maybe, data loss?
   - [ ] binfmt etc can be in different files
 
+#### DEs
+
+- [x] plasma6
+- [ ] xfce
+  - [ ] wayland
+- [ ] hyprland
+- [ ] ratpoison
+- [ ] gnome ??
+
 #### iron arch
 
 - [ ] hm
