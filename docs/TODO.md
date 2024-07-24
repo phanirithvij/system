@@ -115,23 +115,49 @@ more are in my zet but that is to be made public
     - a bit risky maybe, data loss?
   - [ ] binfmt etc can be in different files
 
-#### DEs
+#### DEs + rice
 
 - [x] plasma6
+  - [ ] plasma-manager (chris mcdonough vid)
 - [ ] xfce
-  - [ ] wayland
+  - [ ] wayland (future)
 - [ ] hyprland
 - [ ] ratpoison
-- [ ] gnome ??
+  - jake@linux videos
+  - https://github.com/jdpedersen1/windowmanagers/tree/master
+  - also his menu scripts which dropdown, they are beautiful
+  - yank his void rice too
+- [ ] awesome (one of my favs)
+- [ ] dwm ?
+  - suckless people were called neonazis before
+  - also c configuration seems cool
+  - maybe I can learn zig and package it via zig with nix
+- [ ] xmonad
+- [ ] qtile
+- [x] gnome ??
+  - seems going down the wrongpath TM
+  - along with nixos, openSuse, redhat, firefox
+
+- [ ] dunst
+- [ ] rofi, wofi
 
 #### iron arch
 
 - [ ] hm
 - [ ] sysm
+- [ ] nix-free normal setup, incase nix goes to shit
+- [ ] manjaro, garudalinux and endavour have some good scripts/configs
+  - yank those
+
+#### iron manjaro
+
+- [ ] hm
+- [ ] sysm
+- [ ] todo move over to archlinux slowly, leave manjaro
 
 ### vps (stand-in for non-nixos)
 
-- [ ] No longer have a vps, do it in a local vm/docker
+- [ ] No longer have a vps, do it in a local vm/docker/manjaro/arch
 - [ ] hm
   - [ ] caddy?
 - [ ] sysm
