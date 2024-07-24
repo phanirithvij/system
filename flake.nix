@@ -24,9 +24,9 @@
     #flake-schemas.url = "github:gvolpe/flake-schemas";
     # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
     nix-schema = {
+      url = "github:DeterminateSystems/nix-src/flake-schemas";
       inputs.flake-schemas.follows = "flake-schemas";
       inputs.nixpkgs.follows = "nixpkgs";
-      url = "github:DeterminateSystems/nix-src/flake-schemas";
     };
     # TODO jupyenv python, nix, go kernels
 
@@ -34,20 +34,14 @@
     # Flakes are bad for big repos (lazy-trees)
     # TODO move to npins, also keep flakes config in a diff branch
 
-    navi_config = {
-      url = "github:phanirithvij/navi";
-      flake = false;
-    };
+    navi_config.url = "github:phanirithvij/navi";
+    navi_config.flake = false;
 
-    nixos-cosmic = {
-      url = "github:lilyinstarlight/nixos-cosmic";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+    nixos-cosmic.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-index-database = {
-      url = "github:nix-community/nix-index-database";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     blobdrop.url = "github:vimpostor/blobdrop";
     blobdrop.inputs.nixpkgs.follows = "nixpkgs";
@@ -57,10 +51,12 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
-    lemurs.url = "github:phanirithvij/lemurs/nixosmodule";
-    lemurs.inputs.nixpkgs.follows = "nixpkgs";
-    lemurs.inputs.utils.follows = "flake-utils";
-    lemurs.inputs.rust-overlay.follows = "rust-overlay";
+    lemurs = {
+      url = "github:phanirithvij/lemurs/nixosmodule";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
 
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
