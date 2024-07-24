@@ -89,6 +89,15 @@ in
     powerOnBoot = true;
   };
 
+  system.activationScripts = {
+    rfkillUnblockBt = {
+      text = ''
+        rfkill unblock bluetooth
+      '';
+      deps = [ ];
+    };
+  };
+
   hardware.opentabletdriver.enable = true;
 
   # TODO learn what rtkit is
