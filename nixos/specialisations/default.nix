@@ -7,6 +7,7 @@ _: {
     ./hyprland.nix
     ./lemurs.nix
     ./ly.nix
+    ./ratpoison.nix
     ./tty.nix
     ./tuigreet.nix
     ./xfce.nix
