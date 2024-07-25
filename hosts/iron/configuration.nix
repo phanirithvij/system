@@ -16,6 +16,7 @@ in
   imports = [
     ./hardware-configuration.nix
     ../../nixos/profiles/desktop.nix
+    ../../nixos/modules/tailscale.nix
     ../../nixos/specialisations
   ];
 
@@ -272,7 +273,7 @@ in
   networking.firewall = {
     enable = true;
     trustedInterfaces = [
-      #"tailscale0"
+      "tailscale0"
       "wlp3s0"
       "enp0s20f0u1" # usb tethering
     ];
@@ -287,13 +288,6 @@ in
     ];
   };
   networking.nameservers = nameservers;
-
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "client";
-    openFirewall = true;
-    #extraUpFlags = [ "--login-server http://armyofrats.in" ];
-  };
 
   # TODO headscale
   # TODO modularise all of these
