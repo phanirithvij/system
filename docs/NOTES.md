@@ -1,4 +1,4 @@
-# notes to self
+## notes to self
 
 - home-manager manages itself for now in a single user env
   - Allows users to manage their own version
@@ -37,7 +37,8 @@ Useful links along with my annotations.
   - nix flakes schema overlay
 - https://github.com/workflow/dotfiles
   - gha initial setup
--
+- [ ] postgresql backup with rustic
+- [ ] impermiance
 
 ## Notes
 
@@ -68,15 +69,19 @@ Useful links along with my annotations.
 ## Useful projects (I use)
 
 - List only stuff I use! see awesome-nix for all other things
-- https://github.com/numtide/system-manager
+- [x] https://github.com/numtide/system-manager
   - bring nixos to non-nixos dyi kinda, alpha
   - https://github.com/a-h/system-manager-test/tree/main
   - https://github.com/a-h/nix-airgapped-vm
 - [ ] nix-olde, nix-du, nix-inspect, nix-tree etc
-- [ ] nom, nh, nvd
-- [ ] hm
-- [ ] direnv
-- [ ] nixos-infect
+- [x] nom, nh, nvd
+- [x] hm
+- [x] direnv
+- [ ] nixos-infect ??
+- [ ] xc/just
+- [ ] nixci
+  - [ ] omnix
+- [ ] attic, harmonia, nix-serve, nix-serve-ng
 
 ## Discourse/gh prs/gh issues
 
