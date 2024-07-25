@@ -289,10 +289,10 @@ in
   networking.nameservers = nameservers;
 
   services.tailscale = {
-    enable = false;
+    enable = true;
     useRoutingFeatures = "client";
     openFirewall = true;
-    extraUpFlags = [ "--login-server http://armyofrats.in" ];
+    #extraUpFlags = [ "--login-server http://armyofrats.in" ];
   };
 
   # TODO headscale
