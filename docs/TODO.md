@@ -208,8 +208,10 @@ more are in my zet but that is to be made public
   - sysm
   - [ ] cloudflared service
     - for quick debugs
-  - [ ] nix-serve, nix-serve-ng
+  - [ ] nix-serve, nix-serve-ng, attic
   - [ ] serf?
+  - [ ] tailscale ephemeral
+    - [ ] headscale ephemeral
 
 #### forgejo-runners
 
