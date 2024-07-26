@@ -6,14 +6,17 @@
 # go
 # fzf lazygit hub gdu lf ...
 
+# old config missed: tmate
+
 {
   home.username = "rithviz";
   home.homeDirectory = "/home/rithviz";
   news.display = "silent";
 
   imports = [
-    ../modules/git
     ../modules/bookmarks
+    ../modules/editors.nix
+    ../modules/git
     ../modules/media
     ../modules/shells
     ../modules/tmux.nix
@@ -22,7 +25,6 @@
 
   home.packages = with pkgs; [
     air # reload go run
-    #asdf-vm #package version manager, using rtx now
     babelfish # bash to fish
     bat # fancy cat
     bashmount # very useful
@@ -80,17 +82,5 @@
   home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;
-  # nano like text editor, best tool for non-coding, not an ide
-  programs.micro = {
-    enable = true;
-    settings = {
-      colorscheme = "twilight";
-      relativeruler = true;
-      saveundo = true;
-      tabsize = 2;
-      tabstospaces = true;
-      wordwrap = true;
-    };
-  };
   programs.firefox.enable = true;
 }
