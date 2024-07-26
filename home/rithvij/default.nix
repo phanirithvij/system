@@ -94,7 +94,7 @@ in
     # remote-touchpad
     # templ
     # rustup
-    # mise
+    # mise (rtx >> asdf-vm)
     # hyperfine
     # neovide
     # cargo-zigbuild
@@ -126,7 +126,7 @@ in
       font = {
         size = 11.25;
         normal = {
-          family = "JetBrainsMono Nerd Font";
+          family = "JetBrainsMono Nerd Font"; # TODO try Source Code Pro
         };
       };
     };
@@ -149,8 +149,6 @@ in
   programs.firefox.enable = true;
   programs.gallery-dl.enable = true;
   programs.jq.enable = true;
-
-  programs.micro.enable = true;
 
   programs.poetry.enable = true;
 

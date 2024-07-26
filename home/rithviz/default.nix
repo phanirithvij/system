@@ -77,11 +77,11 @@
     xplr # TODO something temp, remove later
     yq # yaml cli
     yadm # dotfile manager
-    zoxide # directory bookmarks and sort by most frequently used
   ];
 
   home.stateVersion = "24.05";
 
   programs.home-manager.enable = true;
   programs.firefox.enable = true;
+  programs.zoxide.enable = true;
 }
