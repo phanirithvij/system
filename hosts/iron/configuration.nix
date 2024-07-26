@@ -15,9 +15,10 @@ in
 {
   imports = [
     ./hardware-configuration.nix
+    ../../nixos/specialisations
     ../../nixos/profiles/desktop.nix
     ../../nixos/modules/tailscale.nix
-    ../../nixos/specialisations
+    ../../nixos/modules/nixserve
   ];
 
   boot.loader = {
