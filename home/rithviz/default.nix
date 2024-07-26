@@ -20,6 +20,7 @@
     ../modules/media
     ../modules/shells
     ../modules/tmux.nix
+    ../modules/topgrade.nix
     ../modules/tui.nix
   ];
 
