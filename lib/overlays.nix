@@ -1,6 +1,6 @@
 { inputs, system }:
 let
-  schemaOverlay = f: p: {
+  schemaOverlay = _: _: {
     nix-schema = inputs.nix-schema.packages.${system}.nix.overrideAttrs (old: {
       doCheck = false;
       doInstallCheck = false;
@@ -12,7 +12,7 @@ let
         '';
     });
   };
-  naviOverlay = f: p: {
+  naviOverlay = _: p: {
     navi = p.navi.overrideAttrs (old: rec {
       pname = "navi";
       version = "master";
@@ -31,8 +31,10 @@ let
       );
     });
   };
-  # https://github.com/bluez/bluez/issues/821 fixed in 5.76
-  # track https://github.com/NixOS/nixpkgs/pull/322127
+in
+# https://github.com/bluez/bluez/issues/821 fixed in 5.76
+# track https://github.com/NixOS/nixpkgs/pull/322127
+/*
   bluezOverlay = f: p: {
     bluez = p.bluez.overrideAttrs (old: rec {
       version = "5.76";
@@ -47,7 +49,7 @@ let
       buildFeatures = [ "client" ];
     });
   };
-in
+*/
 [
   schemaOverlay
   naviOverlay

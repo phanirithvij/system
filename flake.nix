@@ -37,8 +37,10 @@
     navi_config.url = "github:phanirithvij/navi";
     navi_config.flake = false;
 
-    nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-    nixos-cosmic.inputs.nixpkgs.follows = "nixpkgs";
+    /*
+      nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
+      nixos-cosmic.inputs.nixpkgs.follows = "nixpkgs";
+    */
 
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
@@ -51,12 +53,14 @@
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
-    lemurs = {
-      url = "github:phanirithvij/lemurs/nixosmodule";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.utils.follows = "flake-utils";
-      inputs.rust-overlay.follows = "rust-overlay";
-    };
+    /*
+      lemurs = {
+        url = "github:phanirithvij/lemurs/nixosmodule";
+        inputs.nixpkgs.follows = "nixpkgs";
+        inputs.utils.follows = "flake-utils";
+        inputs.rust-overlay.follows = "rust-overlay";
+      };
+    */
 
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
@@ -72,12 +76,11 @@
       home-manager,
       nix-on-droid,
       blobdrop,
-      navi_config,
-      nixos-cosmic,
+      #nixos-cosmic,
       nix-index-database,
       system-manager,
       treefmt-nix,
-      lemurs,
+      #lemurs,
       ...
     }@inputs:
     let

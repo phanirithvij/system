@@ -1,25 +1,19 @@
-{
-  config,
-  lib,
-  pkgs,
-  nixosModulesPath,
-  ...
-}:
+{ pkgs, ... }:
 {
   imports = [ ../modules/syncplay.nix ];
   config = rec {
     nixpkgs.hostPlatform = "x86_64-linux";
 
     environment = {
-      systemPackages = [
+      systemPackages = with pkgs; [
         # All hm, only systemd related should stay here I think
         # but for root user maybe this is the spot
-        pkgs.ripgrep
-        pkgs.fzf
-        pkgs.sysz
-        pkgs.lf
-        pkgs.lazygit
-        pkgs.tmux
+        ripgrep
+        fzf
+        sysz
+        lf
+        lazygit
+        tmux
       ];
     };
 

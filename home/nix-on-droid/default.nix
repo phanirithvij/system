@@ -1,10 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-{
+_: {
   home.username = "nix-on-droid";
   home.homeDirectory = "/data/data/com.termux.nix/files/home";
   programs.lazygit.enable = true;

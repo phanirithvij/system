@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 # rust
 # delta exa bat fd ripgrep sd starship du-dust

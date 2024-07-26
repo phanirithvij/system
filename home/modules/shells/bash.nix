@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
 {
   # TODO logrotate bash_history
   # TODO borgmatic backup to gdrive
