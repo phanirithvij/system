@@ -199,10 +199,12 @@
       devShells.${system} = {
         default = pkgs.mkShell {
           packages =
+            with pkgs;
             [
-              pkgs.nh
-              pkgs.xc
-              pkgs.statix
+              nh
+              xc
+              statix
+              deadnix
             ]
             ++ [
               treefmtCfg.wrapper
