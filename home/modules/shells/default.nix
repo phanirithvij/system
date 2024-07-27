@@ -5,7 +5,10 @@
     ./fish.nix
   ];
 
-  programs.atuin.enable = true;
+  programs.atuin = {
+    enable = true;
+    flags = [ "--disable-up-arrow" ];
+  };
   programs.eza.enable = true;
   programs.fd = {
     enable = true;
