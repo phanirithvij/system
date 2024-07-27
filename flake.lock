@@ -20,11 +20,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1721992626,
-        "narHash": "sha256-GFDSPWxOqEkNrbuSfyoQHGIaRhJNapn2Rv0EEmBGR9A=",
+        "lastModified": 1722100913,
+        "narHash": "sha256-75Hcx5Zu0f+BeCkZxN1frkYacjbkwgCq+z3doVgr4Hw=",
         "owner": "hyprwm",
         "repo": "aquamarine",
-        "rev": "f95d1509370b7f40ef356ff69a332bd0356ab044",
+        "rev": "4918e57979bbdbd05aabb20f63e1cb5dc289bcbd",
         "type": "github"
       },
       "original": {
@@ -40,11 +40,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1721988707,
-        "narHash": "sha256-l+Mm6yNOZjy56WMFpY4tzh5ZxwP8eE3/KVmGSjwrT74=",
+        "lastModified": 1722111953,
+        "narHash": "sha256-XtiyIy1EC/UEZCzPF6LJtamVOPWZ/ij+3US8CQtM47E=",
         "owner": "vimpostor",
         "repo": "blobdrop",
-        "rev": "7aa7ee92ebe7c58a9b210035cd3e84aa89e1aace",
+        "rev": "8f76b2e74feea8c0a0553783911cdc226fc1d126",
         "type": "github"
       },
       "original": {
@@ -300,11 +300,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1722099103,
-        "narHash": "sha256-2Ebhf5kYsszJV/05KdlE5R0S8w/fsgB8VBvjnlbKl+c=",
+        "lastModified": 1722112981,
+        "narHash": "sha256-0tpOoFxpyYwoo9craExTcxx1yroUuSjHTP2+8toM7Qw=",
         "ref": "refs/heads/main",
-        "rev": "10e8af00d61ee2d647af82712c4070eaec875cdb",
-        "revCount": 4998,
+        "rev": "bc86afea7e177a7ad4335737417fc0e468698dc4",
+        "revCount": 5002,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -577,11 +577,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1722099338,
-        "narHash": "sha256-MJ32MAn1+kh9KX8BMOZcA+hYOroMLunjjJYGdjIxbSQ=",
+        "lastModified": 1722113634,
+        "narHash": "sha256-Gd3IC9b0SixmibLuL/lTNtqQSBCD9+l/jcrkpeCZfZ0=",
         "owner": "phanirithvij",
         "repo": "nixpkgs",
-        "rev": "f77fbcb1659428734da9ce514854708a4764bf68",
+        "rev": "e01a3c90a139259f130b0e6b582e348a35938ed6",
         "type": "github"
       },
       "original": {
