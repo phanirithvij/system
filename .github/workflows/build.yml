@@ -53,12 +53,13 @@ jobs:
           key: ${{ runner.os }}
       #- run: nix flake check
       - run: nix fmt
-      - run: nix profile install github:numtide/system-manager github:viperML/nh
+      - run: nix profile install github:numtide/system-manager
       - run: sudo $(which system-manager) switch --flake .#gha
       #- run: system-manager build --flake .#gha
       - run: system-manager build --flake .#vps
-      - run: nix build .#nixosConfigurations.iron.config.system.build.toplevel
-      - run: nh os build -H iron -s tty . --no-nom
+      #- run: nix build .#nixosConfigurations.iron.config.system.build.toplevel
+      - run: nixos-rebuild build --fast --flake .#iron
+      #- run: nh os build -H iron -s tty . --no-nom
       - run: nix build .#homeConfigurations."rithvij@iron".activationPackage
       - run: nix build .#homeConfigurations."rithviz@rithviz-inspiron7570".activationPackage
       - run: nix run .#nix -- flake show
