@@ -57,9 +57,7 @@ jobs:
       - run: sudo $(which system-manager) switch --flake .#gha
       #- run: system-manager build --flake .#gha
       - run: system-manager build --flake .#vps
-      #- run: nix build .#nixosConfigurations.iron.config.system.build.toplevel
-      - run: nixos-rebuild build --fast --flake .#iron
-      #- run: nh os build -H iron -s tty . --no-nom
+      - run: nix build .#nixosConfigurations.iron.config.system.build.toplevel
       - run: nix build .#homeConfigurations."rithvij@iron".activationPackage
       - run: nix build .#homeConfigurations."rithviz@rithviz-inspiron7570".activationPackage
       - run: nix run .#nix -- flake show
