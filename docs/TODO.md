@@ -236,16 +236,14 @@ more are in my zet but that is to be made public
 
 - [ ] see numtide repos and how they do it
 
-#### selfhosted binary caches
+#### uncategorized
 
+- [ ] selfhosted binary caches
 - [ ] installer iso two variations
   - One with my full setup
   - Other is minimal, absolutely necessary steps only
   - https://github.com/nix-community/nixos-generators
-- [x] Nixos specialisations/systemd profiles idea
-  - multiple generations which each act as a profile
-  - generations can be named I watched this on a youtube video
-  - It is nix specialisations
+- nix specialisations
   - [x] mingetty/tty only specilization to act as a server
     - Ideally can be used if I learn to work without a mouse
     - Full nvim
@@ -267,10 +265,8 @@ more are in my zet but that is to be made public
   - I did remove .cache didn't help, tried using default vals for all configs of plamsa
     didn't help
   - so the bug is hard to track down given I know nothing about plasma
-- [x] Separate home-manager to work on non-nixos
-  - [ ] TODO test on old manjaro this config
 
-- [ ] tailscale on local instead of vps
+- [ ] headscale on local instead of vps
   - also vps configuration in nix/dockerfiles separate repo?
   - rustdesk-server, syncplay, tailscale, headscale
 
@@ -278,7 +274,6 @@ more are in my zet but that is to be made public
   - there is a awesome-age repo
   - yubikey try
   - Espanso module for this, copy pasting secrets
-- [ ] nix-serve/harmonica
 - [ ] Appimages and all github repos mirror
 - [ ] Docker containers registry mirrors
 - [ ] Experimental nix overlay store
@@ -289,15 +284,14 @@ more are in my zet but that is to be made public
   - For creating Containers
 - [ ] Styx
   - binary cache substitutor something novel
-- [ ] nix-serve ++ attic ++ harmonia
-- [ ] gha backed magic cache
+- [ ] gha backed on demand remote builders
   - https://github.com/alexellis/actions-batch
   - https://github.com/fawazahmed0/action-debug
   - https://github.com/phanirithvij/debug-action
 
 ## termux/android
 
-- [ ] nix-on-droid
+- [x] nix-on-droid
   - two identical?
   - [ ] remote build on linux
   - [ ] distributed builds on both devices
@@ -306,7 +300,7 @@ more are in my zet but that is to be made public
 ## non nix nix
 
 - [ ] Ansible playbooks??
-  - Not related to nix
+  - *Not related to nix* !!!
   - Mainly for installing nix on vps
   - Same purpose as gha action yml
   - And Termux ofc, not possible to use nix
@@ -319,12 +313,18 @@ more are in my zet but that is to be made public
   - https://sandervanderburg.blogspot.com/2014/07/managing-private-nix-packages-outside.html
   - https://sandervanderburg.blogspot.com/2012/11/an-alternative-explaination-of-nix.html
   - https://github.com/DeterminateSystems/update-flake-lock
-- [ ] Teldrive
-  - on vps and local (i.e system-manager module and nixos module, services)
-  - maintainer on nixpkgs it's not there
-  - Fork and add drag drop, existing listings, remember upload location and send pr for 1, 3
-  - htmx rewrite fork, already in go
+- [ ] teldrive
   - flake/npins setup
+  - on vps and local (i.e system-manager module and nixos module, services)
+  - become maintainer on nixpkgs since it isn't there
+  - [ ] fork
+    - ui drag drop
+    - remember upload location
+    - [ ] and send pr upstream
+    - own fork:
+      - existing listings
+      - htmx rewrite, already in go
 - [ ] cloudflared tunnel nixos service
   - multiple service (redis like)
-  - write endpoint to /run/secrets or something so others can use it
+  - write the output endpoints to /run/secrets
+    or somewhere other processes can read from
