@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  imports = [ ../applications/syncplay.nix ];
+  imports = [ ../modules/syncplay.nix ];
   config = rec {
     nixpkgs.hostPlatform = "x86_64-linux";
 
