@@ -16,6 +16,7 @@
     curl
     wget2
     wget
+    sysz
   ];
 
   home.stateVersion = "24.11";
