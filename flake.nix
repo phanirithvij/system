@@ -111,9 +111,15 @@
         };
       treefmtCfg = (treefmt-nix.lib.evalModule pkgs ./treefmt.nix).config.build;
       nix-index-hm-modules = [
-        nix-index-database.hmModules.nix-index
+        inputs.nix-index-database.hmModules.nix-index
         { programs.nix-index-database.comma.enable = true; }
       ];
+      toolsModule = {
+        environment.systemPackages = [
+          home-manager.packages.${system}.default
+          system-manager.packages.${system}.default
+        ];
+      };
     in
     rec {
       inherit (inputs.flake-schemas) schemas;
@@ -155,16 +161,11 @@
         # TODO runner #different repo with npins?
       };
       nixosConfigurations = {
-        ${host} = nixpkgs.lib.nixosSystem rec {
+        ${host} = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            {
-              environment.systemPackages = [
-                blobdrop.packages.${system}.default
-                home-manager.packages.${system}.default
-                system-manager.packages.${system}.default
-              ];
-            }
+            { environment.systemPackages = [ blobdrop.packages.${system}.default ]; }
+            toolsModule
             ./hosts/${host}/configuration.nix
             { nixpkgs.overlays = overlays; }
           ];
@@ -182,12 +183,7 @@
           };
           modules = [
             home-manager.nixosModules.home-manager
-            {
-              environment.systemPackages = [
-                home-manager.packages.${system}.default
-                system-manager.packages.${system}.default
-              ];
-            }
+            toolsModule
             {
               home-manager = {
                 useGlobalPkgs = true;
@@ -213,25 +209,8 @@
         gha = system-manager.lib.makeSystemConfig { modules = [ ./hosts/sysm/gha/configuration.nix ]; };
         vps = system-manager.lib.makeSystemConfig { modules = [ ./hosts/sysm/vps/configuration.nix ]; };
       };
-      devShells.${system} = {
-        default = pkgs.mkShell {
-          packages =
-            with pkgs;
-            [
-              nh
-              xc
-              statix
-              deadnix
-            ]
-            ++ [
-              treefmtCfg.wrapper
-              (pkgs.lib.attrValues treefmtCfg.programs)
-            ];
-        };
-      };
       formatter.${system} = treefmtCfg.wrapper;
-      checks.${system} = {
-        formatting = treefmtCfg.check self;
-      };
+      checks.${system}.formatting = treefmtCfg.check self;
+      devShells.${system}.default = import ./flake/shell.nix { inherit pkgs treefmtCfg; };
     };
 }
