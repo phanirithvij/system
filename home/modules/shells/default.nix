@@ -20,5 +20,5 @@
     fileWidgetCommand = "${pkgs.fd}/bin/fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
   };
   programs.lf.enable = true;
-  xdg.configFile."lf".source = ../config/lf;
+  xdg.configFile."lf/lfrc".source = ../config/lf/lfrc;
 }
