@@ -37,11 +37,6 @@
     navi_config.url = "github:phanirithvij/navi";
     navi_config.flake = false;
 
-    /*
-      nixos-cosmic.url = "github:lilyinstarlight/nixos-cosmic";
-      nixos-cosmic.inputs.nixpkgs.follows = "nixpkgs";
-    */
-
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -52,15 +47,6 @@
 
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
-
-    /*
-      lemurs = {
-        url = "github:phanirithvij/lemurs/nixosmodule";
-        inputs.nixpkgs.follows = "nixpkgs";
-        inputs.utils.follows = "flake-utils";
-        inputs.rust-overlay.follows = "rust-overlay";
-      };
-    */
 
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
@@ -75,21 +61,23 @@
       nixpkgs,
       home-manager,
       nix-on-droid,
-      blobdrop,
-      #nixos-cosmic,
-      nix-index-database,
       system-manager,
       treefmt-nix,
-      #lemurs,
+      blobdrop,
+      nix-index-database,
       ...
     }@inputs:
     let
       user = "rithvij";
       uzer = "rithviz";
       droid = "nix-on-droid";
+      liveuser = "nixos";
+
       host = "iron";
       hozt = "rithviz-inspiron7570";
       hostdroid = "localhost"; # not possible to change it
+      livehost = "nixos";
+
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit overlays system;
@@ -107,14 +95,14 @@
       };
       overlays = import ./lib/overlays.nix { inherit inputs system; };
       homeConfig =
-        { username, hostname }:
+        {
+          username,
+          hostname,
+          modules ? [ ],
+        }:
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          modules = [
-            ./home/${username}
-            nix-index-database.hmModules.nix-index
-            { programs.nix-index-database.comma.enable = true; }
-          ];
+          modules = [ ./home/${username} ] ++ modules;
           extraSpecialArgs = {
             inherit inputs;
             inherit username;
@@ -122,6 +110,10 @@
           };
         };
       treefmtCfg = (treefmt-nix.lib.evalModule pkgs ./treefmt.nix).config.build;
+      nix-index-hm-modules = [
+         nix-index-database.hmModules.nix-index
+         { programs.nix-index-database.comma.enable = true; }
+      ];
     in
     rec {
       inherit (inputs.flake-schemas) schemas;
@@ -133,25 +125,34 @@
       };
       apps."aarch64-linux".nix = apps.${system}.nix;
       packages.${system} = {
-        inherit (pkgs) nix-schema bluez;
+        inherit (pkgs) nix-schema;
         navi-master = pkgs.navi;
         system-manager = system-manager.packages.${system}.default;
       };
       homeConfigurations = {
+        # nixos main
         "${user}@${host}" = homeConfig {
           username = user;
           hostname = host;
+          modules = [] ++ nix-index-hm-modules;
         };
+        # non-nixos
         "${uzer}@${hozt}" = homeConfig {
           username = uzer;
           hostname = hozt;
+          modules = [] ++ nix-index-hm-modules;
         };
+        # nix-on-droid
         "${droid}@${hostdroid}" = homeConfig {
           username = droid;
           hostname = hostdroid;
         };
+        # nixos live user
+        "${liveuser}@${livehost}" = homeConfig {
+          username = liveuser;
+          hostname = livehost;
+        };
         # TODO runner #different repo with npins?
-        # TODO nixos live user
       };
       nixosConfigurations = {
         ${host} = nixpkgs.lib.nixosSystem rec {
@@ -166,8 +167,6 @@
             }
             ./hosts/${host}/configuration.nix
             { nixpkgs.overlays = overlays; }
-            #lemurs.nixosModules.default
-            #nixos-cosmic.nixosModules.default
           ];
           specialArgs = {
             inherit inputs;

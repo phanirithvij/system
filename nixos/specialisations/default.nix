@@ -3,9 +3,7 @@ _: {
   # mainly a server profile (no audio, gui, etc)
   # and multiple modes to choose from in boot menu
   imports = [
-    #./cosmic.nix
     ./hyprland.nix
-    #./lemurs.nix
     ./ly.nix
     ./ratpoison.nix
     ./tty.nix

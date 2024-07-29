@@ -61,6 +61,7 @@ jobs:
       - run: nix build .#nixosConfigurations.iron.config.system.build.toplevel
       - run: nix build .#homeConfigurations."rithvij@iron".activationPackage
       - run: nix build .#homeConfigurations."rithviz@rithviz-inspiron7570".activationPackage
+      - run: nix build .#homeConfigurations."nixos@nixos".activationPackage
       - run: nix run .#nix -- flake show
       #- run: nix build .#homeConfigurations."runner".activationPackage
       #- run: nix build .#homeConfigurations."root@vpshostname".activationPackage
