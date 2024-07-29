@@ -117,10 +117,12 @@
         inputs.nix-index-database.hmModules.nix-index
         { programs.nix-index-database.comma.enable = true; }
       ];
+      hm = home-manager.packages.${system}.default;
+      sysm = system-manager.packages.${system}.default;
       toolsModule = {
         environment.systemPackages = [
-          home-manager.packages.${system}.default
-          system-manager.packages.${system}.default
+          hm
+          sysm
         ];
       };
     in
@@ -136,7 +138,8 @@
       packages.${system} = {
         inherit (pkgs) nix-schema;
         navi-master = pkgs.navi;
-        system-manager = system-manager.packages.${system}.default;
+        system-manager = sysm;
+        home-manager = hm;
       };
       homeConfigurations = {
         # nixos main
@@ -161,7 +164,11 @@
           username = liveuser;
           hostname = livehost;
         };
-        # TODO runner #different repo with npins?
+        # TODO different repo with npins?
+        "runner" = homeConfig {
+          username = "runner";
+          hostname = "ignored";
+        };
       };
       nixosConfigurations = {
         ${host} = nixpkgs.lib.nixosSystem {

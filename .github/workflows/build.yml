@@ -40,7 +40,6 @@ jobs:
       # TODO sandbox relax only for dprint plugins possible?
       # TODO file an issue in treefmt-nix repo about dprint plugins
       - uses: DeterminateSystems/magic-nix-cache-action@main
-
       # crazy thing, magic-nix-cache runs on top of attic
       # - name: Debugging with browser
       #   uses: fawazahmed0/action-debug@v2
@@ -51,29 +50,14 @@ jobs:
           path: |
             ~/.cache/nix/
           key: ${{ runner.os }}
-      #- run: nix flake check
       - run: nix fmt
-      - run: nix profile install .#system-manager
-      - run: sudo $(which system-manager) switch --flake .#gha
-      #- run: system-manager build --flake .#gha
-      - run: system-manager build --flake .#vps
-      - run: nix build .#devShells.x86_64-linux.default
+      - run: nix flake check
+      - run: nix build .#systemConfigs.gha && sudo ./result/bin/activate
+      - run: nix build .#homeConfigurations."runner".activationPackage && ./result/activate
       - run: nix build .#nixosConfigurations.iron.config.system.build.toplevel
+      - run: nix build .#systemConfigs.vps
+      - run: nix build .#devShells.x86_64-linux.default
       - run: nix build .#homeConfigurations."rithvij@iron".activationPackage
       - run: nix build .#homeConfigurations."rithviz@rithviz-inspiron7570".activationPackage
       - run: nix build .#homeConfigurations."nixos@nixos".activationPackage
       - run: nix run .#nix -- flake show
-      #- run: nix build .#homeConfigurations."runner".activationPackage
-      #- run: nix build .#homeConfigurations."root@vpshostname".activationPackage
-      #- name: keypair for nix-serve and run
-      #  shell: bash
-      #  run: |
-      #    source .github/scripts/nix-serve.sh >/dev/null 2>&1
-      #- run: nix profile install nixpkgs#cloudflared
-      ## optionally configure a fixed cloudflare tunnel endpoint (requires login)
-      ## - name: configure cloudflare tunnel endpoint
-      #- name: expose nix-serve server
-      #  run: |
-      #    cloudflared tunnel --url http://localhost:5000 > cloudflared.log 2>&1 &
-      #- run: .github/scripts/loop.sh
-      #  shell: bash
