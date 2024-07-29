@@ -4,6 +4,10 @@
   nixosModulesPath,
   ...
 }:
+let
+  redisName = name: "redis" + lib.optionalString (name != "") ("-" + name);
+  enabledServers = lib.filterAttrs (name: conf: conf.enable) config.services.redis.servers;
+in
 {
   imports = map (path: nixosModulesPath + path) [
     "/services/databases/redis.nix"
@@ -11,9 +15,9 @@
     "/services/networking/nftables.nix"
   ];
   config = {
-    # https://github.com/numtide/system-manager/blob/main/nix/modules/upstream/nixpkgs/nginx.nix
-    systemd.services.redis-redrum = lib.mkIf config.services.redis.servers.redrum.enable {
-      wantedBy = lib.mkForce [ "system-manager.target" ];
-    };
+    systemd.services = lib.mapAttrs' (
+      name: conf:
+      lib.nameValuePair (redisName name) { wantedBy = lib.mkForce [ "system-manager.target" ]; }
+    ) enabledServers;
   };
 }
