@@ -54,7 +54,7 @@
     macchina # neofetch alternative
     onefetch # neofetch like tool for git repos
     p7zip # 7z cli
-    pulumi # TODO testdrive
+    pulumi-bin # TODO testdrive
     pv # progress vizualized
     qbittorrent
     qcomicbook
