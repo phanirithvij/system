@@ -53,7 +53,7 @@ jobs:
           key: ${{ runner.os }}
       #- run: nix flake check
       - run: nix fmt
-      - run: nix profile install github:numtide/system-manager
+      - run: nix profile install .#system-manager
       - run: sudo $(which system-manager) switch --flake .#gha
       #- run: system-manager build --flake .#gha
       - run: system-manager build --flake .#vps

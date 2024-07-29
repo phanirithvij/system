@@ -139,6 +139,7 @@
       packages.${system} = {
         inherit (pkgs) nix-schema bluez;
         navi-master = pkgs.navi;
+        system-manager = system-manager.packages.${system}.default;
       };
       homeConfigurations = {
         "${user}@${host}" = homeConfig {
