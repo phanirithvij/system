@@ -26,7 +26,7 @@ buildGoModule rec {
     description = "Search github issues interactively";
     homepage = "https://github.com/gennaro-tedesco/gh-i";
     license = licenses.asl20;
-    maintainers = with maintainers; [ daru-san ];
+    maintainers = with maintainers; [ ];
     mainProgram = "gh-i";
   };
 }

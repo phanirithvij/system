@@ -148,7 +148,7 @@ in
   programs.poetry.enable = true;
 
   programs.ripgrep.enable = true;
- 
+
   programs.yt-dlp.enable = true;
 
   home.file.".cargo/config.toml".text = ''
