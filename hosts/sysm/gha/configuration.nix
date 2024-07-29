@@ -5,6 +5,7 @@
   ...
 }:
 {
+  imports = [ ../modules/redis.nix ];
   config = {
     nixpkgs.hostPlatform = "x86_64-linux";
 
@@ -13,5 +14,13 @@
       fd
       hello
     ];
+
+    services.redis = {
+      package = pkgs.valkey;
+      servers.redrum = {
+        enable = true;
+        port = 6379;
+      };
+    };
   };
 }
