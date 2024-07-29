@@ -5,25 +5,27 @@ let
 in
 {
   imports = [
-    ../modules/appimgs.nix
-    ../modules/android.nix
-    ../modules/bookmarks
-    ../modules/editors.nix
+    ../applications/appimgs.nix
+    ../applications/android.nix
+    ../applications/bookmarks
+    ../applications/bashmount.nix
+    ../applications/editors.nix
     # TODO if inside specialization detect that?
     # maybe cfg.xfce enabled? something
-    ../modules/config/xfconf.nix
+    ../applications/config/xfconf.nix
 
-    ../modules/git
-    ../modules/games
-    ../modules/media
+    ../applications/git
+    ../applications/games
+    ../applications/media
 
-    ../modules/hyprland.nix
-    ../modules/rss.nix
-    ../modules/shells
-    ../modules/terminals.nix
-    ../modules/tmux.nix
-    ../modules/topgrade.nix
-    ../modules/tui.nix
+    ../applications/hyprland.nix
+    ../applications/rss.nix
+    ../applications/shells
+    ../applications/terminals.nix
+    ../applications/tmux.nix
+    ../applications/topgrade.nix
+    ../applications/tui.nix
+    ../applications/zoxide.nix
   ];
 
   home.username = username;

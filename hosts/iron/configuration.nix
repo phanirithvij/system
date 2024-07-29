@@ -17,8 +17,8 @@ in
     ./hardware-configuration.nix
     ../../nixos/specialisations
     ../../nixos/profiles/desktop.nix
-    ../../nixos/modules/tailscale.nix
-    ../../nixos/modules/nixserve
+    ../../nixos/applications/tailscale.nix
+    ../../nixos/applications/nixserve
   ];
 
   boot.loader = {

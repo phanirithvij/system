@@ -185,7 +185,28 @@
           specialArgs = {
             inherit inputs;
           };
-          modules = [ ./hosts/iso.nix ];
+          modules = [
+            home-manager.nixosModules.home-manager
+            {
+              environment.systemPackages = [
+                home-manager.packages.${system}.default
+                system-manager.packages.${system}.default
+              ];
+            }
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                users.nixos = import ./home/nixos;
+                extraSpecialArgs = {
+                  inherit inputs;
+                  username = "nixos";
+                  hostname = "nixos";
+                };
+              };
+            }
+            ./hosts/nixos/iso.nix
+          ];
         };
       };
       # keep all nix-on-droid hosts in same state

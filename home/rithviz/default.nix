@@ -14,14 +14,15 @@
   news.display = "silent";
 
   imports = [
-    ../modules/bookmarks
-    ../modules/editors.nix
-    ../modules/git
-    ../modules/media
-    ../modules/shells
-    ../modules/tmux.nix
-    ../modules/topgrade.nix
-    ../modules/tui.nix
+    ../applications/bookmarks
+    ../applications/editors.nix
+    ../applications/git
+    ../applications/media
+    ../applications/shells
+    ../applications/tmux.nix
+    ../applications/topgrade.nix
+    ../applications/tui.nix
+    ../applications/zoxide.nix
   ];
 
   home.packages = with pkgs; [

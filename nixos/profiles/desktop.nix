@@ -1,1 +1,1 @@
-_: { imports = [ ../modules/games.nix ]; }
+_: { imports = [ ../applications/games.nix ]; }

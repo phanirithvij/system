@@ -1,1 +1,1 @@
-_: { imports = [ ../modules/hydra.nix ]; }
+_: { imports = [ ../applications/hydra.nix ]; }
