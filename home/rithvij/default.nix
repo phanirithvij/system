@@ -66,6 +66,7 @@ in
     yacreader
     localsend
     rclone-browser
+    spotify
 
     ffmpeg-headless
     sqlite-interactive

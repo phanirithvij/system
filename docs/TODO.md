@@ -328,3 +328,6 @@ more are in my zet but that is to be made public
   - multiple service (redis like)
   - write the output endpoints to /run/secrets
     or somewhere other processes can read from
+- [ ] trash-cli, trashy, fzf, lf
+    - tui?
+
