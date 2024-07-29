@@ -191,7 +191,6 @@ more are in my zet but that is to be made public
   - have a full build action which does not use cache
     - or in a different repo? but can 10GB hold it
     - iron hm seems to be 7GB (nix-tree)
-  - [ ] gha runner home-manager profile
   - [ ] repo/cache per host?
   - [ ] detect files changed and do only nixos or hm build to not waste gha resources
   - [ ] pre-commit hooks and pre-commit hooks step in gha like npins
@@ -204,13 +203,11 @@ more are in my zet but that is to be made public
   - sysm
   - docker?
 - [ ] gha config
-  - hm (when using debug time action either upterm or cloudflared tunnel)
-  - sysm
   - [ ] cloudflared service
     - for quick debugs
   - [ ] nix-serve, nix-serve-ng, attic
   - [ ] serf?
-  - [ ] tailscale ephemeral
+  - [x] tailscale ephemeral
     - [ ] headscale ephemeral
 
 #### forgejo-runners
@@ -260,15 +257,17 @@ more are in my zet but that is to be made public
 - [ ] flakes modular
   - flake-parts
   - snowfalllib (meh, completely changes everything)
-- [ ] Wayland external monitor sleeping bug workaround
-  - New user works but need to somehow make /home/rithvij move to the new user
+- [x] KDE plasma external monitor sleeping bug workaround
+  - new user works but need to somehow make /home/rithvij move to the new user
   - I did remove .cache didn't help, tried using default vals for all configs of plamsa
     didn't help
   - so the bug is hard to track down given I know nothing about plasma
+  - works fine in hyprland
 
 - [ ] headscale on local instead of vps
   - also vps configuration in nix/dockerfiles separate repo?
   - rustdesk-server, syncplay, tailscale, headscale
+  - [ ] wait for fiber connection
 
 - [ ] ragenix/sops-nix/rage
   - there is a awesome-age repo
