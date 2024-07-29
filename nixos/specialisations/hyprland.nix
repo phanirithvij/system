@@ -1,5 +1,5 @@
 {
-  inputs,
+  flake-inputs,
   lib,
   pkgs,
   system,
@@ -11,8 +11,8 @@
     configuration = {
       programs.hyprland = {
         enable = true;
-        package = inputs.hyprland.packages.${system}.hyprland;
-        portalPackage = inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
+        package = flake-inputs.hyprland.packages.${system}.hyprland;
+        portalPackage = flake-inputs.hyprland.packages.${system}.xdg-desktop-portal-hyprland;
       };
       programs.hyprlock.enable = true;
       services.desktopManager.plasma6.enable = lib.mkForce false;

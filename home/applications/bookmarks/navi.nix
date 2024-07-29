@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ flake-inputs, pkgs, ... }:
 let
   inherit (pkgs) navi;
 in
@@ -49,7 +49,7 @@ in
       | source
   '';
   home.file.".local/share/navi/cheats/phanirithvij__navi" = {
-    source = inputs.navi_config;
+    source = flake-inputs.navi_config;
     recursive = true;
   };
 }

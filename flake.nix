@@ -93,7 +93,10 @@
           };
         };
       };
-      overlays = import ./lib/overlays.nix { inherit inputs system; };
+      overlays = import ./lib/overlays.nix {
+        inherit system;
+        flake-inputs = inputs;
+      };
       homeConfig =
         {
           username,
@@ -104,7 +107,7 @@
           inherit pkgs;
           modules = [ ./home/${username} ] ++ modules;
           extraSpecialArgs = {
-            inherit inputs;
+            flake-inputs = inputs;
             inherit username;
             inherit hostname;
           };
@@ -170,7 +173,7 @@
             { nixpkgs.overlays = overlays; }
           ];
           specialArgs = {
-            inherit inputs;
+            flake-inputs = inputs;
             inherit system;
             username = user;
             hostname = host;
@@ -179,7 +182,7 @@
 
         defaultIso = nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit inputs;
+            flake-inputs = inputs;
           };
           modules = [
             home-manager.nixosModules.home-manager
@@ -190,7 +193,7 @@
                 useUserPackages = true;
                 users.nixos = import ./home/nixos;
                 extraSpecialArgs = {
-                  inherit inputs;
+                  flake-inputs = inputs;
                   username = "nixos";
                   hostname = "nixos";
                 };

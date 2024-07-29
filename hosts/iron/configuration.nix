@@ -2,7 +2,7 @@
   config,
   lib,
   pkgs,
-  inputs,
+  flake-inputs,
   ...
 }:
 let
@@ -122,8 +122,8 @@ in
 
   nix = {
     registry = {
-      nixpkgs.flake = inputs.nixpkgs;
-      n.flake = inputs.nixpkgs;
+      nixpkgs.flake = flake-inputs.nixpkgs;
+      n.flake = flake-inputs.nixpkgs;
     };
     package = pkgs.nixFlakes;
     settings =

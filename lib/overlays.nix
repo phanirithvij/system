@@ -1,7 +1,7 @@
-{ inputs, system }:
+{ flake-inputs, system }:
 let
   schemaOverlay = _: _: {
-    nix-schema = inputs.nix-schema.packages.${system}.nix.overrideAttrs (old: {
+    nix-schema = flake-inputs.nix-schema.packages.${system}.nix.overrideAttrs (old: {
       doCheck = false;
       doInstallCheck = false;
       postInstall =

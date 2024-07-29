@@ -4,7 +4,7 @@ let
 in
 {
   home.packages = [
-	pkgs.distrobox
-	dtui
+    pkgs.distrobox
+    dtui
   ];
 }
