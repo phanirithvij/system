@@ -25,7 +25,6 @@ in
     ../applications/tmux.nix
     ../applications/topgrade.nix
     ../applications/tui.nix
-    ../applications/zoxide.nix
   ];
 
   home.username = username;

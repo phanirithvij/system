@@ -21,4 +21,6 @@
   };
   programs.lf.enable = true;
   xdg.configFile."lf/lfrc".source = ../config/lf/lfrc;
+
+  programs.zoxide.enable = true;
 }

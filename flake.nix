@@ -111,8 +111,8 @@
         };
       treefmtCfg = (treefmt-nix.lib.evalModule pkgs ./treefmt.nix).config.build;
       nix-index-hm-modules = [
-         nix-index-database.hmModules.nix-index
-         { programs.nix-index-database.comma.enable = true; }
+        nix-index-database.hmModules.nix-index
+        { programs.nix-index-database.comma.enable = true; }
       ];
     in
     rec {
@@ -134,13 +134,13 @@
         "${user}@${host}" = homeConfig {
           username = user;
           hostname = host;
-          modules = [] ++ nix-index-hm-modules;
+          modules = [ ] ++ nix-index-hm-modules;
         };
         # non-nixos
         "${uzer}@${hozt}" = homeConfig {
           username = uzer;
           hostname = hozt;
-          modules = [] ++ nix-index-hm-modules;
+          modules = [ ] ++ nix-index-hm-modules;
         };
         # nix-on-droid
         "${droid}@${hostdroid}" = homeConfig {

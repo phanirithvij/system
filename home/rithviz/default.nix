@@ -22,7 +22,6 @@
     ../applications/tmux.nix
     ../applications/topgrade.nix
     ../applications/tui.nix
-    ../applications/zoxide.nix
   ];
 
   home.packages = with pkgs; [

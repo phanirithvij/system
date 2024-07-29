@@ -13,7 +13,6 @@
     ../applications/bashmount.nix
     ../applications/bookmarks/navi.nix
     ../applications/tmux.nix
-    ../applications/zoxide.nix
   ];
 
   home.username = username;
