@@ -53,7 +53,8 @@ jobs:
       - run: nix fmt
       - run: nix flake check
       - run: nix build .#systemConfigs.gha && sudo ./result/bin/activate
-      - run: nix build .#homeConfigurations."runner".activationPackage && ./result/activate
+      - run: nix build .#homeConfigurations."runner".activationPackage
+      - run: nix run .#home-manager -- switch --flake . -b bak
       - run: nix build .#nixosConfigurations.iron.config.system.build.toplevel
       - run: nix build .#systemConfigs.vps
       - run: nix build .#devShells.x86_64-linux.default
