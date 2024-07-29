@@ -221,10 +221,6 @@ in
       sysz
       progress
 
-      lazydocker
-      docker-compose
-      distrobox
-
       nix-output-monitor
       nix-schema # overlay
 

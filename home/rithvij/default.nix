@@ -9,6 +9,7 @@ in
     ../applications/android.nix
     ../applications/bookmarks
     ../applications/bashmount.nix
+    ../applications/docker
     ../applications/editors.nix
     # TODO if inside specialization detect that?
     # maybe cfg.xfce enabled? something
@@ -86,7 +87,6 @@ in
     #adb android-tools is too fat and heavy
     # rustdesk-server
     # gup # TODO write own overlay/package derivation
-    # distrobox-tui # TODO own go package derivation
     # remote-touchpad
     # templ
     # rustup
