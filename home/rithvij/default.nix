@@ -129,7 +129,6 @@ in
     };
   };
   programs.aria2.enable = true;
-  programs.bashmount.enable = true;
   programs.bat.enable = true;
   programs.bun.enable = true;
 
@@ -162,7 +161,6 @@ in
   };
 
   programs.yt-dlp.enable = true;
-  programs.zoxide.enable = true;
 
   home.file.".cargo/config.toml".text = ''
     [registries.crates-io]

@@ -106,16 +106,12 @@
         };
       };
       overlays = import ./lib/overlays.nix { inherit inputs system; };
-      overlayModule = {
-        nixpkgs.overlays = overlays;
-      };
       homeConfig =
         { username, hostname }:
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
             ./home/${username}
-
             nix-index-database.hmModules.nix-index
             { programs.nix-index-database.comma.enable = true; }
           ];
@@ -169,7 +165,7 @@
               ];
             }
             ./hosts/${host}/configuration.nix
-            overlayModule
+            { nixpkgs.overlays = overlays; }
             #lemurs.nixosModules.default
             #nixos-cosmic.nixosModules.default
           ];

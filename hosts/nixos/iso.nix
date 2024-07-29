@@ -33,11 +33,6 @@
   environment.systemPackages = with pkgs; [
     disko
     parted
-    lf
-    git
-    gh
-    lazygit
-    bashmount
   ];
 
   services.openssh.enable = true;

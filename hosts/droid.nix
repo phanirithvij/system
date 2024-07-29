@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 {
   environment.packages = with pkgs; [
     neovim
