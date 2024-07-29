@@ -128,7 +128,6 @@ in
     };
   };
   programs.aria2.enable = true;
-  programs.bat.enable = true;
   programs.bun.enable = true;
 
   programs.direnv = {

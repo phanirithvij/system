@@ -15,6 +15,7 @@
 
   imports = [
     ../applications/bookmarks
+    ../applications/bashmount.nix
     ../applications/editors.nix
     ../applications/git
     ../applications/media
@@ -27,8 +28,6 @@
   home.packages = with pkgs; [
     air # reload go run
     babelfish # bash to fish
-    bat # fancy cat
-    bashmount # very useful
     btop # fancy process manager like htop
     cmatrix # screensaver
     difftastic # fancy diff
