@@ -296,13 +296,12 @@ more are in my zet but that is to be made public
   - [ ] distributed builds on both devices
   - proot is unusably slow
 
-## non nix nix
+## non nix
 
-- [ ] Ansible playbooks??
+- [x] for nix: detsys installer for gha/vps
+- [ ] Ansible playbooks
   - *Not related to nix* !!!
-  - Mainly for installing nix on vps
-  - Same purpose as gha action yml
-  - And Termux ofc, not possible to use nix
+  - Termux, not possible to use nix (nod proot slow alternative)
 
 ## nixpkgs+external+contribs
 

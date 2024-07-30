@@ -1,5 +1,6 @@
 { pkgs, flake-inputs, ... }:
 {
+  imports = [ ./sshd.nix ];
   environment.packages = with pkgs; [
     neovim
     openssh
@@ -46,7 +47,6 @@
     extraSpecialArgs = {
       inherit flake-inputs;
     };
-
-    config = ../home/nix-on-droid;
+    config = ../../home/nix-on-droid;
   };
 }

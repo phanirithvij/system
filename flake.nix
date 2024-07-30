@@ -219,7 +219,7 @@
           extraSpecialArgs = {
             flake-inputs = inputs;
           };
-          modules = [ ./hosts/droid.nix ];
+          modules = [ ./hosts/nod ];
         };
       };
       systemConfigs = rec {
