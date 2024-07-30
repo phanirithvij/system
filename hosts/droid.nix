@@ -40,7 +40,7 @@
   time.timeZone = "Asia/Kolkata";
 
   home-manager = {
-    backupFileExtension = ".hm.bak";
+    backupFileExtension = "hm.bak";
     useGlobalPkgs = true;
     extraSpecialArgs = {
       inherit flake-inputs;
