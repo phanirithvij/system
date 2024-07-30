@@ -212,11 +212,14 @@
         };
       };
       # keep all nix-on-droid hosts in same state
-      nixOnDroidConfigurations.default = nix-on-droid.lib.nixOnDroidConfiguration {
-        extraSpecialArgs = {
-          flake-inputs = inputs;
+      nixOnDroidConfigurations = rec {
+        default = mdroid;
+        mdroid = nix-on-droid.lib.nixOnDroidConfiguration {
+          extraSpecialArgs = {
+            flake-inputs = inputs;
+          };
+          modules = [ ./hosts/droid.nix ];
         };
-        modules = [ ./hosts/droid.nix ];
       };
       systemConfigs = rec {
         default = gha;
