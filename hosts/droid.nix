@@ -15,7 +15,7 @@
     #man
     gnugrep
     #gnupg
-    #gnused
+    gnused
     #gnutar
     #bzip2
     #gzip
