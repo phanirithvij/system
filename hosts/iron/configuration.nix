@@ -221,9 +221,6 @@ in
       sysz
       progress
 
-      nix-output-monitor
-      nix-schema # overlay
-
       libsmbios
       dmidecode
 

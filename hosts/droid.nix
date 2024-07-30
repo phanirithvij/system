@@ -7,7 +7,6 @@
     file
     procps
     killall
-    git
     #diffutils
     #findutils
     utillinux
@@ -23,10 +22,7 @@
     #xz
     #zip
     #unzip
-    lf
     neovim
-    nix-output-monitor
-    nvd
     #nh #not in 23.11
     iproute2
   ];
