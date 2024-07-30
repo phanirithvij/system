@@ -2,6 +2,7 @@ _: {
   imports = [
     ../applications/bookmarks/navi.nix
     ../applications/git
+    ../applications/go
     ../applications/nix.nix
     ../applications/shells
     ../applications/tmux.nix

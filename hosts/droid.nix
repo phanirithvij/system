@@ -22,7 +22,6 @@
     #xz
     #zip
     #unzip
-    neovim
     #nh #not in 23.11
     iproute2
   ];

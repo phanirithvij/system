@@ -15,11 +15,13 @@ in
     # maybe cfg.xfce enabled? something
     ../applications/config/xfconf.nix
 
-    ../applications/git
     ../applications/games
+    ../applications/git
+    ../applications/go
     ../applications/media
 
     ../applications/hyprland.nix
+    ../applications/nix.nix
     ../applications/rss.nix
     ../applications/shells
     ../applications/terminals.nix
@@ -79,6 +81,7 @@ in
     cargo-binstall
     pipx
     trash-cli
+    remote-touchpad
 
     # TODO remove this later when I know enough about python packages building with venv, poetry, devenv whatnot per project
     python3
@@ -86,8 +89,6 @@ in
     # TODO add this stuff
     #adb android-tools is too fat and heavy
     # rustdesk-server
-    # gup # TODO write own overlay/package derivation
-    # remote-touchpad
     # templ
     # rustup
     # mise (rtx >> asdf-vm)
