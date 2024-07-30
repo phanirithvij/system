@@ -167,7 +167,8 @@
         # TODO different repo with npins?
         "runner" = homeConfig {
           username = "runner";
-          hostname = "ignored";
+          hostname = "_______";
+          modules = [ ] ++ nix-index-hm-modules;
         };
       };
       nixosConfigurations = {
@@ -198,7 +199,7 @@
               home-manager = {
                 useGlobalPkgs = true;
                 useUserPackages = true;
-                users.nixos = import ./home/nixos;
+                users.nixos = ./home/nixos;
                 extraSpecialArgs = {
                   flake-inputs = inputs;
                   username = "nixos";
