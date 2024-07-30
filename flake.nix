@@ -230,6 +230,6 @@
       formatter.${system} = treefmtCfg.wrapper;
       checks.${system}.formatting = treefmtCfg.check self;
       devShells.${system}.default = import ./flake/shell.nix { inherit pkgs treefmtCfg; };
-      devShells."aarch64-linux".default = import ./flake/shell.nix { inherit pkgs treefmtCfg; };
+      devShells."aarch64-linux".default = import ./flake/shellaarch.nix { inherit pkgs; };
     };
 }
