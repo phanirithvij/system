@@ -7,6 +7,7 @@
     file
     procps
     killall
+    ncurses5
     #diffutils
     #findutils
     utillinux
