@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, flake-inputs, ... }:
 {
   environment.packages = with pkgs; [
     neovim
@@ -47,6 +47,9 @@
   home-manager = {
     backupFileExtension = ".hm.bak";
     useGlobalPkgs = true;
+    extraSpecialArgs = {
+      inherit flake-inputs;
+    };
 
     config = ../home/nix-on-droid;
   };
