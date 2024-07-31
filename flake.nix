@@ -102,12 +102,10 @@
           };
         };
       };
-      overlays =
-        (import ./lib/overlays.nix {
-          inherit system;
-          flake-inputs = inputs;
-        })
-        ++ [ git-repo-manager.overlays.git-repo-manager ];
+      overlays = import ./lib/overlays.nix {
+        inherit system;
+        flake-inputs = inputs;
+      };
       homeConfig =
         {
           username,
