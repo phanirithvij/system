@@ -2,6 +2,8 @@
   inputs = {
     nixpkgs.url = "github:phanirithvij/nixpkgs/nixos-unstable-ly";
 
+    systems.url = "github:nix-systems/default-linux";
+
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -19,20 +21,13 @@
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    # https://github.com/gvolpe/nix-config/blob/d983b5e6d8c4d57152ef31fa7141d3aad465123a/flake.nix#L17
-    flake-schemas.url = "github:DeterminateSystems/flake-schemas";
-    #flake-schemas.url = "github:gvolpe/flake-schemas";
     # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
+    flake-schemas.url = "github:DeterminateSystems/flake-schemas";
     nix-schema = {
       url = "github:DeterminateSystems/nix-src/flake-schemas";
       inputs.flake-schemas.follows = "flake-schemas";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # TODO jupyenv python, nix, go kernels
-
-    # TODO split up flakes, seems like inputs cannot be separated
-    # Flakes are bad for big repos (lazy-trees)
-    # TODO move to npins, also keep flakes config in a diff branch
 
     navi_config.url = "github:phanirithvij/navi";
     navi_config.flake = false;
@@ -44,6 +39,7 @@
     blobdrop.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.inputs.systems.follows = "systems";
 
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
@@ -230,6 +226,7 @@
       formatter.${system} = treefmtCfg.wrapper;
       checks.${system}.formatting = treefmtCfg.check self;
       devShells.${system}.default = import ./flake/shell.nix { inherit pkgs treefmtCfg; };
-      devShells."aarch64-linux".default = import ./flake/shellaarch.nix { inherit pkgs; };
+      # TODO broken
+      #devShells."aarch64-linux".default = import ./flake/shellaarch.nix { inherit pkgs; };
     };
 }
