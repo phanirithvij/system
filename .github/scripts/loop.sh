@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 time_left=$((28 * 60))
 while [ $time_left -gt 0 ]; do
   echo "WF exits in $((time_left / 60))m $((time_left % 60))s"

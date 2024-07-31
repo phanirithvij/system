@@ -43,7 +43,7 @@ for phase in ${all_phases[*]}; do
 
   case $input in
   [Rr])
-    runPhase $phase
+    runPhase "$phase"
     ;;
   [Qq])
     break
