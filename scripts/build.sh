@@ -16,4 +16,3 @@ nom build .#systemConfigs.vps
 
 nom build .#nixosConfigurations.iron.config.system.build.toplevel
 nom build .#nixosConfigurations.defaultIso.config.system.build.isoImage
-
