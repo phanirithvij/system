@@ -41,8 +41,8 @@ jobs:
       # TODO file an issue in treefmt-nix repo about dprint plugins
       - uses: DeterminateSystems/magic-nix-cache-action@main
       # crazy thing, magic-nix-cache runs on top of attic
-      - name: Debugging with browser
-        uses: fawazahmed0/action-debug@v2
+      #- name: Debugging with browser
+      #  uses: fawazahmed0/action-debug@v2
       # https://sourcegraph.com/github.com/osdev-wiki/wiki/-/blob/.github/workflows/sitegen.yml?L43:13-43:25
       - name: cache dependency builds
         uses: actions/cache@v2
