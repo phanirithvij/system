@@ -3,7 +3,7 @@ _: {
     ../applications/bookmarks/navi.nix
     ../applications/git
     ../applications/go
-    ../applications/nix.nix
+    ../applications/nixy/nix.nix
     ../applications/shells
     ../applications/tmux.nix
   ];

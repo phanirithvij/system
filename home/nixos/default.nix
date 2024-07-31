@@ -6,7 +6,7 @@
     ../applications/shells
     ../applications/bashmount.nix
     ../applications/bookmarks/navi.nix
-    ../applications/nix.nix
+    ../applications/nixy/nix.nix
     ../applications/tmux.nix
   ];
 

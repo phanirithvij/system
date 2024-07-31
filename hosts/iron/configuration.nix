@@ -18,7 +18,8 @@ in
     ../../nixos/specialisations
     ../../nixos/profiles/desktop.nix
     ../../nixos/applications/tailscale.nix
-    ../../nixos/applications/nixserve
+    ../../nixos/applications/nix/nixserve
+    ../../nixos/applications/nix/pr-tracker-service.nix
   ];
 
   boot.loader = {
@@ -255,6 +256,7 @@ in
 
   programs.neovim.enable = true;
   services.openssh.enable = true;
+  services.pr-tracker.enable = true;
 
   services.redis = {
     package = pkgs.valkey;

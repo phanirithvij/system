@@ -19,9 +19,9 @@ in
     ../applications/git
     ../applications/go
     ../applications/media
+    ../applications/nixy
 
     ../applications/hyprland.nix
-    ../applications/nix.nix
     ../applications/rss.nix
     ../applications/shells
     ../applications/terminals.nix
