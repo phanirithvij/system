@@ -56,16 +56,15 @@
     "crane": {
       "inputs": {
         "nixpkgs": [
-          "system-manager",
           "nixpkgs"
         ]
       },
       "locked": {
-        "lastModified": 1721322122,
-        "narHash": "sha256-a0G1NvyXGzdwgu6e1HQpmK5R5yLsfxeBe07nNDyYd+g=",
+        "lastModified": 1721842668,
+        "narHash": "sha256-k3oiD2z2AAwBFLa4+xfU+7G5fisRXfkvrMTCJrjZzXo=",
         "owner": "ipetkov",
         "repo": "crane",
-        "rev": "8a68b987c476a33e90f203f0927614a75c3f47ea",
+        "rev": "529c1a0b1f29f0d78fa3086b8f6a134c71ef3aaf",
         "type": "github"
       },
       "original": {
@@ -214,6 +213,35 @@
       "original": {
         "owner": "numtide",
         "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "git-repo-manager": {
+      "inputs": {
+        "crane": [
+          "crane"
+        ],
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": [
+          "rust-overlay"
+        ]
+      },
+      "locked": {
+        "lastModified": 1715422898,
+        "narHash": "sha256-Mzemb1CzdByiZ5CUeh4uZRRERndw9ijmywLruCmrd8A=",
+        "owner": "hakoerber",
+        "repo": "git-repo-manager",
+        "rev": "4622b618ec44f462411619f58a25890334c8b4bf",
+        "type": "github"
+      },
+      "original": {
+        "owner": "hakoerber",
+        "repo": "git-repo-manager",
         "type": "github"
       }
     },
@@ -786,8 +814,10 @@
     "root": {
       "inputs": {
         "blobdrop": "blobdrop",
+        "crane": "crane",
         "flake-schemas": "flake-schemas",
         "flake-utils": "flake-utils",
+        "git-repo-manager": "git-repo-manager",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "navi_config": "navi_config",
@@ -839,7 +869,9 @@
     },
     "system-manager": {
       "inputs": {
-        "crane": "crane",
+        "crane": [
+          "crane"
+        ],
         "devshell": "devshell",
         "flake-utils": [
           "flake-utils"

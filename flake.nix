@@ -2,23 +2,33 @@
   inputs = {
     nixpkgs.url = "github:phanirithvij/nixpkgs/nixos-unstable-ly";
 
-    systems.url = "github:nix-systems/default-linux";
+    blobdrop.url = "github:vimpostor/blobdrop";
+    blobdrop.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    nix-on-droid = {
-      url = "github:nix-community/nix-on-droid/release-23.11";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
-    };
-
     system-manager = {
       url = "github:numtide/system-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.crane.follows = "crane";
       inputs.flake-utils.follows = "flake-utils";
-      inputs.treefmt-nix.follows = "treefmt-nix";
       inputs.rust-overlay.follows = "rust-overlay";
+      inputs.treefmt-nix.follows = "treefmt-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    git-repo-manager = {
+      url = "github:hakoerber/git-repo-manager";
+      inputs.crane.follows = "crane";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.rust-overlay.follows = "rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/release-23.11";
+      inputs.home-manager.follows = "home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
@@ -35,31 +45,34 @@
     nix-index-database.url = "github:nix-community/nix-index-database";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    blobdrop.url = "github:vimpostor/blobdrop";
-    blobdrop.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
+
+    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    systems.url = "github:nix-systems/default-linux";
+
+    crane.url = "github:ipetkov/crane";
+    crane.inputs.nixpkgs.follows = "nixpkgs";
 
     flake-utils.url = "github:numtide/flake-utils";
     flake-utils.inputs.systems.follows = "systems";
 
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
-
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    hyprland.inputs.nixpkgs.follows = "nixpkgs";
-
-    treefmt-nix.url = "github:numtide/treefmt-nix";
-    treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
     {
       self,
       nixpkgs,
-      home-manager,
-      nix-on-droid,
-      system-manager,
-      treefmt-nix,
       blobdrop,
+      home-manager,
+      system-manager,
+      git-repo-manager,
+      nix-on-droid,
+      treefmt-nix,
       nix-index-database,
       ...
     }@inputs:
@@ -89,10 +102,12 @@
           };
         };
       };
-      overlays = import ./lib/overlays.nix {
-        inherit system;
-        flake-inputs = inputs;
-      };
+      overlays =
+        (import ./lib/overlays.nix {
+          inherit system;
+          flake-inputs = inputs;
+        })
+        ++ [ git-repo-manager.overlays.git-repo-manager ];
       homeConfig =
         {
           username,
@@ -113,11 +128,13 @@
         inputs.nix-index-database.hmModules.nix-index
         { programs.nix-index-database.comma.enable = true; }
       ];
+      grm = git-repo-manager.packages.${system}.default;
       hm = home-manager.packages.${system}.default;
       sysm = system-manager.packages.${system}.default;
       toolsModule = {
         environment.systemPackages = [
           hm
+          grm
           sysm
           pkgs.nix-schema
         ];
@@ -135,8 +152,9 @@
       packages.${system} = {
         inherit (pkgs) nix-schema;
         navi-master = pkgs.navi;
-        system-manager = sysm;
+        git-repo-manager = grm;
         home-manager = hm;
+        system-manager = sysm;
       };
       homeConfigurations = {
         # nixos main
