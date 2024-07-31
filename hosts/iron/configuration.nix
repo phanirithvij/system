@@ -20,6 +20,7 @@ in
     ../../nixos/applications/tailscale.nix
     ../../nixos/applications/nix/nixserve
     ../../nixos/applications/nix/pr-tracker-service.nix
+    ../../secrets
   ];
 
   boot.loader = {
@@ -179,10 +180,14 @@ in
   };
   hardware.nvidia-container-toolkit.enable = true;
 
+  sops.secrets.rithvij_user_passwd = {
+    neededForUsers = true;
+  };
+
   users.users.rithvij = {
     isNormalUser = true;
     # Hint: my clash of clans username
-    hashedPassword = "$y$j9T$CIlZr8283694QRRuk5LV61$2XLbPeB3WADV.jZLC7rXYGJ0GhZgGk7LQwyDXfI4dUD";
+    hashedPasswordFile = config.sops.secrets.rithvij_user_passwd.path;
     extraGroups = [
       "wheel"
       "video"

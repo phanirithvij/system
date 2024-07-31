@@ -1,0 +1,7 @@
+keys:
+  - &admin_rithvij age10mfyxnncp80gvrsllaeac8c4y3vf3dsr2qxmh4q904a8966px36sv3g2zh
+creation_rules:
+  - path_regex: secrets/[^/]+\.(yaml|yml|json|env|ini)$
+    key_groups:
+    - age:
+      - *admin_rithvij

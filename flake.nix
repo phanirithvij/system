@@ -39,6 +39,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sops-nix.inputs.nixpkgs-stable.follows = "";
+
     navi_config.url = "github:phanirithvij/navi";
     navi_config.flake = false;
 
@@ -72,6 +76,7 @@
       system-manager,
       git-repo-manager,
       nix-on-droid,
+      sops-nix,
       treefmt-nix,
       nix-index-database,
       ...
@@ -115,6 +120,7 @@
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [ ./home/${username} ] ++ modules;
+          # TODO sharedModules sops
           extraSpecialArgs = {
             flake-inputs = inputs;
             inherit username;
@@ -190,6 +196,7 @@
           modules = [
             { environment.systemPackages = [ blobdrop.packages.${system}.default ]; }
             toolsModule
+            sops-nix.nixosModules.sops
             ./hosts/${host}/configuration.nix
             { nixpkgs.overlays = overlays; }
           ];
@@ -206,6 +213,7 @@
             flake-inputs = inputs;
           };
           modules = [
+            sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             toolsModule
             {

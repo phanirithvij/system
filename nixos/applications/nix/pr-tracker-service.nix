@@ -35,6 +35,7 @@ in
     users.groups = {
       pr-tracker = { };
     };
+    sops.secrets.gh_t_pr_tracker = { };
     systemd.services.pr-tracker = {
       path = [ pkgs.git ];
       enable = true;
@@ -42,7 +43,7 @@ in
         #Type = "simple";
         User = "pr-tracker";
         Group = "pr-tracker";
-        Environment = "PR_TRACKER_GITHUB_TOKEN=${gh_token}";
+        EnvironmentFile = config.sops.secrets.gh_t_pr_tracker.path;
         ExecStartPre = ''
           ${pkgs.git}/bin/git config --global --add safe.directory ${nixpkgsDir}
         '';

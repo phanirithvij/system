@@ -826,6 +826,7 @@
         "nix-schema": "nix-schema",
         "nixpkgs": "nixpkgs",
         "rust-overlay": "rust-overlay",
+        "sops-nix": "sops-nix",
         "system-manager": "system-manager",
         "systems": "systems_3",
         "treefmt-nix": "treefmt-nix"
@@ -864,6 +865,27 @@
       "original": {
         "owner": "andreymatin",
         "repo": "scss-reset",
+        "type": "github"
+      }
+    },
+    "sops-nix": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "nixpkgs-stable": []
+      },
+      "locked": {
+        "lastModified": 1722114803,
+        "narHash": "sha256-s6YhI8UHwQvO4cIFLwl1wZ1eS5Cuuw7ld2VzUchdFP0=",
+        "owner": "Mic92",
+        "repo": "sops-nix",
+        "rev": "eb34eb588132d653e4c4925d862f1e5a227cc2ab",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Mic92",
+        "repo": "sops-nix",
         "type": "github"
       }
     },
