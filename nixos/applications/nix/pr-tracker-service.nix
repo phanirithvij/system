@@ -15,7 +15,10 @@ let
       systemd
       ;
   };
-  dataDir = "/shed/Projects/nixer";
+  # TODO ensure dataDir is owned by pr-tracker grp
+  # writeable by the grp
+  # and git safe dir because initially it was owned by other user/grp
+  dataDir = "/shed/Projects/nixhome";
   nixpkgsDir = "${dataDir}/nixpkgs";
   cfg = config.services.pr-tracker.enable;
 in
@@ -40,11 +43,12 @@ in
         User = "pr-tracker";
         Group = "pr-tracker";
         Environment = "PR_TRACKER_GITHUB_TOKEN=${gh_token}";
-        #ExecStartPre = "${pkgs.git}/bin/git config --system --add safe.directory ${nixpkgsDir}";
+        ExecStartPre = ''
+          ${pkgs.git}/bin/git config --global --add safe.directory ${nixpkgsDir}
+        '';
         ExecStart = ''
           ${pr-tracker}/bin/pr-tracker \
-          --remote origin \
-          --mount pr-tracker \
+          --remote origin --mount pr-tracker \
           --path ${nixpkgsDir} \
           --user-agent 'pr-tracker (alyssais)' \
           --source-url https://git.qyliss.net/pr-tracker
