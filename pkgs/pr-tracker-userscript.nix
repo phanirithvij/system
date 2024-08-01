@@ -12,7 +12,7 @@ let
     name = pname;
     #runtimeInputs = [ pkgs.pr-tracker ];
     runtimeInputs = [ (pkgs.callPackage ./pr-tracker.nix { }) ];
-    text = builtins.readFile ../scripts/pr-tracker.sh;
+    text = builtins.readFile ../scripts/nixinternal/pr-tracker.sh;
   };
 in
 runCommand pname { meta.mainProgram = pname; } ''
