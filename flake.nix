@@ -132,6 +132,7 @@
         inputs.nix-index-database.hmModules.nix-index
         { programs.nix-index-database.comma.enable = true; }
       ];
+      common-hm-modules = [ inputs.sops-nix.homeManagerModules.sops ];
       grm = git-repo-manager.packages.${system}.default;
       hm = home-manager.packages.${system}.default;
       sysm = system-manager.packages.${system}.default;
@@ -165,13 +166,13 @@
         "${user}@${host}" = homeConfig {
           username = user;
           hostname = host;
-          modules = [ ] ++ nix-index-hm-modules;
+          modules = [ ] ++ nix-index-hm-modules ++ common-hm-modules;
         };
         # non-nixos
         "${uzer}@${hozt}" = homeConfig {
           username = uzer;
           hostname = hozt;
-          modules = [ ] ++ nix-index-hm-modules;
+          modules = [ ] ++ nix-index-hm-modules ++ common-hm-modules;
         };
         # nix-on-droid
         "${droid}@${hostdroid}" = homeConfig {
@@ -187,7 +188,7 @@
         "runner" = homeConfig {
           username = "runner";
           hostname = "_______";
-          modules = [ ] ++ nix-index-hm-modules;
+          modules = [ ] ++ nix-index-hm-modules ++ common-hm-modules;
         };
       };
       nixosConfigurations = {
@@ -226,6 +227,7 @@
                   username = "nixos";
                   hostname = "nixos";
                 };
+                sharedModules = [ ] ++ common-hm-modules;
               };
             }
             ./hosts/nixos/iso.nix

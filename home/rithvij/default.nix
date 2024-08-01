@@ -1,6 +1,5 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 let
-  username = "rithvij";
   homeDir = "/home/${username}";
 in
 {
@@ -28,6 +27,10 @@ in
     ../applications/tmux.nix
     ../applications/topgrade.nix
     ../applications/tui.nix
+
+    ./home-scripts.nix
+
+    ../../secrets
   ];
 
   home.username = username;
