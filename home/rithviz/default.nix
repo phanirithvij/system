@@ -23,6 +23,9 @@
     ../applications/tmux.nix
     ../applications/topgrade.nix
     ../applications/tui.nix
+
+    ./home-scripts.nix
+    ../../secrets
   ];
 
   home.packages = with pkgs; [

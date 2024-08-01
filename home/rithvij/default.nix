@@ -29,7 +29,6 @@ in
     ../applications/tui.nix
 
     ./home-scripts.nix
-
     ../../secrets
   ];
 
