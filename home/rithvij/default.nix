@@ -23,6 +23,7 @@ in
     ../applications/hyprland.nix
     ../applications/rss.nix
     ../applications/shells
+    ../applications/telegram
     ../applications/terminals.nix
     ../applications/tmux.nix
     ../applications/topgrade.nix
