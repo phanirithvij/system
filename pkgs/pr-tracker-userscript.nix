@@ -10,8 +10,7 @@ let
   pname = "pr-tracker-user-script";
   scriptPrTracker = pkgs.writeShellApplication {
     name = pname;
-    #runtimeInputs = [ pkgs.pr-tracker ];
-    runtimeInputs = [ (pkgs.callPackage ./pr-tracker.nix { }) ];
+    runtimeInputs = [ pkgs.pr-tracker ];
     text = builtins.readFile ../scripts/nixinternal/pr-tracker.sh;
   };
 in

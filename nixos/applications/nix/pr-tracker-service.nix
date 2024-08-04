@@ -5,16 +5,6 @@
   ...
 }:
 let
-  pr-tracker = import ../../../pkgs/pr-tracker.nix {
-    inherit (pkgs)
-      rustPlatform
-      lib
-      fetchzip
-      openssl
-      pkg-config
-      systemd
-      ;
-  };
   # TODO ensure dataDir is owned by pr-tracker grp
   # writeable by the grp
   # and git safe dir because initially it was owned by other user/grp
@@ -48,7 +38,7 @@ in
           ${pkgs.git}/bin/git config --global --add safe.directory ${nixpkgsDir}
         '';
         ExecStart = ''
-          ${pr-tracker}/bin/pr-tracker \
+          ${pkgs.pr-tracker}/bin/pr-tracker \
           --remote origin --mount pr-tracker \
           --path ${nixpkgsDir} \
           --user-agent 'pr-tracker (alyssais)' \
