@@ -16,7 +16,7 @@ in
   ];
   config = {
     systemd.services = lib.mapAttrs' (
-      _: _: lib.nameValuePair (redisName name) { wantedBy = lib.mkForce [ "system-manager.target" ]; }
+      name: _: lib.nameValuePair (redisName name) { wantedBy = lib.mkForce [ "system-manager.target" ]; }
     ) enabledServers;
   };
 }
