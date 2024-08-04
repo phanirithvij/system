@@ -6,7 +6,7 @@
 }:
 let
   redisName = name: "redis" + lib.optionalString (name != "") ("-" + name);
-  enabledServers = lib.filterAttrs (name: conf: conf.enable) config.services.redis.servers;
+  enabledServers = lib.filterAttrs (_: conf: conf.enable) config.services.redis.servers;
 in
 {
   imports = map (path: nixosModulesPath + path) [
@@ -16,8 +16,7 @@ in
   ];
   config = {
     systemd.services = lib.mapAttrs' (
-      name: conf:
-      lib.nameValuePair (redisName name) { wantedBy = lib.mkForce [ "system-manager.target" ]; }
+      _: _: lib.nameValuePair (redisName name) { wantedBy = lib.mkForce [ "system-manager.target" ]; }
     ) enabledServers;
   };
 }

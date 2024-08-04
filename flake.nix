@@ -166,13 +166,13 @@
         "${user}@${host}" = homeConfig {
           username = user;
           hostname = host;
-          modules = [ ] ++ nix-index-hm-modules ++ common-hm-modules;
+          modules = nix-index-hm-modules ++ common-hm-modules;
         };
         # non-nixos
         "${uzer}@${hozt}" = homeConfig {
           username = uzer;
           hostname = hozt;
-          modules = [ ] ++ nix-index-hm-modules ++ common-hm-modules;
+          modules = nix-index-hm-modules ++ common-hm-modules;
         };
         # nix-on-droid
         "${droid}@${hostdroid}" = homeConfig {
@@ -188,7 +188,7 @@
         "runner" = homeConfig {
           username = "runner";
           hostname = "_______";
-          modules = [ ] ++ nix-index-hm-modules ++ common-hm-modules;
+          modules = nix-index-hm-modules ++ common-hm-modules;
         };
       };
       nixosConfigurations = {
@@ -227,7 +227,7 @@
                   username = "nixos";
                   hostname = "nixos";
                 };
-                sharedModules = [ ] ++ common-hm-modules;
+                sharedModules = common-hm-modules;
               };
             }
             ./hosts/nixos/iso.nix

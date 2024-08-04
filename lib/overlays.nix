@@ -31,8 +31,8 @@ let
       );
     });
   };
-  pr-trackerOverlay = f: p: {
-    pr-tracker = p.pr-tracker.overrideAttrs (old: {
+  pr-trackerOverlay = _: p: {
+    pr-tracker = p.pr-tracker.overrideAttrs (_: {
       patches = [ ../pkgs/matt2432-pr-tracker-c9d0fd535b9ad1b53c212a87e0710d55d8b7f42e.patch ];
     });
   };
