@@ -6,6 +6,7 @@ in
   imports = [
     ../applications/appimgs.nix
     ../applications/android.nix
+    ../applications/audio
     ../applications/bookmarks
     ../applications/bashmount.nix
     ../applications/docker
