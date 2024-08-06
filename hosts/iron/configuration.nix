@@ -122,6 +122,8 @@ in
     binfmt = true;
   };
 
+  services.fwupd.enable = true;
+
   nix = {
     registry = {
       nixpkgs.flake = flake-inputs.nixpkgs;
