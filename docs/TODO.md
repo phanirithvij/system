@@ -309,7 +309,8 @@ more are in my zet but that is to be made public
 ## nixpkgs+external+contribs
 
 - [ ] https://elatov.github.io/2022/01/building-a-nix-package
-  - add distrobox-tui, gh-i
+  - add distrobox-tui, gh-i, gitcs, gup
+  - add gomtree?
   - add self as maintainer
   - https://sandervanderburg.blogspot.com/2014/07/managing-private-nix-packages-outside.html
   - https://sandervanderburg.blogspot.com/2012/11/an-alternative-explaination-of-nix.html
