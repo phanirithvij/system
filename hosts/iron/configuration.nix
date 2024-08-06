@@ -144,7 +144,7 @@ in
         auto-optimise-store = true;
         trusted-users = [ "@wheel" ];
         allowed-users = users;
-        sandbox = "relaxed";
+        #sandbox = "relaxed";
         http-connections = 50;
         log-lines = 50;
         substituters = [
