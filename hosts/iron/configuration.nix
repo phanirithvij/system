@@ -241,6 +241,11 @@ in
       #wacomtablet
       #xf86_input_wacom
       btrfs-progs
+
+      smartmontools
+      nvme-cli
+      ksnip
+      kdiskmark
     ];
     variables.EDITOR = "nvim";
     variables.VISUAL = "nvim";
