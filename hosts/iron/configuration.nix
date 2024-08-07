@@ -20,6 +20,7 @@ in
     ../../nixos/applications/tailscale.nix
     ../../nixos/applications/nix/nixserve
     ../../nixos/applications/nix/pr-tracker-service.nix
+    ../../nixos/modules/virtualisation.nix
     ../../secrets
   ];
 
