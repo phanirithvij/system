@@ -198,6 +198,7 @@ in
       "networkmanager"
       "docker"
       "input"
+      "libvirtd"
     ];
   };
 
