@@ -167,6 +167,8 @@ in
       };
     */
   };
+  system.switch.enableNg = true;
+  system.switch.enable = false;
   nixpkgs.config.allowUnfree = true;
 
   # https://nixos.wiki/wiki/Podman
