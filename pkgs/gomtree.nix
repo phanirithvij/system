@@ -17,12 +17,14 @@ buildGoModule rec {
 
   vendorHash = null;
 
-  # tests fail with only on nix due to file ro-system
-  doCheck = false;
+  # test fails with nix due to ro file system
+  checkFlags = [ "-skip=^TestXattr$" ];
+
+  subPackages = [ "cmd/gomtree" ];
 
   ldflags = [
     "-s"
-    "-w"
+    "-X main.Version=${version}"
   ];
 
   meta = with lib; {

@@ -1,1 +1,0 @@
-../../../pkgs/go-mtree.nix
