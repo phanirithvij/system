@@ -33,12 +33,13 @@ all_phases="${prePhases[*]:-} unpackPhase patchPhase ${preConfigurePhases[*]:-} 
     ${preDistPhases[*]:-} distPhase ${postPhases[*]:-}"
 
 # run phases
+# shellcheck disable=SC2048
 for phase in ${all_phases[*]}; do
   phases_pretty=$(echo "${all_phases[*]}" | sed "s|$phase|**$phase**|g" | tr -s '[:blank:]')
   echo -e "\n>>> Phase:   $phases_pretty"
   echo ">>> Command:  runPhase $phase"
   echo ">>> Press ENTER/s to skip, q/ctrl+c to quit, r to run"
-  read -n 1 input
+  read -n 1 -r input
   echo
 
   case $input in

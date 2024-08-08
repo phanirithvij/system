@@ -1,5 +1,6 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -i bash -p bash ssh-to-age sops
+# shellcheck shell=bash
 
 SECRET_FILE=$1
 SECRET_FILE=${SECRET_FILE:-secrets/secrets.yml}

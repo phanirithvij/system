@@ -1,5 +1,6 @@
 #!/usr/bin/env nix-shell
 #!nix-shell -i bash -p bash ssh-to-age gnugrep coreutils openssh age
+# shellcheck shell=bash
 
 mkdir -p ~/.config/sops
 
