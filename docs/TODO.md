@@ -40,7 +40,6 @@ more are in my zet but that is to be made public
     - nix-shell with python jupyerlab
     - detsys nix install script
 - [ ] secrets+passwords+privaterepos
-  - sops secrets, age? o.O
   - authpass so I can paste passwds online
     - optional espanso integration
   - gopass + lesspass (gopass-hibp?)
@@ -337,4 +336,5 @@ more are in my zet but that is to be made public
   - http://localhost:8000/pr-tracker?pr=297434 - ly module
   - http://localhost:8000/pr-tracker?pr=332765 - add self + 5 pkgs
   - http://localhost:8000/pr-tracker?pr=328862 - rustdesk headless client service
+  - http://localhost:8000/pr-tracker?pr=323381 - quickgui
 
