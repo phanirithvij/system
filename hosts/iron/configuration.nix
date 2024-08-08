@@ -109,6 +109,16 @@ in
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
+    # https://reddit.com/r/linux/comments/1em8biv/comment/lgxtmck
+    wireplumber.extraConfig = {
+      "10-disable-camera" = {
+        "wireplumber.profiles" = {
+          main = {
+            "monitor.libcamera" = "disabled";
+          };
+        };
+      };
+    };
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
