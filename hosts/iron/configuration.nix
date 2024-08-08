@@ -20,7 +20,7 @@ in
     ../../nixos/applications/tailscale.nix
     ../../nixos/applications/nix/nixserve
     ../../nixos/applications/nix/pr-tracker-service.nix
-    ../../nixos/modules/virtualisation.nix
+    ../../nixos/modules/virtualisation
     ../../secrets
   ];
 
@@ -159,31 +159,10 @@ in
           "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
         ];
       };
-    /*
-      gc = {
-        automatic = true;
-        dates = "weekly";
-        options = "--delete-older-than 7d";
-      };
-    */
   };
   system.switch.enableNg = true;
   system.switch.enable = false;
   nixpkgs.config.allowUnfree = true;
-
-  # https://nixos.wiki/wiki/Podman
-  virtualisation = {
-    # waydroid.enable = true;
-    docker = {
-      enable = true;
-      enableOnBoot = true;
-      package = pkgs.docker_25;
-      daemon.settings = {
-        dns = nameservers;
-      };
-    };
-  };
-  hardware.nvidia-container-toolkit.enable = true;
 
   sops.secrets.rithvij_user_passwd = {
     neededForUsers = true;
@@ -244,14 +223,13 @@ in
       iftop # network monitoring
 
       iptables
-      #wacomtablet
-      #xf86_input_wacom
       btrfs-progs
 
       smartmontools
       nvme-cli
-      ksnip
       kdiskmark
+
+      ksnip
     ];
     variables.EDITOR = "nvim";
     variables.VISUAL = "nvim";
