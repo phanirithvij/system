@@ -25,6 +25,8 @@ in
     ../../secrets
   ];
 
+  docker-opts.nameservers = nameservers;
+
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
