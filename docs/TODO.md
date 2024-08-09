@@ -309,8 +309,6 @@ more are in my zet but that is to be made public
 
 - [x] https://elatov.github.io/2022/01/building-a-nix-package
   - add distrobox-tui, gh-i, gitcs, gup, gomtree
-  - add self as maintainer
-  - https://github.com/NixOS/nixpkgs/pull/332765
   - [ ] todo remove those locally if pr gets merged or setup a NUR
 - https://sandervanderburg.blogspot.com/2014/07/managing-private-nix-packages-outside.html
   - https://sandervanderburg.blogspot.com/2012/11/an-alternative-explaination-of-nix.html
