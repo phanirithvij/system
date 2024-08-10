@@ -1,13 +1,11 @@
 permissions:
   contents: write
-
 on:
   push:
     tags:
       - "v*.*.*"
   workflow_dispatch:
   # cron: weekly
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -38,10 +36,9 @@ jobs:
           remove-docker-images: "true"
       - run: sudo chown 0 /nix
       - uses: actions/checkout@v4
-       # enables flakes, nix-command, sets runner as trusted user
+        # enables flakes, nix-command, sets runner as trusted user
       - uses: DeterminateSystems/nix-installer-action@v12
       - uses: DeterminateSystems/magic-nix-cache-action@main
-
       # crazy thing, magic-nix-cache runs on top of attic
       # - name: Debugging with browser
       #   uses: fawazahmed0/action-debug@v2
