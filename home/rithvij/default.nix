@@ -146,6 +146,21 @@ in
   };
 
   programs.firefox.enable = true;
+
+  xdg.mimeApps =
+    let
+      ff = {
+        "x-scheme-handler/http" = [ "firefox.desktop" ];
+        "x-scheme-handler/https" = [ "firefox.desktop" ];
+        "video/x-matroska" = [ "mpv.desktop" ];
+        "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
+      };
+    in
+    {
+      enable = true;
+      defaultApplications = ff;
+      associations.added = ff;
+    };
   programs.gallery-dl.enable = true;
   programs.jq.enable = true;
 
