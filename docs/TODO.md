@@ -307,9 +307,6 @@ more are in my zet but that is to be made public
 
 ## nixpkgs+external+contribs
 
-- [x] https://elatov.github.io/2022/01/building-a-nix-package
-  - add distrobox-tui, gh-i, gitcs, gup, gomtree
-  - [ ] todo remove those locally if pr gets merged or setup a NUR
 - https://sandervanderburg.blogspot.com/2014/07/managing-private-nix-packages-outside.html
   - https://sandervanderburg.blogspot.com/2012/11/an-alternative-explaination-of-nix.html
   - https://github.com/DeterminateSystems/update-flake-lock
@@ -331,8 +328,6 @@ more are in my zet but that is to be made public
 - [ ] trash-cli, trashy, fzf, lf
     - tui?
 - [ ] pr-tracker prs
-  - http://localhost:8000/pr-tracker?pr=297434 - ly module
-  - http://localhost:8000/pr-tracker?pr=332765 - add self + 5 pkgs
   - http://localhost:8000/pr-tracker?pr=328862 - rustdesk headless client service
   - http://localhost:8000/pr-tracker?pr=323381 - quickgui
 

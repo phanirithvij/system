@@ -66,7 +66,6 @@ in
     # desktop apps
     #microsoft-edge # for its bing ai integration (slow af)
     tor-browser
-    telegram-desktop
     qbittorrent
     koreader
     qimgv

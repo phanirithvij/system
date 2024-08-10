@@ -1,1 +1,7 @@
-_: { imports = [ ./tdl-import.nix ]; }
+{ pkgs, ... }:
+{
+  home.packages = [
+    pkgs.tdl
+    pkgs.telegram-desktop
+  ];
+}

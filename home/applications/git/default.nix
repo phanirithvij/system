@@ -1,12 +1,9 @@
 { pkgs, ... }:
-let
-  gitcs = import ./gitcs.nix { inherit (pkgs) lib buildGoModule fetchFromGitHub; };
-in
 {
   home.packages = [
     pkgs.gitbatch
     pkgs.hub
-    gitcs
+    pkgs.gitcs
   ];
   imports = [
     ./gh.nix

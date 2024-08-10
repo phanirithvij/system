@@ -1,7 +1,4 @@
 { pkgs, ... }:
-let
-  gh-i = import ./gh-i.nix { inherit (pkgs) lib buildGoModule fetchFromGitHub; };
-in
 {
   programs.gh = {
     enable = true;

@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:phanirithvij/nixpkgs/nixos-unstable-ly";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
     blobdrop.url = "github:vimpostor/blobdrop";
     blobdrop.inputs.nixpkgs.follows = "nixpkgs";
