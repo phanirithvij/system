@@ -53,4 +53,4 @@ jobs:
       - run: nix build .#systemConfigs.gha && sudo ./result/bin/activate
       - run: nix build .#homeConfigurations."runner".activationPackage
       - run: nix run .#home-manager -- switch --flake . -b bak
-      - run: bash ../../scripts/build.sh
+      - run: bash scripts/build.sh
