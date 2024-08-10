@@ -270,15 +270,26 @@
               enable = true;
               stages = [ "pre-push" ];
             };
+            nixfmt = {
+              package = pkgs.nixfmt-rfc-style;
+              enable = true;
+              stages = [
+                "pre-push"
+                "pre-commit"
+              ];
+            };
             skip-ci-check = {
               enable = true;
-              files = "\\.md$";
+              always_run = true;
               stages = [ "prepare-commit-msg" ];
               entry = toString (
                 # if all are md files, skip ci
                 pkgs.writeShellScript "skip-ci-md" ''
                   COMMIT_MSG_FILE=$1
                   if git diff --cached --name-only | grep -qvE '\.md$'; then
+                    exit 0
+                  fi
+                  if grep -q "\[skip ci\]" "$COMMIT_MSG_FILE"; then
                     exit 0
                   fi
                   echo "[skip ci]" >> "$COMMIT_MSG_FILE"
