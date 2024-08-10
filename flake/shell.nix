@@ -5,8 +5,7 @@ pkgs.mkShell {
     [
       nh
       xc
-      statix
-      deadnix
+      dprint
     ]
     ++ [
       treefmtCfg.wrapper
