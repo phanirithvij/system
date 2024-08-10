@@ -15,6 +15,7 @@
       inputs.rust-overlay.follows = "rust-overlay";
       inputs.treefmt-nix.follows = "treefmt-nix";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pre-commit-hooks.follows = "git-hooks";
     };
 
     git-repo-manager = {
@@ -37,6 +38,7 @@
       url = "github:DeterminateSystems/nix-src/flake-schemas";
       inputs.flake-schemas.follows = "flake-schemas";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.pre-commit-hooks.follows = "git-hooks";
     };
 
     sops-nix.url = "github:Mic92/sops-nix";
@@ -54,6 +56,10 @@
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
+
+    git-hooks.url = "github:cachix/git-hooks.nix";
+    git-hooks.inputs.nixpkgs.follows = "nixpkgs";
+    git-hooks.inputs.nixpkgs-stable.follows = "";
 
     systems.url = "github:nix-systems/default-linux";
 
@@ -78,6 +84,7 @@
       nix-on-droid,
       sops-nix,
       treefmt-nix,
+      git-hooks,
       nix-index-database,
       ...
     }@inputs:
@@ -250,8 +257,46 @@
         vps = system-manager.lib.makeSystemConfig { modules = [ ./hosts/sysm/vps/configuration.nix ]; };
       };
       formatter.${system} = treefmtCfg.wrapper;
-      checks.${system}.formatting = treefmtCfg.check self;
-      devShells.${system}.default = import ./flake/shell.nix { inherit pkgs treefmtCfg; };
+      checks.${system} = {
+        formatting = treefmtCfg.check self;
+        git-hooks-check = git-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            deadnix = {
+              enable = true;
+              stages = [ "pre-push" ];
+            };
+            statix = {
+              enable = true;
+              stages = [ "pre-push" ];
+            };
+            skip-ci-check = {
+              enable = true;
+              files = "\\.md$";
+              stages = [ "prepare-commit-msg" ];
+              entry = toString (
+                # if all are md files, skip ci
+                pkgs.writeShellScript "skip-ci-md" ''
+                  COMMIT_MSG_FILE=$1
+                  if git diff --cached --name-only | grep -qvE '\.md$'; then
+                    exit 0
+                  fi
+                  echo "[skip ci]" >> "$COMMIT_MSG_FILE"
+                ''
+              );
+            };
+          };
+        };
+      };
+
+      devShells.${system}.default = import ./flake/shell.nix {
+        inherit
+          pkgs
+          treefmtCfg
+          self
+          system
+          ;
+      };
       # TODO broken
       #devShells."aarch64-linux".default = import ./flake/shellaarch.nix { inherit pkgs; };
     };

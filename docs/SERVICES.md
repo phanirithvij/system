@@ -23,6 +23,8 @@ A selfhosted heaven all in nixos
 - [ ] home-manager-option-search
 - [ ] nixos-search
 - [ ] old versions tracker
+- [ ] ofborg (necessary?)
+  - https://github.com/NixOS/ofborg/wiki/Operating-a-Builder/
 
 Another doc for selfhosted docker/podman stuff
 
