@@ -8,8 +8,8 @@ more are in my zet but that is to be made public
 ### ideas
 
 - [ ] matt1432
-    - https://github.com/matt1432/nixos-configs
-    - https://github.com/jorsn/flakegen
+  - https://github.com/matt1432/nixos-configs
+  - https://github.com/jorsn/flakegen
 - [ ] github board like https://github.com/users/kachick/projects/3?query=sort%3Aupdated-desc+is%3Aopen
   - would prefer something selfhosted (find one)
   - for now settle on this todo.md
@@ -302,7 +302,7 @@ more are in my zet but that is to be made public
 
 - [x] for nix: detsys installer for gha/vps
 - [ ] Ansible playbooks
-  - *Not related to nix* !!!
+  - _Not related to nix_ !!!
   - Termux, not possible to use nix (nod proot slow alternative)
 
 ## nixpkgs+external+contribs
@@ -326,8 +326,7 @@ more are in my zet but that is to be made public
   - write the output endpoints to /run/secrets
     or somewhere other processes can read from
 - [ ] trash-cli, trashy, fzf, lf
-    - tui?
+  - tui?
 - [ ] pr-tracker prs
   - http://localhost:8000/pr-tracker?pr=328862 - rustdesk headless client service
   - http://localhost:8000/pr-tracker?pr=323381 - quickgui
-
