@@ -50,15 +50,7 @@ jobs:
           path: |
             ~/.cache/nix/
           key: ${{ runner.os }}
-      - run: nix fmt
-      - run: nix flake check
       - run: nix build .#systemConfigs.gha && sudo ./result/bin/activate
       - run: nix build .#homeConfigurations."runner".activationPackage
       - run: nix run .#home-manager -- switch --flake . -b bak
-      - run: nix build .#nixosConfigurations.iron.config.system.build.toplevel
-      - run: nix build .#systemConfigs.vps
-      - run: nix build .#devShells.x86_64-linux.default
-      - run: nix build .#homeConfigurations."rithvij@iron".activationPackage
-      - run: nix build .#homeConfigurations."rithviz@rithviz-inspiron7570".activationPackage
-      - run: nix build .#homeConfigurations."nixos@nixos".activationPackage
-      - run: nix run .#nix -- flake show
+      - run: bash ../../scripts/build.sh
