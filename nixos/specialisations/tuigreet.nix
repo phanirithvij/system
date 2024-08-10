@@ -4,7 +4,7 @@
     inheritParentConfig = true;
     configuration = {
       services = {
-        displayManager.sddm.enable = lib.mkForce false;
+        displayManager.ly.enable = lib.mkForce false;
 
         greetd = {
           enable = true;

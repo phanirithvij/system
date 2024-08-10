@@ -128,7 +128,11 @@ in
   services.libinput.enable = true;
 
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
+  services.displayManager.ly.enable = lib.mkDefault true;
+  services.displayManager.ly.settings = {
+    load = true;
+    save = true;
+  };
   services.desktopManager.plasma6.enable = true;
 
   services.flatpak.enable = true;
