@@ -17,9 +17,18 @@ A selfhosted heaven all in nixos
   - I need to make it
   - Is it worth it for ~12MiBps extra?
 
+- Nix specific
+- [x] pr-tracker
+  - [ ] https://github.com/matt1432/pr-tracker/issues/1
+- [ ] home-manager-option-search
+- [ ] nixos-search
+- [ ] old versions tracker
+
 Another doc for selfhosted docker/podman stuff
 
 - [ ] Immich
+- [ ] Teldrive
+- [ ] postgres backups
 
 - All the above services
   - just in case I leave nixos due to the toxicity
