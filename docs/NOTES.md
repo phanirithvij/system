@@ -23,6 +23,14 @@
   - would've been very useful when I was in uni with sudo disabled
 - formatter is nixfmt-rfc-style
   - treefmt+dprint for other things
+- dprint broken with treefmt-nix need to file an issue TODO
+- git-repo-manager for git repos own and others and symlink to appropriate locations
+  - eg. for go projects etc. ~/Projects/go
+  - zig -> ~/Projects/zig
+  - system -> ~/Projects/system -> ~/Projects/\!Own/system
+- nix bundle works but initial startup is slow
+- nix bundle ralismarks/nix-appimage doesn't work on non-nix system
+  - tried on one for navi and firefox
 
 # nixey by other people
 
@@ -38,7 +46,7 @@ Useful links along with my annotations.
 - https://github.com/workflow/dotfiles
   - gha initial setup
 - [ ] postgresql backup with rustic
-- [ ] impermiance
+- [ ] impermanence
 
 ## Notes
 
@@ -64,24 +72,26 @@ Useful links along with my annotations.
   - https://github.com/andir/npins
   - https://github.com/privatevoid-net/nix-super
 - https://github.com/nixlang-wiki/nixlang-wiki/tree/main/nix
--
 
 ## Useful projects (I use)
 
 - List only stuff I use! see awesome-nix for all other things
-- [x] https://github.com/numtide/system-manager
+- https://github.com/numtide/system-manager
   - bring nixos to non-nixos dyi kinda, alpha
   - https://github.com/a-h/system-manager-test/tree/main
   - https://github.com/a-h/nix-airgapped-vm
+- nom >> nh > nvd
+- https://github.com/nix-community/home-manager
+  - https://home-manager-options.extranix.com/
+- direnv
+  - use flake in envrc
 - [ ] nix-olde, nix-du, nix-inspect, nix-tree etc
-- [x] nom, nh, nvd
-- [x] hm
-- [x] direnv
 - [ ] nixos-infect ??
 - [ ] xc/just
 - [ ] nixci
   - [ ] omnix
 - [ ] attic, harmonia, nix-serve, nix-serve-ng
+- https://github.com/hakoerber/git-repo-manager
 
 ## Discourse/gh prs/gh issues
 
@@ -141,3 +151,4 @@ Useful links along with my annotations.
 - reproducible
 - nix cli stabilisation
 - flakes stabilisation
+
