@@ -24,6 +24,12 @@ jobs:
           sudo rm -rf /home/linuxbrew
           sudo rm -rf /home/runner/.rustup
       - uses: actions/checkout@v4
+      # enables flakes, nix-command, sets runner as trusted user
+      - uses: DeterminateSystems/nix-installer-action@v12
+        with:
+          extra-conf: |
+            substituters = http://iron:5000
+            trusted-public-keys = iron:RiBHQE6zmBos9J6DRbp+9WvUZGYotzFO0JC4om94R24=
       - name: tailscale use iron as builder
         uses: tailscale/github-action@v2
         with:
@@ -31,12 +37,6 @@ jobs:
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
           version: 1.70.0
-       # enables flakes, nix-command, sets runner as trusted user
-      - uses: DeterminateSystems/nix-installer-action@v12
-        with:
-          extra-conf: |
-            substituters = http://iron:5000
-            trusted-public-keys = iron:RiBHQE6zmBos9J6DRbp+9WvUZGYotzFO0JC4om94R24=
       # TODO sandbox relax only for dprint plugins possible?
       # TODO file an issue in treefmt-nix repo about dprint plugins
       - uses: DeterminateSystems/magic-nix-cache-action@main
