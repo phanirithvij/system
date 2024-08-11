@@ -114,7 +114,7 @@
           };
         };
       };
-      overlays = import ./lib/overlays.nix {
+      overlays = import ./lib/overlays {
         inherit system;
         flake-inputs = inputs;
       };

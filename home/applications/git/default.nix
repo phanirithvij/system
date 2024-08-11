@@ -4,6 +4,7 @@
     pkgs.gitbatch
     pkgs.hub
     pkgs.gitcs
+    pkgs.git-bug
   ];
   imports = [
     ./gh.nix
