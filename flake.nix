@@ -286,7 +286,8 @@
                 # if all are md files, skip ci
                 pkgs.writeShellScript "skip-ci-md" ''
                   COMMIT_MSG_FILE=$1
-                  if git diff --cached --name-only | grep -qvE '\.md$'; then
+                  STAGED_FILES=$(git diff --cached --name-only)
+                  if [ -z "$STAGED_FILES" ] || ! echo "$STAGED_FILES" | grep -qE '\.md$'; then
                     exit 0
                   fi
                   if grep -q "\[skip ci\]" "$COMMIT_MSG_FILE"; then
