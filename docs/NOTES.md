@@ -124,6 +124,10 @@ Useful links along with my annotations.
 - srid permaban
   - red meat + woke critisism
 
+- polls
+ - https://pol.is/4uh6xvah6b
+ - https://pol.is/report/r4zurrpweay6khmsaab4e
+
 - jonringer audril MIC post
   - community divide
   - open letter for eeclo to step down
@@ -131,7 +135,7 @@ Useful links along with my annotations.
     - corporate speak
     - asks users to move communities (i am inclined to)
 - jonringer tempban
-- youtuber tempban, shea levy tempban
+- youtuber chirsmcdonough tempban, shea levy tempban
   - over nazisim semantics discussion with nat418
 
 - ratioberatus quit, lix
