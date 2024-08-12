@@ -1,10 +1,5 @@
-{ pkgs, ... }:
-let
-  onix = pkgs.writeShellApplication {
-    name = "onix";
-    text = builtins.readFile ../../../scripts/nixinternal/onix.sh;
-  };
-in
-{
-  home.packages = [ onix ];
+_: {
+  programs.bash.initExtra = ''
+    source ${../../../scripts/nixinternal/onix.sh}
+  '';
 }
