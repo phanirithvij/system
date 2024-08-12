@@ -13,6 +13,7 @@
           colorArg = "always";
           pager = "${pkgs.delta}/bin/delta --dark --paging=never";
         };
+        autoFetch = false;
       };
       gui = {
         showBottomLine = false;
