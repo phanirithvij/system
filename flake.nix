@@ -151,6 +151,9 @@
           pkgs.nix-schema
         ];
       };
+      overlayModule = {
+        nixpkgs.overlays = overlays;
+      };
     in
     rec {
       inherit (inputs.flake-schemas) schemas;
@@ -204,9 +207,9 @@
           modules = [
             { environment.systemPackages = [ blobdrop.packages.${system}.default ]; }
             toolsModule
+            overlayModule
             sops-nix.nixosModules.sops
             ./hosts/${host}/configuration.nix
-            { nixpkgs.overlays = overlays; }
           ];
           specialArgs = {
             flake-inputs = inputs;
@@ -224,6 +227,7 @@
             sops-nix.nixosModules.sops
             home-manager.nixosModules.home-manager
             toolsModule
+            overlayModule
             {
               home-manager = {
                 useGlobalPkgs = true;
