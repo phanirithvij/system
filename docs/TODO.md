@@ -124,21 +124,18 @@ more are in my zet but that is to be made public
 - [ ] xfce
   - [ ] wayland (future)
 - [ ] hyprland
-- [ ] ratpoison
-  - jake@linux videos
+- jake@linux videos
   - https://github.com/jdpedersen1/windowmanagers/tree/master
   - also his menu scripts which dropdown, they are beautiful
-  - yank his void rice too
+  - [ ] yank his void rice too
 - [ ] awesome (one of my favs)
 - [ ] dwm ?
-  - suckless people were called neonazis before
   - also c configuration seems cool
   - maybe I can learn zig and package it via zig with nix
 - [ ] xmonad
+  - pros: can dabble in haskell
+  - cons: what to do with haskell?
 - [ ] qtile
-- [x] gnome ??
-  - seems going down the wrongpath TM
-  - along with nixos, openSuse, redhat, firefox
 
 - [ ] dunst
 - [ ] rofi, wofi
