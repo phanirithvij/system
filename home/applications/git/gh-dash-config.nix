@@ -61,8 +61,8 @@
     "golang/go" = "/tmp/fk/go";
   };
   keybindings = null;
-  pager = {
-    diff = "delta";
-  };
+  #pager = {
+  #  diff = "delta";
+  #};
   confirmQuit = false;
 }

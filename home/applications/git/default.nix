@@ -16,7 +16,8 @@
       package = pkgs.gitFull;
       userName = "phanirithvij";
       userEmail = "phanirithvij2000@gmail.com";
-      delta.enable = true;
+      # broken https://github.com/NixOS/nixpkgs/pull/334814
+      #delta.enable = true;
       extraConfig = {
         init = {
           defaultBranch = "main";

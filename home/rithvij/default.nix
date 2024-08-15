@@ -53,7 +53,7 @@ in
 
     #joplin # slow node tui app
 
-    ctpv
+    #ctpv
     #xdragon
 
     glow # markdown previewer in terminal
