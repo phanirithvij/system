@@ -5,17 +5,21 @@ A selfhosted heaven all in nixos
 - [ ] Immich
   - https://github.com/NixOS/nixpkgs/pull/324127
 - [ ] Email server
-- [ ] Syncplay
+- [x] Syncplay
   - Runs, tested once
-- [ ] Jellyfin
+- [x] Jellyfin
 - [ ] Caddy
 - [ ] Teldrive
   - I need to make it
+- [ ] pyload
+- [ ] archivebox
 - [ ] android-file-transfer automount
   - disable kio kde thing
   - found https://bbs.archlinux.org/viewtopic.php?pid=1944871#p1944871
   - I need to make it
   - Is it worth it for ~12MiBps extra?
+- [ ] Wikipedia
+- [ ] kiwi
 
 - Nix specific
 - [x] pr-tracker
@@ -29,7 +33,9 @@ A selfhosted heaven all in nixos
 Another doc for selfhosted docker/podman stuff
 
 - [ ] Immich
-- [ ] Teldrive
+- [x] Teldrive
+  - have own repo
+  - [ ] todo document it
 - [ ] postgres backups
 
 - All the above services
