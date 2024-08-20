@@ -33,4 +33,4 @@ _exe onix bundle \
 
 _exe nix flake check
 _exe nix fmt
-_exe nix run .#nix -- flake show
+#_exe nix run .#nix -- flake show

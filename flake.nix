@@ -148,7 +148,7 @@
           hm
           grm
           sysm
-          pkgs.nix-schema
+          #pkgs.nix-schema
         ];
       };
       overlayModule = {
@@ -165,7 +165,7 @@
       };
       apps."aarch64-linux".nix = apps.${system}.nix;
       packages.${system} = {
-        inherit (pkgs) nix-schema;
+        #inherit (pkgs) nix-schema;
         navi-master = pkgs.navi;
         git-repo-manager = grm;
         home-manager = hm;
