@@ -1,11 +1,11 @@
 {
-  config,
   username,
   hostname,
   ...
 }:
 let
-  configDir = "${config.home.homeDirectory}/Projects/system"; # TODO impure??
+  #configDir = "${config.home.homeDirectory}/Projects/system"; # TODO impure??
+  configDir = "/shed/Projects/system";
 in
 {
   programs.topgrade = {
