@@ -24,6 +24,11 @@ A selfhosted heaven all in nixos
 - Nix specific
 - [x] pr-tracker
   - [ ] https://github.com/matt1432/pr-tracker/issues/1
+- [x] better pr-tracker
+  - nixpkgs-tracker
+- [x] nixos landscape
+  - always facing SSL errors
+  - cafkafk is busy with non-nix things
 - [ ] home-manager-option-search
 - [ ] nixos-search
 - [ ] old versions tracker
@@ -34,7 +39,7 @@ Another doc for selfhosted docker/podman stuff
 
 - [ ] Immich
 - [x] Teldrive
-  - have own repo
+  - have own repo with docker-compose config
   - [ ] todo document it
 - [ ] postgres backups
 
