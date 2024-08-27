@@ -239,7 +239,7 @@ in
   };
 
   networking.firewall = {
-    enable = true;
+    enable = false;
     trustedInterfaces = [
       "tailscale0"
       "wlp3s0"
