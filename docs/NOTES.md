@@ -125,8 +125,8 @@ Useful links along with my annotations.
   - red meat + woke critisism
 
 - polls
- - https://pol.is/4uh6xvah6b
- - https://pol.is/report/r4zurrpweay6khmsaab4e
+  - https://pol.is/4uh6xvah6b
+  - https://pol.is/report/r4zurrpweay6khmsaab4e
 
 - jonringer audril MIC post
   - community divide
