@@ -2,8 +2,8 @@ _: {
   #rustdesk takes up time to compile and UI is bad. I prefer its AppImage on nixos
   home.file."Desktop/rustdesk-x86_64.AppImage" = {
     source = builtins.fetchurl {
-      url = "https://github.com/rustdesk/rustdesk/releases/download/1.2.6/rustdesk-1.2.6-x86_64.AppImage";
-      sha256 = "0k5sj646qhpaf711z3pw542psf6yjyfvd05gp0f4xv3wcxq6cy41";
+      url = "https://github.com/rustdesk/rustdesk/releases/download/1.3.0/rustdesk-1.3.0-x86_64.AppImage";
+      sha256 = "1h8b75bx1h16p5wz598nvn2yrbgs4znzr1cvfgzy26cnxv0804wk";
     };
     executable = true;
   };
