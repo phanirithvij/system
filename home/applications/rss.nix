@@ -13,7 +13,8 @@ _: {
       { url = "https://dwheeler.com/blog/index.rss"; }
       { url = "https://eli.thegreenplace.net/feeds/go.atom.xml"; }
       { url = "https://festivus.dev/index.xml"; }
-      { url = "https://gog-games.com/rss"; }
+      { url = "https://fmhy.net/feed.rss"; }
+      { url = "https://gog-games.to/rss"; }
       { url = "http://habitatchronicles.com/feed/"; }
       { url = "https://lwn.net/headlines/rss"; }
       { url = "https://mitchellh.com/feed.xml"; }
