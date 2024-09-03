@@ -26,8 +26,6 @@
     nixos.initialHashedPassword = lib.mkForce "nixos";
   };
 
-  # TODO home-manager
-  # document all of it
   environment.systemPackages = with pkgs; [
     disko
     parted

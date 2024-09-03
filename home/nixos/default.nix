@@ -1,6 +1,5 @@
 { pkgs, username, ... }:
 {
-
   imports = [
     ../applications/git
     ../applications/shells
