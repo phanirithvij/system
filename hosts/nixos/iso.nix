@@ -19,10 +19,10 @@
     "flakes"
   ];
   networking.wireless.enable = lib.mkForce false;
-  networking.networkmanager.enable = true;
+  #networking.networkmanager.enable = true;
 
   users.users = {
-    nixos.extraGroups = [ "networkmanager" ];
+    #nixos.extraGroups = [ "networkmanager" ];
     nixos.initialHashedPassword = lib.mkForce "nixos";
   };
 
@@ -31,7 +31,7 @@
     parted
   ];
 
-  services.openssh.enable = true;
+  #services.openssh.enable = true;
   programs.tmux.enable = true;
   programs.neovim.enable = true;
 }
