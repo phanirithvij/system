@@ -166,7 +166,7 @@ in
       wget2
       xclip
 
-      gdu
+      ncdu
       lf
       tmux # programs tmux
 
