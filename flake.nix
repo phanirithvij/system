@@ -273,8 +273,7 @@
               enable = true;
               stages = [ "pre-push" ];
             };
-            nixfmt = {
-              package = pkgs.nixfmt-rfc-style;
+            nixfmt-rfc-style = {
               enable = true;
               stages = [
                 "pre-push"
