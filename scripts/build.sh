@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 SCRIPT_DIR=$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")
-# shellcheck source=scripts/nixinternal/onix.sh
+# shellcheck disable=SC1091
 source "$SCRIPT_DIR"/nixinternal/onix.sh
-# shellcheck source=scripts/nixinternal/exe.sh
+# shellcheck disable=SC1091
 source "$SCRIPT_DIR"/nixinternal/exe.sh
 
 mkdir -p result
