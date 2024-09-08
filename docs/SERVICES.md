@@ -20,6 +20,8 @@ A selfhosted heaven all in nixos
   - Is it worth it for ~12MiBps extra?
 - [ ] Wikipedia
 - [ ] kiwi
+- [ ] searxng
+- [ ] Oodoo corporate
 
 - Nix specific
 - [x] pr-tracker
