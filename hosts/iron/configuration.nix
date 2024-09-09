@@ -20,6 +20,7 @@ in
     ../../nixos/applications/jellyfin.nix
     ../../nixos/applications/paperless.nix
     ../../nixos/applications/tailscale.nix
+    ../../nixos/applications/guix
     ../../nixos/applications/nix
     ../../nixos/applications/nix/nixserve
     ../../nixos/applications/nix/pr-tracker-service.nix
