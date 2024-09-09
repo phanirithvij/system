@@ -16,6 +16,7 @@ in
     ./hardware-configuration.nix
     ../../nixos/specialisations
     ../../nixos/profiles/desktop.nix
+    ../../nixos/applications/cloudflare.nix
     ../../nixos/applications/jellyfin.nix
     ../../nixos/applications/paperless.nix
     ../../nixos/applications/tailscale.nix
