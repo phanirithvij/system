@@ -93,23 +93,23 @@
       port = "netstat -tuplen";
       ports = "sudo netstat -tuplen";
       sport = "sudo lsof -i -P -n | rg LISTEN";
-      wport = "viddy -p -d -n 0.2 -c netstat -tuplen";
-      wports = "sudo viddy -p -d -n 0.2 -c netstat -tuplen";
-      dufw = "CLICOLOR_FORCE=1 COLORTERM='truecolor' viddy -p -d -n 0.5 -c duf";
-      wduf = "CLICOLOR_FORCE=1 COLORTERM='truecolor' viddy -p -d -n 0.5 -c duf";
-      dufi = ''CLICOLOR_FORCE=1 COLORTERM="truecolor" viddy -p -d -n 0.5 -c "duf -only local,fuse -hide-mp /boot/efi -output \"mountpoint, avail, usage, inodes_avail, inodes_usage, filesystem\" -sort usage"'';
-      dfah = ''viddy -p -n 0.1 -c "df --output=source,iavail,ipcent,avail,pcent,target -h | (sed -u 1q; sort -h -r -k 4) # Sort by Avail"'';
-      dffh = ''viddy -p -n 0.1 -c "df --output=source,iavail,ipcent,avail,pcent,target -h | (sed -u 1q; sort -h -r -k 5) # Sort by Use%"'';
-      dfao = ''viddy -p -n 0.1 -c "df --output=source,iavail,ipcent,avail,pcent,target | (sed -u 1q; sort -h -r -k 4) # Sort by Avail"'';
-      dffo = ''viddy -p -n 0.1 -c "df --output=source,iavail,ipcent,avail,pcent,target | (sed -u 1q; sort -h -r -k 5) # Sort by Use%"'';
+      wport = "viddy -p -d -n 0.2 netstat -tuplen";
+      wports = "sudo viddy -p -d -n 0.2 netstat -tuplen";
+      dufw = "CLICOLOR_FORCE=1 COLORTERM='truecolor' viddy -p -d -n 0.5 duf";
+      wduf = "CLICOLOR_FORCE=1 COLORTERM='truecolor' viddy -p -d -n 0.5 duf";
+      dufi = ''CLICOLOR_FORCE=1 COLORTERM="truecolor" viddy -p -d -n 0.5 "duf -only local,fuse -hide-mp /boot/efi -output \"mountpoint, avail, usage, inodes_avail, inodes_usage, filesystem\" -sort usage"'';
+      dfah = ''viddy -p -n 0.1 "df --output=source,iavail,ipcent,avail,pcent,target -h | (sed -u 1q; sort -h -r -k 4) # Sort by Avail"'';
+      dffh = ''viddy -p -n 0.1 "df --output=source,iavail,ipcent,avail,pcent,target -h | (sed -u 1q; sort -h -r -k 5) # Sort by Use%"'';
+      dfao = ''viddy -p -n 0.1 "df --output=source,iavail,ipcent,avail,pcent,target | (sed -u 1q; sort -h -r -k 4) # Sort by Avail"'';
+      dffo = ''viddy -p -n 0.1 "df --output=source,iavail,ipcent,avail,pcent,target | (sed -u 1q; sort -h -r -k 5) # Sort by Use%"'';
 
-      prog = "viddy -p -n 0.5 -c progress -w";
-      wls = "viddy -p -d -n 0.1 -c exa --long --header --icons -B --color=always";
-      wlsa = "viddy -p -t -d -n 0.1 -c exa --long --header --icons -B --all --color=always";
-      wll = "viddy -p -d -n 0.1 -c exa --long --header --icons --git -B --color=always";
-      wlla = "viddy -p -t -d -n 0.1 -c exa --long --header --icons --git -B --all --color=always";
+      prog = "viddy -p -n 0.5 progress -w";
+      wls = "viddy -p -d -n 0.1 exa --long --header --icons -B --color=always";
+      wlsa = "viddy -p -t -d -n 0.1 exa --long --header --icons -B --all --color=always";
+      wll = "viddy -p -d -n 0.1 exa --long --header --icons --git -B --color=always";
+      wlla = "viddy -p -t -d -n 0.1 exa --long --header --icons --git -B --all --color=always";
       wpactl = ''viddy "pactl list | rg -U \".*bluez_card(.*\n)*\""'';
-      mem = "viddy -p -n 0.1 -c free -h";
+      mem = "viddy -p -n 0.1 free -h";
 
       chrome = "google-chrome-stable & disown;tmux splitw;exit";
       nixfire = "nixGL firefox & disown;tmux splitw;exit";
