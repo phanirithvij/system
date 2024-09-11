@@ -4,7 +4,6 @@ let
 in
 {
   imports = [
-    ../applications/appimgs.nix
     ../applications/android.nix
     ../applications/audio
     ../applications/bookmarks
@@ -89,6 +88,11 @@ in
 
     # TODO remove this later when I know enough about python packages building with venv, poetry, devenv whatnot per project
     python3
+
+    # https://discourse.nixos.org/t/home-manager-collision-with-app-lib/51969
+    # https://haseebmajid.dev/posts/2023-10-02-til-how-to-fix-package-binary-collisions-on-nix/
+    (lib.hiPrio rustdesk-flutter)
+    subtitlecomposer
 
     # TODO add this stuff
     #adb android-tools is too fat and heavy
