@@ -39,11 +39,13 @@ A selfhosted heaven all in nixos
 
 Another doc for selfhosted docker/podman stuff
 
+- using all of these via docker compose
 - [ ] Immich
-- [x] Teldrive
+- [ ] Teldrive
   - have own repo with docker-compose config
   - [ ] todo document it
 - [ ] postgres backups
+- [ ] vnstat-docker
 
 - All the above services
   - just in case I leave nixos due to the toxicity
