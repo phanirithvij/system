@@ -1,16 +1,11 @@
-From c9d0fd535b9ad1b53c212a87e0710d55d8b7f42e Mon Sep 17 00:00:00 2001
-From: matt1432 <matt@nelim.org>
-Date: Mon, 29 Jul 2024 00:29:48 -0400
-Subject: [PATCH] feat: read token from environment
-
 diff --git a/src/main.rs b/src/main.rs
-index b088e1f..2ee0223 100644
+index c804d16..fc0d1ea 100644
 --- a/src/main.rs
 +++ b/src/main.rs
 @@ -52,18 +52,8 @@ struct Config {
- static CONFIG: Lazy<Config> = Lazy::new(Config::from_args);
+ static CONFIG: LazyLock<Config> = LazyLock::new(Config::from_args);
  
- static GITHUB_TOKEN: Lazy<OsString> = Lazy::new(|| {
+ static GITHUB_TOKEN: LazyLock<OsString> = LazyLock::new(|| {
 -    use std::io::{stdin, BufRead, BufReader};
 -    use std::os::unix::prelude::*;
 -
