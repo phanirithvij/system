@@ -279,6 +279,16 @@
                 "pre-commit"
               ];
             };
+            nix-fmt = {
+              enable = true;
+              always_run = true;
+              stages = [ "pre-commit" ];
+              entry = toString (
+                pkgs.writeShellScript "nix-fmt" ''
+                  ${pkgs.nix}/bin/nix --extra-experimental-features "nix-command flakes" fmt
+                ''
+              );
+            };
             skip-ci-check = {
               enable = true;
               always_run = true;
