@@ -56,9 +56,12 @@ in
     emulatedSystems = [ "aarch64-linux" ];
   };
 
-  # REISUB
   boot.kernel.sysctl = {
+    # REISUB
     "kernel.sysrq" = 1;
+    # reboot after panic=5 secs
+    # see https://unix.stackexchange.com/q/29567 https://superuser.com/q/1853565
+    "kernel.panic" = 5;
   };
 
   networking.hostName = "iron";
