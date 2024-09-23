@@ -22,6 +22,10 @@ A selfhosted heaven all in nixos
 - [ ] kiwi
 - [ ] searxng
 - [ ] Oodoo corporate
+  - nix-build -E 'with import <nixpkgs> {}; nixosTests.odoo' --check --no-out-link
+  - nixosTests.odoo15 and odoo16 are all failing
+- [x] your_spotify
+  - customised to have SPOTIFY_CLIENT_ID to be secret too
 
 - Nix specific
 - [x] pr-tracker
