@@ -34,4 +34,6 @@
   #services.openssh.enable = true;
   programs.tmux.enable = true;
   programs.neovim.enable = true;
+
+  boot.kernelParams = [ "copytoram" ];
 }
