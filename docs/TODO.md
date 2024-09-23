@@ -132,6 +132,8 @@ more are in my zet but that is to be made public
 - [ ] dwm ?
   - also c configuration seems cool
   - maybe I can learn zig and package it via zig with nix
+    (just as a learning experience, ofc it is already in nixpkgs)
+  - sxhkd/swhkd(rust+wayland)
 - [ ] xmonad
   - pros: can dabble in haskell
   - cons: what to do with haskell?
