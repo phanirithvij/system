@@ -5,6 +5,7 @@
     pkgs.hub
     pkgs.gitcs
     pkgs.git-bug
+    pkgs.git-absorb
   ];
   imports = [
     ./gh.nix
