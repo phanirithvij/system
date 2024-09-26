@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+# https://discourse.nixos.org/t/nix-build-phases-run-nix-build-phases-interactively/36090
+# https://jade.fyi/blog/building-nix-derivations-manually/
+# https://github.com/imincik/nix-utils
+
 # Interactively run Nix build phases.
 # This script must be sourced in Nix development shell environent !
 
