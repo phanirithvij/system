@@ -4,6 +4,7 @@ _: {
   # and multiple modes to choose from in boot menu
   imports = [
     ./hyprland.nix
+    ./niri.nix
     ./tty.nix
     #./tuigreet.nix
     ./xfce.nix

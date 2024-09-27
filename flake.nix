@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
     blobdrop.url = "github:vimpostor/blobdrop";
 
@@ -42,7 +43,7 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    sops-nix.inputs.nixpkgs-stable.follows = "";
+    sops-nix.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
     navi_config.url = "github:phanirithvij/navi";
     navi_config.flake = false;
@@ -53,12 +54,16 @@
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
 
+    niri.url = "github:sodiboo/niri-flake";
+    niri.inputs.nixpkgs.follows = "nixpkgs";
+    niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     git-hooks.url = "github:cachix/git-hooks.nix";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
-    git-hooks.inputs.nixpkgs-stable.follows = "";
+    git-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
     systems.url = "github:nix-systems/default-linux";
 
@@ -84,6 +89,7 @@
       treefmt-nix,
       git-hooks,
       nix-index-database,
+      niri,
       ...
     }@inputs:
     let
@@ -112,10 +118,12 @@
           };
         };
       };
-      overlays = import ./lib/overlays {
-        inherit system;
-        flake-inputs = inputs;
-      };
+      overlays =
+        (import ./lib/overlays {
+          inherit system;
+          flake-inputs = inputs;
+        })
+        ++ [ niri.overlays.niri ];
       homeConfig =
         {
           username,
@@ -207,6 +215,7 @@
             toolsModule
             overlayModule
             sops-nix.nixosModules.sops
+            niri.nixosModules.niri
             ./hosts/${host}/configuration.nix
           ];
           specialArgs = {
