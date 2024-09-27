@@ -111,9 +111,10 @@
           # TODO allowlist of unfree pkgs, for home-manager too
           allowUnfreePredicate = _: true;
           packageOverrides = pkgs: {
+            # TODO espanso_wayland and espanso-x11 and use it in different places accordingly?
             espanso = pkgs.espanso.override {
-              x11Support = true;
-              waylandSupport = false;
+              x11Support = false;
+              waylandSupport = true;
             };
           };
         };
