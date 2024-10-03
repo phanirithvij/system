@@ -3,8 +3,6 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
-    blobdrop.url = "github:vimpostor/blobdrop";
-
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -44,6 +42,8 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+
+    blobdrop.url = "github:vimpostor/blobdrop";
 
     navi_config.url = "github:phanirithvij/navi";
     navi_config.flake = false;
@@ -146,7 +146,14 @@
         inputs.nix-index-database.hmModules.nix-index
         { programs.nix-index-database.comma.enable = true; }
       ];
-      common-hm-modules = [ inputs.sops-nix.homeManagerModules.sops ];
+      common-hm-modules = [
+        inputs.sops-nix.homeManagerModules.sops
+        {
+          home.packages = [
+            blobdrop.packages.${system}.default
+          ];
+        }
+      ];
       grm = git-repo-manager.packages.${system}.default;
       hm = home-manager.packages.${system}.default;
       sysm = system-manager.packages.${system}.default;
@@ -212,7 +219,6 @@
         ${host} = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            { environment.systemPackages = [ blobdrop.packages.${system}.default ]; }
             toolsModule
             overlayModule
             sops-nix.nixosModules.sops
