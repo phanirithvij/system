@@ -55,7 +55,6 @@ in
     #joplin # slow node tui app
 
     #ctpv
-    #xdragon
 
     glow # markdown previewer in terminal
 
@@ -78,16 +77,15 @@ in
 
     ffmpeg-headless
     sqlite-interactive
-    miniserve
-    filebrowser
-    cargo-update
-    sccache
-    cargo-binstall
-    pipx
-    trash-cli
+    miniserve # httplz -x
+    filebrowser # service maybe?
+    cargo-update # needed?
+    sccache # needed?
+    cargo-binstall # needed?
+    pipx # needed?
+    trash-cli # there is a rustrewrite for this, trashy maybe
     remote-touchpad
 
-    # TODO remove this later when I know enough about python packages building with venv, poetry, devenv whatnot per project
     python3
 
     # https://discourse.nixos.org/t/home-manager-collision-with-app-lib/51969
@@ -98,26 +96,22 @@ in
     # TODO add this stuff
     #adb android-tools is too fat and heavy
     # rustdesk-server
-    # templ
-    # rustup
     # mise (rtx >> asdf-vm)
-    # hyperfine
+    # templ, hyperfine # perproject
     # neovide
     # cargo-zigbuild
+    # zig
     # gping
     # gitoxide
     # du-dust
     # bore-cli
     # coreutils
-    # onefetch
-    # tokei
-    # zig
+    # onefetch, tokei, scc
     # goteleport
     #
     # caddy xcaddy with godaddy
     # nats
     # nats cli server
-    # jellyfin
     # openspeedtestserver
     # TODO devbox
     # hare?
