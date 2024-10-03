@@ -21,17 +21,17 @@ _exe onix build .#systemConfigs.vps -o result/sysm.vps
 _exe onix build .#nixosConfigurations.iron.config.system.build.toplevel -o result/h-iron
 _exe onix build .#nixosConfigurations.defaultIso.config.system.build.isoImage -o result/h-iso
 
-_exe onix bundle .#navi-master -o result/navi-master.bundled
+#_exe onix bundle .#navi-master -o result/navi-master.bundled
 #_exe onix bundle \
 #  --bundler github:ralismark/nix-appimage \
 #  .#navi-master \
 #  -o result/navi-master-x86_64.AppImage
 
-_exe onix build github:DavHau/nix-portable -o result/nix-portable
-_exe onix bundle \
-  --bundler github:DavHau/nix-portable \
-  .#navi-master \
-  -o result/navi-master-portable.bundled
+#_exe onix build github:DavHau/nix-portable -o result/nix-portable
+#_exe onix bundle \
+#  --bundler github:DavHau/nix-portable \
+#  .#navi-master \
+#  -o result/navi-master-portable.bundled
 
 _exe nix flake check
 _exe nix fmt
