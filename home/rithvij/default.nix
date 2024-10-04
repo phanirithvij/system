@@ -85,6 +85,8 @@ in
     pipx # needed?
     trash-cli # there is a rustrewrite for this, trashy maybe
     remote-touchpad
+    csvlens
+    #redbean ape com
 
     python3
 

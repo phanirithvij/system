@@ -155,3 +155,11 @@ Useful links along with my annotations.
 - reproducible
 - nix cli stabilisation
 - flakes stabilisation
+- this month in documentation
+
+### Other
+
+- my utility projects
+  - npins templates
+  - nix-shell-templates
+  - flake-templates (maybe same as above)
