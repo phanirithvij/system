@@ -3,7 +3,7 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
-    home-manager.url = "github:nix-community/home-manager";
+    home-manager.url = "github:phanirithvij/home-manager/espanso-wl-no-pr";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     system-manager = {
@@ -110,12 +110,14 @@
           allowUnfree = true;
           # TODO allowlist of unfree pkgs, for home-manager too
           allowUnfreePredicate = _: true;
-          packageOverrides = pkgs: {
+          packageOverrides = _: {
             # TODO espanso_wayland and espanso-x11 and use it in different places accordingly?
-            espanso = pkgs.espanso.override {
-              x11Support = false;
-              waylandSupport = true;
-            };
+            /*
+              espanso = pkgs.espanso.override {
+                x11Support = false;
+                waylandSupport = true;
+              };
+            */
           };
         };
       };

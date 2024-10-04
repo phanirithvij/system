@@ -6,6 +6,8 @@
   home.packages = [ pkgs.buku ];
   services.espanso = {
     enable = true;
+    x11Support = true;
+    waylandSupport = true;
     # TODO config, matches
     # gh auth token | xclip -sel clipboard
     # https://github.com/phanirithvij
