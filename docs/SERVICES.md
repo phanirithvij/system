@@ -40,6 +40,8 @@ A selfhosted heaven all in nixos
 - [ ] old versions tracker
 - [ ] ofborg (necessary?)
   - https://github.com/NixOS/ofborg/wiki/Operating-a-Builder/
+- [ ] docs (all)
+  - https://github.com/phanirithvij/mmdoc-nixpkgs-toc-gen.git
 
 Another doc for selfhosted docker/podman stuff
 
