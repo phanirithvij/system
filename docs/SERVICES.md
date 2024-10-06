@@ -43,6 +43,12 @@ A selfhosted heaven all in nixos
 - [ ] docs (all)
   - https://github.com/phanirithvij/mmdoc-nixpkgs-toc-gen.git
 
+- pdf and docs tools
+  - s-pdf (striling-pdf)
+  - https://sioyek-documentation.readthedocs.io/en/latest/configuration.html
+  - w3mman (key : for loading urls in manpages)
+  - pinfo is bad (see pinfo lf)
+
 Another doc for selfhosted docker/podman stuff
 
 - using all of these via docker compose
