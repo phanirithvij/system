@@ -6,7 +6,7 @@ _: p: {
       owner = "denisidoro";
       repo = "navi";
       rev = version;
-      hash = "sha256-h7lF+jvrwjiMMmaqOGifJnBbTgjCK0WW2yocq7vO7zU=";
+      hash = "sha256-/pVE5C9c9R+1CANnCVJddc0kFJlREBl9ULET773edJo=";
     };
     cargoDeps = old.cargoDeps.overrideAttrs (
       p.lib.const {
