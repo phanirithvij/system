@@ -56,4 +56,5 @@ in
       port = nginxClientPort;
     }
   ];
+  services.mongodb.package = pkgs.mongodb-ce;
 }
