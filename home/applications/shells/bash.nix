@@ -109,7 +109,15 @@
       wll = "viddy --disable_auto_save -p -d -n 0.1 exa --long --header --icons --git -B --color=always";
       wlla = "viddy --disable_auto_save -p -t -d -n 0.1 exa --long --header --icons --git -B --all --color=always";
       wpactl = ''viddy --disable_auto_save "pactl list | rg -U \".*bluez_card(.*\n)*\""'';
-      mem = "viddy --disable_auto_save -p -n 0.1 free -h";
+      mem = ''
+        viddy -n 0.5 -d --disable_auto_save '
+          sh -c "
+            echo $ free -h; free -h; echo;
+            echo $ zramctl; echo; zramctl; echo;
+            echo $ swapon --show; echo; swapon --show
+          "
+        '
+      '';
 
       chrome = "google-chrome-stable & disown;tmux splitw;exit";
       nixfire = "nixGL firefox & disown;tmux splitw;exit";
