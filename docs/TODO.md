@@ -237,13 +237,18 @@ more are in my zet but that is to be made public
   - Other is minimal, absolutely necessary steps only
   - https://github.com/nix-community/nixos-generators
 - nix specialisations
-  - [x] mingetty/tty only specilization to act as a server
+  - [x] mingetty/tty only specilization to act as a headless-server
     - Ideally can be used if I learn to work without a mouse
     - Full nvim
-    - [ ] TODO disable audio, printing etc, non-server things
-  - [x] ly in a specialisation
-    - ly flake config from https://github.com/NixOS/nixpkgs/pull/297434
-    - [ ] make default after merged into unstable, remove my own fork as dependency
+    - [ ] TODO disable audio, printing etc, headful things
+      - think more, maybe allow audio but disable video
+      - spotify tui maybe? or own music tui based on teldrive+rclone+lru+cache
+        - nccpmp, mpd, etc things (not own tui at first)
+  - [ ] nix-build-server specialisation
+    - disable everything but nix-daemon and wifi?
+    - to act as a Bare Metal software builder
+    - allow firefox? but needs to be headless?
+    - for now zram+swap16+swapspace removes the need for this
 - [ ] Nixvim - neovim
 - [ ] home-manager services
   - [x] espanso
@@ -301,26 +306,60 @@ more are in my zet but that is to be made public
 
 ## nixpkgs+external+contribs
 
+- see zet, `search:nixcontribs`
+- TODO move the following there
+- TODO blog w/ rss
 - https://sandervanderburg.blogspot.com/2014/07/managing-private-nix-packages-outside.html
   - https://sandervanderburg.blogspot.com/2012/11/an-alternative-explaination-of-nix.html
   - https://github.com/DeterminateSystems/update-flake-lock
 - [ ] teldrive
-  - flake/npins setup
   - on vps and local (i.e system-manager module and nixos module, services)
-  - become maintainer on nixpkgs since it isn't there
+  - become maintainer on nixpkgs since it isn't there (think more)
   - [ ] fork
-    - ui drag drop
-    - remember upload location
-    - [ ] and send pr upstream
+    - ui drag drop files
+    - remember upload location (might've been fixed?)
+    - breadcrumbs bug (reported and fixed, TODO find url)
+    - [ ] send pr upstream
     - own fork:
-      - existing listings
+      - flake/npins setup (maybe upstream)
+      - existing listings (index owned, (unrelated) dedup+mirror scripts)
       - htmx rewrite, already in go
+      - rclone lru disk cache per channel (think more)
 - [ ] cloudflared tunnel nixos service
   - multiple service (redis like)
   - write the output endpoints to /run/secrets
     or somewhere other processes can read from
 - [ ] trash-cli, trashy, fzf, lf
-  - tui?
+  - tui? (oss contrib)
+- [ ] odoo 18 + fix tests
+  - broken py packages: websockets, furl, aiohttp
+- [ ] loop hero wrapper npins single drv nix+bash script
+  - input-remapper joystick workaround
+  - blog post link (TODO find it, steam loop hero nixos)
+  - try w/ joystick + antimicrox personal setup
+  - try out wrapper-manager too
+  - hotline miami wrapper
+    - has a README with libs in gog folder
+  - [ ] blog post (contrib)
+- [ ] navi+direnv project level ctrl+j bind bug
+  - not a priority for home-manager users
+  - [ ] blog if I fix it
+  - tried to debug, bug must be in direnv?
+  - but direnv didn't get updated recently
+  - nix versions work the same (2.18.x and 2.24.x)
+  - nix print-dev-env works fine
+- [ ] elimiate docker-compose unreproducibility, use compose2nix
+  - vnstat-docker (move to nix?)
+  - teldrive (move to nix)
+  - postgres-backup-local (nix??)
+  - own ghcr backups for all dockerfiles
+  - use ghcr as nix cache?
+    - https://github.com/linyinfeng/oranc
+    - related `search:nixery`
+    - https://jnsgr.uk/2024/01/building-a-blog-with-go-nix-hugo/
+
+### bookmarks
+
 - [ ] pr-tracker prs
   - http://localhost:8000/pr-tracker?pr=328862 - rustdesk headless client service
   - http://localhost:8000/pr-tracker?pr=323381 - quickgui
