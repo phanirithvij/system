@@ -66,6 +66,8 @@ in
     enable = true;
     memoryPercent = 90;
   };
+  services.swapspace.enable = true;
+
   boot.kernel.sysctl = {
     # REISUB
     "kernel.sysrq" = 1;

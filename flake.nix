@@ -225,6 +225,7 @@
             overlayModule
             sops-nix.nixosModules.sops
             niri.nixosModules.niri
+            ./nixos/modules/swapspace.nix
             ./hosts/${host}/configuration.nix
           ];
           specialArgs = {
