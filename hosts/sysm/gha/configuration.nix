@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 {
-  imports = [ ../modules/redis.nix ];
+  imports = [
+    ../modules/redis.nix
+    ../modules/swapspace.nix
+  ];
   config = {
     nixpkgs.hostPlatform = "x86_64-linux";
 
