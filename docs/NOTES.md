@@ -101,14 +101,15 @@ Useful links along with my annotations.
 
 - lazy trees - only helps with local flakes, shallow clones or github:x/x can't utilise it
 - flake schemas - useful for flake checks it seems
-- cppnix meson refactor blocked, would make it easy to compile it seems with the only con of having python as a build dep but that's ok.
 - nix upgrade-nix blocked in favor of detsys/nix-installer
+- ca-derviations (halted due to lack of funds, my best guess)
+- recursive-nix (poor discoverability)
 
 ### beginner
 
-- overlay
+- overlays (overlay module)
 - cargo sha256 workaround
-- python packageswith syntax
+- python packageswith syntax vs python3xxPackages.pkg
 
 ## Meta
 
@@ -119,10 +120,8 @@ Useful links along with my annotations.
 - flakes merged (experimental)
 - flakehub
 - detsys grahamc flakes are stable post
-  - _no_
 
 - srid permaban
-  - red meat + woke critisism
 
 - polls
   - https://pol.is/4uh6xvah6b
@@ -133,10 +132,10 @@ Useful links along with my annotations.
   - open letter for eeclo to step down
   - detsys blogpost eelco without permission
     - corporate speak
-    - asks users to move communities (i am inclined to)
+    - asks users to move communities
 - jonringer tempban
 - youtuber chirsmcdonough tempban, shea levy tempban
-  - over nazisim semantics discussion with nat418
+  - over semantics discussion with nat418
 
 - ratioberatus quit, lix
   - nix update mic92, no proper stable upgrade process
@@ -144,10 +143,11 @@ Useful links along with my annotations.
   - anticipates backlash, gets backlash
     - "lies" about timeline
     - walks back and apologises (no one cares)
-  - samueldr ragequit nixos mobile abdandon
+  - samueldr ragequit - nixos mobile abdandon
   - xe ragequit
 - jonringer permaban
   - jonringer steps down from discord and reddit
+  - jonringer doesn't step down from reddit (poly-repo fork)
 
 ### awesome
 
@@ -163,3 +163,4 @@ Useful links along with my annotations.
   - npins templates
   - nix-shell-templates
   - flake-templates (maybe same as above)
+  - use flake template feature for nix-shell-templates too? but make it work with old nix-* commands
