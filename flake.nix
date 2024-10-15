@@ -123,17 +123,19 @@
         };
       };
       # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
-      patches = [
-        {
-          url = "https://patch-diff.githubusercontent.com/raw/phanirithvij/nixpkgs/pull/1.diff";
-          sha256 = "sha256-JwXE2RUt30jWzTbd20buX1qucPmrBFzp8qlmbfzzno4=";
-        }
-      ];
-      nixpkgs' = pkgs.applyPatches {
-        name = "nixpkgs-patched";
-        src = inputs.nixpkgs;
-        patches = map pkgs.fetchpatch patches;
-      };
+      /*
+        patches = [
+          {
+            url = "https://patch-diff.githubusercontent.com/raw/phanirithvij/nixpkgs/pull/1.diff";
+            sha256 = "sha256-JwXE2RUt30jWzTbd20buX1qucPmrBFzp8qlmbfzzno4=";
+          }
+        ];
+        nixpkgs' = pkgs.applyPatches {
+          name = "nixpkgs-patched";
+          src = inputs.nixpkgs;
+          patches = map pkgs.fetchpatch patches;
+        };
+      */
       overlays =
         (import ./lib/overlays {
           inherit system;
@@ -230,8 +232,8 @@
           modules = nix-index-hm-modules ++ common-hm-modules;
         };
       };
-      nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
-      #nixosSystem = inputs.nixpkgs.lib.nixosSystem;
+      #nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
+      inherit (inputs.nixpkgs.lib) nixosSystem;
       nixosConfigurations = {
         ${host} = nixosSystem {
           inherit system;
@@ -240,6 +242,7 @@
             overlayModule
             sops-nix.nixosModules.sops
             niri.nixosModules.niri
+            ./nixos/modules/swapspace.nix
             ./hosts/${host}/configuration.nix
           ];
           specialArgs = {

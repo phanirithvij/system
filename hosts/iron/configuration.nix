@@ -67,6 +67,7 @@ in
     memoryPercent = 90;
   };
   services.swapspace.enable = true;
+  services.swapspace.extraArgs = "-P -v";
 
   boot.kernel.sysctl = {
     # REISUB

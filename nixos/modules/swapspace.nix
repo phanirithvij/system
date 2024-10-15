@@ -12,14 +12,18 @@ let
     mkPackageOption
     mkEnableOption
     ;
-  configFile = pkgs.writeText "swapspace.conf" (
-    lib.concatStringsSep "\n" (lib.mapAttrsToList (n: v: "${n}=${toString v}") cfg.settings)
-  );
+  configFile = pkgs.writeText "swapspace.conf" (lib.generators.toKeyValue { } cfg.settings);
 in
 {
   options.services.swapspace = {
     enable = mkEnableOption "Swapspace, a dynamic swap space manager";
     package = mkPackageOption pkgs "swapspace" { };
+    extraArgs = mkOption {
+      type = types.str;
+      default = "";
+      example = "-P -v";
+      description = "Any extra arguments to pass to swapspace";
+    };
     settings = mkOption {
       type = types.submodule {
         options = {
@@ -29,7 +33,7 @@ in
             description = "Location where swapspace may create and delete swapfiles";
           };
           lower_freelimit = mkOption {
-            type = types.ints.between 0 100;
+            type = types.ints.between 0 99;
             default = 20;
             description = "Lower free-space threshold: if the percentage of free space drops below this number, additional swapspace is allocated";
           };
@@ -39,7 +43,7 @@ in
             description = "Upper free-space threshold: if the percentage of free space exceeds this number, swapspace will attempt to free up swapspace";
           };
           freetarget = mkOption {
-            type = types.ints.between 0 100;
+            type = types.ints.between 2 99;
             default = 30;
             description = ''
               Percentage of free space swapspace should aim for when adding swapspace.
@@ -64,6 +68,16 @@ in
               The default cooldown period is about 10 minutes.
             '';
           };
+          buffer_elasticity = mkOption {
+            type = types.ints.between 0 100;
+            default = 30;
+            description = ''Percentage of buffer space considered to be "free"'';
+          };
+          cache_elasticity = mkOption {
+            type = types.ints.between 0 100;
+            default = 80;
+            description = ''Percentage of cache space considered to be "free"'';
+          };
         };
       };
       default = { };
@@ -75,6 +89,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    systemd.tmpfiles.rules = [ "d '${cfg.settings.swappath}' 0700 - - - - " ];
     environment.systemPackages = [ cfg.package ];
     systemd.services.swapspace = {
       after = [
@@ -89,24 +104,15 @@ in
       documentation = [ "man:swapspace(8)" ];
       description = "Swapspace, a dynamic swap space manager";
       serviceConfig = {
-        Type = "simple";
-        ExecStart = "${lib.getExe cfg.package} -c ${configFile}";
-        Restart = "always";
-        RestartSec = 30;
-        StateDirectory = lib.mkIf (cfg.settings.swappath == "/var/lib/swapspace") "swapspace";
-        StateDirectoryMode = "0700";
-        WorkingDirectory = cfg.settings.swappath;
+        ExecStart = "${lib.getExe cfg.package} -c ${configFile} ${cfg.extraArgs}";
       };
     };
   };
 
   meta = {
-    maintainers = with lib.maintainers; [ phanirithvij ];
+    maintainers = with lib.maintainers; [
+      Luflosi
+      phanirithvij
+    ];
   };
-
-  # in flake.nix export as nixosModules.swapspace?
-  # [ ] nixpkgs pr
-  # blog post tagged nix, linux, swap, zram
-  # - note that comparision and benchmarks is not the goal just discoverability
-  # - swapspace limitations (readme mentions some)
 }
