@@ -308,7 +308,6 @@ more are in my zet but that is to be made public
 
 - see zet, `search:nixcontribs`
 - TODO move the following there
-- TODO blog w/ rss
 - https://sandervanderburg.blogspot.com/2014/07/managing-private-nix-packages-outside.html
   - https://sandervanderburg.blogspot.com/2012/11/an-alternative-explaination-of-nix.html
   - https://github.com/DeterminateSystems/update-flake-lock
@@ -333,9 +332,10 @@ more are in my zet but that is to be made public
   - tui? (oss contrib)
 - [ ] odoo 18 + fix tests
   - broken py packages: websockets, furl, aiohttp
+  - https://github.com/NixOS/nixpkgs/pull/346397
 - [ ] loop hero wrapper npins single drv nix+bash script
   - input-remapper joystick workaround
-  - blog post link (TODO find it, steam loop hero nixos)
+  - https://toast.al/posts/techlore/2024-06-11_loop-hero-on-nixos
   - try w/ joystick + antimicrox personal setup
   - try out wrapper-manager too
   - hotline miami wrapper
