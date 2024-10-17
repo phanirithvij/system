@@ -1,33 +1,35 @@
 _: {
   programs.newsboat = {
     enable = true;
-    urls = [
-      { url = "https://andrewkelley.me/rss.xml"; }
-      { url = "https://bbengfort.github.io/index.xml"; }
-      { url = "https://blog.adafruit.com/feed/"; }
-      { url = "https://blog.janissary.xyz/feed.xml"; }
-      { url = "https://blog.kowalczyk.info/atom.xml"; }
-      { url = "https://bollu.github.io/feed.rss"; }
-      { url = "https://bmcgee.ie/posts/index.xml"; }
-      { url = "https://codewithoutrules.com/atom.xml"; }
-      { url = "https://dwheeler.com/blog/index.rss"; }
-      { url = "https://eli.thegreenplace.net/feeds/go.atom.xml"; }
-      { url = "https://festivus.dev/index.xml"; }
-      { url = "https://fmhy.net/feed.rss"; }
-      { url = "https://gog-games.to/rss"; }
-      { url = "http://habitatchronicles.com/feed/"; }
-      { url = "https://lwn.net/headlines/rss"; }
-      { url = "https://mitchellh.com/feed.xml"; }
-      { url = "http://nil.wallyjones.com/feeds/all.atom.xml"; }
-      { url = "https://perens.com/feed/"; }
-      { url = "https://python.libhunt.com/newsletter/feed"; }
-      { url = "https://rootknecht.net/index.xml"; }
-      { url = "https://rsapkf.org/weblog/rss.xml"; }
-      { url = "https://sparkfun.com/feeds/news"; }
-      { url = "https://this-week-in-rust.org/rss.xml"; }
-      { url = "https://threedots.tech/index.xml"; }
-      { url = "http://waywardmonkeys.org/feeds/all.atom.xml"; }
-      { url = "https://www.trickster.dev/post/index.xml"; }
+    urls = builtins.map (x: { url = x; }) [
+      "https://invent.kde.org/multimedia/subtitlecomposer/-/tags?format=atom"
+      "https://github.com/YS-L/csvlens/releases.atom"
+      "https://andrewkelley.me/rss.xml"
+      "https://bbengfort.github.io/index.xml"
+      "https://blog.adafruit.com/feed/"
+      "https://blog.janissary.xyz/feed.xml"
+      "https://blog.kowalczyk.info/atom.xml"
+      "https://bollu.github.io/feed.rss"
+      "https://bmcgee.ie/posts/index.xml"
+      "https://codewithoutrules.com/atom.xml"
+      "https://dwheeler.com/blog/index.rss"
+      "https://eli.thegreenplace.net/feeds/go.atom.xml"
+      "https://festivus.dev/index.xml"
+      "https://fmhy.net/feed.rss"
+      "https://gog-games.to/rss"
+      "http://habitatchronicles.com/feed/"
+      "https://lwn.net/headlines/rss"
+      "https://mitchellh.com/feed.xml"
+      "http://nil.wallyjones.com/feeds/all.atom.xml"
+      "https://perens.com/feed/"
+      "https://python.libhunt.com/newsletter/feed"
+      "https://rootknecht.net/index.xml"
+      "https://rsapkf.org/weblog/rss.xml"
+      "https://sparkfun.com/feeds/news"
+      "https://this-week-in-rust.org/rss.xml"
+      "https://threedots.tech/index.xml"
+      "http://waywardmonkeys.org/feeds/all.atom.xml"
+      "https://www.trickster.dev/post/index.xml"
     ];
   };
 }

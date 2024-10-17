@@ -85,7 +85,26 @@ in
     pipx # needed?
     trash-cli # there is a rustrewrite for this, trashy maybe
     remote-touchpad
-    csvlens
+    # TODO remove once 0.10.2 releases
+    # see https://github.com/YS-L/csvlens/issues/101
+    # https://github.com/YS-L/csvlens/releases.atom
+    (csvlens.overrideAttrs (drv: rec {
+      pname = "csvlens";
+      version = "0-unstable-2024-10-15";
+      src = fetchFromGitHub {
+        owner = "YS-L";
+        repo = "csvlens";
+        rev = "002edebeda69b0b81b4fd4060e25e80c5a87f4da";
+        hash = "sha256-9nD25Xjrk8aXD/ufkKEblBXVEvEZcWkoCVzadpe0xm0=";
+      };
+      cargoDeps = drv.cargoDeps.overrideAttrs (
+        lib.const {
+          inherit src;
+          name = "${pname}-vendor.tar.gz";
+          outputHash = "sha256-XiLhvtg7zpevMIkubmTQ/HGvu87Gqf7vcnTAb7y/eVs=";
+        }
+      );
+    }))
     #redbean ape com
 
     python3
@@ -93,7 +112,16 @@ in
     # https://discourse.nixos.org/t/home-manager-collision-with-app-lib/51969
     # https://haseebmajid.dev/posts/2023-10-02-til-how-to-fix-package-binary-collisions-on-nix/
     (lib.hiPrio rustdesk-flutter)
-    subtitlecomposer
+    (subtitlecomposer.overrideAttrs (_: {
+      version = "0-unstable-2024-10-07";
+      src = fetchFromGitLab {
+        domain = "invent.kde.org";
+        owner = "multimedia";
+        repo = "subtitlecomposer";
+        rev = "8930c2926864d0015d8b23d4bf7a218e4267edc5";
+        hash = "sha256-nAYg/Tj+iTL4INLxsZtf6KQOMaDoqcx9URsiBsr6HP0=";
+      };
+    }))
 
     # TODO add this stuff
     #adb android-tools is too fat and heavy
