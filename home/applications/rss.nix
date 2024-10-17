@@ -9,7 +9,7 @@ _: {
       "https://blog.adafruit.com/feed/"
       "https://blog.janissary.xyz/feed.xml"
       "https://blog.kowalczyk.info/atom.xml"
-      "https://bollu.github.io/feed.rss"
+      "https://pixel-druid.com/feed.rss"
       "https://bmcgee.ie/posts/index.xml"
       "https://codewithoutrules.com/atom.xml"
       "https://dwheeler.com/blog/index.rss"
