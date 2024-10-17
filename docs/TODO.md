@@ -115,6 +115,9 @@ more are in my zet but that is to be made public
   - hardware-configuration.nix needs to be untouched
   - [ ] disko
     - a bit risky maybe, data loss?
+    - will do ever if I had to re-install
+    - [ ] lanzaboote
+    - [ ] maybe impermeanace if I am crazy
   - [ ] binfmt etc can be in different files
 
 #### DEs + rice

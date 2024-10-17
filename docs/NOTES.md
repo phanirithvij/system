@@ -31,6 +31,17 @@
 - nix bundle works but initial startup is slow
 - nix bundle ralismarks/nix-appimage doesn't work on non-nix system
   - tried on one for navi and firefox
+- home-manager has specialisations as well like nixos.
+ - [ ] I need to try it out.
+- editor setup w/ lsp should be #1 priority for nix before writing/preusing non-trivial nix
+  - noogle is very useful for jumping to stdlib src
+  - nix pills is very very useful
+  - nix.dev tuts
+  - nix manual
+  - nixos manual
+  - nixpkgs manual
+  - hm manual
+- lychee for link checking, everywhere (has a gha, also nix lycheeCheck)
 
 # nixey by other people
 
@@ -44,26 +55,33 @@ Useful links along with my annotations.
 - https://github.com/gvolpe/nix-config
   - nix flakes schema overlay
 - https://github.com/workflow/dotfiles
-  - gha initial setup
+  - gha initial setup inspired by this
 - [ ] postgresql backup with rustic
 - [ ] impermanence
+  - not worth the effort imo
+  - since it has the potential for data loss
+  - but sounds good in theory (declerative folder allowlist)
 
 ## Notes
 
-- https://github.com/nikitavoloboev/knowledge/blob/main/docs/package-managers/nix/nix.md
+- https://github.com/past-nikiv/knowledge/blob/main/docs/package-managers/nix/nix.md
 - https://github.com/kitnil/notes/blob/master/nix.org
 - https://github.com/Anton-Latukha/nix-notes/blob/master/nix.org
 - https://github.com/drakerossman/nixos-musings
   - https://drakerossman.com/blog
+- https://github.com/mcdonc/.nixconfig/blob/master/videos/tipsntricks/script.rst
 
 ## Blogs
 
 - https://jade.fyi/blog/flakes-arent-real/
-  - convinced me to use flakes only if necessary, I decided to go on with flakes
+  - convinced me to use flakes only if necessary, I decided to go on with flakes for my system config
   - also plan to try npins and if I can get it working stay there
+    - upd: npins for simple projects with few inputs, flakes if they provide quality flakes w/ tons of stuff
   - flake inputs are inflexible
     - https://github.com/NixOS/nix/issues/3966
     - https://github.com/jorsn/flakegen
+    - upd: imo not worth it to break up flake inputs
+      - https://github.com/matt1432/nixos-configs/issues/1
   - flake schemas
     - https://github.com/gvolpe/nix-config
   - cli stablilisation
@@ -72,6 +90,11 @@ Useful links along with my annotations.
   - https://github.com/andir/npins
   - https://github.com/privatevoid-net/nix-super
 - https://github.com/nixlang-wiki/nixlang-wiki/tree/main/nix
+- https://ayats.org/blog
+- full time nix pod
+- nixpkgs.news (dead since 3 months)
+- https://ianthehenry.com/posts/how-to-learn-nix/
+- https://vereis.com/posts/nixos_kool_aid
 
 ## Useful projects (I use)
 
@@ -80,24 +103,31 @@ Useful links along with my annotations.
   - bring nixos to non-nixos dyi kinda, alpha
   - https://github.com/a-h/system-manager-test/tree/main
   - https://github.com/a-h/nix-airgapped-vm
-- nom >> nh > nvd
+- nom >> nh > nvd (utility)
 - https://github.com/nix-community/home-manager
   - https://home-manager-options.extranix.com/
 - direnv
   - use flake in envrc
 - [ ] nix-olde, nix-du, nix-inspect, nix-tree etc
-- [ ] nixos-infect ??
+- [ ] nixos-infect ?? nixos-anywhere
 - [ ] xc/just
+  - meh never used them
+  - might just go with navi & espanso (project level)
+  - project level atuin? (all this rust is unnecessary)
 - [ ] nixci
   - [ ] omnix
 - [ ] attic, harmonia, nix-serve, nix-serve-ng
 - https://github.com/hakoerber/git-repo-manager
+  - I assumed this will keep repos in sync
+  - but I have to use it to write scripts to do it?
+- nmt + nmd (sr.ht/~rycee)
+  - tests and docs for hm
 
 ## Discourse/gh prs/gh issues
 
 ## Technical
 
-### blocked/halted
+### blocked/halted/stale
 
 - lazy trees - only helps with local flakes, shallow clones or github:x/x can't utilise it
 - flake schemas - useful for flake checks it seems
@@ -110,6 +140,8 @@ Useful links along with my annotations.
 - overlays (overlay module)
 - cargo sha256 workaround
 - python packageswith syntax vs python3xxPackages.pkg
+- nix-prefetch-scripts (nix-prefetch-url/git/github)
+  - nix-prefetch has an advanced cli (-A or something) FIND it
 
 ## Meta
 
@@ -164,3 +196,4 @@ Useful links along with my annotations.
   - nix-shell-templates
   - flake-templates (maybe same as above)
   - use flake template feature for nix-shell-templates too? but make it work with old nix-* commands
+  - npins > flake-compat

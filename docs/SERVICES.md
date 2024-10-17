@@ -26,6 +26,8 @@ A selfhosted heaven all in nixos
   - nixosTests.odoo15 and odoo16 are all failing
 - [x] your_spotify
   - customised to have SPOTIFY_CLIENT_ID to be secret too
+- [ ] buildbot-nix
+  - CI w/ python
 
 - Nix specific
 - [x] pr-tracker
