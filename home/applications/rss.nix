@@ -9,7 +9,6 @@ _: {
       "https://blog.adafruit.com/feed/"
       "https://blog.janissary.xyz/feed.xml"
       "https://blog.kowalczyk.info/atom.xml"
-      "https://pixel-druid.com/feed.rss"
       "https://bmcgee.ie/posts/index.xml"
       "https://codewithoutrules.com/atom.xml"
       "https://dwheeler.com/blog/index.rss"
@@ -22,6 +21,7 @@ _: {
       "https://mitchellh.com/feed.xml"
       "http://nil.wallyjones.com/feeds/all.atom.xml"
       "https://perens.com/feed/"
+      "https://pixel-druid.com/feed.rss"
       "https://python.libhunt.com/newsletter/feed"
       "https://rootknecht.net/index.xml"
       "https://rsapkf.org/weblog/rss.xml"
@@ -30,6 +30,7 @@ _: {
       "https://threedots.tech/index.xml"
       "http://waywardmonkeys.org/feeds/all.atom.xml"
       "https://www.trickster.dev/post/index.xml"
+      "https://ziglang.org/news/index.xml"
     ];
   };
 }
