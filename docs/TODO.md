@@ -7,6 +7,13 @@ more are in my zet but that is to be made public
 
 ### ideas
 
+- [ ] sesh
+  - major wf change (mixed with tmuxp or sth)
+  - bind ctrl+k to sesh+fzf? this will avoid having a `tmux a` keybind
+  - but icons etc missing
+  - don't bind inside tmux.conf, or alacritty
+  - bind in bash like fzf ctrl+t via bind command
+  - `sesh connect $(sesh l -i | fzf --ansi --reverse | cut -d" " -f2-)`
 - [ ] matt1432
   - https://github.com/matt1432/nixos-configs
   - https://github.com/jorsn/flakegen
