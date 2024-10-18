@@ -13,6 +13,8 @@
       hello
     ];
 
+    services.swapspace.enable = true;
+
     services.redis = {
       package = pkgs.valkey;
       servers.redrum = {

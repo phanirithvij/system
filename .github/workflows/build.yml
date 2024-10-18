@@ -46,7 +46,7 @@ jobs:
       - run: |
           free -h
           swapon --show
-          which swapspace
+          which swapspace || true
       - run: nix build .#homeConfigurations."runner".activationPackage
       - run: nix run .#home-manager -- switch --flake . -b bak
       - run: bash scripts/build.sh
