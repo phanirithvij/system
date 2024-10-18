@@ -38,7 +38,15 @@ jobs:
           path: |
             ~/.cache/nix/
           key: ${{ runner.os }}
+      - run: |
+          free -h
+          swapon --show
+          command -v swapspace || true
       - run: nix build .#systemConfigs.gha && sudo ./result/bin/activate
+      - run: |
+          free -h
+          swapon --show
+          which swapspace
       - run: nix build .#homeConfigurations."runner".activationPackage
       - run: nix run .#home-manager -- switch --flake . -b bak
       - run: bash scripts/build.sh
