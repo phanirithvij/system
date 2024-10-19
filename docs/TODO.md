@@ -14,6 +14,15 @@ more are in my zet but that is to be made public
   - don't bind inside tmux.conf, or alacritty
   - bind in bash like fzf ctrl+t via bind command
   - `sesh connect $(sesh l -i | fzf --ansi --reverse | cut -d" " -f2-)`
+- gists
+  - [ ] snips.sh systemd
+    - tui
+  - [ ] opengist systemd
+- RSS
+  - [ ] vigilant php systemd+nix (maybe not)
+  - [ ] feedpushr systemd+nix
+    - [ ] companion go mitm helper?
+    - [ ] recreate with ui htmx + bknd net/http (no frameworks)
 - [ ] matt1432
   - https://github.com/matt1432/nixos-configs
   - https://github.com/jorsn/flakegen
@@ -108,14 +117,11 @@ more are in my zet but that is to be made public
   - man pages
 - [ ] mouse heavy wf
   - awesomewm
-  - hyprland
   - dunst
 - [ ] flake compat
   - get it working with default.nix and shell.nix
   - for old nix version support
   - eg https://github.com/thiagokokada/nix-alien/blob/master/compat.nix
-- [x] devshell
-  - treefmt, dprint, nixfmt-rfc-style
 - [ ] extraoptions, username, email, hostname etc. global
 - [ ] modular restructuring
   - allows enabling disabling things
@@ -129,6 +135,9 @@ more are in my zet but that is to be made public
 
 #### DEs + rice
 
+- [x] niri (flake)
+  - wezterm bug
+  - looks like wezterm is not working outside too
 - [x] plasma6
   - [ ] plasma-manager (chris mcdonough vid)
 - [ ] xfce
@@ -138,7 +147,7 @@ more are in my zet but that is to be made public
   - https://github.com/jdpedersen1/windowmanagers/tree/master
   - also his menu scripts which dropdown, they are beautiful
   - [ ] yank his void rice too
-- [ ] awesome (one of my favs)
+- [ ] awesomewm (one of my favs)
 - [ ] dwm ?
   - also c configuration seems cool
   - maybe I can learn zig and package it via zig with nix
@@ -160,15 +169,9 @@ more are in my zet but that is to be made public
 - [ ] manjaro, garudalinux and endavour have some good scripts/configs
   - yank those
 
-#### iron manjaro
-
-- [ ] hm
-- [ ] sysm
-- [ ] todo move over to archlinux slowly, leave manjaro
-
 ### vps (stand-in for non-nixos)
 
-- [ ] No longer have a vps, do it in a local vm/docker/manjaro/arch
+- [ ] No longer have a vps, do it in a local vm/docker/arch
 - [ ] hm
   - [ ] caddy?
 - [ ] sysm
@@ -235,7 +238,7 @@ more are in my zet but that is to be made public
 - tried but failed to run properly
 - push to attic?
 
-#### buildbot
+#### buildbot-nix
 
 - [ ] see numtide repos and how they do it
 
@@ -261,7 +264,7 @@ more are in my zet but that is to be made public
     - for now zram+swap16+swapspace removes the need for this
 - [ ] Nixvim - neovim
 - [ ] home-manager services
-  - [x] espanso
+  - [ ] espanso fat (x11+wayland+custom)
 - [ ] jupyenv/jupyterhub/jupyterlab
   - [ ] hm/sys service based on if hub/lab/single instance
   - [ ] project level config flake templates
@@ -332,13 +335,13 @@ more are in my zet but that is to be made public
     - own fork:
       - flake/npins setup (maybe upstream)
       - existing listings (index owned, (unrelated) dedup+mirror scripts)
-      - htmx rewrite, already in go
+      - htmx rewrite (progressive), already in go
       - rclone lru disk cache per channel (think more)
 - [ ] cloudflared tunnel nixos service
   - multiple service (redis like)
   - write the output endpoints to /run/secrets
     or somewhere other processes can read from
-- [ ] trash-cli, trashy, fzf, lf
+- [ ] trash-cli, trashy, gtrash, fzf, lf
   - tui? (oss contrib)
 - [ ] odoo 18 + fix tests
   - broken py packages: websockets, furl, aiohttp
@@ -372,4 +375,4 @@ more are in my zet but that is to be made public
 
 - [ ] pr-tracker prs
   - http://localhost:8000/pr-tracker?pr=328862 - rustdesk headless client service
-  - http://localhost:8000/pr-tracker?pr=323381 - quickgui
+
