@@ -834,11 +834,11 @@
     },
     "nixpkgs-sysm": {
       "locked": {
-        "lastModified": 1729236148,
-        "narHash": "sha256-V4Y/Tj7quz2WH2lIteE/7C9TPguOuoc2CxDqs3bJeA8=",
+        "lastModified": 1729351736,
+        "narHash": "sha256-aWvpVE7QGQ8z02XH0+brPO9fVnK7NfvwV2RnAvUvah8=",
         "owner": "phanirithvij",
         "repo": "nixpkgs",
-        "rev": "96c5ff3588f60aa77c1844ca6c45174def28c554",
+        "rev": "5237556a5760882726948d9445e01aff52183d03",
         "type": "github"
       },
       "original": {
