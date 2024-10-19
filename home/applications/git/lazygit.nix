@@ -1,4 +1,5 @@
-_: {
+{ pkgs, ... }:
+{
   programs.lazygit = {
     enable = true;
     settings = {
@@ -9,7 +10,7 @@ _: {
         };
         paging = {
           colorArg = "always";
-          #pager = "${pkgs.delta}/bin/delta --dark --paging=never";
+          pager = "${pkgs.delta}/bin/delta --dark --paging=never";
         };
         autoFetch = false;
       };

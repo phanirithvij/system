@@ -18,7 +18,7 @@
       userName = "phanirithvij";
       userEmail = "phanirithvij2000@gmail.com";
       # broken https://github.com/NixOS/nixpkgs/pull/334814
-      #delta.enable = true;
+      delta.enable = true;
       extraConfig = {
         init = {
           defaultBranch = "main";
