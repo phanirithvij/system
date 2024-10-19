@@ -1,5 +1,7 @@
 ## notes to self
 
+- xargs -I {} will work with -d' ' only (bash)
+
 - home-manager manages itself for now in a single user env
   - Allows users to manage their own version
 - in a multi-user scenario a single global home-manager can be enabled in the flake modules
