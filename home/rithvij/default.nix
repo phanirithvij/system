@@ -85,26 +85,6 @@ in
     pipx # needed?
     trash-cli # there is a rustrewrite for this, trashy maybe
     remote-touchpad
-    # TODO remove once 0.10.2 releases
-    # see https://github.com/YS-L/csvlens/issues/101
-    # https://github.com/YS-L/csvlens/releases.atom
-    (csvlens.overrideAttrs (drv: rec {
-      pname = "csvlens";
-      version = "0-unstable-2024-10-15";
-      src = fetchFromGitHub {
-        owner = "YS-L";
-        repo = "csvlens";
-        rev = "002edebeda69b0b81b4fd4060e25e80c5a87f4da";
-        hash = "sha256-9nD25Xjrk8aXD/ufkKEblBXVEvEZcWkoCVzadpe0xm0=";
-      };
-      cargoDeps = drv.cargoDeps.overrideAttrs (
-        lib.const {
-          inherit src;
-          name = "${pname}-vendor.tar.gz";
-          outputHash = "sha256-XiLhvtg7zpevMIkubmTQ/HGvu87Gqf7vcnTAb7y/eVs=";
-        }
-      );
-    }))
     #redbean ape com
 
     python3
