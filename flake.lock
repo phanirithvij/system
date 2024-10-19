@@ -832,22 +832,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-swapspace": {
-      "locked": {
-        "lastModified": 1729057390,
-        "narHash": "sha256-j+1YVX+bPFbBHnaqDNcIvpI6dA7R6ciQ3RdEi8l6D6A=",
-        "owner": "phanirithvij",
-        "repo": "nixpkgs",
-        "rev": "60fb16b1b931306017e2363d3e09a04da0ced5af",
-        "type": "github"
-      },
-      "original": {
-        "owner": "phanirithvij",
-        "ref": "swapspace-module",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-sysm": {
       "locked": {
         "lastModified": 1729236148,
@@ -993,7 +977,6 @@
         "nix-schema": "nix-schema",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable_2",
-        "nixpkgs-swapspace": "nixpkgs-swapspace",
         "nixpkgs-sysm": "nixpkgs-sysm",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",

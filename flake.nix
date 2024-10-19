@@ -1,7 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-swapspace.url = "github:phanirithvij/nixpkgs/swapspace-module";
     # https://github.com/numtide/system-manager/issues/133
     # 509b099fd471922f78bbbaebc76d31338fee82a4
     nixpkgs-sysm.url = "github:phanirithvij/nixpkgs/swapspace-module-before-systemd";
@@ -126,19 +125,23 @@
         };
       };
       # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
-      /*
-        patches = [
+      patches = [
+        /*
           {
             url = "https://patch-diff.githubusercontent.com/raw/phanirithvij/nixpkgs/pull/1.diff";
             sha256 = "sha256-JwXE2RUt30jWzTbd20buX1qucPmrBFzp8qlmbfzzno4=";
           }
-        ];
-        nixpkgs' = pkgs.applyPatches {
-          name = "nixpkgs-patched";
-          src = inputs.nixpkgs;
-          patches = map pkgs.fetchpatch patches;
-        };
-      */
+          {
+            url = "https://patch-diff.githubusercontent.com/raw/nixos/nixpkgs/pull/348269.diff";
+            sha256 = "sha256-yNsguHhr/QHV4SIlh0RwhgZci7uQjxsRsO8iY80zr0A=";
+          }
+        */
+      ];
+      nixpkgs' = pkgs.applyPatches {
+        name = "nixpkgs-patched";
+        src = inputs.nixpkgs;
+        patches = map pkgs.fetchpatch patches;
+      };
       overlays =
         (import ./lib/overlays {
           inherit system;
@@ -235,8 +238,8 @@
           modules = nix-index-hm-modules ++ common-hm-modules;
         };
       };
-      #nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
-      inherit (inputs.nixpkgs.lib) nixosSystem;
+      nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
+      #inherit (inputs.nixpkgs.lib) nixosSystem;
       nixosConfigurations = {
         ${host} = nixosSystem {
           inherit system;
