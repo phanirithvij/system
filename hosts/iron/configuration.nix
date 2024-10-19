@@ -67,8 +67,13 @@ in
     enable = true;
     memoryPercent = 90;
   };
-  services.swapspace.enable = true;
-  services.swapspace.extraArgs = "-P -v";
+  services.swapspace = {
+    enable = true;
+    extraArgs = [
+      "-P"
+      "-v"
+    ];
+  };
 
   boot.kernel.sysctl = {
     # REISUB

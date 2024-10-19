@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  utils,
   ...
 }:
 let
@@ -19,9 +20,12 @@ in
     enable = mkEnableOption "Swapspace, a dynamic swap space manager";
     package = mkPackageOption pkgs "swapspace" { };
     extraArgs = mkOption {
-      type = types.str;
-      default = "";
-      example = "-P -v";
+      type = types.listOf types.str;
+      default = [ ];
+      example = [
+        "-P"
+        "-v"
+      ];
       description = "Any extra arguments to pass to swapspace";
     };
     settings = mkOption {
@@ -53,12 +57,12 @@ in
           min_swapsize = mkOption {
             type = types.str;
             default = "4m";
-            description = "Smallest allowed size for individual swapfiles.";
+            description = "Smallest allowed size for individual swapfiles";
           };
           max_swapsize = mkOption {
             type = types.str;
             default = "2t";
-            description = "Greatest allowed size for individual swapfiles.";
+            description = "Greatest allowed size for individual swapfiles";
           };
           cooldown = mkOption {
             type = types.ints.unsigned;
@@ -89,8 +93,8 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    systemd.tmpfiles.rules = [ "d '${cfg.settings.swappath}' 0700 - - - - " ];
     environment.systemPackages = [ cfg.package ];
+    systemd.packages = [ cfg.package ];
     systemd.services.swapspace = {
       after = [
         "local-fs.target"
@@ -101,12 +105,15 @@ in
         "swap.target"
       ];
       wantedBy = [ "multi-user.target" ];
-      documentation = [ "man:swapspace(8)" ];
       description = "Swapspace, a dynamic swap space manager";
       serviceConfig = {
-        ExecStart = "${lib.getExe cfg.package} -c ${configFile} ${cfg.extraArgs}";
+        ExecStart = [
+          ""
+          "${lib.getExe cfg.package} -c ${configFile} ${utils.escapeSystemdExecArgs cfg.extraArgs}"
+        ];
       };
     };
+    systemd.tmpfiles.rules = [ "d '${cfg.settings.swappath}' 0700 - - - - " ];
   };
 
   meta = {

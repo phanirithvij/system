@@ -1,9 +1,6 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # https://github.com/numtide/system-manager/issues/133
-    # 509b099fd471922f78bbbaebc76d31338fee82a4
-    nixpkgs-sysm.url = "github:phanirithvij/nixpkgs/swapspace-module-before-systemd";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
 
     home-manager.url = "github:phanirithvij/home-manager/espanso-wl-no-pr";
@@ -15,7 +12,7 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.rust-overlay.follows = "rust-overlay";
       inputs.treefmt-nix.follows = "treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs-sysm";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks.follows = "git-hooks";
     };
 
