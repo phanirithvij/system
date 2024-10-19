@@ -35,5 +35,8 @@
   programs.tmux.enable = true;
   programs.neovim.enable = true;
 
-  boot.kernelParams = [ "copytoram" ];
+  # there is a copy to ram option in grub so this is not needed
+  #boot.kernelParams = [ "copytoram" ];
+  # https://discourse.nixos.org/t/hardware-nvidia-open-is-used-but-not-defined-error-when-updating-nixos-flake-config/51359/4
+  hardware.nvidia.open = false;
 }

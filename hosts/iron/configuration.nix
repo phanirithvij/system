@@ -78,6 +78,8 @@ in
     "kernel.panic" = 5;
   };
 
+  hardware.nvidia.open = false;
+
   networking.hostName = "iron";
   networking.networkmanager.enable = true;
 
