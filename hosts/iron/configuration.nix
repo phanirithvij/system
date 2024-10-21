@@ -84,7 +84,6 @@ in
   };
 
   hardware.nvidia.open = false;
-  services.xserver.videoDrivers = [ "nvidia" ];
 
   networking.hostName = "iron";
   networking.networkmanager.enable = true;
