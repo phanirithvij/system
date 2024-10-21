@@ -832,6 +832,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-sysm": {
+      "locked": {
+        "lastModified": 1729355671,
+        "narHash": "sha256-Wjr3/ypGjeS8HUcM2habx3e8M4znm+TNPFaWFEuMO/w=",
+        "owner": "phanirithvij",
+        "repo": "nixpkgs",
+        "rev": "46b7f3e57b5db713e5d728c20e60c22fead86d98",
+        "type": "github"
+      },
+      "original": {
+        "owner": "phanirithvij",
+        "ref": "swapspace-module",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1729256560,
@@ -961,6 +977,7 @@
         "nix-schema": "nix-schema",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable_2",
+        "nixpkgs-sysm": "nixpkgs-sysm",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
         "system-manager": "system-manager",
@@ -1038,7 +1055,7 @@
         ],
         "nix-vm-test": "nix-vm-test",
         "nixpkgs": [
-          "nixpkgs"
+          "nixpkgs-sysm"
         ],
         "pre-commit-hooks": [
           "git-hooks"

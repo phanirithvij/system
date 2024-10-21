@@ -2,6 +2,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-sysm.url = "github:phanirithvij/nixpkgs/swapspace-module";
 
     home-manager.url = "github:phanirithvij/home-manager/espanso-wl-no-pr";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -12,7 +13,7 @@
       inputs.flake-utils.follows = "flake-utils";
       inputs.rust-overlay.follows = "rust-overlay";
       inputs.treefmt-nix.follows = "treefmt-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-sysm";
       inputs.pre-commit-hooks.follows = "git-hooks";
     };
 
@@ -128,11 +129,11 @@
             url = "https://patch-diff.githubusercontent.com/raw/phanirithvij/nixpkgs/pull/1.diff";
             sha256 = "sha256-JwXE2RUt30jWzTbd20buX1qucPmrBFzp8qlmbfzzno4=";
           }
-          {
-            url = "https://patch-diff.githubusercontent.com/raw/nixos/nixpkgs/pull/348269.diff";
-            sha256 = "sha256-yNsguHhr/QHV4SIlh0RwhgZci7uQjxsRsO8iY80zr0A=";
-          }
         */
+        {
+          url = "https://patch-diff.githubusercontent.com/raw/nixos/nixpkgs/pull/348588.diff";
+          sha256 = "sha256-fWWCsIQyY/E+uQPjyuf+gCYHnA/T5Ee9B7QcSX5Fa80=";
+        }
       ];
       nixpkgs' = pkgs.applyPatches {
         name = "nixpkgs-patched";
@@ -245,7 +246,6 @@
             overlayModule
             sops-nix.nixosModules.sops
             niri.nixosModules.niri
-            ./nixos/modules/swapspace.nix
             ./hosts/${host}/configuration.nix
           ];
           specialArgs = {
