@@ -1,6 +1,6 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs?shallow=1";
     # https://github.com/numtide/system-manager/issues/133
     # 509b099fd471922f78bbbaebc76d31338fee82a4
     nixpkgs-sysm.url = "github:phanirithvij/nixpkgs/swapspace-module-before-systemd";
