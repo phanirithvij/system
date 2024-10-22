@@ -84,7 +84,11 @@ in
   };
 
   hardware.nvidia.open = false;
-  #hardware.nvidia-container-toolkit.enable = true;
+  services.xserver.videoDrivers = [
+    "intel"
+    "nvidia"
+  ];
+  # hardware.nvidia-container-toolkit.enable = true;
 
   networking.hostName = "iron";
   networking.networkmanager.enable = true;
