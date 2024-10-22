@@ -124,21 +124,20 @@
       };
       # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
       patches = [
-        /*
-          {
-            url = "https://patch-diff.githubusercontent.com/raw/phanirithvij/nixpkgs/pull/1.diff";
-            sha256 = "sha256-JwXE2RUt30jWzTbd20buX1qucPmrBFzp8qlmbfzzno4=";
-          }
-        */
         {
           # swapspace module: https://nixpk.gs/pr-tracker.html?pr=348588
           url = "https://patch-diff.githubusercontent.com/raw/nixos/nixpkgs/pull/348588.diff";
-          sha256 = "sha256-fWWCsIQyY/E+uQPjyuf+gCYHnA/T5Ee9B7QcSX5Fa80=";
+          hash = "sha256-fWWCsIQyY/E+uQPjyuf+gCYHnA/T5Ee9B7QcSX5Fa80=";
         }
         {
           # guile-ssh bump: https://nixpk.gs/pr-tracker.html?pr=348857
           url = "https://patch-diff.githubusercontent.com/raw/nixos/nixpkgs/pull/348857.diff";
-          sha256 = "sha256-jeNH4sQ2g6qwLROmrpsfjYIAfsN+CIIPSDnDyDiP0ms=";
+          hash = "sha256-jeNH4sQ2g6qwLROmrpsfjYIAfsN+CIIPSDnDyDiP0ms=";
+        }
+        {
+          # nvidia-container-toolkit: won't work for me but have it for review
+          url = "https://patch-diff.githubusercontent.com/raw/nixos/nixpkgs/pull/350339.diff";
+          hash = "sha256-otuEO7WinI3dGlXpofbCy7nAqxqutf2GqNpyMSooYv0=";
         }
       ];
       nixpkgs' = pkgs.applyPatches {
