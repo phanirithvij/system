@@ -84,9 +84,11 @@ in
   };
 
   hardware.nvidia.open = false;
-  services.xserver.videoDrivers = [
-    "intel"
-  ];
+  hardware.nvidia.nvidiaPersistenced = true;
+  # services.xserver.videoDrivers = [
+  #   "intel"
+  #   "nvidia"
+  # ];
   # hardware.nvidia-container-toolkit.enable = true;
 
   networking.hostName = "iron";
