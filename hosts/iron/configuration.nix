@@ -85,15 +85,11 @@ in
 
   hardware.nvidia = {
     open = false;
-    #nvidiaPersistenced = true;
-    #modesetting.enable = true;
-    #package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
-    /*
-      prime = {
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
-      };
-    */
+    prime = {
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+      sync.enable = true;
+    };
   };
   services.xserver.videoDrivers = [
     "modesetting"
