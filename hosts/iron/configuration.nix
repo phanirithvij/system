@@ -83,9 +83,8 @@ in
     "kernel.panic" = 5;
   };
 
-  hardware.nvidia.open = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia-container-toolkit.enable = true;
+  hardware.nvidia.open = false;
+  #hardware.nvidia-container-toolkit.enable = true;
 
   networking.hostName = "iron";
   networking.networkmanager.enable = true;
