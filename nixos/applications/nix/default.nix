@@ -5,7 +5,7 @@
       nixpkgs.flake = flake-inputs.nixpkgs;
       n.flake = flake-inputs.nixpkgs;
     };
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     settings =
       let
         users = [
