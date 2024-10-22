@@ -83,7 +83,7 @@ in
     "kernel.panic" = 5;
   };
 
-  hardware.nvidia.open = true;
+  hardware.nvidia.open = false;
   hardware.nvidia-container-toolkit.enable = true;
 
   networking.hostName = "iron";
