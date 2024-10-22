@@ -85,17 +85,18 @@ in
 
   hardware.nvidia = {
     open = false;
-    nvidiaPersistenced = true;
-    modesetting.enable = true;
-    package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
-    prime = {
-      intelBusId = "PCI:0:2:0";
-      nvidiaBusId = "PCI:1:0:0";
-    };
+    #nvidiaPersistenced = true;
+    #modesetting.enable = true;
+    #package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+    /*
+      prime = {
+        intelBusId = "PCI:0:2:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
+    */
   };
   services.xserver.videoDrivers = [
     "modesetting"
-    "fbdev"
     "nvidia"
   ];
   nixpkgs.config.nvidia.acceptLicense = true;
