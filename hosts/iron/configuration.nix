@@ -83,13 +83,23 @@ in
     "kernel.panic" = 5;
   };
 
-  hardware.nvidia.open = false;
-  hardware.nvidia.nvidiaPersistenced = true;
-  # services.xserver.videoDrivers = [
-  #   "intel"
-  #   "nvidia"
-  # ];
-  # hardware.nvidia-container-toolkit.enable = true;
+  hardware.nvidia = {
+    open = false;
+    nvidiaPersistenced = true;
+    modesetting.enable = true;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
+    prime = {
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:1:0:0";
+    };
+  };
+  services.xserver.videoDrivers = [
+    "modesetting"
+    "fbdev"
+    "nvidia"
+  ];
+  nixpkgs.config.nvidia.acceptLicense = true;
+  hardware.nvidia-container-toolkit.enable = true;
 
   networking.hostName = "iron";
   networking.networkmanager.enable = true;
