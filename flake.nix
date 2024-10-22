@@ -131,8 +131,14 @@
           }
         */
         {
+          # swapspace module: https://nixpk.gs/pr-tracker.html?pr=348588
           url = "https://patch-diff.githubusercontent.com/raw/nixos/nixpkgs/pull/348588.diff";
           sha256 = "sha256-fWWCsIQyY/E+uQPjyuf+gCYHnA/T5Ee9B7QcSX5Fa80=";
+        }
+        {
+          # guile-ssh bump: https://nixpk.gs/pr-tracker.html?pr=348857
+          url = "https://patch-diff.githubusercontent.com/raw/nixos/nixpkgs/pull/348857.diff";
+          sha256 = "sha256-jeNH4sQ2g6qwLROmrpsfjYIAfsN+CIIPSDnDyDiP0ms=";
         }
       ];
       nixpkgs' = pkgs.applyPatches {
