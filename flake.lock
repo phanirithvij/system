@@ -864,6 +864,22 @@
         "type": "github"
       }
     },
+    "nixpkgs_3": {
+      "locked": {
+        "lastModified": 1729595756,
+        "narHash": "sha256-rNaLWDqjgy23Y6M3K/e7Kiyimq04ikDMrErpqgXWcV0=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "782740762fb281404740b6b7084d356c3dab1173",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nmd": {
       "flake": false,
       "locked": {
@@ -916,6 +932,24 @@
         "owner": "rycee",
         "repo": "nmt",
         "type": "gitlab"
+      }
+    },
+    "nur-pkgs": {
+      "inputs": {
+        "nixpkgs": "nixpkgs_3"
+      },
+      "locked": {
+        "lastModified": 1729674270,
+        "narHash": "sha256-C0eytp1UjlPdqNQ+rwBsK+g1OypoggOv2aCFaLvCAto=",
+        "owner": "phanirithvij",
+        "repo": "nur-packages",
+        "rev": "4edae3ebc4e3dd68aead49b53d16b9ee063be003",
+        "type": "github"
+      },
+      "original": {
+        "owner": "phanirithvij",
+        "repo": "nur-packages",
+        "type": "github"
       }
     },
     "pre-commit-hooks": {
@@ -978,6 +1012,7 @@
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "nixpkgs-sysm": "nixpkgs-sysm",
+        "nur-pkgs": "nur-pkgs",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
         "system-manager": "system-manager",

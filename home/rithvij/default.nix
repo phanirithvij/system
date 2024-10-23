@@ -20,6 +20,8 @@ in
     ../applications/media
     ../applications/nixy
 
+    ../applications/nurpkgs.nix
+
     ../applications/hyprland.nix
     ../applications/rss.nix
     ../applications/shells
