@@ -77,8 +77,6 @@
       v = "vim";
       vim = "nvim";
       n = "v";
-      copy = "xclip -sel clip";
-      xcopy = "xclip -sel clip";
 
       t = "tmux";
       ta = "tmux a";
