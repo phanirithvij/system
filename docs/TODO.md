@@ -351,6 +351,8 @@ more are in my zet but that is to be made public
   - https://toast.al/posts/techlore/2024-06-11_loop-hero-on-nixos
   - try w/ joystick + antimicrox personal setup
   - try out wrapper-manager too
+    - feedpushr hm module + wrapper-manger + nixos module
+    - qbittorrentui wrappm (or) upstream XDG_CONFIG_HOME || ~/.config || macos too??
   - hotline miami wrapper
     - has a README with libs in gog folder
   - [ ] blog post (contrib)
