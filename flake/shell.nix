@@ -11,6 +11,7 @@ pkgs.mkShell {
     with pkgs;
     [
       nh
+      cachix
       xc
       dprint
     ]
