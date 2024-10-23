@@ -4,6 +4,10 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-sysm.url = "github:phanirithvij/nixpkgs/swapspace-module";
 
+    nur-pkgs.url = "github:phanirithvij/nur-packages";
+    #shouldn't be used as cachix cache becomes useless
+    #nur-pkgs.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager.url = "github:phanirithvij/home-manager/espanso-wl-no-pr";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -163,6 +167,7 @@
           # TODO sharedModules sops
           extraSpecialArgs = {
             flake-inputs = inputs;
+            inherit system;
             inherit username;
             inherit hostname;
           };
