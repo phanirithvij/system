@@ -95,6 +95,7 @@
       git-hooks,
       nix-index-database,
       niri,
+      nur-pkgs,
       ...
     }@inputs:
     let
@@ -154,7 +155,13 @@
           inherit system;
           flake-inputs = inputs;
         })
-        ++ [ niri.overlays.niri ];
+        ++ [ niri.overlays.niri ]
+        ++ (builtins.attrValues
+          (import "${nur-pkgs}" {
+            # pkgs here is not being used in nur-pkgs overlays
+            inherit pkgs;
+          }).overlays
+        );
       homeConfig =
         {
           username,
