@@ -7,6 +7,11 @@
   programs.atuin = {
     enable = true;
     flags = [ "--disable-up-arrow" ];
+    settings = {
+      style = "compact";
+      inline_height = 24;
+      invert = false;
+    };
   };
   programs.bat.enable = true;
   programs.eza.enable = true;
