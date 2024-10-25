@@ -84,18 +84,31 @@ in
   };
 
   hardware.nvidia = {
+    # open true will simply won't work for my gpu
+    # but noveau works somehow?
     open = false;
-    #nvidiaPersistenced = true;
+    # this feels useless to me
+    nvidiaPersistenced = true;
+    # needs to be used with prime sync
     #modesetting.enable = true;
+    # my gpu's driver can be production
     #package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
-    /*
-      prime = {
-        intelBusId = "PCI:0:2:0";
-        nvidiaBusId = "PCI:1:0:0";
-      };
-    */
+    # https://discourse.nixos.org/t/struggling-with-nvidia-prime/13794/3
+    prime = {
+      intelBusId = "0@0:2:0";
+      nvidiaBusId = "1@0:0:0";
+      offload.enable = true;
+      offload.enableOffloadCmd = true;
+      # prime sync doesn't work shows only a mouse in a black screen
+      #sync.enable = true;
+    };
+    # not supported on my gpu 940M
+    #powerManagement.enable = true;
+    #powerManagement.finegrained = true;
   };
   services.xserver.videoDrivers = [
+    # without modesetting, x server will be run by nvidia
+    # causes heating issues
     "modesetting"
     "nvidia"
   ];
