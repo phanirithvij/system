@@ -1,12 +1,14 @@
 # system
 
 main system configuration including other whacky ideas
-more are in my zet but that is to be made public
+more are in my zet but that is yet to be made public
 
 ## TODO
 
 ### ideas
 
+- [ ] try out https://github.com/katrinafyi/nix-patcher
+  - is that better than pkgs.applyPatches approach?
 - [ ] sesh
   - major wf change (mixed with tmuxp or sth)
   - bind ctrl+k to sesh+fzf? this will avoid having a `tmux a` keybind
