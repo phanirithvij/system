@@ -4,6 +4,8 @@ _: {
     urls = builtins.map (x: { url = x; }) [
       "https://invent.kde.org/multimedia/subtitlecomposer/-/tags?format=atom"
       "https://github.com/YS-L/csvlens/releases.atom"
+      "https://github.com/thomiceli/opengist/releases.atom"
+      "https://github.com/sachaos/viddy/releases.atom"
       "https://andrewkelley.me/rss.xml"
       "https://bbengfort.github.io/index.xml"
       "https://blog.adafruit.com/feed/"
