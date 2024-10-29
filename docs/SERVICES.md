@@ -13,8 +13,7 @@ A selfhosted heaven all in nixos
   - Runs, tested once
 - [x] Jellyfin
 - [ ] Caddy
-- [ ] Teldrive
-  - I need to make it
+- [ ] Teldrive (own nur)
 - [ ] pyload
 - [ ] archivebox
 - [ ] android-file-transfer automount
@@ -22,11 +21,12 @@ A selfhosted heaven all in nixos
   - found https://bbs.archlinux.org/viewtopic.php?pid=1944871#p1944871
   - I need to make it
   - Is it worth it for ~12MiBps extra?
+  - fuse + wifi transfer from android devices
 - [ ] Wikipedia backups
 - [ ] kiwi
 - [ ] searxng
-- [ ] Oodoo corporate
-  - https://github.com/NixOS/nixpkgs/pull/346397
+- [ ] Odoo corporate
+  - v18 in nixos-unstable
 - [x] your_spotify
   - customised to have SPOTIFY_CLIENT_ID to be secret too
 - [ ] buildbot-nix
@@ -46,7 +46,9 @@ A selfhosted heaven all in nixos
 - [ ] qbittorrent server
   - with scripts (ntfy, gotify)
   - reddit.com/r/qBittorrent/comments/vyt1sz/comment/lpgxc2c
-  - qbittorrentui (TODO nixpkgs pr? nur?)
+  - qbittorrentui (own nur)
+  - https://github.com/qbittorrent/qBittorrent/wiki/Running-qBittorrent-without-X-server-(WebUI-only,-systemd-service-set-up,-Ubuntu-15.04-or-newer)
+    - qbittorrent-nox
 
 - Nix specific
 - [x] pr-tracker
@@ -69,10 +71,16 @@ A selfhosted heaven all in nixos
   - https://github.com/phanirithvij/mmdoc-nixpkgs-toc-gen.git
 
 - pdf and docs tools
-  - s-pdf (striling-pdf)
+  - striling-pdf
+    - ocrmypdf
+  - gImageReader (ocr)
   - https://sioyek-documentation.readthedocs.io/en/latest/configuration.html
   - w3mman (key : for loading urls in manpages)
   - pinfo is bad (see pinfo lf)
+  - xournalpp (notes wacom)
+  - rnote (notes wacom)
+  - pinta
+  - sumatrapdf (win)
 
 Another doc for selfhosted docker/podman stuff
 
