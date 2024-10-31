@@ -58,6 +58,7 @@ in
     #ctpv
 
     glow # markdown previewer in terminal
+    python312Packages.grip # markdown preview in browser
 
     # TODO https://github.com/badele/nix-homelab/tree/main?tab=readme-ov-file#tui-floating-panel-configuration
     pulsemixer
