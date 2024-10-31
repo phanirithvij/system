@@ -1,6 +1,7 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs?shallow=1";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-sysm.url = "github:phanirithvij/nixpkgs/swapspace-module";
 
@@ -13,7 +14,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     system-manager = {
-      url = "github:phanirithvij/system-manager/tmpfiles-settings";
+      url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs-sysm";
     };
 
@@ -114,6 +115,7 @@
           allowUnfreePredicate = _: true;
           packageOverrides = _: {
             # TODO espanso_wayland and espanso-x11 and use it in different places accordingly?
+            # made a pr to home-manager see https://github.com/nix-community/home-manager/pull/5930
             /*
               espanso = pkgs.espanso.override {
                 x11Support = false;
@@ -127,7 +129,7 @@
       patches = [
         {
           # swapspace module: https://nixpk.gs/pr-tracker.html?pr=348588
-          url = "https://patch-diff.githubusercontent.com/raw/nixos/nixpkgs/pull/348588.diff";
+          url = "https://github.com/nixos/nixpkgs/pull/348588.diff";
           hash = "sha256-M21xPBJrjExk9glq/lX3dv+ER4/w7HUWtRFL+y+FMFM=";
           #url = "https://github.com/NixOS/nixpkgs/compare/master...phanirithvij:nixpkgs:swapspace-module-no-pr.diff";
           #hash = "sha256-XJjulFacrffNz7hr0TVPBuJcvAUeBTRVQYv1NWwwBVY=";
@@ -138,6 +140,8 @@
         src = inputs.nixpkgs;
         patches = map pkgs.fetchpatch patches;
       };
+      nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
+      #inherit (inputs.nixpkgs.lib) nixosSystem;
       overlays =
         (import ./lib/overlays {
           inherit system;
@@ -194,6 +198,16 @@
       overlayModule = {
         nixpkgs.overlays = overlays;
       };
+      system-manager' = pkgs.applyPatches {
+        name = "sysm-patched";
+        src = inputs.system-manager;
+        patches = [
+          (pkgs.fetchpatch {
+            url = "https://github.com/numtide/system-manager/pull/148.diff";
+            hash = "sha256-qdUYk3RtfC0lfT//lh1M6FaLkAvba8tN5oEXctH6KKA=";
+          })
+        ];
+      };
     in
     rec {
       inherit (inputs.flake-schemas) schemas;
@@ -241,8 +255,6 @@
           modules = nix-index-hm-modules ++ common-hm-modules;
         };
       };
-      nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
-      #inherit (inputs.nixpkgs.lib) nixosSystem;
       nixosConfigurations = {
         ${host} = nixosSystem {
           inherit system;
@@ -261,7 +273,7 @@
           };
         };
 
-        defaultIso = nixpkgs.lib.nixosSystem {
+        defaultIso = nixosSystem {
           specialArgs = {
             flake-inputs = inputs;
           };
@@ -297,10 +309,15 @@
           modules = [ ./hosts/nod ];
         };
       };
+      inherit ((import "${system-manager'}/nix/lib.nix" { nixpkgs = nixpkgs'; }))
+        makeSystemConfig
+        ;
       systemConfigs = rec {
         default = gha;
-        gha = system-manager.lib.makeSystemConfig { modules = [ ./hosts/sysm/gha/configuration.nix ]; };
-        vps = system-manager.lib.makeSystemConfig { modules = [ ./hosts/sysm/vps/configuration.nix ]; };
+        gha = makeSystemConfig {
+          modules = [ ./hosts/sysm/gha/configuration.nix ];
+        };
+        vps = makeSystemConfig { modules = [ ./hosts/sysm/vps/configuration.nix ]; };
       };
       formatter.${system} = treefmtCfg.wrapper;
       checks.${system} = {
