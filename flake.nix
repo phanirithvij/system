@@ -4,6 +4,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-sysm.url = "github:phanirithvij/nixpkgs/swapspace-module";
 
+    #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages";
     #shouldn't be used as cachix cache becomes useless
     #nur-pkgs.inputs.nixpkgs.follows = "nixpkgs";
