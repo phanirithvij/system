@@ -12,13 +12,8 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     system-manager = {
-      url = "github:numtide/system-manager";
-      inputs.crane.follows = "crane";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.rust-overlay.follows = "rust-overlay";
-      inputs.treefmt-nix.follows = "treefmt-nix";
+      url = "github:phanirithvij/system-manager/tmpfiles-settings";
       inputs.nixpkgs.follows = "nixpkgs-sysm";
-      inputs.pre-commit-hooks.follows = "git-hooks";
     };
 
     git-repo-manager = {
@@ -132,7 +127,7 @@
         {
           # swapspace module: https://nixpk.gs/pr-tracker.html?pr=348588
           url = "https://patch-diff.githubusercontent.com/raw/nixos/nixpkgs/pull/348588.diff";
-          hash = "sha256-Gey/LHysCYIIIRiZMgRnduztBZ5qSq0OxU8My94nWf8=";
+          hash = "sha256-M21xPBJrjExk9glq/lX3dv+ER4/w7HUWtRFL+y+FMFM=";
           #url = "https://github.com/NixOS/nixpkgs/compare/master...phanirithvij:nixpkgs:swapspace-module-no-pr.diff";
           #hash = "sha256-XJjulFacrffNz7hr0TVPBuJcvAUeBTRVQYv1NWwwBVY=";
         }
