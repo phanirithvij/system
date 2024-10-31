@@ -43,7 +43,8 @@
     fsType = "btrfs";
   };
 
-  swapDevices = [ { device = "/dev/disk/by-label/swap"; } ];
+  # we're in the swapspace now
+  swapDevices = [ ];
 
   networking.useDHCP = lib.mkDefault true;
 
