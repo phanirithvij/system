@@ -131,11 +131,6 @@
           #url = "https://github.com/NixOS/nixpkgs/compare/master...phanirithvij:nixpkgs:swapspace-module-no-pr.diff";
           #hash = "sha256-XJjulFacrffNz7hr0TVPBuJcvAUeBTRVQYv1NWwwBVY=";
         }
-        {
-          # guile-ssh bump: https://nixpk.gs/pr-tracker.html?pr=348857
-          url = "https://patch-diff.githubusercontent.com/raw/nixos/nixpkgs/pull/348857.diff";
-          hash = "sha256-jeNH4sQ2g6qwLROmrpsfjYIAfsN+CIIPSDnDyDiP0ms=";
-        }
       ];
       nixpkgs' = pkgs.applyPatches {
         name = "nixpkgs-patched";
