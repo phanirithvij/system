@@ -69,6 +69,7 @@ in
   };
   services.swapspace = {
     enable = true;
+    settings.cooldown = 20;
     extraArgs = [
       "-P"
       "-v"
