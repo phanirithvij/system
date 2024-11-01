@@ -45,7 +45,10 @@
         '')
         sysz
       ];
-    services.swapspace.enable = true;
+    services.swapspace = {
+      enable = true;
+      settings.cooldown = 5;
+    };
     services.redis = {
       package = pkgs.valkey;
       servers.redrum = {
