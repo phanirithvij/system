@@ -2,10 +2,7 @@
 {
   imports = [
     ../applications/docker
-    ../applications/bookmarks/navi.nix
     ../applications/bashmount.nix
-    ../applications/git
-    ../applications/shells
     ../applications/tmux.nix
   ];
 
