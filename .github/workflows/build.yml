@@ -32,7 +32,7 @@ jobs:
       # crazy thing, magic-nix-cache runs on top of attic
       # https://sourcegraph.com/github.com/osdev-wiki/wiki/-/blob/.github/workflows/sitegen.yml?L43:13-43:25
       - name: cache dependency builds
-        uses: actions/cache@v2
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cache/nix/
