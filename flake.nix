@@ -14,7 +14,9 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     system-manager = {
-      url = "github:numtide/system-manager";
+      #url = "git+file:///shed/Projects/nixer/learn/numtide/system-manager";
+      url = "github:phanirithvij/system-manager/tmpfiles-settings-no-pr";
+      #url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs-sysm";
     };
 
@@ -202,10 +204,14 @@
         name = "sysm-patched";
         src = inputs.system-manager;
         patches = [
-          (pkgs.fetchpatch {
-            url = "https://github.com/numtide/system-manager/pull/148.diff";
-            hash = "sha256-qdUYk3RtfC0lfT//lh1M6FaLkAvba8tN5oEXctH6KKA=";
-          })
+          # TODO once I work it out for multiple file generation
+          # then use this till it gets merged
+          /*
+            (pkgs.fetchpatch {
+              url = "https://github.com/numtide/system-manager/pull/148.diff";
+              hash = "sha256-qdUYk3RtfC0lfT//lh1M6FaLkAvba8tN5oEXctH6KKA=";
+            })
+          */
         ];
       };
     in
@@ -274,6 +280,7 @@
         };
 
         defaultIso = nixosSystem {
+          inherit system;
           specialArgs = {
             flake-inputs = inputs;
           };

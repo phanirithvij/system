@@ -1090,15 +1090,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1730321012,
-        "narHash": "sha256-M8MaTLvBMonrto6MbdALJhHxoM4ajpci7AozHMdILKQ=",
-        "owner": "numtide",
+        "lastModified": 1730447145,
+        "narHash": "sha256-6ULog16AwshmjTT1H8zQRirzkL/17EvPZQVUSHREWoY=",
+        "owner": "phanirithvij",
         "repo": "system-manager",
-        "rev": "2272979512e9fd29325b6553fd038b4fb8b339ca",
+        "rev": "74a049807aefacf76144cb196b6fca56b1111262",
         "type": "github"
       },
       "original": {
-        "owner": "numtide",
+        "owner": "phanirithvij",
+        "ref": "tmpfiles-settings-no-pr",
         "repo": "system-manager",
         "type": "github"
       }
