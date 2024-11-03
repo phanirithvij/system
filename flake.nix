@@ -4,7 +4,7 @@
     # useful for git bisecting
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages";
@@ -16,7 +16,7 @@
 
     system-manager = {
       #url = "git+file:///shed/Projects/nixer/learn/numtide/system-manager";
-      url = "github:numtide/system-manager";
+      url = "github:numtide/system-manager/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -25,20 +25,17 @@
 
     git-repo-manager = {
       url = "github:hakoerber/git-repo-manager";
-      inputs.crane.follows = "crane";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.rust-overlay.follows = "rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nix-on-droid = {
-      url = "github:nix-community/nix-on-droid/release-23.11";
+      url = "github:nix-community/nix-on-droid/master";
       inputs.home-manager.follows = "home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
-    flake-schemas.url = "github:DeterminateSystems/flake-schemas";
+    flake-schemas.url = "github:DeterminateSystems/flake-schemas/main";
     nix-schema = {
       url = "github:DeterminateSystems/nix-src/flake-schemas";
       inputs.flake-schemas.follows = "flake-schemas";
@@ -49,35 +46,25 @@
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    navi_config.url = "github:phanirithvij/navi";
+    navi_config.url = "github:phanirithvij/navi/main";
     navi_config.flake = false;
 
-    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.url = "github:nix-community/nix-index-database/main";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=main";
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
 
-    niri.url = "github:sodiboo/niri-flake";
+    niri.url = "github:sodiboo/niri-flake/main";
     niri.inputs.nixpkgs.follows = "nixpkgs";
     niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.url = "github:numtide/treefmt-nix/main";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
     git-hooks.url = "github:cachix/git-hooks.nix";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-
-    systems.url = "github:nix-systems/default-linux";
-
-    crane.url = "github:ipetkov/crane";
-
-    flake-utils.url = "github:numtide/flake-utils";
-    flake-utils.inputs.systems.follows = "systems";
-
-    rust-overlay.url = "github:oxalica/rust-overlay";
-    rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
