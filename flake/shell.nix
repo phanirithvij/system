@@ -12,6 +12,7 @@ pkgs.mkShellNoCC {
     [
       nh
       cachix
+      npins
       xc
       dprint
     ]

@@ -1,0 +1,184 @@
+{
+  "pins": {
+    "flake-schemas": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "DeterminateSystems",
+        "repo": "flake-schemas"
+      },
+      "branch": "main",
+      "revision": "acb99ce31a50f0ae93826a8ce15728db097e3cda",
+      "url": "https://github.com/DeterminateSystems/flake-schemas/archive/acb99ce31a50f0ae93826a8ce15728db097e3cda.tar.gz",
+      "hash": "0gv878ck9dhcljx42pqih5bvrfbacj0zwkpgyhsfbg84ixjd4dxh"
+    },
+    "git-hooks": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "cachix",
+        "repo": "git-hooks.nix"
+      },
+      "branch": "master",
+      "revision": "6f4e2a2112050951a314d2733a994fbab94864c6",
+      "url": "https://github.com/cachix/git-hooks.nix/archive/6f4e2a2112050951a314d2733a994fbab94864c6.tar.gz",
+      "hash": "0afrn42rbxs2nj60nwd3vxz8p7rdd8h87sc74xfwsj4znsqiam29"
+    },
+    "git-repo-manager": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "hakoerber",
+        "repo": "git-repo-manager"
+      },
+      "branch": "master",
+      "revision": "9dc557aeea502ae3b97a040e01d016ecd626208a",
+      "url": "https://github.com/hakoerber/git-repo-manager/archive/9dc557aeea502ae3b97a040e01d016ecd626208a.tar.gz",
+      "hash": "1rz22sb63qpl7jfg7j9scsfn2lrx94529168bq7di7wklxqmxhn9"
+    },
+    "home-manager": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "phanirithvij",
+        "repo": "home-manager"
+      },
+      "branch": "espanso-wl-no-pr",
+      "revision": "a7147282a3f1dc70911aecf549a902171e12da08",
+      "url": "https://github.com/phanirithvij/home-manager/archive/a7147282a3f1dc70911aecf549a902171e12da08.tar.gz",
+      "hash": "0vz8b3g9zd96ry2hwr3140bcp350qd02r2hpx5i6y3kr2ihw1m6p"
+    },
+    "hyprland": {
+      "type": "Git",
+      "repository": {
+        "type": "Git",
+        "url": "https://github.com/hyprwm/Hyprland"
+      },
+      "branch": "main",
+      "revision": "c106f454c136ecca47f84c659c58e19670050412",
+      "url": null,
+      "hash": "1kgjdr316dd81ln2nz222rpf2c0z3vg02kc5l5ndji71rb2qylxv"
+    },
+    "navi_config": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "phanirithvij",
+        "repo": "navi"
+      },
+      "branch": "main",
+      "revision": "0e5a93e49e4853d39e3ba5fd717817d21c9139b8",
+      "url": "https://github.com/phanirithvij/navi/archive/0e5a93e49e4853d39e3ba5fd717817d21c9139b8.tar.gz",
+      "hash": "0hb69q3cjxlrrpmffyp0hx669z63w9d60imkqlsl2r4n1v4hmv95"
+    },
+    "niri": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "sodiboo",
+        "repo": "niri-flake"
+      },
+      "branch": "main",
+      "revision": "2a7e4cb2b7430e8f412e8046b558e1540f6fb8cf",
+      "url": "https://github.com/sodiboo/niri-flake/archive/2a7e4cb2b7430e8f412e8046b558e1540f6fb8cf.tar.gz",
+      "hash": "06k8hpj69k9nwrv5fa76smipfpxf1ynjhkl58p8pdsyliakk6vgi"
+    },
+    "nix-index-database": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "nix-index-database"
+      },
+      "branch": "main",
+      "revision": "f1e477a7dd11e27e7f98b646349cd66bbabf2fb8",
+      "url": "https://github.com/nix-community/nix-index-database/archive/f1e477a7dd11e27e7f98b646349cd66bbabf2fb8.tar.gz",
+      "hash": "1dc1x70x27k6gd2s117xnnx6dkdyvsmg8y4b1p6hh0q56jzf4jsk"
+    },
+    "nix-on-droid": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nix-community",
+        "repo": "nix-on-droid"
+      },
+      "branch": "master",
+      "revision": "5d88ff2519e4952f8d22472b52c531bb5f1635fc",
+      "url": "https://github.com/nix-community/nix-on-droid/archive/5d88ff2519e4952f8d22472b52c531bb5f1635fc.tar.gz",
+      "hash": "1z411zdzmdp7d2408rf62nwh2gdfi2lzlfsmndlpxxkwdgh76vrz"
+    },
+    "nix-schema": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "DeterminateSystems",
+        "repo": "nix-src"
+      },
+      "branch": "flake-schemas",
+      "revision": "e1ed2d111bd21724f28ebb80aedd5154d4979fa9",
+      "url": "https://github.com/DeterminateSystems/nix-src/archive/e1ed2d111bd21724f28ebb80aedd5154d4979fa9.tar.gz",
+      "hash": "1cf8m5b65vk0ikac5dd40sdji2wf0zaccksk7bir3gvmqwvb1h1d"
+    },
+    "nixpkgs": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "nixos",
+        "repo": "nixpkgs"
+      },
+      "branch": "nixos-unstable",
+      "revision": "d0797a04b81caeae77bcff10a9dde78bc17f5661",
+      "url": "https://github.com/nixos/nixpkgs/archive/d0797a04b81caeae77bcff10a9dde78bc17f5661.tar.gz",
+      "hash": "0yq6kiphqf4b0h9rkpdrmqh73ws6gxdn02z74i402z8h6lji6jwh"
+    },
+    "nur-pkgs": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "phanirithvij",
+        "repo": "nur-packages"
+      },
+      "branch": "master",
+      "revision": "d8d6c4ef4d7bf187868a1c55b17de9a6076b943b",
+      "url": "https://github.com/phanirithvij/nur-packages/archive/d8d6c4ef4d7bf187868a1c55b17de9a6076b943b.tar.gz",
+      "hash": "1k92hkl69c8786hmfm7miy95j7r952jyx2c1mc93bmq8yz6zqx90"
+    },
+    "sops-nix": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "Mic92",
+        "repo": "sops-nix"
+      },
+      "branch": "master",
+      "revision": "c6134b6fff6bda95a1ac872a2a9d5f32e3c37856",
+      "url": "https://github.com/Mic92/sops-nix/archive/c6134b6fff6bda95a1ac872a2a9d5f32e3c37856.tar.gz",
+      "hash": "0dvak4whkhxsmg64g7dqj9m264ndral2w7f132fwhq89j30fmbwv"
+    },
+    "system-manager": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "numtide",
+        "repo": "system-manager"
+      },
+      "branch": "main",
+      "revision": "64627568a52fd5f4d24ecb504cb33a51ffec086d",
+      "url": "https://github.com/numtide/system-manager/archive/64627568a52fd5f4d24ecb504cb33a51ffec086d.tar.gz",
+      "hash": "1rzfnz5pzlh7ahvl59w7yz477mag0k6y0dj98fllr7nllxgx73qx"
+    },
+    "treefmt-nix": {
+      "type": "Git",
+      "repository": {
+        "type": "GitHub",
+        "owner": "numtide",
+        "repo": "treefmt-nix"
+      },
+      "branch": "main",
+      "revision": "50862ba6a8a0255b87377b9d2d4565e96f29b410",
+      "url": "https://github.com/numtide/treefmt-nix/archive/50862ba6a8a0255b87377b9d2d4565e96f29b410.tar.gz",
+      "hash": "1xg5nmywbd2w4g69cjz7p5nyrbrnx989rqkls98728dy6fzgg8m8"
+    }
+  },
+  "version": 3
+}
