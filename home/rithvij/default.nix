@@ -56,6 +56,7 @@ in
     #joplin # slow node tui app
 
     #ctpv
+    blobdrop
 
     glow # markdown previewer in terminal
     python312Packages.grip # markdown preview in browser

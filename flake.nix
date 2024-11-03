@@ -47,8 +47,6 @@
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
     sops-nix.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
-    blobdrop.url = "github:vimpostor/blobdrop";
-
     navi_config.url = "github:phanirithvij/navi";
     navi_config.flake = false;
 
@@ -84,7 +82,6 @@
     {
       self,
       nixpkgs,
-      blobdrop,
       home-manager,
       system-manager,
       git-repo-manager,
@@ -180,11 +177,6 @@
       ];
       common-hm-modules = [
         inputs.sops-nix.homeManagerModules.sops
-        {
-          home.packages = [
-            blobdrop.packages.${system}.default
-          ];
-        }
       ];
       grm = git-repo-manager.packages.${system}.default;
       hm = home-manager.packages.${system}.default;

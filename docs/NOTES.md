@@ -44,6 +44,33 @@
   - nixpkgs manual
   - hm manual
 - lychee for link checking, everywhere (has a gha, also nix lycheeCheck)
+- override, overrideAttrs, overrideModAttrs
+- applyPatches
+- experimental features + advanced features (TODO add links here)
+
+### Ramblings or thoughts
+
+- If I don't need pure evaluation then flake-compat is good enough?
+  - Does it mean pure evaluation is useful or not?
+  - from my impression pure eval is great since you need to explicitly define everything
+  - but flake-compat disallows it? I think the default behavior of nix-* vs nix cli has changed that's all?
+  - so with old cli we need to do --pure and with new we need --impure?
+- Can I migrate to npins?
+  - all this drama about how flakes are not that good is irritating and influencing me to avoid them.
+  - but npins might not satisfy every need I have, since there are flakes which I depend on as of now.
+  - multiple instances of nixpkgs, and patching nixpkgs can be done without flakes
+  - niri cannot be used without flakes as of now (since it is not in nixpkgs?) (verify this) (I can give it up)
+    - I will use niri when I can use it withou a touchpad?
+    - but I like the touchpad scroll
+  - hyprland flake too (I can give it up) (it is in hm and nixpkgs if needed)
+  - flake-schemas, it can be its own project(directory), I don't need it in my nixos config really
+  - crane, etc not needed
+  - blobdrop -> nixpkgs per my package request (done in my config)
+- TODO maintain own npins channels
+  - since channels are minimal compared to github repo size
+  - but channels can be generated on my own via local checkout of nixpkgs
+  - no need for a network roundtrip
+  - do something like what nixpkgs-review does and have a worktree and checkout the specific command and run the command to generate a channel.
 
 # nixey by other people
 
