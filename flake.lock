@@ -33,24 +33,6 @@
         "type": "github"
       }
     },
-    "blobdrop": {
-      "inputs": {
-        "quartz": "quartz"
-      },
-      "locked": {
-        "lastModified": 1730155630,
-        "narHash": "sha256-DdPcFwxLVeqee9KAkUBlArrxZnQpsecRdwgqvCoksYc=",
-        "owner": "vimpostor",
-        "repo": "blobdrop",
-        "rev": "8e2adea27308ba5eb8241ada625abab84388b3bf",
-        "type": "github"
-      },
-      "original": {
-        "owner": "vimpostor",
-        "repo": "blobdrop",
-        "type": "github"
-      }
-    },
     "crane": {
       "locked": {
         "lastModified": 1730060262,
@@ -713,15 +695,15 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1725634671,
-        "narHash": "sha256-v3rIhsJBOMLR8e/RNWxr828tB+WywYIoajrZKFM+0Gg=",
-        "owner": "NixOS",
+        "lastModified": 1730200266,
+        "narHash": "sha256-l253w0XMT8nWHGXuXqyiIC/bMvh1VRszGXgdpQlfhvU=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "574d1eac1c200690e27b8eb4e24887f8df7ac27c",
+        "rev": "807e9154dcb16384b1b765ebe9cd2bba2ac287fd",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
+        "owner": "nixos",
         "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
@@ -853,22 +835,6 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1730200266,
-        "narHash": "sha256-l253w0XMT8nWHGXuXqyiIC/bMvh1VRszGXgdpQlfhvU=",
-        "owner": "nixos",
-        "repo": "nixpkgs",
-        "rev": "807e9154dcb16384b1b765ebe9cd2bba2ac287fd",
-        "type": "github"
-      },
-      "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs_3": {
-      "locked": {
         "lastModified": 1730272153,
         "narHash": "sha256-B5WRZYsRlJgwVHIV6DvidFN7VX7Fg9uuwkRW9Ha8z+w=",
         "owner": "NixOS",
@@ -940,7 +906,7 @@
     "nur-pkgs": {
       "inputs": {
         "nix-update": "nix-update",
-        "nixpkgs": "nixpkgs_3"
+        "nixpkgs": "nixpkgs_2"
       },
       "locked": {
         "lastModified": 1730390083,
@@ -980,27 +946,8 @@
         "type": "github"
       }
     },
-    "quartz": {
-      "inputs": {
-        "nixpkgs": "nixpkgs"
-      },
-      "locked": {
-        "lastModified": 1725898343,
-        "narHash": "sha256-sKKfBP7/Nyh3Y6V/C8L6wgCbLipvldxQspsgFbmp+6c=",
-        "owner": "vimpostor",
-        "repo": "quartz",
-        "rev": "19fc6131b6ac09693cdb0562c9e2bc6495140bdc",
-        "type": "github"
-      },
-      "original": {
-        "owner": "vimpostor",
-        "repo": "quartz",
-        "type": "github"
-      }
-    },
     "root": {
       "inputs": {
-        "blobdrop": "blobdrop",
         "crane": "crane",
         "flake-schemas": "flake-schemas",
         "flake-utils": "flake-utils",
@@ -1013,7 +960,7 @@
         "nix-index-database": "nix-index-database",
         "nix-on-droid": "nix-on-droid",
         "nix-schema": "nix-schema",
-        "nixpkgs": "nixpkgs_2",
+        "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable_2",
         "nixpkgs-sysm": "nixpkgs-sysm",
         "nur-pkgs": "nur-pkgs",
