@@ -34,7 +34,7 @@
 - nix bundle ralismarks/nix-appimage doesn't work on non-nix system
   - tried on one for navi and firefox
 - home-manager has specialisations as well like nixos.
- - [ ] I need to try it out.
+  - [ ] I need to try it out.
 - editor setup w/ lsp should be #1 priority for nix before writing/preusing non-trivial nix
   - noogle is very useful for jumping to stdlib src
   - nix pills is very very useful
@@ -89,7 +89,7 @@ Useful links along with my annotations.
 - [ ] impermanence
   - not worth the effort imo
   - since it has the potential for data loss
-  - but sounds good in theory (declerative folder allowlist)
+  - but sounds good in theory (declarative folder allowlist)
 
 ## Notes
 

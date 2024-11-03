@@ -5,6 +5,10 @@ more are in my zet but that is yet to be made public
 
 ## TODO
 
+- [ ] wrapper-manager
+- [ ] auto gen statix, dprint config
+  - like pre-commit-config.yml by git-hooks.nix
+
 ### ideas
 
 - [ ] try out https://github.com/katrinafyi/nix-patcher
@@ -379,4 +383,3 @@ more are in my zet but that is yet to be made public
 
 - [ ] pr-tracker prs
   - http://localhost:8000/pr-tracker?pr=328862 - rustdesk headless client service
-
