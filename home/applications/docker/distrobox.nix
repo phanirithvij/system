@@ -1,7 +1,7 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   home.packages = [
     pkgs.distrobox
-    pkgs.distrobox-tui
+    (lib.lowPrio pkgs.distrobox-tui)
   ];
 }
