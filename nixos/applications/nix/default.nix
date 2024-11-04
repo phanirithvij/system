@@ -1,6 +1,8 @@
 { flake-inputs, pkgs, ... }:
 {
   nix = {
+    # https://discourse.nixos.org/t/24-05-add-flake-to-nix-path/46310/14
+    channel.enable = false;
     registry = {
       nixpkgs.flake = flake-inputs.nixpkgs;
       n.flake = flake-inputs.nixpkgs;
@@ -15,6 +17,7 @@
         ];
       in
       {
+        nix-path = "nixpkgs=flake:nixpkgs";
         allowed-uris = "github: gitlab: git+ssh:// https://github.com/";
         experimental-features = "nix-command flakes";
         auto-optimise-store = true;
