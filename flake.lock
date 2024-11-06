@@ -1037,11 +1037,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1730465419,
-        "narHash": "sha256-tImtHHuqE3oCfl3wsAAlfWj5Owgz7c4fszwdjs2HT9c=",
+        "lastModified": 1730910401,
+        "narHash": "sha256-ucV4c1WdB6w5DbX2v1I/Uhgyr78A4KdtwPLO2SndkkU=",
         "owner": "phanirithvij",
         "repo": "system-manager",
-        "rev": "aac2adbbd952a7ea4ed3095e875d32678dbc71ed",
+        "rev": "3316139ed1d277ce63401e8225ba55241f9b17b2",
         "type": "github"
       },
       "original": {
