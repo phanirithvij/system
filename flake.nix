@@ -1,7 +1,7 @@
 {
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs?shallow=1";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
     nixpkgs-sysm.url = "github:phanirithvij/nixpkgs/swapspace-module";
 
@@ -15,8 +15,7 @@
 
     system-manager = {
       #url = "git+file:///shed/Projects/nixer/learn/numtide/system-manager";
-      url = "github:phanirithvij/system-manager/tmpfiles-settings-no-pr";
-      #url = "github:numtide/system-manager";
+      url = "github:numtide/system-manager";
       inputs.nixpkgs.follows = "nixpkgs-sysm";
     };
 
@@ -192,20 +191,6 @@
       overlayModule = {
         nixpkgs.overlays = overlays;
       };
-      system-manager' = pkgs.applyPatches {
-        name = "sysm-patched";
-        src = inputs.system-manager;
-        patches = [
-          # TODO once I work it out for multiple file generation
-          # then use this till it gets merged
-          /*
-            (pkgs.fetchpatch {
-              url = "https://github.com/numtide/system-manager/pull/148.diff";
-              hash = "sha256-qdUYk3RtfC0lfT//lh1M6FaLkAvba8tN5oEXctH6KKA=";
-            })
-          */
-        ];
-      };
     in
     rec {
       inherit (inputs.flake-schemas) schemas;
@@ -308,9 +293,7 @@
           modules = [ ./hosts/nod ];
         };
       };
-      inherit ((import "${system-manager'}/nix/lib.nix" { nixpkgs = nixpkgs'; }))
-        makeSystemConfig
-        ;
+      inherit (system-manager.lib) makeSystemConfig;
       systemConfigs = rec {
         default = gha;
         gha = makeSystemConfig {
