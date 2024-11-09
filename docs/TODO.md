@@ -8,6 +8,8 @@ more are in my zet but that is yet to be made public
 - [ ] wrapper-manager
 - [ ] auto gen statix, dprint config
   - like pre-commit-config.yml by git-hooks.nix
+- [ ] npins with flake inputs
+  - [ ] npins with local git repos as inputs
 
 ### ideas
 
