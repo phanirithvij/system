@@ -47,6 +47,16 @@
 - override, overrideAttrs, overrideModAttrs
 - applyPatches
 - experimental features + advanced features (TODO add links here)
+- nixseparatedebuginfod
+  - https://matrix.to/#/!kjdutkOsheZdjqYmqp:nixos.org/$IW0dpiyjyC5SD7w-nOFyaekzP3HP96XCvw6Lzfg47pM
+- hand-rolled >> nix-update >> nix-prefetch
+  - by-name manual migration comes with issues?
+  - faced when writing opengist update script
+  - https://matrix.to/#/!kjdutkOsheZdjqYmqp:nixos.org/$ChkVlbom95iNwaNoCBb0H0m4EpXoybi2H92X4EZvWJI
+  - hm espanso https://matrix.to/#/!kjdutkOsheZdjqYmqp:nixos.org/$qPRxcb3wHaAN5cJJXCUUnCIrGv8wkGcax0bnaO_5HQo
+- focaltech driver pr
+  - makePkgconfigItem
+    - https://github.com/NixOS/nixpkgs/pull/354311#discussion_r1835286178
 
 ### Ramblings or thoughts
 
