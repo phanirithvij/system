@@ -1,8 +1,26 @@
-{ flake-inputs, pkgs, ... }:
+{
+  flake-inputs,
+  pkgs,
+  wifipassFile,
+  ...
+}:
 let
   inherit (pkgs) navi;
 in
 {
+  home.file.".local/share/navi/cheats/phanirithvij__navi" = {
+    source = flake-inputs.navi_config;
+    recursive = true;
+  };
+  home.file.".local/share/navi/cheats/home_manager_cheats/hm.cheat" = {
+    source = pkgs.writeText "hm.cheat" ''
+      % wifipass
+
+      # pass
+      cat ${wifipassFile} | grep <pwlist> | cut -d'=' -f2
+      $ pwlist: cat ${wifipassFile} | cut -d'=' -f1
+    '';
+  };
   programs.tealdeer = {
     enable = true;
     settings = {
@@ -48,8 +66,4 @@ in
       | sed 's/_navi_smart_replace/_navi_smart_replace_currdir/g' \
       | source
   '';
-  home.file.".local/share/navi/cheats/phanirithvij__navi" = {
-    source = flake-inputs.navi_config;
-    recursive = true;
-  };
 }
