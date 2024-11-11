@@ -6,7 +6,6 @@
       (map (p: p.meta.homepage + "/releases.atom") (
         with pkgs;
         [
-          csvlens
           opengist
           viddy
           gitcs

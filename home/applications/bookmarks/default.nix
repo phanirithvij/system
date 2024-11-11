@@ -1,25 +1,18 @@
-{ pkgs, ... }:
 {
-  imports = [ ./navi.nix ];
+  config,
+  pkgs,
+  ...
+}@args:
+let
+  wifipassFile = config.sops.secrets.wifi_password_file.path;
+in
+{
+  imports = [
+    (import ./navi.nix (args // { inherit wifipassFile; }))
+    (import ./espanso.nix (args // { inherit wifipassFile; }))
+  ];
   # TODO buku server, buku webext etc?
   # https://github.com/samhh/bukubrow-webext/issues/165
   home.packages = [ pkgs.buku ];
-  services.espanso = {
-    enable = true;
-    x11Support = true;
-    waylandSupport = true;
-    # TODO config, matches
-    # gh auth token | xclip -sel clipboard
-    # https://github.com/phanirithvij
-    # https://github.com/phanirithvij/system
-    # @phanirithvij
-    # private matches
-    # TODO other crazy things
-    # navi matches module
-    # passwords matches
-    # authpass module
-    # lesspass module
-    # gopass module
-    # buku module
-  };
+  sops.secrets.wifi_password_file = { };
 }
