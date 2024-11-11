@@ -102,7 +102,7 @@
                 name = "prefetch";
                 type = "shell";
                 params = {
-                  cmd = "nix hash convert --hash-algo sha256 --from nix32 $(nix-prefetch-url --name legal '{{form1.url}}')";
+                  cmd = "nix-prefetch-patch '{{form1.url}}'";
                 };
               }
             ];
