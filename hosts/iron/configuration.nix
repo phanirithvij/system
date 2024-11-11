@@ -84,6 +84,8 @@ in
     "kernel.panic" = 5;
   };
 
+  # TODO move all this hardware specific things to a module
+  # eg. https://codeberg.org/mateidibu/nix-config/src/commit/c247b4525230271b77b37ee7259d5ef6c20aa11c/nixosModules/gpu-intel.nix#L11
   hardware.nvidia = {
     # open true will simply won't work for my gpu
     # but noveau works somehow?
@@ -115,6 +117,26 @@ in
   ];
   nixpkgs.config.nvidia.acceptLicense = true;
   hardware.nvidia-container-toolkit.enable = true;
+  # https://bbs.archlinux.org/viewtopic.php?id=287207
+  # https://gitlab.freedesktop.org/mesa/mesa/-/issues/11429#note_2560673
+  # https://codeberg.org/mateidibu/nix-config/src/commit/c247b4525230271b77b37ee7259d5ef6c20aa11c/nixosModules/gpu-intel.nix#L25
+  # my fence expiration timeout kernel panic bug
+  # see if it changes anything
+  # additional https://wiki.archlinux.org/title/Intel_graphics#X_freeze/crash_with_intel_driver
+  boot.extraModprobeConfig = ''
+    options i915 reset=1 enable_dc=0 enable_psr=0 enable_fbc=0
+    options intel_idle max_cstate=1
+  '';
+
+  systemd.services."intel-gpu-frequency-max" = {
+    description = "Set iGPU frequency to max";
+    serviceConfig = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.intel-gpu-tools}/bin/intel_gpu_frequency -m";
+      RemainAfterExit = true;
+    };
+    wantedBy = [ "multi-user.target" ];
+  };
 
   networking.hostName = "iron";
   networking.networkmanager.enable = true;
