@@ -3,7 +3,6 @@
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
-    nixpkgs-sysm.url = "github:phanirithvij/nixpkgs/swapspace-module";
 
     #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages";
@@ -16,7 +15,7 @@
     system-manager = {
       #url = "git+file:///shed/Projects/nixer/learn/numtide/system-manager";
       url = "github:numtide/system-manager";
-      inputs.nixpkgs.follows = "nixpkgs-sysm";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     git-repo-manager = {
@@ -124,22 +123,19 @@
         };
       };
       # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
-      patches = [
-        {
-          # swapspace module: https://nixpk.gs/pr-tracker.html?pr=348588
-          url = "https://github.com/nixos/nixpkgs/pull/348588.diff";
-          hash = "sha256-M21xPBJrjExk9glq/lX3dv+ER4/w7HUWtRFL+y+FMFM=";
-          #url = "https://github.com/NixOS/nixpkgs/compare/master...phanirithvij:nixpkgs:swapspace-module-no-pr.diff";
-          #hash = "sha256-XJjulFacrffNz7hr0TVPBuJcvAUeBTRVQYv1NWwwBVY=";
-        }
-      ];
-      nixpkgs' = pkgs.applyPatches {
-        name = "nixpkgs-patched";
-        src = inputs.nixpkgs;
-        patches = map pkgs.fetchpatch patches;
-      };
-      nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
-      #inherit (inputs.nixpkgs.lib) nixosSystem;
+      /*
+        patches = [
+          {
+          }
+        ];
+        nixpkgs' = pkgs.applyPatches {
+          name = "nixpkgs-patched";
+          src = inputs.nixpkgs;
+          patches = map pkgs.fetchpatch patches;
+        };
+        nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
+      */
+      inherit (inputs.nixpkgs.lib) nixosSystem;
       overlays =
         (import ./lib/overlays {
           inherit system;

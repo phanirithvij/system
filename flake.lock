@@ -695,11 +695,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1730200266,
-        "narHash": "sha256-l253w0XMT8nWHGXuXqyiIC/bMvh1VRszGXgdpQlfhvU=",
+        "lastModified": 1731139594,
+        "narHash": "sha256-IigrKK3vYRpUu+HEjPL/phrfh7Ox881er1UEsZvw9Q4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "807e9154dcb16384b1b765ebe9cd2bba2ac287fd",
+        "rev": "76612b17c0ce71689921ca12d9ffdc9c23ce40b2",
         "type": "github"
       },
       "original": {
@@ -813,22 +813,6 @@
       "original": {
         "owner": "nixos",
         "ref": "nixos-24.05",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
-    "nixpkgs-sysm": {
-      "locked": {
-        "lastModified": 1730308346,
-        "narHash": "sha256-QCnz7919hUM31S9inpowZwenve1EX4ffILWYh+X9fp0=",
-        "owner": "phanirithvij",
-        "repo": "nixpkgs",
-        "rev": "e4c898c8071c5333cc283620dd14a5638a09957e",
-        "type": "github"
-      },
-      "original": {
-        "owner": "phanirithvij",
-        "ref": "swapspace-module",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -962,7 +946,6 @@
         "nix-schema": "nix-schema",
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable_2",
-        "nixpkgs-sysm": "nixpkgs-sysm",
         "nur-pkgs": "nur-pkgs",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
@@ -1033,7 +1016,7 @@
     "system-manager": {
       "inputs": {
         "nixpkgs": [
-          "nixpkgs-sysm"
+          "nixpkgs"
         ]
       },
       "locked": {
