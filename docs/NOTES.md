@@ -57,6 +57,9 @@
 - focaltech driver pr
   - makePkgconfigItem
     - https://github.com/NixOS/nixpkgs/pull/354311#discussion_r1835286178
+- IFD is not simply `${drv}` but `import "${drv}"`
+  - which is why cargo pacakges, yarn packages etc. have lockfiles in nixpkgs
+  - because `${src}/Cargo.lock` will be imported by buildRustpackage etc.
 
 ### Ramblings or thoughts
 

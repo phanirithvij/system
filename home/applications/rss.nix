@@ -20,10 +20,12 @@
         "https://invent.kde.org/multimedia/subtitlecomposer/-/tags?format=atom"
 
         "https://andrewkelley.me/rss.xml"
+        "https://ayats.org/feed.xml"
         "https://bbengfort.github.io/index.xml"
         "https://blog.adafruit.com/feed/"
         "https://blog.janissary.xyz/feed.xml"
         "https://blog.kowalczyk.info/atom.xml"
+        "https://blog.tiserbox.com/atom.xml"
         "https://bmcgee.ie/posts/index.xml"
         "https://codewithoutrules.com/atom.xml"
         "https://dwheeler.com/blog/index.rss"
