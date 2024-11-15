@@ -1,5 +1,7 @@
 {
   inputs = {
+    # THIS is dumb unless nixpkgs is based on nixos-unstable
+    # useful for git bisecting
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.05";
@@ -122,20 +124,22 @@
           };
         };
       };
+
       # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
-      /*
-        patches = [
-          {
-          }
+      patches =
+        [
         ];
-        nixpkgs' = pkgs.applyPatches {
-          name = "nixpkgs-patched";
-          src = inputs.nixpkgs;
-          patches = map pkgs.fetchpatch patches;
-        };
-        nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
-      */
-      inherit (inputs.nixpkgs.lib) nixosSystem;
+      nixpkgs' = pkgs.applyPatches {
+        name = "nixpkgs-patched";
+        src = inputs.nixpkgs;
+        inherit patches;
+      };
+      # IFD BAD BAD AAAAAA!
+      # only option is to maintain a fork of nixpkgs as of now
+      # follow https://github.com/NixOS/nix/issues/3920
+      nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
+
+      #inherit (inputs.nixpkgs.lib) nixosSystem;
       overlays =
         (import ./lib/overlays {
           inherit system;
