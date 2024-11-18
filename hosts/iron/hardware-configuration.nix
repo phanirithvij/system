@@ -23,10 +23,19 @@
     "v4l2loopback"
   ];
   boot.extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
+  boot.supportedFilesystems = [ "btrfs" ];
 
+  # TODO blogpost of sort doing this migration step by step
+  # ext4 to btrfs
+  # reboot check everything works
+  # come back and remove ext2_saved
+  # optionally defrag+compress
+  # TODO /nix, /home subvols empty / subvol (reset on each boot)
+  # then disko for new installations?
   fileSystems."/" = {
     device = "/dev/disk/by-label/nixroot";
-    fsType = "ext4";
+    fsType = "btrfs";
+    options = [ "compress=zstd" ];
   };
 
   fileSystems."/boot/efi" = {
@@ -41,6 +50,7 @@
   fileSystems."/shed" = {
     device = "/dev/disk/by-label/shed";
     fsType = "btrfs";
+    options = [ "compress=zstd" ];
   };
 
   # we're in the swapspace now
