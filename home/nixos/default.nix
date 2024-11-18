@@ -4,9 +4,11 @@
     ../applications/git
     ../applications/shells
     ../applications/bashmount.nix
-    ../applications/bookmarks/navi.nix
+    ../applications/bookmarks
     ../applications/nixy/nix.nix
     ../applications/tmux.nix
+
+    ../../secrets
   ];
 
   home.username = username;

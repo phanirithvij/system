@@ -94,7 +94,8 @@ in
 
     # https://discourse.nixos.org/t/home-manager-collision-with-app-lib/51969
     # https://haseebmajid.dev/posts/2023-10-02-til-how-to-fix-package-binary-collisions-on-nix/
-    (lib.hiPrio rustdesk-flutter)
+    # TODO re-enable later
+    # (lib.hiPrio rustdesk-flutter)
     (subtitlecomposer.overrideAttrs (_: {
       version = "0-unstable-2024-10-07";
       src = fetchFromGitLab {
@@ -166,6 +167,7 @@ in
         "x-scheme-handler/https" = [ "firefox.desktop" ];
         "video/x-matroska" = [ "mpv.desktop" ];
         "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
+        "x-scheme-handler/tonsite" = [ "org.telegram.desktop.desktop" ];
       };
     in
     {

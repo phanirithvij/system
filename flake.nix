@@ -105,29 +105,37 @@
       livehost = "nixos";
 
       system = "x86_64-linux";
-      pkgs = import nixpkgs {
-        inherit overlays system;
-        config = {
-          allowUnfree = true;
-          # TODO allowlist of unfree pkgs, for home-manager too
-          allowUnfreePredicate = _: true;
-          packageOverrides = _: {
-            # TODO espanso_wayland and espanso-x11 and use it in different places accordingly?
-            # made a pr to home-manager see https://github.com/nix-community/home-manager/pull/5930
-            /*
-              espanso = pkgs.espanso.override {
-                x11Support = false;
-                waylandSupport = true;
-              };
-            */
+      pkgsF =
+        nixpkgs:
+        import nixpkgs {
+          inherit overlays system;
+          config = {
+            allowUnfree = true;
+            # TODO allowlist of unfree pkgs, for home-manager too
+            allowUnfreePredicate = _: true;
+            packageOverrides = _: {
+              # TODO espanso_wayland and espanso-x11 and use it in different places accordingly?
+              # made a pr to home-manager see https://github.com/nix-community/home-manager/pull/5930
+              /*
+                espanso = pkgs.espanso.override {
+                  x11Support = false;
+                  waylandSupport = true;
+                };
+              */
+            };
           };
         };
-      };
+      pkgs = pkgsF nixpkgs;
+      pkgs' = pkgsF nixpkgs';
 
       # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
-      patches =
-        [
-        ];
+      patches = [
+        (pkgs.fetchpatch {
+          # nixpk.gs/pr-tracker.html?pr=356081
+          url = "https://github.com/NixOS/nixpkgs/pull/356081.diff";
+          hash = "sha256-6PhvfzyRXNlMlgVawBx29yLKDUsoOljWKJs7ryEzCFM=";
+        })
+      ];
       nixpkgs' = pkgs.applyPatches {
         name = "nixpkgs-patched";
         src = inputs.nixpkgs;
@@ -158,7 +166,7 @@
           modules ? [ ],
         }:
         home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
+          pkgs = pkgs';
           modules = [ ./home/${username} ] ++ modules;
           # TODO sharedModules sops
           extraSpecialArgs = {
@@ -229,6 +237,7 @@
         "${liveuser}@${livehost}" = homeConfig {
           username = liveuser;
           hostname = livehost;
+          modules = common-hm-modules;
         };
         # TODO different repo with npins?
         "runner" = homeConfig {

@@ -51,7 +51,6 @@
     lf # file manager tui
     newsboat # rss
     fastfetch # sysinfo summary
-    neovim # editor but slow (for some weird reason)
     nms # esoteric sneakers movie terminal effect
     macchina # neofetch alternative
     onefetch # neofetch like tool for git repos
