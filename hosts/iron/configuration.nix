@@ -43,7 +43,9 @@ in
       enable = true;
       useOSProber = true;
       efiSupport = true;
-      default = "saved";
+      # btrfs can't have this feature of saving last booted entry
+      # https://forum.manjaro.org/t/converting-ext4-root-to-btrfs-brings-up-grub-error-sparse-file-not-allowed/154491
+      #default = "saved";
       device = "nodev";
       extraEntries = ''
         menuentry "Reboot" {
@@ -57,6 +59,10 @@ in
   };
   boot.binfmt = {
     emulatedSystems = [ "aarch64-linux" ];
+  };
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "weekly";
   };
 
   # Zram allows using part of ram as a swap device
@@ -281,6 +287,7 @@ in
 
       iptables
       btrfs-progs
+      compsize # btrfs compression stats
 
       smartmontools
       nvme-cli

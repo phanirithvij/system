@@ -95,7 +95,18 @@
       wports = "sudo viddy --disable_auto_save -p -d -n 0.2 netstat -tuplen";
       dufw = "CLICOLOR_FORCE=1 COLORTERM='truecolor' viddy --disable_auto_save -p -d -n 0.5 duf";
       wduf = "CLICOLOR_FORCE=1 COLORTERM='truecolor' viddy --disable_auto_save -p -d -n 0.5 duf";
-      dufi = ''CLICOLOR_FORCE=1 COLORTERM="truecolor" viddy --disable_auto_save -p -d -n 0.5 "duf -only local,fuse -hide-mp /boot/efi -output \"mountpoint, avail, usage, inodes_avail, inodes_usage, filesystem\" -sort usage"'';
+      dufi = ''
+        viddy --disable_auto_save -p -d -n 0.5 '
+          CLICOLOR_FORCE=1 COLORTERM="truecolor" duf \
+            -only local,fuse -hide-mp /boot/efi \
+            -output "mountpoint, avail, usage, inodes_avail, inodes_usage, filesystem" -sort usage;
+          echo /;
+          btrfs fi df /;
+          echo ----------;
+          echo /shed;
+          btrfs fi df /shed;
+        '
+      '';
       dfah = ''viddy --disable_auto_save -p -n 0.1 "df --output=source,iavail,ipcent,avail,pcent,target -h | (sed -u 1q; sort -h -r -k 4) # Sort by Avail"'';
       dffh = ''viddy --disable_auto_save -p -n 0.1 "df --output=source,iavail,ipcent,avail,pcent,target -h | (sed -u 1q; sort -h -r -k 5) # Sort by Use%"'';
       dfao = ''viddy --disable_auto_save -p -n 0.1 "df --output=source,iavail,ipcent,avail,pcent,target | (sed -u 1q; sort -h -r -k 4) # Sort by Avail"'';
