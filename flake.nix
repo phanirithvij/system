@@ -45,7 +45,6 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
-    sops-nix.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
     navi_config.url = "github:phanirithvij/navi";
     navi_config.flake = false;
