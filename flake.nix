@@ -130,11 +130,6 @@
 
       # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
       patches = [
-        (pkgs.fetchpatch {
-          # nixpk.gs/pr-tracker.html?pr=356081
-          url = "https://github.com/NixOS/nixpkgs/pull/356081.diff";
-          hash = "sha256-6PhvfzyRXNlMlgVawBx29yLKDUsoOljWKJs7ryEzCFM=";
-        })
       ];
       nixpkgs' = pkgs.applyPatches {
         name = "nixpkgs-patched";
