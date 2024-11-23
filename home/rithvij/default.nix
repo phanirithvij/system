@@ -12,6 +12,8 @@ in
     ../applications/editors.nix
     # TODO if inside specialization detect that?
     # maybe cfg.xfce enabled? something
+    # home manager has specialisations
+    # maybe import this file inside a specialisation?
     ../applications/config/xfconf.nix
 
     ../applications/games
@@ -94,8 +96,7 @@ in
 
     # https://discourse.nixos.org/t/home-manager-collision-with-app-lib/51969
     # https://haseebmajid.dev/posts/2023-10-02-til-how-to-fix-package-binary-collisions-on-nix/
-    # TODO re-enable later
-    # (lib.hiPrio rustdesk-flutter)
+    (lib.hiPrio rustdesk-flutter)
     (subtitlecomposer.overrideAttrs (_: {
       version = "0-unstable-2024-10-07";
       src = fetchFromGitLab {
@@ -120,7 +121,7 @@ in
     # du-dust
     # bore-cli
     # coreutils
-    # onefetch, tokei, scc
+    # onefetch, tokei, scc, tcount
     # goteleport
     #
     # caddy xcaddy with godaddy
@@ -158,6 +159,12 @@ in
     };
   };
 
+  # TODO firefox with extensions configure
+  # Ensures impurity can't exist by restricting extensions from being installed
+  # Librewolf etc? mozilla is getting enshittified
+  # chrome is up for grabs in google monopoly lawsuit final steps what now?
+  # ladybird browser? not ready yet obv and apple swift wtf?
+  # servo? dead? ladybird dev says rust not good for oop (dom) based browsers
   programs.firefox.enable = true;
 
   xdg.mimeApps =

@@ -14,6 +14,7 @@ A selfhosted heaven all in nixos
 - [x] Jellyfin
 - [ ] Caddy
 - [ ] Teldrive (own nur)
+- [ ] chihaya (own nur)
 - [ ] pyload
 - [ ] archivebox
 - [ ] android-file-transfer automount
