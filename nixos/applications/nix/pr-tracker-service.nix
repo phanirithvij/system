@@ -5,7 +5,9 @@
   ...
 }:
 let
+  # TODO remove once I can use cloned nixpkgs in pr-tracker without systemd timer pull
   # TODO ensure dataDir is owned by pr-tracker grp
+  # in the upstream PR
   # writeable by the grp
   # and git safe dir because initially it was owned by other user/grp
   dataDir = "/shed/Projects/nixhome";

@@ -3,7 +3,6 @@
   # TODO
   # attic
   # harmonia
-  # nix-serve-ng
   sops.secrets.nix-serve-privkey = { };
   services.nix-serve = {
     enable = true;

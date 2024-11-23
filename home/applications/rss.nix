@@ -31,6 +31,7 @@
         "https://dwheeler.com/blog/index.rss"
         "https://eli.thegreenplace.net/feeds/go.atom.xml"
         "https://exploring-better-ways.bellroy.com/rss.xml"
+        "https://fbrs.io/atom.xml"
         "https://festivus.dev/index.xml"
         "https://fmhy.net/feed.rss"
         "https://gog-games.to/rss"
