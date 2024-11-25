@@ -33,24 +33,56 @@
   # TODO /nix, /home subvols empty / subvol (reset on each boot)
   # then disko for new installations?
   fileSystems."/" = {
-    device = "/dev/disk/by-label/nixroot";
+    label = "nixroot";
     fsType = "btrfs";
-    options = [ "compress=zstd" ];
+    options = [
+      "subvol=vols/@"
+      "compress=zstd"
+    ];
+  };
+
+  # TODO all this managed from outside this file
+  # and use nixos-generate-config regularly
+  # disko?
+  fileSystems."/nix" = {
+    label = "nixroot";
+    fsType = "btrfs";
+    options = [
+      "subvol=vols/@nix"
+      "noatime"
+      "compress=zstd"
+    ];
+  };
+
+  fileSystems."/home" = {
+    label = "nixroot";
+    fsType = "btrfs";
+    # sops ssh secret defined in ~/.ssh
+    neededForBoot = true;
+    options = [
+      "subvol=vols/@home"
+      "compress=zstd"
+    ];
+  };
+
+  # this could become persist
+  # other dirs which are excluded in backups (all backups, except teldrive)
+  fileSystems."/shed" = {
+    label = "nixroot";
+    fsType = "btrfs";
+    options = [
+      "subvol=vols/@shed"
+      "compress=zstd"
+    ];
   };
 
   fileSystems."/boot/efi" = {
-    device = "/dev/disk/by-label/boot";
+    label = "boot";
     fsType = "vfat";
     options = [
       "fmask=0022"
       "dmask=0022"
     ];
-  };
-
-  fileSystems."/shed" = {
-    device = "/dev/disk/by-label/shed";
-    fsType = "btrfs";
-    options = [ "compress=zstd" ];
   };
 
   # we're in the swapspace now
