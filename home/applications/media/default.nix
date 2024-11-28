@@ -9,6 +9,9 @@
     config = {
       auto-window-resize = false;
     };
-    scripts = with pkgs; [ mpvScripts.uosc ];
+    scripts = with pkgs.mpvScripts; [
+      thumbfast
+      uosc
+    ];
   };
 }
