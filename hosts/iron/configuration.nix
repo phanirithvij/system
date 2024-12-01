@@ -156,7 +156,7 @@ in
     useXkbConfig = true; # use xkb.options in tty.
   };
 
-  fonts.packages = [ (pkgs.nerdfonts.override { fonts = [ "JetBrainsMono" ]; }) ];
+  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
 
   services.keyd = {
     enable = true;
