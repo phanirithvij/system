@@ -46,6 +46,7 @@
 - lychee for link checking, everywhere (has a gha, also nix lycheeCheck)
 - override, overrideAttrs, overrideModAttrs
 - applyPatches
+  - if you import it then it is IFD
 - experimental features + advanced features (TODO add links here)
 - nixseparatedebuginfod
   - https://matrix.to/#/!kjdutkOsheZdjqYmqp:nixos.org/$IW0dpiyjyC5SD7w-nOFyaekzP3HP96XCvw6Lzfg47pM
@@ -60,6 +61,9 @@
 - IFD is not simply `${drv}` but `import "${drv}"`
   - which is why cargo pacakges, yarn packages etc. have lockfiles in nixpkgs
   - because `${src}/Cargo.lock` will be imported by buildRustpackage etc.
+- use fetchpatch2 whenever possible over fetchpatch, because fetchpatch is old/outdated, fetchpatch2 fixes issues
+  - patches might not get applied correctly if using fetchpatch
+  - also `?full_index=1` for patch urls for github patches for reproducibility.
 
 ### Ramblings or thoughts
 
