@@ -129,12 +129,19 @@
       pkgs' = pkgsF nixpkgs';
 
       # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
-      patches = [
-        (pkgs.fetchpatch2 {
-          url = "https://github.com/NixOS/nixpkgs/pull/360389.diff?full_index=1";
-          hash = "sha256-ijytEpoiEQg0r6QtzbNwBZWuXB9nhaXa5GVVoq/eDJ4=";
-        })
-      ];
+      patches =
+        [
+        ]
+        ++ builtins.map pkgs.fetchpatch2 [
+          {
+            url = "https://github.com/NixOS/nixpkgs/pull/360389.diff?full_index=1";
+            hash = "sha256-ijytEpoiEQg0r6QtzbNwBZWuXB9nhaXa5GVVoq/eDJ4=";
+          }
+          {
+            url = "https://github.com/NixOS/nixpkgs/pull/361125.diff?full_index=1";
+            hash = "sha256-npBgcb0rVH9415vZN/xNDUZUi3FQFCcYP/6w48lED1k=";
+          }
+        ];
       nixpkgs' = pkgs.applyPatches {
         name = "nixpkgs-patched";
         src = inputs.nixpkgs;
