@@ -131,6 +131,7 @@
       # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
       patches =
         [
+          ./opengist-module.patch
         ]
         ++ builtins.map pkgs.fetchpatch2 [
         ];

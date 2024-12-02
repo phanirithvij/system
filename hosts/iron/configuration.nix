@@ -27,6 +27,7 @@ in
     ../../nixos/applications/nix/nixserve
     ../../nixos/applications/nix/pr-tracker-service.nix
     ../../nixos/applications/ntfy-rss.nix
+    ../../nixos/applications/opengist.nix
     ../../nixos/applications/spotify.nix
     ../../nixos/modules/virtualisation
     ../../secrets
