@@ -9,6 +9,8 @@
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
     "${modulesPath}/installer/cd-dvd/channel.nix"
+
+    ../../nixos/applications/scripts/nixos-enter-custom-script.nix
   ];
   nixpkgs = {
     config.allowUnfree = true;
@@ -27,8 +29,13 @@
   };
 
   environment.systemPackages = with pkgs; [
+    bashmount
     disko
+    fzf
+    lf
+    lazygit
     parted
+    ripgrep
   ];
 
   #services.openssh.enable = true;
