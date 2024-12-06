@@ -64,6 +64,45 @@
 - use fetchpatch2 whenever possible over fetchpatch, because fetchpatch is old/outdated, fetchpatch2 fixes issues
   - patches might not get applied correctly if using fetchpatch
   - also `?full_index=1` for patch urls for github patches for reproducibility.
+- requireFile
+  - non-redistributable files user warning with file hash verified
+- git bisect with nixos-rebuild vm (nix-hour #8 18:20)
+  - `nix-build <nixpkgs/nixos> --arg configuration ./configuration.nix -A vm`
+  - `nix-build ./nixos --arg configuration ./configuration.nix -A vm`
+  - echo $LINES $COLUMNS (outside vm) (nhr#8 32:28)
+  - stty rows 28 cols 128 (resize vm console area)
+- git bisect run "command"
+- `nix-build -A something --arg config '{ allowUnfree = true; }'` (nix-hour #8 33:48)
+  - argstr
+  - arg is for nixpkgs
+  - nix-instantiate -A same as above
+    - stops before build
+- nix-build-uncached
+  - What is it exactly?
+- modulesPath is a flake compatible thing (nix-hour #8 20:05)
+- just `nix-shell -p` gives patchelf, make etc. stdenv (nix-hour #8 29:15)
+- previously mkShell couldn't be built then `inputDerviation` had to be used (nix-hour #11)
+- __noChroot to escape sandbox if relaxed (nix-hour #12 29:30)
+- buildEnv
+  - pkgsPath passAsFile
+- nix-locate, nix-index, nix-index-database, comma, command-not-found.dbPath, NIX_AUTO_RUN (nix-hour #63)
+- `nix repl .`
+- `nix repl .` in system flake and can do `nixosConfigurations.iron.config/options`
+- `_module.args` (nix-hour #63 52:21 npins)
+- [ ] make nix-hour into a blog
+  - huge undertaking
+  - talk with infinisil
+  - segments (if possible)
+  - bits/clips/timestamped links in blog
+  - navi cheats
+  - https://github.com/tweag/nix-hour/issues?q=is%3Aissue+sort%3Areactions-%2B1-desc+
+  - https://www.reddit.com/r/youtubedl/comments/1acz8lf/live_chat/
+  - https://gist.github.com/pukkandan/ee737fec64822f2552caf3ca4cbf5db7
+    - https://gist.github.com/tinyapps/df2b6757a142ff93caf9c63d0ef38b11
+  - https://github.com/xenova/chat-downloader
+  - https://github.com/sonigy/YCS/issues/58#issuecomment-2389179106
+  - https://www.reddit.com/r/youtubedl/comments/15fcrmd/transcript_extract_from_youtube_videos_ytdlp/
+  - https://github.com/yt-dlp/yt-dlp/issues/7496
 
 ### Ramblings or thoughts
 
