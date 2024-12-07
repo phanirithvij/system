@@ -14,7 +14,7 @@ in
     # maybe cfg.xfce enabled? something
     # home manager has specialisations
     # maybe import this file inside a specialisation?
-    ../applications/config/xfconf.nix
+    ../applications/xfce.nix
 
     ../applications/games
     ../applications/git
