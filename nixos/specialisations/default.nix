@@ -9,7 +9,7 @@ _: {
     ./niri.nix
     ./tty.nix
     #./tuigreet.nix
-    ./xfce.nix
+    ./xfce
 
     # NOTE specialisations cannot have '-' (OWN restriction, see the implementation in the below file)
     ../applications/scripts/home-manager-switch-specialisation.nix

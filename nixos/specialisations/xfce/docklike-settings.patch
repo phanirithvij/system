@@ -1,0 +1,30 @@
+diff --git a/src/Settings.cpp b/src/Settings.cpp
+index 7b46c88..c132fa1 100644
+--- a/src/Settings.cpp
++++ b/src/Settings.cpp
+@@ -43,7 +43,7 @@ namespace Settings
+ 
+ 	void init()
+ 	{
+-		gchar* path = xfce_panel_plugin_save_location(Plugin::mXfPlugin, true);
++		gchar* path = xfce_resource_lookup(XFCE_RESOURCE_CONFIG, "xfce4/panel/docklike.rc");
+ 		GKeyFile* file = g_key_file_new();
+ 		mPath = Store::AutoPtr<gchar>(path, g_free);
+ 		mFile = Store::AutoPtr<GKeyFile>(file, (GDestroyNotify)g_key_file_unref);
+@@ -51,16 +51,6 @@ namespace Settings
+ 		if (g_file_test(path, G_FILE_TEST_IS_REGULAR))
+ 			g_key_file_load_from_file(file, path, G_KEY_FILE_NONE, nullptr);
+ 
+-		else // Look for a default config file in XDG_CONFIG_DIRS/xfce4/panel/docklike.rc
+-		{
+-			gchar* distConfig = xfce_resource_lookup(XFCE_RESOURCE_CONFIG, "xfce4/panel/docklike.rc");
+-
+-			if (distConfig != nullptr && g_file_test(distConfig, G_FILE_TEST_IS_REGULAR))
+-				g_key_file_load_from_file(file, distConfig, G_KEY_FILE_NONE, nullptr);
+-
+-			g_free(distConfig);
+-		}
+-
+ 		showPreviews.setup(g_key_file_get_boolean(file, "user", "showPreviews", nullptr),
+ 			[](bool _showPreviews) -> void {
+ 				g_key_file_set_boolean(mFile.get(), "user", "showPreviews", _showPreviews);

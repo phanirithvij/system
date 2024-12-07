@@ -1,7 +1,7 @@
 _: {
   specialisation.xfce = {
     configuration = {
-      imports = [ ../applications/config/xfconf.nix ];
+      imports = [ ./xfce.nix ];
       xdg.configFile."specialisation".text = "xfce";
     };
   };
