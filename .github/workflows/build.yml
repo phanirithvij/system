@@ -48,6 +48,6 @@ jobs:
           which swapspace || true
       - run: nix build .#homeConfigurations."runner".activationPackage
       - run: nix run .#home-manager -- switch --flake . -b bak
-      - name: Debugging with browser
-        uses: fawazahmed0/action-debug@v2
-    #- run: bash scripts/build.sh
+      #- name: Debugging with browser
+      #  uses: fawazahmed0/action-debug@v2
+      - run: bash scripts/build.sh
