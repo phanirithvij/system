@@ -14,7 +14,12 @@
     };
   };
   programs.bat.enable = true;
+
   programs.eza.enable = true;
+  programs.eza-aliases.enable = true;
+
+  programs.duf-aliases.enable = true;
+
   programs.fd = {
     enable = true;
     package = pkgs.fd;

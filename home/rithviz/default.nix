@@ -1,5 +1,8 @@
 { pkgs, ... }:
 
+# TODO generalise this, test this in a vm
+# this host is dead, deleted
+
 # rust
 # delta exa bat fd ripgrep sd starship du-dust
 
@@ -31,7 +34,6 @@
   home.packages = with pkgs; [
     air # reload go run
     babelfish # bash to fish
-    btop # fancy process manager like htop
     cmatrix # screensaver
     difftastic # fancy diff
     duf # fancy du

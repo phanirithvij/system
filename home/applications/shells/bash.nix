@@ -55,14 +55,6 @@
 
     shellAliases = {
       cat = "bat";
-      l = "ls";
-      l1 = "llb";
-      l2 = "llab";
-      llb = "eza --long --header --icons --git -B";
-      llab = "eza --long --header --icons --git --all -B";
-      llh = "eza --long --header --icons --git";
-      llS = "eza --long --header --icons --git -B -s size";
-      llSh = "eza --long --header --icons --git -s size";
       opop = "xdg-open";
       lac = "lazyconf";
       laz = "lazygit";
@@ -78,10 +70,6 @@
       vim = "nvim";
       n = "v";
 
-      t = "tmux";
-      ta = "tmux a";
-      at = "tmux a";
-      tma = "tmux a";
       #tag = "tmsu";
 
       tmpsize = "sudo mount -o remount,size=8589934592 /tmp";
@@ -93,30 +81,12 @@
       sport = "sudo lsof -i -P -n | rg LISTEN";
       wport = "viddy --disable_auto_save -p -d -n 0.2 netstat -tuplen";
       wports = "sudo viddy --disable_auto_save -p -d -n 0.2 netstat -tuplen";
-      dufw = "CLICOLOR_FORCE=1 COLORTERM='truecolor' viddy --disable_auto_save -p -d -n 0.5 duf";
-      wduf = "CLICOLOR_FORCE=1 COLORTERM='truecolor' viddy --disable_auto_save -p -d -n 0.5 duf";
-      dufi = ''
-        viddy --disable_auto_save -p -d -n 0.5 '
-          CLICOLOR_FORCE=1 COLORTERM="truecolor" duf \
-            -only local,fuse -hide-mp /boot/efi \
-            -output "mountpoint, avail, usage, inodes_avail, inodes_usage, filesystem" -sort usage;
-          echo /;
-          btrfs fi df /;
-          echo ----------;
-          echo /shed;
-          btrfs fi df /shed;
-        '
-      '';
       dfah = ''viddy --disable_auto_save -p -n 0.1 "df --output=source,iavail,ipcent,avail,pcent,target -h | (sed -u 1q; sort -h -r -k 4) # Sort by Avail"'';
       dffh = ''viddy --disable_auto_save -p -n 0.1 "df --output=source,iavail,ipcent,avail,pcent,target -h | (sed -u 1q; sort -h -r -k 5) # Sort by Use%"'';
       dfao = ''viddy --disable_auto_save -p -n 0.1 "df --output=source,iavail,ipcent,avail,pcent,target | (sed -u 1q; sort -h -r -k 4) # Sort by Avail"'';
       dffo = ''viddy --disable_auto_save -p -n 0.1 "df --output=source,iavail,ipcent,avail,pcent,target | (sed -u 1q; sort -h -r -k 5) # Sort by Use%"'';
 
       prog = "viddy --disable_auto_save -p -n 0.5 progress -w";
-      wls = "viddy --disable_auto_save -p -d -n 0.1 exa --long --header --icons -B --color=always";
-      wlsa = "viddy --disable_auto_save -p -t -d -n 0.1 exa --long --header --icons -B --all --color=always";
-      wll = "viddy --disable_auto_save -p -d -n 0.1 exa --long --header --icons --git -B --color=always";
-      wlla = "viddy --disable_auto_save -p -t -d -n 0.1 exa --long --header --icons --git -B --all --color=always";
       wpactl = ''viddy --disable_auto_save "pactl list | rg -U \".*bluez_card(.*\n)*\""'';
       mem = ''
         viddy -n 0.5 -d --disable_auto_save '
@@ -132,7 +102,7 @@
       nixfire = "nixGL firefox & disown;tmux splitw;exit";
       f = "firefox & disown;tmux splitw;exit";
       firefox = "firefox & disown;tmux splitw;exit";
-      tor = "~/Desktop/tor.desktop & disown;tmux splitw;exit";
+      tor = "tor-browser & disown;tmux splitw;exit";
       zoom = "zoom & disown;tmux splitw;exit";
       telegram = "telegram-desktop & disown;tmux splitw;exit";
       discord = "discord & disown;tmux splitw;exit";

@@ -5,7 +5,12 @@ more are in my zet but that is yet to be made public
 
 ## TODO
 
-- [ ] wrapper-manager
+- [x] wrapper-manager
+  - [x] duf with aliases
+    - i.e. a package provides its own aliases
+    - [x] it is possible in home-manager but what about wrapm
+      - I don't think it is possible, wrapm wraps programs nothing to do with shell config
+    - implemented a basic abstraction which provides `programs.<name>-aliases.enable`
 - [ ] auto gen statix, dprint config
   - like pre-commit-config.yml by git-hooks.nix
 - [ ] npins with flake inputs
