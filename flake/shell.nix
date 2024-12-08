@@ -4,7 +4,7 @@
   system,
   treefmtCfg,
 }:
-pkgs.mkShell {
+pkgs.mkShellNoCC {
   inherit (self.checks.${system}.git-hooks-check) shellHook;
   buildInputs = self.checks.${system}.git-hooks-check.enabledPackages;
   packages =

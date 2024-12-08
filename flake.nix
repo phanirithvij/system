@@ -129,12 +129,9 @@
       pkgs' = pkgsF nixpkgs';
 
       # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
-      patches =
-        [
-          ./opengist-module.patch
-        ]
-        ++ builtins.map pkgs.fetchpatch2 [
-        ];
+      patches = [
+        ./opengist-module.patch
+      ] ++ builtins.map pkgs.fetchpatch2 [ ];
       nixpkgs' = pkgs.applyPatches {
         name = "nixpkgs-patched";
         src = inputs.nixpkgs;
