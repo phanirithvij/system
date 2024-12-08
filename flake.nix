@@ -171,6 +171,7 @@
         flake-inputs = inputs;
       };
 
+      hmAliasModules = (import ./home/applications/special.nix { inherit pkgs; }).aliasModules;
       homeConfig =
         {
           username,
@@ -179,7 +180,7 @@
         }:
         home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs';
-          modules = [ ./home/${username} ] ++ modules;
+          modules = [ ./home/${username} ] ++ modules ++ hmAliasModules;
           # TODO sharedModules sops
           extraSpecialArgs = {
             flake-inputs = inputs;
@@ -296,7 +297,7 @@
                   username = "nixos";
                   hostname = "nixos";
                 };
-                sharedModules = common-hm-modules;
+                sharedModules = common-hm-modules ++ hmAliasModules;
               };
             }
             ./hosts/nixos/iso.nix
