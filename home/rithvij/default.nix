@@ -172,6 +172,7 @@ in
       ff = {
         "x-scheme-handler/http" = [ "firefox.desktop" ];
         "x-scheme-handler/https" = [ "firefox.desktop" ];
+        "application/pdf" = [ "firefox.desktop" ];
         "video/x-matroska" = [ "mpv.desktop" ];
         "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
         "x-scheme-handler/tonsite" = [ "org.telegram.desktop.desktop" ];
