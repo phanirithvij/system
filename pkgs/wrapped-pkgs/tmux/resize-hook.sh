@@ -1,4 +1,7 @@
 #!/usr/bin/env sh
+# TODO redis-less
+# maybe in-memory file instead
+# but /tmp not a tmpfs on nixos
 window_zoomed_flag=$(tmux display-message -p '#{window_zoomed_flag}')
 #prev_zoomed_flag=$(cat ~/.tmux/.zoomed_flag)
 prev_zoomed_flag=$(redis-cli get tmux_zoomed)

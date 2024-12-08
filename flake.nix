@@ -20,6 +20,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    wrapper-manager.url = "github:viperML/wrapper-manager";
+    wrapper-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     git-repo-manager = {
       url = "github:hakoerber/git-repo-manager";
       inputs.crane.follows = "crane";
@@ -155,6 +158,12 @@
             inherit pkgs;
           }).overlays
         );
+
+      wrappedPkgs = import ./pkgs/wrapped-pkgs {
+        inherit pkgs;
+        flake-inputs = inputs;
+      };
+
       homeConfig =
         {
           username,
@@ -170,6 +179,7 @@
             inherit system;
             inherit username;
             inherit hostname;
+            inherit wrappedPkgs;
           };
         };
       treefmtCfg = (treefmt-nix.lib.evalModule pkgs ./treefmt.nix).config.build;
@@ -210,7 +220,7 @@
         git-repo-manager = grm;
         home-manager = hm;
         system-manager = sysm;
-      };
+      } // wrappedPkgs;
       homeConfigurations = {
         # nixos main
         "${user}@${host}" = homeConfig {
