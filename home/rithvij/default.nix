@@ -98,13 +98,13 @@ in
     # https://haseebmajid.dev/posts/2023-10-02-til-how-to-fix-package-binary-collisions-on-nix/
     (lib.hiPrio rustdesk-flutter)
     (subtitlecomposer.overrideAttrs (_: {
-      version = "0-unstable-2024-10-07";
+      version = "0-unstable-2024-12-05";
       src = fetchFromGitLab {
         domain = "invent.kde.org";
         owner = "multimedia";
         repo = "subtitlecomposer";
-        rev = "8930c2926864d0015d8b23d4bf7a218e4267edc5";
-        hash = "sha256-nAYg/Tj+iTL4INLxsZtf6KQOMaDoqcx9URsiBsr6HP0=";
+        rev = "dbe98938bcd82f19b8bc871a54e694b722d470b4";
+        hash = "sha256-VcTyaiVtiyb1unZYb9lWAStC9D1p0OkCW1IRwPtqBTg=";
       };
     }))
 

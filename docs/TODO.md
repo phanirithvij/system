@@ -144,8 +144,6 @@ more are in my zet but that is yet to be made public
 #### DEs + rice
 
 - [x] niri (flake)
-  - wezterm bug
-  - looks like wezterm is not working outside too
 - [x] plasma6
   - [ ] plasma-manager (chris mcdonough vid)
 - [ ] xfce
