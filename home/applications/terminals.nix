@@ -1,4 +1,7 @@
-_: {
-  programs.wezterm.enable = true;
-  xdg.configFile."wezterm".source = ./config/wezterm;
+{ pkgs, ... }:
+{
+  programs.wezterm = {
+    enable = true;
+    package = pkgs.wrappedPkgs.wezterm;
+  };
 }

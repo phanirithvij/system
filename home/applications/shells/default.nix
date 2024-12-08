@@ -24,8 +24,10 @@
     defaultCommand = "${pkgs.fd}/bin/fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
     fileWidgetCommand = "${pkgs.fd}/bin/fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
   };
-  programs.lf.enable = true;
-  xdg.configFile."lf/lfrc".source = ../config/lf/lfrc;
+  programs.lf = {
+    package = pkgs.wrappedPkgs.lf;
+    enable = true;
+  };
   programs.starship = {
     enable = true;
     settings = {
