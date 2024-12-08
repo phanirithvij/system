@@ -48,7 +48,6 @@
     jid # jq query repl
     jq # json cli
     lazydocker # docker tui
-    lf # file manager tui
     newsboat # rss
     fastfetch # sysinfo summary
     nms # esoteric sneakers movie terminal effect
