@@ -8,6 +8,10 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+-- https://github.com/wez/wezterm/issues/5990
+-- https://github.com/NixOS/nixpkgs/issues/336069
+config.front_end = "WebGpu";
+
 config.window_background_opacity = 1
 config.font = wezterm.font 'JetBrains Mono'
 -- config.color_scheme = 'Tomorrow Night Bright'

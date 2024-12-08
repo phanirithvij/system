@@ -20,6 +20,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    wrapper-manager.url = "github:viperML/wrapper-manager";
+    wrapper-manager.inputs.nixpkgs.follows = "nixpkgs";
+
     git-repo-manager = {
       url = "github:hakoerber/git-repo-manager";
       inputs.crane.follows = "crane";
@@ -152,9 +155,22 @@
         ++ (builtins.attrValues
           (import "${nur-pkgs}" {
             # pkgs here is not being used in nur-pkgs overlays
-            inherit pkgs;
+            #inherit pkgs;
           }).overlays
-        );
+        )
+        ++ [
+          # wrappedPkgs imported into pkgs.wrappedPkgs
+          # no need to pass them around
+          (_: _: {
+            inherit wrappedPkgs;
+          })
+        ];
+
+      wrappedPkgs = import ./pkgs/wrapped-pkgs {
+        inherit pkgs;
+        flake-inputs = inputs;
+      };
+
       homeConfig =
         {
           username,
@@ -210,7 +226,7 @@
         git-repo-manager = grm;
         home-manager = hm;
         system-manager = sysm;
-      };
+      } // wrappedPkgs;
       homeConfigurations = {
         # nixos main
         "${user}@${host}" = homeConfig {
