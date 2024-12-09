@@ -1,0 +1,747 @@
+diff --git a/nixos/doc/manual/release-notes/rl-2505.section.md b/nixos/doc/manual/release-notes/rl-2505.section.md
+index f173d0d93b1d..4c5399f17673 100644
+--- a/nixos/doc/manual/release-notes/rl-2505.section.md
++++ b/nixos/doc/manual/release-notes/rl-2505.section.md
+@@ -18,6 +18,8 @@
+ 
+ - [Omnom](https://github.com/asciimoo/omnom), a webpage bookmarking and snapshotting service. Available as [services.omnom](options.html#opt-services.omnom.enable).
+ 
++- [Opengist](https://opengist.io/), a Self-hosted pastebin powered by Git, open-source alternative to Github Gist. Available as [services.opengist](#opt-services.opengist.enable).
++
+ - [Traccar](https://www.traccar.org/), a modern GPS Tracking Platform. Available as [services.traccar](#opt-services.traccar.enable).
+ 
+ - [Amazon CloudWatch Agent](https://github.com/aws/amazon-cloudwatch-agent), the official telemetry collector for AWS CloudWatch and AWS X-Ray. Available as [services.amazon-cloudwatch-agent](options.html#opt-services.amazon-cloudwatch-agent.enable).
+diff --git a/nixos/modules/module-list.nix b/nixos/modules/module-list.nix
+index b285e3f7c7ae..aca94b5476c0 100644
+--- a/nixos/modules/module-list.nix
++++ b/nixos/modules/module-list.nix
+@@ -1502,6 +1502,7 @@
+   ./services/web-apps/node-red.nix
+   ./services/web-apps/ocis.nix
+   ./services/web-apps/onlyoffice.nix
++  ./services/web-apps/opengist.nix
+   ./services/web-apps/openvscode-server.nix
+   ./services/web-apps/mediagoblin.nix
+   ./services/web-apps/open-web-calendar.nix
+diff --git a/nixos/modules/services/web-apps/opengist.nix b/nixos/modules/services/web-apps/opengist.nix
+new file mode 100644
+index 000000000000..7fc780047cd4
+--- /dev/null
++++ b/nixos/modules/services/web-apps/opengist.nix
+@@ -0,0 +1,451 @@
++{
++  config,
++  lib,
++  pkgs,
++  ...
++}:
++
++let
++  inherit (lib)
++    getExe
++    mkDefault
++    mkEnableOption
++    mkIf
++    mkOption
++    mkPackageOption
++    optionalAttrs
++    types
++    ;
++
++  defaultUser = "opengist";
++  cfg = config.services.opengist;
++
++  settingsFormat = pkgs.formats.yaml { };
++  configFile =
++    if cfg.settingsFile != null then
++      cfg.settingsFile
++    else
++      settingsFormat.generate "opengist.yaml" cfg.settings;
++
++  environmentFile = pkgs.writeText "opengist-environment" (
++    lib.generators.toKeyValue { } cfg.environment
++  );
++  environmentFiles = [
++    environmentFile
++  ] ++ lib.optional (cfg.secretsFile != null) cfg.secretsFile ++ lib.optional notSqlite dbUriEnvFile;
++
++  mysqlLocal = cfg.database.createLocally && cfg.database.type == "mysql";
++  pgsqlLocal = cfg.database.createLocally && cfg.database.type == "postgresql";
++  notSqlite = cfg.database.type != "sqlite";
++
++  dbService = if notSqlite then "${cfg.database.type}.service" else "";
++  dbUriEnvFile = "${cfg.opengist-home}/db_uri_env";
++
++  opengist-db-postinit-script =
++    cfg:
++    pkgs.writeShellApplication {
++      name = "opengist-db-postinit-script";
++      runtimeInputs =
++        [ pkgs.coreutils ]
++        ++ lib.optional (cfg.database.type == "postgresql") config.services.postgresql.package
++        ++ lib.optional (cfg.database.type == "mysql") config.services.mysql.package;
++      text = ''
++        ${
++          if cfg.database.passwordFile != null then
++            ''PW="$(cat "$CREDENTIALS_DIRECTORY/opengist_passwordFile")"''
++          else if cfg.database.password != null then
++            # This is ok, it is already exposed in the store
++            ''PW="${cfg.database.password}"''
++          else
++            "exit 0"
++        }
++
++        role="${cfg.database.username}"
++        host="${cfg.database.host}"
++        port="${toString cfg.database.port}"
++        db_name="${cfg.database.name}"
++        db_uri="${cfg.database.type}://$role:$PW@$host:$port/$db_name"
++
++        env_file="${dbUriEnvFile}"
++        rm -rf "$env_file"
++        echo OG_DB_URI="$db_uri" >"$env_file"
++        chmod 0600 "$env_file"
++        ${
++          # taken from keycloak.nix
++          # escape any single quotes by adding additional single
++          # quotes after them, following the rules laid out here:
++          # https://dev.mysql.com/doc/refman/8.0/en/string-literals.html
++          # https://www.postgresql.org/docs/current/sql-syntax-lexical.html#SQL-SYNTAX-CONSTANTS
++          if pgsqlLocal then # bash
++            ''
++              PW="''${PW//\'/\'\'}"
++              alter_role="$(mktemp)"
++              trap 'rm -f "$alter_role"' EXIT
++              PSQL="psql --port=$port"
++              echo "ALTER ROLE $role WITH PASSWORD '$PW'" > "$alter_role"
++              $PSQL -tAc "SELECT 1 FROM pg_roles WHERE rolname='$role'" | grep -q 1 || echo BAD BAD BAD
++              $PSQL -tA --file="$alter_role"
++            ''
++          else if mysqlLocal then # bash
++            ''
++              PW="''${PW//\'/\'\'}"
++              mysql --skip-column-names --execute \
++                "ALTER USER '$role'@'$host' IDENTIFIED BY '$PW'; FLUSH PRIVILEGES;"
++            ''
++          else
++            ""
++        }
++      '';
++    };
++in
++{
++  options.services.opengist = {
++    enable = mkEnableOption "opengist" // {
++      description = "Enable opengist.";
++    };
++
++    package = mkPackageOption pkgs "opengist" { };
++
++    user = mkOption {
++      default = defaultUser;
++      type = types.str;
++      description = "User account under which opengist runs.";
++    };
++
++    group = mkOption {
++      default = defaultUser;
++      type = types.str;
++      example = "users";
++      description = ''
++        Group account under which opengist runs.
++
++        ::: {.note}
++        Use "users" along with `readonly-home` to have write access to the `opengist-home` directory.
++        :::
++      '';
++    };
++
++    opengist-home = mkOption {
++      type = types.str;
++      default = "/var/lib/opengist";
++      description = ''
++        The directory used to store all data for opengist.
++
++        ::: {.note}
++        Do not set `settings.opengist-home` set this.
++        :::
++      '';
++    };
++
++    readonly-home = mkOption {
++      type = types.bool;
++      default = true;
++      description = ''
++        Whether the created default opengist-home needs to be readonly.
++
++        ::: {.note}
++        Only applies to /var/lib/opengist
++        :::
++      '';
++    };
++
++    database = mkOption {
++      description = "Database settings.";
++      default = { };
++      type = types.submodule {
++        options = {
++          createLocally = mkOption {
++            type = types.bool;
++            default = notSqlite;
++            defaultText = lib.literalExpression ''cfg.database.type != "sqlite"'';
++            description = ''
++              Whether to setup a local database with provided engine.
++              If `database.type` is not sqlite, all other `database.*` options must be provided.
++
++              ::: {.note}
++              Set this to false and then you can use `environment.OG_DB_URI` or set the `database.*` options.
++              Or if you prefer to keep your database password secret, set OG_DB_URI in {option}`secretsFile`.
++              :::
++            '';
++          };
++          type = mkOption {
++            type = types.enum [
++              "sqlite"
++              "postgresql"
++              "mysql"
++            ];
++            default = "sqlite";
++            description = ''
++              Database engine to use.
++
++              ::: {.note}
++              If not using sqlite then you must set all the options, name, host, port, username, password.
++              Or you can use OG_DB_URI in environment.
++              Also see {option}`database.createLocally`.
++              :::
++            '';
++          };
++          name = mkOption {
++            type = types.str;
++            default = "opengist";
++            description = "Database name. For sqlite, it will be `DB_NAME`.db.";
++          };
++          host = mkOption {
++            type = types.nullOr types.str;
++            default = null;
++            description = "DB host";
++          };
++          port = mkOption {
++            type = types.port;
++            default = if cfg.database.type == "postgresql" then 5432 else 3306;
++            defaultText = "5432 for postgresql, 3306 for mysql";
++            description = "DB port";
++          };
++          username = mkOption {
++            type = types.str;
++            default = "opengist";
++            description = "DB username";
++          };
++          # TODO consider removal
++          password = mkOption {
++            type = types.nullOr types.str;
++            default = null;
++            description = "DB password";
++          };
++          # TODO https://github.com/NixOS/nixpkgs/pull/326306
++          # what about for mysql?
++          passwordFile = mkOption {
++            type = types.nullOr types.path;
++            default = null;
++            description = "DB password file";
++          };
++        };
++      };
++    };
++
++    settingsFile = mkOption {
++      type = types.nullOr types.path;
++      default = null;
++      description = ''
++        Set a custom yaml config for opengist and manage it outside the nixos module.
++        See <https://github.com/thomiceli/opengist/blob/stable/config.yml>
++      '';
++    };
++
++    settings = mkOption {
++      description = ''
++        Config for opengist.
++        See <https://github.com/thomiceli/opengist/blob/stable/config.yml> for the default settings.
++        Also <https://opengist.io/docs/configuration/cheat-sheet.html>
++
++        :::{.note}
++        Nix keys require double quotes when they have periods `.`
++        eg. { "http.git-enabled" = false; }
++        :::
++      '';
++      default = { };
++      type = types.submodule {
++        freeformType = settingsFormat.type;
++        options = {
++          "http.host" = mkOption {
++            type = types.str;
++            default = "0.0.0.0";
++            description = "Host to bind to.";
++          };
++
++          "http.port" = mkOption {
++            type = types.port;
++            default = 6157;
++            description = "Port the server will listen on.";
++          };
++        };
++      };
++      example = {
++        "http.git-enabled" = true;
++        "ssh.git-enabled" = false;
++        "custom.logo" = "logo.png";
++        "custom.favicon" = "logo.ico";
++        "custom.static-links" = [
++          {
++            name = "Gitea";
++            path = "https://gitea.com";
++          }
++          {
++            name = "Legal notices";
++            path = "legal.html";
++          }
++        ];
++      };
++    };
++
++    environment = mkOption {
++      description = ''
++        Enviornment variables that opengist can access.
++        See <https://opengist.io/docs/configuration/cheat-sheet.html> for the list of env vars.
++
++        Environment variables override any config set in the yaml config i.e. {option}`settings` or {option}`settingsFile`.
++      '';
++      default = { };
++      type = types.submodule {
++        freeformType = types.attrsOf types.str;
++        options = { };
++      };
++    };
++
++    secretsFile = mkOption {
++      type = types.nullOr types.path;
++      description = ''
++        Path to a file containing the secret key in the format
++        ```
++        OG_SECRET_KEY=<key>
++        ```
++
++        ::: {.note}
++        Secret key used for session store & encrypt MFA data on database.
++        Will use a random 32-byte key if not set.
++
++        Can set additional secret environment variables that opengist can read.
++        eg. OG_DB_URI=postgres://user:<super_secret_password>@...
++        :::
++      '';
++      example = "/run/secrets/sops_opengist_passfile";
++      default = null;
++    };
++  };
++
++  config = mkIf cfg.enable {
++    assertions = [
++      /*
++        TODO
++        {
++          assertion = cfg.settings != { } -> cfg.settingsFile == null;
++          message = "Both settings and settingsFile are specified, only one can be set.";
++        }
++      */
++      {
++        assertion = pgsqlLocal -> config.services.postgresql.enable;
++        message = "Postgresql must be enabled to create a local database.";
++      }
++      {
++        assertion = mysqlLocal -> config.services.mysql.enable;
++        message = "Mysql must be enabled to create a local database.";
++      }
++      {
++        assertion = cfg.database.passwordFile != null -> cfg.database.password == null;
++        message = "Both passwordFile and password are set, use only one.";
++      }
++      {
++        assertion =
++          cfg.database.host != null -> (cfg.database.password != null || cfg.database.passwordFile != null);
++        message = "Database host is set but database password/passwordFile not set.";
++      }
++      {
++        assertion = (cfg.database.createLocally || notSqlite) -> cfg.database.host != null;
++        message = "Database host is null.";
++      }
++    ];
++
++    services.opengist.settings = {
++      opengist-home = mkIf (cfg.settingsFile == null) cfg.opengist-home;
++      db-uri = mkIf (cfg.database.type == "sqlite") "${cfg.database.name}.db";
++    };
++
++    services.mysql = mkIf mysqlLocal {
++      enable = mkDefault true;
++      package = mkDefault pkgs.mariadb;
++      ensureUsers = [
++        {
++          name = cfg.database.username;
++          ensurePermissions = {
++            "${cfg.database.name}.*" = "ALL PRIVILEGES";
++            # password change for mysql requires this
++            # from writefreely.nix
++            "*.*" = "CREATE USER, RELOAD";
++          };
++        }
++      ];
++      ensureDatabases = [ cfg.database.name ];
++    };
++
++    services.postgresql = mkIf pgsqlLocal {
++      enable = mkDefault true;
++      ensureUsers = [
++        {
++          name = cfg.database.username;
++          ensureDBOwnership = true;
++        }
++      ];
++      ensureDatabases = [ cfg.database.name ];
++    };
++
++    # taken from honk.nix
++    # this is passwordFile logic, not dependent on createLocally
++    systemd.services.opengist-postinit-db = mkIf notSqlite {
++      description = "opengist server configure database ";
++      requiredBy = [ "opengist.service" ];
++      before = [ "opengist.service" ];
++      requires = [ dbService ];
++      after = [
++        "systemd-tmpfiles-setup.service"
++        dbService
++      ];
++      serviceConfig = {
++        LoadCredential = mkIf (cfg.database.passwordFile != null) [
++          "opengist_passwordFile:${cfg.database.passwordFile}"
++        ];
++        # https://github.com/NixOS/nixpkgs/issues/258371
++        Type = "exec"; # oneshot
++        DynamicUser = false;
++        User = cfg.user;
++        RemainAfterExit = true;
++        ExecStart = lib.getExe (opengist-db-postinit-script cfg);
++        PrivateTmp = true;
++      };
++    };
++
++    systemd.services.opengist = {
++      description = "Opengist service";
++      wantedBy = [
++        "multi-user.target"
++      ];
++      after = [
++        "multi-user.target"
++      ] ++ lib.optional notSqlite dbService;
++      bindsTo = mkIf notSqlite [ "opengist-postinit-db.service" ];
++      path = [
++        pkgs.gitMinimal
++        pkgs.openssh # ssh-keygen
++      ];
++      serviceConfig = {
++        User = cfg.user;
++        Group = cfg.group;
++        EnvironmentFile = environmentFiles;
++        WorkingDirectory = cfg.opengist-home;
++        ExecStart = "${getExe cfg.package} --config ${configFile}";
++        Restart = "always";
++      };
++    };
++
++    # if user specified, the user needs to create it themselves
++    systemd.tmpfiles.settings.opengist = mkIf (cfg.opengist-home == "/var/lib/opengist") {
++      "${cfg.opengist-home}".d = {
++        inherit (cfg) user group;
++        mode = if cfg.readonly-home then "0700" else "0770";
++      };
++    };
++
++    # create service user
++    users.users = optionalAttrs (cfg.user == defaultUser) {
++      ${defaultUser} = {
++        description = "opengist service owner";
++        isSystemUser = true;
++        group = defaultUser;
++      };
++    };
++    users.groups = optionalAttrs (cfg.user == defaultUser) {
++      ${defaultUser} = {
++        members = [ defaultUser ];
++      };
++    };
++  };
++}
+diff --git a/nixos/tests/all-tests.nix b/nixos/tests/all-tests.nix
+index ab50acd739b9..0e3c2c150469 100644
+--- a/nixos/tests/all-tests.nix
++++ b/nixos/tests/all-tests.nix
+@@ -743,6 +743,7 @@ in {
+   ombi = handleTest ./ombi.nix {};
+   openarena = handleTest ./openarena.nix {};
+   openldap = handleTest ./openldap.nix {};
++  opengist = handleTest ./opengist.nix {};
+   opensearch = discoverTests (import ./opensearch.nix);
+   openresty-lua = handleTest ./openresty-lua.nix {};
+   opensmtpd = handleTest ./opensmtpd.nix {};
+diff --git a/nixos/tests/opengist.nix b/nixos/tests/opengist.nix
+new file mode 100644
+index 000000000000..eedbbffd918b
+--- /dev/null
++++ b/nixos/tests/opengist.nix
+@@ -0,0 +1,247 @@
++import ./make-test-python.nix (
++  { pkgs, lib, ... }:
++  let
++    port = 6157;
++    sshPort = 2222;
++    sshKey = "/root/.ssh/id_ed25519";
++    initSshKey = pkgs.writeShellApplication {
++      name = "init-ssh-key";
++      text = ''
++        ssh-keygen -t ed25519 -C "test@example.com" -N "" -f ${sshKey} -q
++      '';
++    };
++    addSshKey =
++      pkgs.writers.writePython3Bin "add-ssh-key"
++        {
++          libraries = with pkgs.python3Packages; [ requests ];
++        }
++        ''
++          import requests
++          url = "http://localhost:${toString port}"
++          s = requests.Session()
++
++          s.get(f"{url}/login")
++          data = {
++            "username": "admin",
++            "password": "admin",
++            "_csrf": s.cookies.get("_csrf", ""),
++          }
++          s.post(f"{url}/login", data=data)
++
++          # register ssh key
++          data = {
++              "title": "sshkey",
++              "content": open("${sshKey}.pub").read(),
++              "_csrf": s.cookies.get("_csrf", ""),
++          }
++          r = s.post(f"{url}/settings/ssh-keys", data=data)
++          assert r.status_code == 200
++        '';
++    postUrlScript =
++      pkgs.writers.writePython3Bin "post-url-opengist"
++        {
++          libraries = with pkgs.python3Packages; [ requests ];
++        }
++        ''
++          import requests
++          import sys
++          url = "http://localhost:${toString port}"
++          s = requests.Session()
++
++          # register/login account (to get session)
++          s.get(f"{url}/register")
++          data = {
++            "username": "admin",
++            "password": "admin",
++            "_csrf": s.cookies.get("_csrf", ""),
++          }
++          # no problem if fails, idempotent
++          s.post(f"{url}/register", data=data)
++          s.post(f"{url}/login", data=data)
++
++          # create post
++          data = {
++            "name": "test.sh",
++            "content": "echo%20-en%20hello",
++            "_csrf": s.cookies.get("_csrf", ""),
++          }
++          r = s.post(url, data=data, allow_redirects=True)
++          url_post = r.url.rstrip("/")
++
++          if sys.argv[1] == "git":
++              url_post += ".git"
++          elif sys.argv[1] == "ssh":
++              url_post = "/".join(["ssh://localhost:${toString sshPort}", *url_post.split("/")[3:]])
++              url_post += ".git"
++          elif sys.argv[1] == "raw":
++              url_post += "/raw/HEAD/test.sh"
++          elif sys.argv[1] == "zip":
++              url_post += "/archive/HEAD"
++          print(url_post, end="")
++        '';
++    makeOpengistNode =
++      extraConfig:
++      lib.mkMerge [
++        {
++          # TODO find the lowest memory possible without getting oomd
++          virtualisation.memorySize = lib.mkDefault 512;
++          environment.systemPackages = [
++            pkgs.gitMinimal
++            postUrlScript
++          ];
++        }
++        extraConfig
++      ];
++    nodeTestScript =
++      machine: # python
++      ''
++        machine = ${machine}
++        name = "${machine}"
++        machine.wait_for_unit("multi-user.target")
++        machine.wait_for_unit("opengist.service")
++        machine.wait_for_open_port(${toString port})
++        if name in [ "minimal_no_ssh" ]:
++          # tests raw and archive dls
++          url_post = machine.succeed("post-url-opengist raw")
++          machine.succeed(f"sh -c 'mkdir testdir; curl --fail {url_post} -o testdir/test.sh'")
++          url_post = machine.succeed("post-url-opengist zip")
++          machine.succeed(f"sh -c 'mkdir testdir2; curl --fail {url_post} -o - | bsdtar -xvf- -C testdir2'")
++          url_post = machine.succeed("post-url-opengist git")
++          # tests git clone fails
++          machine.fail(f"git clone {url_post}")
++        else:
++          # tests git http clone
++          url_post = machine.succeed("post-url-opengist git")
++          machine.succeed(f"git clone {url_post} testdir")
++          # tests ssh clone
++          machine.succeed("sh -c 'init-ssh-key && add-ssh-key'")
++          url_post = machine.succeed("post-url-opengist ssh")
++          SSH_COMMAND="ssh -i ${sshKey} -p ${toString sshPort} -o StrictHostKeyChecking=no"
++          machine.succeed(f"""GIT_SSH_COMMAND="{SSH_COMMAND}" git clone {url_post} testdir2""")
++        assert machine.succeed("sh -c 'cd testdir; chmod +x test.sh; ./test.sh'") == "hello"
++        assert machine.succeed("sh -c 'cd testdir2; chmod +x test.sh; ./test.sh'") == "hello"
++      '';
++
++    baseDBCfg = {
++      username = "opengist";
++      name = "opengist";
++      host = "localhost";
++    };
++  in
++  {
++    name = "opengist";
++    meta = {
++      maintainers = [ lib.maintainers.phanirithvij ];
++    };
++    nodes = {
++      default_sqlite = makeOpengistNode {
++        # tests sqlite
++        services.opengist.enable = true;
++        environment.systemPackages = [
++          initSshKey
++          addSshKey
++        ];
++      };
++
++      minimal_no_ssh = makeOpengistNode {
++        environment.systemPackages = [
++          pkgs.libarchive # bsdtar
++        ];
++        services.opengist = {
++          enable = true;
++          settings = {
++            "index.enabled" = false;
++            "http.git-enabled" = false;
++            "ssh.git-enabled" = false;
++          };
++          # tests postgres
++          database = baseDBCfg // {
++            # tests password
++            password = "notsosecretpass";
++            port = 5432;
++            type = "postgresql";
++            createLocally = true;
++          };
++        };
++      };
++
++      manual = makeOpengistNode {
++        services.opengist = {
++          enable = true;
++          # tests that it works outside /var/lib/opengist
++          opengist-home = "/opengist";
++          # tests that settingsFile works
++          settingsFile =
++            pkgs.writeText "opengist-config.yaml" # yaml
++              ''
++                http.host: 0.0.0.0
++                http.port: ${toString port}
++                opengist-home: "/opengist"
++              '';
++          # tests mysql
++          database = baseDBCfg // {
++            # tests password file
++            passwordFile = "/root/postgres_opengist_pass";
++            port = 3306;
++            type = "mysql";
++            createLocally = true;
++          };
++          # tests secretsFile
++          secretsFile = "/root/opengist_secret_key";
++        };
++        # TODO these two tests
++        #services.mysql.package = pkgs.mysql80;
++        #services.mysql.package = pkgs.percona-server_8_4;
++        systemd.tmpfiles.settings.opengist = {
++          "/opengist".d = {
++            user = "opengist";
++            mode = "0750";
++          };
++          # dumb way to have the secrets exist before service startup
++          # use sops or agenix in real systems
++          "/root/postgres_opengist_pass"."L+" = {
++            user = "opengist";
++            mode = "0400";
++            argument = toString (pkgs.writeText "opengist_pgpass" "Super:Secret:Password");
++          };
++          "/root/opengist_secret_key"."L+" = {
++            user = "opengist";
++            mode = "0400";
++            argument = toString (pkgs.writeText "opengist_secret_key" "ogist_secret_never_gonna_give_u");
++          };
++          # TODO nginx?
++          # TODO test custom dir write access in manual instead of minimal_no_ssh
++        };
++        environment.systemPackages = [
++          initSshKey
++          addSshKey
++        ];
++      };
++    };
++
++    # TODO createLocally = false, percona caddy?
++    # TODO settings settingsFile assert test
++
++    testScript =
++      # python
++      ''
++        start_all()
++
++        ${nodeTestScript "default_sqlite"}
++
++        ${nodeTestScript "manual"}
++        # tests write access to dir
++        manual.succeed("touch /opengist/custom/logoempty.png")
++        manual.succeed("curl --fail -OJ http://localhost:${toString port}/assets/logoempty.png")
++        assert manual.succeed("sh -c '[ -s logoempty.png ] || echo -en empty'") == "empty"
++
++        ${nodeTestScript "minimal_no_ssh"}
++        # tests we can NOT write to custom dir
++        print(minimal_no_ssh.succeed("ls -ld /var/lib/opengist"))
++        print(minimal_no_ssh.succeed("ls -l /var/lib/opengist"))
++        print(minimal_no_ssh.succeed("ls -l /var/lib/opengist/custom"))
++        print(minimal_no_ssh.succeed("ls -dl /var/lib/opengist/custom"))
++        minimal_no_ssh.fail("touch /var/lib/opengist/custom/file.png")
++      '';
++  }
++)
