@@ -13,6 +13,11 @@
           gomtree
           gh-i
           distrobox-tui
+          gama-tui
+          gocovsh
+          golds
+          pkgsite
+          tcount
         ]
       ))
       ++ [
