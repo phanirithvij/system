@@ -17,6 +17,8 @@ function onix-build() {
   run_nom_command "nix-build" "$@"
 }
 
+export -f onix onix-build run_nom_command
+
 # TODO won't work?
 # Register bash completion for onix and onix-build
 if type _complete_nix >/dev/null 2>&1; then

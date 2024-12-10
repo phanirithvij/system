@@ -24,7 +24,7 @@ _exe onix build .#nixosConfigurations.defaultIso.config.system.build.isoImage -o
 nix flake show --json |
   jq '.packages."x86_64-linux"|keys[]' |
   xargs -I '{}' echo '.#{}' |
-  xargs nom build --no-link --print-out-paths
+  xargs nix build --no-link --print-out-paths
 
 #_exe onix bundle .#navi-master -o result/navi-master.bundled
 #_exe onix bundle \

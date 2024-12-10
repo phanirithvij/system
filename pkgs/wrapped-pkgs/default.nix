@@ -1,4 +1,9 @@
-{ flake-inputs, pkgs, ... }:
+{
+  flake-inputs,
+  pkgs,
+  system,
+  ...
+}:
 let
   inherit (pkgs) lib;
   inherit (flake-inputs) wrapper-manager;
@@ -12,6 +17,6 @@ in
     (map (n: ./${n}))
   ];
   specialArgs = {
-    inherit flake-inputs;
+    inherit flake-inputs system;
   };
 }).config.build.packages
