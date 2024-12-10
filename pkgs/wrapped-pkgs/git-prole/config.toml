@@ -1,0 +1,110 @@
+# Configuration for `git-prole(1)`, a `git-worktree(1)` manager.
+# See: https://github.com/9999years/git-prole
+# All settings are listed here with their default values.
+
+# When determining a default remote or branch for a repository, the following
+# remotes will be tried, in order:
+#
+# 1. Git's `checkout.defaultRemote` setting.
+# 2. Any remotes listed here.
+#
+# This is used to pick a default branch; see `default_branches`.
+remote_names = [
+  "upstream",
+  "origin",
+]
+
+# When determining a default branch for a repository, the following branches
+# will be tried in order:
+#
+# 1. The default branch of the default remote (see `remotes`), as determined by
+#    `git ls-remote --symref "$REMOTE" HEAD`.
+# 2. Any branches listed here.
+#
+# When `git prole convert` is used to convert a repository to a worktree
+# checkout, the main worktree will be checked out to the default branch.
+#
+# When `git prole add` is used to create a new worktree, if a new branch is
+# created, the branch will be set to the default branch unless another starting
+# point is given explicitly.
+branch_names = [
+  "main",
+  "master",
+  "trunk",
+]
+
+# Clone a repository into a worktree repository.
+#
+# `man git-prole-clone`
+[clone]
+# When you run `git prole clone foo/bar`, if `enable_gh = true` and `gh` is
+# installed, I'll run `gh repo clone foo/bar` as a shortcut for GitHub
+# repositories.
+#
+# See: https://cli.github.com/
+enable_gh = true
+
+# Add a new worktree to the current repository.
+#
+# `man git-prole-add`
+[add]
+# When `git prole add` is used to create a new worktree, `.gitignored` files
+# are copied to the new worktree from the current worktree by default.
+#
+# This will allow you to get started quickly by copying build products and
+# other configuration files over to the new worktree. However, copying these
+# files can take some time, so this setting can be used to disable this
+# behavior if needed.
+#
+# Note: Untracked files which are not ignored will not be copied.
+#
+# See: `man 'gitignore(5)'`
+copy_ignored = true
+
+# Commands to run when a new worktree is added.
+commands = [
+  # "direnv allow",
+  # { sh = '''
+  #   if [ -e flake.nix ]; then
+  #     nix develop --command true
+  #   fi
+  #   ''' },
+]
+
+# A list of regex replacements which are applied to branch names to determine
+# directory names.
+#
+# This settings is also used by `git prole convert` to resolve branch names
+# into directory names.
+#
+# For syntax, see: https://docs.rs/regex/latest/regex/#syntax
+#
+# By default, when you create a worktree for a branch with a `/` in it, `git
+# prole` will use the last component of the name; e.g., `git prole add
+# -b puppy/doggy` creates a directory named `doggy` for a new branch
+# `puppy/doggy`.
+#
+# However, this might not be the most convenient behavior for you, so you can
+# substitute this behavior with a series of regex replacements instead.
+#
+# For example, my ticket tracker at work auto-generates branch names like
+# `rebeccat/team-1234-some-ticket-title-which-is-way-too-long`. With
+# configuration like this:
+#
+#     [[add.branch_replacements]]
+#     find = '''\w+/\w{1,4}-\d{1,5}-(\w+(?:-\w+){0,2}).*'''
+#     replace = '''$1'''
+#
+# `git prole add -b ...` will create a directory named `some-ticket-title`.
+# (The branch name will still be unchanged and way too long.)
+#
+# Note that if the result of applying your regex substitutions includes a `/`,
+# the last component of the result will be used.
+#
+# For completeness, you can also specify how many replacements are performed:
+#
+#     [[add.branch_replacements]]
+#     find = '''puppy'''
+#     replace = '''doggy'''
+#     count = 1
+branch_replacements = []

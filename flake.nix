@@ -7,7 +7,7 @@
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
     #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
-    nur-pkgs.url = "github:phanirithvij/nur-packages";
+    nur-pkgs.url = "github:phanirithvij/nur-packages/master";
     #shouldn't be used as cachix cache becomes useless
     #nur-pkgs.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -20,13 +20,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    wrapper-manager.url = "github:viperML/wrapper-manager";
+    wrapper-manager.url = "github:viperML/wrapper-manager/master";
     wrapper-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     git-repo-manager = {
-      url = "github:hakoerber/git-repo-manager";
+      url = "github:hakoerber/git-repo-manager/develop";
       inputs.crane.follows = "crane";
       inputs.flake-utils.follows = "flake-utils";
+      inputs.rust-overlay.follows = "rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # git-worktree helper
+    git-prole = {
+      url = "github:9999years/git-prole/main";
+      inputs.systems.follows = "systems";
+      inputs.crane.follows = "crane";
       inputs.rust-overlay.follows = "rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -38,7 +47,7 @@
     };
 
     # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
-    flake-schemas.url = "github:DeterminateSystems/flake-schemas";
+    flake-schemas.url = "github:DeterminateSystems/flake-schemas/main";
     nix-schema = {
       url = "github:DeterminateSystems/nix-src/flake-schemas";
       inputs.flake-schemas.follows = "flake-schemas";
@@ -46,13 +55,13 @@
       inputs.pre-commit-hooks.follows = "git-hooks";
     };
 
-    sops-nix.url = "github:Mic92/sops-nix";
+    sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    navi_config.url = "github:phanirithvij/navi";
+    navi_config.url = "github:phanirithvij/navi/main";
     navi_config.flake = false;
 
-    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.url = "github:nix-community/nix-index-database/main";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=main";
@@ -167,7 +176,7 @@
         ];
 
       wrappedPkgs = import ./pkgs/wrapped-pkgs {
-        inherit pkgs;
+        inherit pkgs system;
         flake-inputs = inputs;
       };
 
