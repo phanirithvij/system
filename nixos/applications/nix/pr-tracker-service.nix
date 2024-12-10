@@ -19,13 +19,10 @@ in
   config = lib.mkIf cfg {
     users.users = {
       pr-tracker = {
-        group = "pr-tracker";
+        group = "users";
         home = dataDir;
         isSystemUser = true;
       };
-    };
-    users.groups = {
-      pr-tracker = { };
     };
     sops.secrets.gh_t_pr_tracker = { };
     systemd.services.pr-tracker = {
@@ -34,7 +31,7 @@ in
       serviceConfig = {
         #Type = "simple";
         User = "pr-tracker";
-        Group = "pr-tracker";
+        Group = "users";
         EnvironmentFile = config.sops.secrets.gh_t_pr_tracker.path;
         ExecStartPre = ''
           ${pkgs.git}/bin/git config --global --add safe.directory ${nixpkgsDir}
