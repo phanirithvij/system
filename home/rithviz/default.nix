@@ -29,6 +29,8 @@
 
     ./home-scripts.nix
     ../../secrets
+
+    ../specialisations
   ];
 
   home.packages = with pkgs; [

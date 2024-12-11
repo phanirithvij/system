@@ -3,6 +3,7 @@ _: {
     specialisation.tty = {
       inheritParentConfig = true;
       configuration = {
+        system.nixos.tags = [ "sp:tty" ];
         # The bug below with noXlibs occurs due to importing minimal profile
         # it fails to compile ghc-8.6
         imports = [ "${modulesPath}/profiles/minimal.nix" ];

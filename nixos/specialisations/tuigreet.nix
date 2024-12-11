@@ -3,6 +3,7 @@
   specialisation.tuigreet = {
     inheritParentConfig = true;
     configuration = {
+      system.nixos.tags = [ "sp:tuigreet" ];
       services = {
         displayManager.ly.enable = lib.mkForce false;
 
