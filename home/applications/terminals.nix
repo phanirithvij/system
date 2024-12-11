@@ -1,7 +1,4 @@
 { pkgs, ... }:
 {
-  programs.wezterm = {
-    enable = true;
-    package = pkgs.wrappedPkgs.wezterm;
-  };
+  home.packages = [ pkgs.wrappedPkgs.wezterm ];
 }

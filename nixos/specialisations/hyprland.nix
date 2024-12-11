@@ -9,6 +9,7 @@
   specialisation.hyprland = {
     inheritParentConfig = true;
     configuration = {
+      system.nixos.tags = [ "sp:hyprland" ];
       programs.hyprland = {
         enable = true;
         package = flake-inputs.hyprland.packages.${system}.hyprland;

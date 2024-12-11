@@ -3,6 +3,7 @@
   specialisation.xfce = {
     inheritParentConfig = true;
     configuration = {
+      system.nixos.tags = [ "sp:xfce" ];
       services.xserver.desktopManager.xfce.enable = true;
       services.desktopManager.plasma6.enable = lib.mkForce false;
       environment.systemPackages = with pkgs; [

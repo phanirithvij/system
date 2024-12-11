@@ -90,6 +90,7 @@
 - `nix repl .` in system flake and can do `nixosConfigurations.iron.config/options`
 - `_module.args` (nix-hour #63 52:21 npins)
 - [ ] make nix-hour into a blog
+  - nix-hour repo has code samples for some (ep 24+)
   - huge undertaking
   - talk with infinisil
   - segments (if possible)

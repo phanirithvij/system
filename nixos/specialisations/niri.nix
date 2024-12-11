@@ -7,6 +7,7 @@
   specialisation.niri = {
     inheritParentConfig = true;
     configuration = {
+      system.nixos.tags = [ "sp:niri" ];
       programs.niri.enable = true;
       # TODO overlays conditionally?
       # nixpkgs.overlays = [ flake-inputs.niri.overlays.niri ];

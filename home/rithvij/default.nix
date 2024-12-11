@@ -10,11 +10,6 @@ in
     ../applications/bashmount.nix
     ../applications/docker
     ../applications/editors.nix
-    # TODO if inside specialization detect that?
-    # maybe cfg.xfce enabled? something
-    # home manager has specialisations
-    # maybe import this file inside a specialisation?
-    ../applications/config/xfconf.nix
 
     ../applications/games
     ../applications/git
@@ -35,6 +30,8 @@ in
 
     ./home-scripts.nix
     ../../secrets
+
+    ../specialisations
   ];
 
   home.username = username;
