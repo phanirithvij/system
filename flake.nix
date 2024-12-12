@@ -48,12 +48,6 @@
 
     # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
     flake-schemas.url = "github:DeterminateSystems/flake-schemas/main";
-    nix-schema = {
-      url = "github:DeterminateSystems/nix-src/flake-schemas";
-      inputs.flake-schemas.follows = "flake-schemas";
-      #inputs.nixpkgs.follows = "nixpkgs";
-      inputs.pre-commit-hooks.follows = "git-hooks";
-    };
 
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -179,8 +173,7 @@
           };
         };
         packages = {
-          # TODO move nix-schema to nur-pkgs cachix
-          inherit (pkgs) nix-schema;
+          inherit (pkgs) nix-schema; # nur-pkgs overlay, cachix cache
           navi-master = pkgs.navi;
           git-repo-manager = grm;
           home-manager = hm;
@@ -288,7 +281,7 @@
             hm
             grm
             sysm
-            #pkgs.nix-schema
+            pkgs.nix-schema
           ];
         };
         overlayModule = {
@@ -303,39 +296,38 @@
         nixosSystem = import (allSystemsJar.nixpkgs'.${system} + "/nixos/lib/eval-config.nix");
       in
       {
-        schemas = # (builtins.removeAttrs inputs.flake-schemas.schemas [ "schemas" ]) //
-          {
-            systemConfigs = {
-              version = 1;
-              doc = ''
-                The `systemConfigs` flake output defines [system-manager configurations](https://github.com/numtide/system-manager).
-              '';
-              inventory =
-                output:
-                inputs.flake-schemas.lib.mkChildren (
-                  builtins.mapAttrs (configName: this: {
-                    what = "system-manager configuration ${configName}";
-                    derivation = this;
-                    forSystems = [ this.system ];
-                  }) output
-                );
-            };
-            nixOnDroidConfigurations = {
-              version = 1;
-              doc = ''
-                The `nixOnDroidConfigurations` flake output defines [nix-on-droid configurations](https://github.com/nix-community/nix-on-droid).
-              '';
-              inventory =
-                output:
-                inputs.flake-schemas.lib.mkChildren (
-                  builtins.mapAttrs (configName: this: {
-                    what = "nix-on-droid configuration ${configName}";
-                    derivation = this.activationPackage;
-                    forSystems = [ this.activationPackage.system ];
-                  }) output
-                );
-            };
+        schemas = (builtins.removeAttrs inputs.flake-schemas.schemas [ "schemas" ]) // {
+          systemConfigs = {
+            version = 1;
+            doc = ''
+              The `systemConfigs` flake output defines [system-manager configurations](https://github.com/numtide/system-manager).
+            '';
+            inventory =
+              output:
+              inputs.flake-schemas.lib.mkChildren (
+                builtins.mapAttrs (configName: this: {
+                  what = "system-manager configuration ${configName}";
+                  derivation = this;
+                  forSystems = [ this.system ];
+                }) output
+              );
           };
+          nixOnDroidConfigurations = {
+            version = 1;
+            doc = ''
+              The `nixOnDroidConfigurations` flake output defines [nix-on-droid configurations](https://github.com/nix-community/nix-on-droid).
+            '';
+            inventory =
+              output:
+              inputs.flake-schemas.lib.mkChildren (
+                builtins.mapAttrs (configName: this: {
+                  what = "nix-on-droid configuration ${configName}";
+                  derivation = this.activationPackage;
+                  forSystems = [ this.activationPackage.system ];
+                }) output
+              );
+          };
+        };
         systemConfigs = {
           gha = inputs.system-manager.lib.makeSystemConfig {
             modules = [ ./hosts/sysm/gha/configuration.nix ];

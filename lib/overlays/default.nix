@@ -1,9 +1,5 @@
-{
-  flake-inputs,
-  system,
-}:
+_:
 let
-  schemaOverlay = import ./nix-schema.nix { inherit flake-inputs system; };
   tempLazygitOverlay = _: p: {
     lazygit = p.lazygit.overrideAttrs (_: {
       patches = [
@@ -16,6 +12,5 @@ let
   };
 in
 [
-  schemaOverlay
   tempLazygitOverlay
 ]
