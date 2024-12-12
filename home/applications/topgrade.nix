@@ -21,10 +21,11 @@ in
         skip_notify = true;
       };
       linux = {
-        nix_arguments = "--flake ${configDir}#${hostname}";
+        nix_arguments =
+          if (hostname == null) then "--flake ${configDir}" else "--flake ${configDir}#${hostname}";
         home_manager_arguments = [
           "--flake"
-          "${configDir}#${username}@${hostname}"
+          (if (hostname == null) then "${configDir}#${username}" else "${configDir}#${username}@${hostname}")
         ];
       };
     };

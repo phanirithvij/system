@@ -51,7 +51,7 @@
     nix-schema = {
       url = "github:DeterminateSystems/nix-src/flake-schemas";
       inputs.flake-schemas.follows = "flake-schemas";
-      inputs.nixpkgs.follows = "nixpkgs";
+      #inputs.nixpkgs.follows = "nixpkgs";
       inputs.pre-commit-hooks.follows = "git-hooks";
     };
 
@@ -78,7 +78,8 @@
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
-    systems.url = "github:nix-systems/default-linux";
+    #systems.url = "github:nix-systems/default-linux";
+    systems.url = "github:nix-systems/default";
 
     crane.url = "github:ipetkov/crane";
 
@@ -92,39 +93,30 @@
   outputs =
     {
       self,
-      nixpkgs,
-      home-manager,
-      system-manager,
-      git-repo-manager,
-      nix-on-droid,
-      sops-nix,
-      treefmt-nix,
-      git-hooks,
-      nix-index-database,
-      niri,
-      nur-pkgs,
       ...
     }@inputs:
     let
-      user = "rithvij";
-      uzer = "rithviz";
-      droid = "nix-on-droid";
-      liveuser = "nixos";
-
-      host = "iron";
-      hozt = "rithviz-inspiron7570";
-      hostdroid = "localhost"; # not possible to change it
-      livehost = "nixos";
-
-      system = "x86_64-linux";
-      pkgsF =
-        nixpkgs:
-        import nixpkgs {
+      allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (system: rec {
+        legacyPackages = inputs.nixpkgs.legacyPackages.${system};
+        inherit (legacyPackages) lib;
+        #pkgs = import inputs.nixpkgs {
+        #pkgs = import nixpkgs' {
+        pkgs = import (if (system == "x86_64-linux") then nixpkgs' else inputs.nixpkgs) {
           inherit overlays system;
           config = {
-            allowUnfree = true;
-            # TODO allowlist of unfree pkgs, for home-manager too
-            allowUnfreePredicate = _: true;
+            # allowlist of unfree pkgs, for home-manager too
+            # https://github.com/viperML/dotfiles/blob/43152b279e609009697346b53ae7db139c6cc57f/packages/default.nix#L64
+            allowUnfreePredicate =
+              pkg:
+              let
+                pname = lib.getName pkg;
+                byName = builtins.elem pname [
+                  "steam-unwrapped"
+                  "spotify"
+                ];
+              in
+              if byName then lib.warn "Allowing unfree package: ${pname}" true else false;
+
             packageOverrides = _: {
               # TODO espanso_wayland and espanso-x11 and use it in different places accordingly?
               # made a pr to home-manager see https://github.com/nix-community/home-manager/pull/5930
@@ -137,253 +129,312 @@
             };
           };
         };
-      pkgs = pkgsF nixpkgs;
-      pkgs' = pkgsF nixpkgs';
-
-      # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
-      patches = [
-        ./opengist-module.patch
-      ] ++ builtins.map pkgs.fetchpatch2 [ ];
-      nixpkgs' = pkgs.applyPatches {
-        name = "nixpkgs-patched";
-        src = inputs.nixpkgs;
-        inherit patches;
-      };
-      # IFD BAD BAD AAAAAA!
-      # only option is to maintain a fork of nixpkgs as of now
-      # follow https://github.com/NixOS/nix/issues/3920
-      nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
-
-      #inherit (inputs.nixpkgs.lib) nixosSystem;
-      overlays =
-        (import ./lib/overlays {
-          inherit system;
-          flake-inputs = inputs;
-        })
-        ++ [ niri.overlays.niri ]
-        ++ (builtins.attrValues
-          (import "${nur-pkgs}" {
-            # pkgs here is not being used in nur-pkgs overlays
-            #inherit pkgs;
-          }).overlays
-        )
-        ++ [
-          # wrappedPkgs imported into pkgs.wrappedPkgs
-          # no need to pass them around
-          (_: _: {
-            inherit wrappedPkgs;
+        # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
+        nixpkgs' = legacyPackages.applyPatches {
+          name = "nixpkgs-patched";
+          src = inputs.nixpkgs;
+          patches = [
+            ./opengist-module.patch
+          ] ++ builtins.map legacyPackages.fetchpatch2 [ ];
+        };
+        overlays =
+          (import ./lib/overlays {
+            inherit system;
+            flake-inputs = inputs;
           })
-        ];
-
-      wrappedPkgs = import ./pkgs/wrapped-pkgs {
-        inherit pkgs system;
-        flake-inputs = inputs;
-      };
-
-      hmAliasModules = (import ./home/applications/special.nix { inherit pkgs; }).aliasModules;
-      homeConfig =
-        {
-          username,
-          hostname,
-          modules ? [ ],
-        }:
-        home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs';
-          modules = [ ./home/${username} ] ++ modules ++ hmAliasModules;
-          # TODO sharedModules sops
-          extraSpecialArgs = {
-            flake-inputs = inputs;
-            inherit system;
-            inherit username;
-            inherit hostname;
-          };
+          ++ [ inputs.niri.overlays.niri ]
+          ++ (builtins.attrValues
+            (import "${inputs.nur-pkgs}" {
+              # pkgs here is not being used in nur-pkgs overlays
+              #inherit pkgs;
+            }).overlays
+          )
+          ++ [
+            # wrappedPkgs imported into pkgs as pkgs.wrappedPkgs
+            # no need to pass them around
+            (_: _: {
+              inherit wrappedPkgs;
+            })
+          ];
+        wrappedPkgs = import ./pkgs/wrapped-pkgs {
+          inherit pkgs system;
+          flake-inputs = inputs;
         };
-      treefmtCfg = (treefmt-nix.lib.evalModule pkgs ./treefmt.nix).config.build;
-      nix-index-hm-modules = [
-        inputs.nix-index-database.hmModules.nix-index
-        { programs.nix-index-database.comma.enable = true; }
-      ];
-      common-hm-modules = [
-        inputs.sops-nix.homeManagerModules.sops
-      ];
-      grm = git-repo-manager.packages.${system}.default;
-      hm = home-manager.packages.${system}.default;
-      sysm = system-manager.packages.${system}.default;
-      toolsModule = {
-        environment.systemPackages = [
-          hm
-          grm
-          sysm
-          #pkgs.nix-schema
-        ];
-      };
-      overlayModule = {
-        nixpkgs.overlays = overlays;
-      };
+      });
     in
-    rec {
-      inherit (inputs.flake-schemas) schemas;
-      apps.${system} = {
-        nix = {
-          type = "app";
-          program = "${pkgs.nix-schema}/bin/nix-schema";
-        };
-      };
-      apps."aarch64-linux".nix = apps.${system}.nix;
-      packages.${system} = {
-        #inherit (pkgs) nix-schema;
-        navi-master = pkgs.navi;
-        git-repo-manager = grm;
-        home-manager = hm;
-        system-manager = sysm;
-      } // wrappedPkgs;
-      homeConfigurations = {
-        # nixos main
-        "${user}@${host}" = homeConfig {
-          username = user;
-          hostname = host;
-          modules = nix-index-hm-modules ++ common-hm-modules;
-        };
-        # non-nixos
-        "${uzer}@${hozt}" = homeConfig {
-          username = uzer;
-          hostname = hozt;
-          modules = nix-index-hm-modules ++ common-hm-modules;
-        };
-        # nix-on-droid
-        "${droid}@${hostdroid}" = homeConfig {
-          username = droid;
-          hostname = hostdroid;
-        };
-        # nixos live user
-        "${liveuser}@${livehost}" = homeConfig {
-          username = liveuser;
-          hostname = livehost;
-          modules = common-hm-modules;
-        };
-        # TODO different repo with npins?
-        "runner" = homeConfig {
-          username = "runner";
-          hostname = "_______";
-          modules = nix-index-hm-modules ++ common-hm-modules;
-        };
-      };
-      nixosConfigurations = {
-        ${host} = nixosSystem {
-          inherit system;
-          modules = [
-            toolsModule
-            overlayModule
-            sops-nix.nixosModules.sops
-            niri.nixosModules.niri
-            ./hosts/${host}/configuration.nix
-          ];
-          specialArgs = {
-            flake-inputs = inputs;
-            inherit system;
-            username = user;
-            hostname = host;
+    inputs.flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = allSystemsJar.pkgs.${system};
+        treefmtCfg = (inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix).config.build;
+        grm = inputs.git-repo-manager.packages.${system}.default;
+        hm = inputs.home-manager.packages.${system}.default;
+        sysm = inputs.system-manager.packages.${system}.default;
+      in
+      rec {
+        apps = {
+          nix = {
+            type = "app";
+            program = "${pkgs.nix-schema}/bin/nix-schema";
           };
         };
-
-        defaultIso = nixosSystem {
-          inherit system;
-          specialArgs = {
-            flake-inputs = inputs;
-          };
-          modules = [
-            sops-nix.nixosModules.sops
-            home-manager.nixosModules.home-manager
-            toolsModule
-            overlayModule
-            {
-              home-manager = {
-                useGlobalPkgs = true;
-                useUserPackages = true;
-                users.nixos = ./home/nixos;
-                extraSpecialArgs = {
-                  flake-inputs = inputs;
-                  username = "nixos";
-                  hostname = "nixos";
-                };
-                sharedModules = common-hm-modules ++ hmAliasModules;
+        packages = {
+          # TODO move nix-schema to nur-pkgs cachix
+          inherit (pkgs) nix-schema;
+          navi-master = pkgs.navi;
+          git-repo-manager = grm;
+          home-manager = hm;
+          system-manager = sysm;
+        } // allSystemsJar.wrappedPkgs.${system};
+        formatter = treefmtCfg.wrapper;
+        checks = {
+          formatting = treefmtCfg.check self;
+          git-hooks-check = inputs.git-hooks.lib.${system}.run {
+            src = ./.;
+            hooks = {
+              deadnix = {
+                enable = true;
+                stages = [ "pre-push" ];
               };
-            }
-            ./hosts/nixos/iso.nix
+              statix = {
+                enable = true;
+                stages = [ "pre-push" ];
+              };
+              nixfmt-rfc-style = {
+                enable = true;
+                stages = [
+                  "pre-push"
+                  "pre-commit"
+                ];
+              };
+              skip-ci-check = {
+                enable = true;
+                always_run = true;
+                stages = [ "prepare-commit-msg" ];
+                entry = toString (
+                  # if all are md files, skip ci
+                  pkgs.writeShellScript "skip-ci-md" ''
+                    COMMIT_MSG_FILE=$1
+                    STAGED_FILES=$(git diff --cached --name-only)
+                    if [ -z "$STAGED_FILES" ] || ! echo "$STAGED_FILES" | grep -qE '\.md$'; then
+                      exit 0
+                    fi
+                    if grep -q "\[skip ci\]" "$COMMIT_MSG_FILE"; then
+                      exit 0
+                    fi
+                    echo "[skip ci]" >> "$COMMIT_MSG_FILE"
+                  ''
+                );
+              };
+            };
+          };
+        };
+
+        devShells.default = import ./flake/shell.nix {
+          inherit
+            pkgs
+            treefmtCfg
+            self
+            system
+            ;
+        };
+      }
+    )
+    // inputs.flake-utils.lib.eachDefaultSystemPassThrough (
+      system:
+      let
+        user = "rithvij";
+        uzer = "rithviz";
+        droid = "nix-on-droid";
+        liveuser = "nixos";
+
+        linuxhost = "iron";
+        hostdroid = "localhost"; # not possible to change it
+        livehost = "nixos";
+
+        pkgs = allSystemsJar.pkgs.${system};
+
+        hmAliasModules = (import ./home/applications/special.nix { inherit pkgs; }).aliasModules;
+        homeConfig =
+          {
+            username,
+            hostname ? null,
+            modules ? [ ],
+            system ? "x86_64-linux",
+          }:
+          inputs.home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [ ./home/${username} ] ++ modules ++ hmAliasModules;
+            # TODO sharedModules sops
+            extraSpecialArgs = {
+              flake-inputs = inputs;
+              inherit system;
+              inherit username;
+              inherit hostname;
+            };
+          };
+        nix-index-hm-modules = [
+          inputs.nix-index-database.hmModules.nix-index
+          { programs.nix-index-database.comma.enable = true; }
+        ];
+        common-hm-modules = [
+          inputs.sops-nix.homeManagerModules.sops
+        ];
+        grm = inputs.git-repo-manager.packages.${system}.default;
+        hm = inputs.home-manager.packages.${system}.default;
+        sysm = inputs.system-manager.packages.${system}.default;
+        toolsModule = {
+          environment.systemPackages = [
+            hm
+            grm
+            sysm
+            #pkgs.nix-schema
           ];
         };
-      };
-      # keep all nix-on-droid hosts in same state
-      nixOnDroidConfigurations = rec {
-        default = mdroid;
-        mdroid = nix-on-droid.lib.nixOnDroidConfiguration {
-          extraSpecialArgs = {
-            flake-inputs = inputs;
-          };
-          modules = [ ./hosts/nod ];
+        overlayModule = {
+          nixpkgs.overlays = allSystemsJar.overlays.${system};
         };
-      };
-      inherit (system-manager.lib) makeSystemConfig;
-      systemConfigs = rec {
-        default = gha;
-        gha = makeSystemConfig {
-          modules = [ ./hosts/sysm/gha/configuration.nix ];
-        };
-        vps = makeSystemConfig { modules = [ ./hosts/sysm/vps/configuration.nix ]; };
-      };
-      formatter.${system} = treefmtCfg.wrapper;
-      checks.${system} = {
-        formatting = treefmtCfg.check self;
-        git-hooks-check = git-hooks.lib.${system}.run {
-          src = ./.;
-          hooks = {
-            deadnix = {
-              enable = true;
-              stages = [ "pre-push" ];
-            };
-            statix = {
-              enable = true;
-              stages = [ "pre-push" ];
-            };
-            nixfmt-rfc-style = {
-              enable = true;
-              stages = [
-                "pre-push"
-                "pre-commit"
-              ];
-            };
-            skip-ci-check = {
-              enable = true;
-              always_run = true;
-              stages = [ "prepare-commit-msg" ];
-              entry = toString (
-                # if all are md files, skip ci
-                pkgs.writeShellScript "skip-ci-md" ''
-                  COMMIT_MSG_FILE=$1
-                  STAGED_FILES=$(git diff --cached --name-only)
-                  if [ -z "$STAGED_FILES" ] || ! echo "$STAGED_FILES" | grep -qE '\.md$'; then
-                    exit 0
-                  fi
-                  if grep -q "\[skip ci\]" "$COMMIT_MSG_FILE"; then
-                    exit 0
-                  fi
-                  echo "[skip ci]" >> "$COMMIT_MSG_FILE"
-                ''
-              );
-            };
-          };
-        };
-      };
 
-      devShells.${system}.default = import ./flake/shell.nix {
-        inherit
-          pkgs
-          treefmtCfg
-          self
-          system
-          ;
-      };
-      # TODO broken
-      #devShells."aarch64-linux".default = import ./flake/shellaarch.nix { inherit pkgs; };
-    };
+        #inherit (inputs.nixpkgs.lib) nixosSystem;
+        # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
+        # IFD BAD BAD AAAAAA!
+        # only option is to maintain a fork of nixpkgs as of now
+        # follow https://github.com/NixOS/nix/issues/3920
+        nixosSystem = import (allSystemsJar.nixpkgs'.${system} + "/nixos/lib/eval-config.nix");
+      in
+      {
+        schemas = # (builtins.removeAttrs inputs.flake-schemas.schemas [ "schemas" ]) //
+          {
+            systemConfigs = {
+              version = 1;
+              doc = ''
+                The `systemConfigs` flake output defines [system-manager configurations](https://github.com/numtide/system-manager).
+              '';
+              inventory =
+                output:
+                inputs.flake-schemas.lib.mkChildren (
+                  builtins.mapAttrs (configName: this: {
+                    what = "system-manager configuration ${configName}";
+                    derivation = this;
+                    forSystems = [ this.system ];
+                  }) output
+                );
+            };
+            nixOnDroidConfigurations = {
+              version = 1;
+              doc = ''
+                The `nixOnDroidConfigurations` flake output defines [nix-on-droid configurations](https://github.com/nix-community/nix-on-droid).
+              '';
+              inventory =
+                output:
+                inputs.flake-schemas.lib.mkChildren (
+                  builtins.mapAttrs (configName: this: {
+                    what = "nix-on-droid configuration ${configName}";
+                    derivation = this.activationPackage;
+                    forSystems = [ this.activationPackage.system ];
+                  }) output
+                );
+            };
+          };
+        systemConfigs = {
+          gha = inputs.system-manager.lib.makeSystemConfig {
+            modules = [ ./hosts/sysm/gha/configuration.nix ];
+          };
+          vps = inputs.system-manager.lib.makeSystemConfig {
+            modules = [ ./hosts/sysm/vps/configuration.nix ];
+          };
+        };
+        homeConfigurations = {
+          # nixos main
+          "${user}@${linuxhost}" = homeConfig {
+            username = user;
+            hostname = linuxhost;
+            modules = nix-index-hm-modules ++ common-hm-modules;
+            inherit system;
+          };
+          # non-nixos linux
+          ${uzer} = homeConfig {
+            username = uzer;
+            modules = nix-index-hm-modules ++ common-hm-modules;
+            inherit system;
+          };
+          # nix-on-droid
+          "${droid}@${hostdroid}" = homeConfig {
+            username = droid;
+            hostname = hostdroid;
+            system = "aarch64-linux";
+          };
+          # nixos live user
+          "${liveuser}@${livehost}" = homeConfig {
+            username = liveuser;
+            hostname = livehost;
+            modules = common-hm-modules;
+            inherit system;
+          };
+          # TODO different repo with npins?
+          "runner" = homeConfig {
+            username = "runner";
+            hostname = "_______";
+            modules = nix-index-hm-modules ++ common-hm-modules;
+            inherit system;
+          };
+        };
+        nixosConfigurations = {
+          ${linuxhost} = nixosSystem {
+            inherit system;
+            modules = [
+              toolsModule
+              overlayModule
+              inputs.sops-nix.nixosModules.sops
+              inputs.niri.nixosModules.niri
+              ./hosts/${linuxhost}/configuration.nix
+            ];
+            specialArgs = {
+              flake-inputs = inputs;
+              inherit system; # TODO needed?
+              username = user;
+              hostname = linuxhost;
+            };
+          };
+          defaultIso = nixosSystem rec {
+            inherit system;
+            specialArgs = {
+              flake-inputs = inputs;
+            };
+            modules = [
+              inputs.sops-nix.nixosModules.sops
+              inputs.home-manager.nixosModules.home-manager
+              toolsModule
+              overlayModule
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.nixos = ./home/nixos;
+                  extraSpecialArgs = {
+                    flake-inputs = inputs;
+                    username = liveuser;
+                    hostname = livehost;
+                  };
+                  sharedModules = common-hm-modules ++ hmAliasModules;
+                };
+              }
+              ./hosts/nixos/iso.nix
+            ];
+          };
+        };
+        # keep all nix-on-droid hosts in same state
+        nixOnDroidConfigurations = rec {
+          default = mdroid;
+          mdroid = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+            inherit pkgs;
+            extraSpecialArgs = {
+              flake-inputs = inputs;
+              hmSharedModules = hmAliasModules;
+            };
+            modules = [ ./hosts/nod ];
+          };
+        };
+      }
+    );
 }
