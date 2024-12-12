@@ -1,4 +1,9 @@
-{ pkgs, flake-inputs, ... }:
+{
+  pkgs,
+  flake-inputs,
+  hmSharedModules,
+  ...
+}:
 {
   imports = [ ./sshd.nix ];
   environment.packages = with pkgs; [
@@ -47,6 +52,7 @@
     extraSpecialArgs = {
       inherit flake-inputs;
     };
+    sharedModules = hmSharedModules;
     config = ../../home/nix-on-droid;
   };
 }

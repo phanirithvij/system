@@ -1,3 +1,4 @@
+{ config, pkgs, ... }:
 # TODO https://github.com/nix-community/nix-on-droid/wiki/SSH-access
 let
   sshdTmpDirectory = "${config.user.home}/sshd-tmp";
