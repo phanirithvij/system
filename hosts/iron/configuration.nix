@@ -18,7 +18,7 @@ in
     ../../nixos/profiles/desktop.nix
     ../../nixos/applications/bandwidth.nix
     ../../nixos/applications/cloudflare.nix
-    ../../nixos/applications/jellyfin.nix
+    ../../nixos/applications/mediaserver.nix
     ../../nixos/applications/paperless.nix
     # ../../nixos/applications/tailscale.nix
     ../../nixos/applications/touchpad.nix
