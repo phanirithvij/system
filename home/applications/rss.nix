@@ -6,6 +6,8 @@
       (map (p: p.meta.homepage + "/releases.atom") (
         with pkgs;
         [
+          # https://discourse.nixos.org/t/eval-nix-expression-from-the-command-line/8993/8?u=phanirithvij
+          # nix-instantiate --eval -E 'import ./scripts/nixinternal/nixpkgs-pkgs-maintained-by-user.nix { }' | jq -r
           opengist
           viddy
           gitcs
@@ -58,6 +60,8 @@
         "http://waywardmonkeys.org/feeds/all.atom.xml"
         "https://www.trickster.dev/post/index.xml"
         "https://ziglang.org/news/index.xml"
+
+        "https://letterboxd.com/eglerbot/rss"
       ]
     );
   };
