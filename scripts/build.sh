@@ -21,7 +21,7 @@ _exe onix build .#systemConfigs.vps -o result/sysm.vps
 _exe onix build .#nixosConfigurations.iron.config.system.build.toplevel -o result/h-iron
 _exe onix build .#nixosConfigurations.defaultIso.config.system.build.isoImage -o result/h-iso
 
-nix flake show --json |
+nix flake show --json --allow-import-from-derivation |
   jq '.packages."x86_64-linux"|keys[]' |
   xargs -I '{}' echo '.#{}' |
   xargs bash -c "onix build --no-link --print-out-paths $*"
