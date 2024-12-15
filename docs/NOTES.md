@@ -194,7 +194,7 @@ Useful links along with my annotations.
   - https://home-manager-options.extranix.com/
 - direnv
   - use flake in envrc
-- [ ] nix-olde, nix-du, nix-inspect, nix-tree etc
+- [ ] nix-olde, nix-du, nix-inspect, nix-tree, nix-top etc
 - [ ] nixos-infect ?? nixos-anywhere
 - [ ] xc/just
   - meh never used them
