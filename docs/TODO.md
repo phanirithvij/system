@@ -5,6 +5,13 @@ more are in my zet but that is yet to be made public
 
 ## TODO
 
+- [ ] gitbatch forked
+  - proper features, prevent crash
+  - also it has a config file ~/.config/gitbatch/config.yml
+- [ ] xfce glibc g_file_replace?(_contents), for docklike and anyother things, so they can work with symlinks
+  - https://github.com/geany/geany/issues/1533
+  - https://github.com/nix-community/home-manager/issues/4537
+  - https://github.com/bk138/gromit-mpx/commit/1242a929a01ba4f2a7ed41eda12d3c15fd18643d#diff-18680f57f5d32607a3b196afffe0d6ecb250af6c0a994b304b88fc91231250bfL652
 - [x] wrapper-manager
   - [x] duf with aliases
     - i.e. a package provides its own aliases
