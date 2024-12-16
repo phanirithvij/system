@@ -127,9 +127,16 @@
         nixpkgs' = legacyPackages.applyPatches {
           name = "nixpkgs-patched";
           src = inputs.nixpkgs;
-          patches = [
-            ./opengist-module.patch
-          ] ++ builtins.map legacyPackages.fetchpatch2 [ ];
+          patches =
+            [
+              ./opengist-module.patch
+            ]
+            ++ builtins.map legacyPackages.fetchpatch2 [
+              {
+                url = "https://github.com/NixOS/nixpkgs/pull/364606.diff";
+                hash = "sha256-FOoq//PnN1yGX6oyYmS7GDARdJEAxpJHUTuFs92nRhI=";
+              }
+            ];
         };
         overlays =
           (import ./lib/overlays {
