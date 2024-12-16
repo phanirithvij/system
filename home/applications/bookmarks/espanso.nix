@@ -54,7 +54,7 @@
             ];
           }
           {
-            trigger = ":wifipass";
+            trigger = ":wifi";
             replace = "{{finalpass}}";
             # ORDER matters
             vars = [
@@ -106,6 +106,13 @@
                 };
               }
             ];
+          }
+          {
+            trigger = ":5months";
+            replace = ''
+              https://github.com/avelino/awesome-go/blob/main/CONTRIBUTING.md#quality-standards
+              > have at least 5 months of history since the first commit.
+            '';
           }
         ];
       };
