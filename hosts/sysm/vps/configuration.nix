@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
   imports = [ ../modules/syncplay.nix ];
+  # TODO many other services
+  # opengist
+  # opengist darwin builds with and without sandbox
   config = rec {
     nixpkgs.hostPlatform = "x86_64-linux";
 

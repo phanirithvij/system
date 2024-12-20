@@ -95,6 +95,7 @@
         inherit (legacyPackages) lib;
         #pkgs = import inputs.nixpkgs {
         #pkgs = import nixpkgs' {
+        # TODO still doesn't work on macos
         pkgs = import (if (system == "x86_64-linux") then nixpkgs' else inputs.nixpkgs) {
           inherit overlays system;
           config = {
@@ -185,6 +186,7 @@
           navi-master = pkgs.navi;
           git-repo-manager = grm;
           home-manager = hm;
+          # TODO optional if system is linux
           system-manager = sysm;
         } // allSystemsJar.wrappedPkgs.${system};
         formatter = treefmtCfg.wrapper;

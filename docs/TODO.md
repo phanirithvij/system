@@ -22,6 +22,11 @@ more are in my zet but that is yet to be made public
   - like pre-commit-config.yml by git-hooks.nix
 - [ ] npins with flake inputs
   - [ ] npins with local git repos as inputs
+- [ ] unfree apps
+  - spotify
+    - can be removed and be replaced with navi cheat with a nix-shell -p
+  - steam
+    - needed if want games, no ifs no buts
 
 ### ideas
 
