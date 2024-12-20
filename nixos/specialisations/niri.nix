@@ -7,11 +7,12 @@
   specialisation.niri = {
     inheritParentConfig = true;
     configuration = {
+      imports = [ ];
       system.nixos.tags = [ "sp:niri" ];
       programs.niri.enable = true;
+      programs.niri.package = pkgs.niri-unstable;
       # TODO overlays conditionally?
       # nixpkgs.overlays = [ flake-inputs.niri.overlays.niri ];
-      programs.niri.package = pkgs.niri-unstable;
       environment.variables.NIXOS_OZONE_WL = "1";
       environment.systemPackages = with pkgs; [
         wl-clipboard-rs

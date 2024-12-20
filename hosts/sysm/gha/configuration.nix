@@ -14,11 +14,11 @@
         duf
         fzf
         gdu
-        lf
+        wrappedPkgs.lf
         lazygit
         neovim
         ripgrep
-        tmux
+        wrappedPkgs.tmux
         viddy
       ]
       ++ [
