@@ -155,10 +155,7 @@
           name = "nixpkgs-patched";
           src = inputs.nixpkgs;
           patches =
-            [
-              ./opengist-module.patch
-            ]
-            ++ builtins.map legacyPackages.fetchpatch2 [
+            builtins.map legacyPackages.fetchpatch2 [
               {
                 url = "https://github.com/NixOS/nixpkgs/pull/364606.diff";
                 hash = "sha256-FOoq//PnN1yGX6oyYmS7GDARdJEAxpJHUTuFs92nRhI=";
@@ -167,6 +164,10 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/352521.diff";
                 hash = "sha256-9dgu4TeA9agJM15HGiaZ9VTyapIte4WNWiBUu6wDhIo=";
               }
+            ]
+            ++ [
+              ./opengist-module.patch
+              ./mediawiki-module-pr-heredoc.patch
             ];
         };
         overlays =
