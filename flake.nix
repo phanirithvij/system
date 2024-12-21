@@ -82,6 +82,19 @@
 
     rust-overlay.url = "github:oxalica/rust-overlay";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
+
+    yaml2nix.url = "github:euank/yaml2nix";
+    # https://github.com/euank/yaml2nix/blob/3a6df359da40ee49cb9ed597c2400342b76f2083/flake.nix#L4
+    yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
+    yaml2nix.inputs.cargo2nix.follows = "cargo2nix";
+    yaml2nix.inputs.flake-utils.follows = "flake-utils";
+
+    cargo2nix = {
+      url = "github:cargo2nix/cargo2nix/release-0.11.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+      inputs.rust-overlay.follows = "rust-overlay";
+    };
   };
 
   outputs =
