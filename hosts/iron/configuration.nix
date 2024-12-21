@@ -25,6 +25,7 @@ in
     ../../nixos/applications/guix
     ../../nixos/applications/nix
     ../../nixos/applications/nix/nixserve
+    ../../nixos/applications/nix/selfhosted
     ../../nixos/applications/nix/pr-tracker-service.nix
     ../../nixos/applications/ntfy-rss.nix
     ../../nixos/applications/opengist.nix
@@ -295,10 +296,16 @@ in
       kdiskmark
 
       ksnip
+
+      man-pages
+      man-pages-posix
     ];
     variables.EDITOR = "nvim";
     variables.VISUAL = "nvim";
   };
+  # https://wiki.nixos.org/wiki/Man_pages
+  documentation.dev.enable = true;
+  documentation.man.enable = true;
 
   programs.git = {
     enable = true;
