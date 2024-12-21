@@ -367,9 +367,13 @@
         systemConfigs = {
           gha = inputs.system-manager.lib.makeSystemConfig {
             modules = [ ./hosts/sysm/gha/configuration.nix ];
+            # https://github.com/numtide/system-manager/issues/10
+            # nixpkgs overlays not propagated
+            extraSpecialArgs = { inherit pkgs; };
           };
           vps = inputs.system-manager.lib.makeSystemConfig {
             modules = [ ./hosts/sysm/vps/configuration.nix ];
+            extraSpecialArgs = { inherit pkgs; };
           };
         };
         homeConfigurations = {

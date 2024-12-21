@@ -45,7 +45,7 @@ in
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    rclone
+    #rclone #tgdrive version from nur
     yq
     viddy
     duf
