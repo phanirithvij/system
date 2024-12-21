@@ -66,6 +66,7 @@
   - also `?full_index=1` for patch urls for github patches for reproducibility.
 - requireFile
   - non-redistributable files user warning with file hash verified
+  - also can write an fixed output derivation maybe a python script which downloads the files, https://nix.dev/manual/nix/stable/glossary#gloss-fixed-output-derivation
 - git bisect with nixos-rebuild vm (nix-hour #8 18:20)
   - `nix-build <nixpkgs/nixos> --arg configuration ./configuration.nix -A vm`
   - `nix-build ./nixos --arg configuration ./configuration.nix -A vm`
@@ -194,7 +195,7 @@ Useful links along with my annotations.
   - https://home-manager-options.extranix.com/
 - direnv
   - use flake in envrc
-- [ ] nix-olde, nix-du, nix-inspect, nix-tree, nix-top etc
+- [ ] nix-olde, nix-du, nix-inspect, nix-tree, nix-top, nix-melt, nix-init etc
 - [ ] nixos-infect ?? nixos-anywhere
 - [ ] xc/just
   - meh never used them
