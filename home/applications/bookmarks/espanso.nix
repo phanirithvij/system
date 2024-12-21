@@ -67,13 +67,33 @@ in
               ":now"
             ];
             replace = "{{mydate}}";
-            label = "lexico-time";
+            label = "2024-12-21T21:14";
             vars = [
               {
                 name = "mydate";
                 type = "date";
                 params = {
-                  format = "%FT%T%:z";
+                  # 2024-12-21T21:13
+                  format = "%FT%H:%M";
+                };
+              }
+            ];
+          }
+          {
+            triggers = [
+              ":date"
+              ":now"
+            ];
+            replace = "{{mydate}}";
+            label = "2024-12-21T21:14:18.216131770+05:30";
+            vars = [
+              {
+                name = "mydate";
+                type = "date";
+                params = {
+                  # 2024-12-21T21:13:52.978767200+05:30
+                  # https://discord.com/channels/884163483409731584/1013916990760554608/1320014927695577169 (Espanso discord)
+                  format = "%+";
                 };
               }
             ];
