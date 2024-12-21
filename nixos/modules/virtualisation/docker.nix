@@ -7,7 +7,7 @@
 {
   options.docker-opts.nameservers = lib.mkOption { type = lib.types.listOf lib.types.str; };
   config = {
-    # https://nixos.wiki/wiki/Podman
+    # https://wiki.nixos.org/wiki/Podman
     virtualisation = {
       # waydroid.enable = true;
       docker = {
