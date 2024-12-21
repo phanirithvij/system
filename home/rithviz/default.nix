@@ -63,7 +63,6 @@
     qcomicbook
     qimgv # img viewer
     qrcp # fileserver with added qr ease of use
-    rclone
     remote-touchpad # control screen via webui from different device
     ripgrep # modern grep cli
     rnote # note taking
