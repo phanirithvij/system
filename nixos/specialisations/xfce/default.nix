@@ -5,6 +5,7 @@
     configuration = {
       system.nixos.tags = [ "sp:xfce" ];
       services.xserver.desktopManager.xfce.enable = true;
+      services.xserver.desktopManager.xfce.enableScreensaver = false;
       services.desktopManager.plasma6.enable = lib.mkForce false;
       environment.systemPackages = with pkgs; [
         plata-theme
