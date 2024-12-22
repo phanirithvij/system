@@ -5,6 +5,8 @@ more are in my zet but that is yet to be made public
 
 ## TODO
 
+- [ ] topgrade config system update inside specialisation switches to default one
+  - or ofcourse disable home-manager and nixos switch in the config fully
 - [ ] gitbatch forked
   - proper features, prevent crash
   - also it has a config file ~/.config/gitbatch/config.yml
