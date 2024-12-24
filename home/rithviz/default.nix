@@ -53,10 +53,11 @@
     jq # json cli
     lazydocker # docker tui
     newsboat # rss
-    fastfetch # sysinfo summary
     nms # esoteric sneakers movie terminal effect
+    fastfetch # sysinfo summary
     macchina # neofetch alternative
     onefetch # neofetch like tool for git repos
+    microfetch # notashelf/microfetch
     p7zip # 7z cli
     pv # progress vizualized
     qbittorrent

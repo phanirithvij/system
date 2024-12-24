@@ -260,7 +260,7 @@ in
 
       fish # programs fish
       go
-      fastfetch
+      microfetch
       gparted
       tree
       upx
