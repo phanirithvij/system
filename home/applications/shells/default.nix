@@ -24,6 +24,7 @@
     enable = true;
     package = pkgs.fd;
   };
+  # https://github.com/junegunn/fzf/issues/3914
   programs.fzf = {
     enable = true;
     defaultCommand = "${pkgs.fd}/bin/fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
