@@ -1,6 +1,8 @@
 { config, ... }:
 let
   repoDir = "/shed/Projects/system";
+  # can do ./symlink as source i.e. docklike.rc.symlink -> /abs/path/docklike.rc and ./docklike.rc.symlink as source
+  # but impure
   symlink = config.lib.file.mkOutOfStoreSymlink;
 in
 {
