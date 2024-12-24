@@ -7,6 +7,7 @@ _: {
       # <Primary> is ctrl https://unix.stackexchange.com/questions/168505/what-key-is-primary
       "commands/custom/<Primary>Escape" = "xfce4-popup-whiskermenu";
       "commands/custom/<Super>" = "xfce4-popup-whiskermenu";
+      "commands/custom/<Super>v" = "xfce4-popup-clipman";
       "xfwm4/custom/<Super>Up" = "maximize_window_key";
       "xfwm4/custom/<Super>Down" = "hide_window_key";
       "xfwm4/custom/<Super>d" = "show_desktop_key";
