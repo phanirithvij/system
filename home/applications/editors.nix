@@ -42,6 +42,7 @@
             tree-sitter-nix
             tree-sitter-python
             tree-sitter-yaml
+            tree-sitter-nim
           ]
         ))
         nvim-lspconfig
