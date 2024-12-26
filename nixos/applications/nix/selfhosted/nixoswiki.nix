@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   services.mediawiki = {
-    enable = true;
+    enable = false;
     database.type = "postgres";
     name = "nixos wiki selfhosted";
     webserver = "nginx";
