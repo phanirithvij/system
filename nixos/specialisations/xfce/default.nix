@@ -20,6 +20,8 @@
         #    docklike plugin
         #    - [ ] track w/ yadm, or home-manager with read/write to allow visual modification
         xfce.thunar
+        xfce.thunar-volman
+        xfce.thunar-archive-plugin
         xfce.xfce4-whiskermenu-plugin
         xfce.xfce4-clipman-plugin
         xfce.xfce4-panel-profiles
