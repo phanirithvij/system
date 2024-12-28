@@ -161,17 +161,11 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/368539.diff";
                 hash = "sha256-IszfMYQNXI5/+vGwfjYoFYUy6vp7veXB6ab+lrbb1mI=";
               }
-              {
-                # mediawiki pr (merged)
-                url = "https://github.com/NixOS/nixpkgs/pull/352521.diff";
-                hash = "sha256-9dgu4TeA9agJM15HGiaZ9VTyapIte4WNWiBUu6wDhIo=";
-              }
             ]
             ++ [
               ./opengist-module.patch
               # https://github.com/junegunn/fzf/pull/3918/files
               ./fzf-keybinds.patch
-              ./mediawiki-module-pr-heredoc.patch
             ];
         };
         overlays =
