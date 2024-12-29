@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 if [ "$#" -ne 1 ]; then
-    echo "nix-prefetch-patch <url>"
-    exit 1
+  echo "nix-prefetch-patch <url>"
+  exit 1
 fi
 read -r -d '' expr <<EOF
 with import <nixpkgs> {};
