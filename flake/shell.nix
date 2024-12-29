@@ -11,9 +11,8 @@ pkgs.mkShellNoCC {
     with pkgs;
     [
       nh
-      cachix
       xc
-      dprint
+      cachix
     ]
     ++ [
       treefmtCfg.wrapper
