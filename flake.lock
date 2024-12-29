@@ -826,11 +826,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1735113460,
-        "narHash": "sha256-uwFkw+HFxwzJBsfxDnYtKS+X+2e4PV8iX/TKD6uyNrw=",
+        "lastModified": 1735418074,
+        "narHash": "sha256-eln9gYdpWJX2F16fY1JN49JY7Po4WLEuwuHAEaNtGlc=",
         "owner": "phanirithvij",
         "repo": "nur-packages",
-        "rev": "e57bd4ca252df78227336b283811e4ff75e2691d",
+        "rev": "9a3d9c14f3dbe8d5becee8e0980ebeb7555c139d",
         "type": "github"
       },
       "original": {
