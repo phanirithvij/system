@@ -1,3 +1,4 @@
+{ pkgs }:
 _: {
   projectRootFile = "flake.nix";
 
@@ -15,6 +16,7 @@ _: {
   #programs.mdformat.enable = true;
 
   programs.dprint.enable = true;
+  programs.dprint.package = pkgs.wrappedPkgs.dprint;
   programs.dprint.settings = {
     includes = [
       "**/*.{md,json,jsonc,toml,yml,yaml}"
@@ -23,12 +25,6 @@ _: {
     excludes = [
       "**/node_modules"
       "**/*-lock.json"
-    ];
-    plugins = [
-      "https://plugins.dprint.dev/markdown-0.17.8.wasm"
-      "https://plugins.dprint.dev/json-0.19.4.wasm"
-      "https://plugins.dprint.dev/toml-0.6.3.wasm"
-      "https://plugins.dprint.dev/g-plane/pretty_yaml-v0.5.0.wasm"
     ];
   };
 }

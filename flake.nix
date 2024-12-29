@@ -197,7 +197,8 @@
       system:
       let
         pkgs = allSystemsJar.pkgs.${system};
-        treefmtCfg = (inputs.treefmt-nix.lib.evalModule pkgs ./treefmt.nix).config.build;
+        treefmtCfg =
+          (inputs.treefmt-nix.lib.evalModule pkgs (import ./treefmt.nix { inherit pkgs; })).config.build;
         grm = inputs.git-repo-manager.packages.${system}.default;
         hm = inputs.home-manager.packages.${system}.default;
         sysm = inputs.system-manager.packages.${system}.default;
