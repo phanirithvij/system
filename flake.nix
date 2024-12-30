@@ -156,6 +156,10 @@
           src = inputs.nixpkgs;
           patches =
             builtins.map legacyPackages.fetchpatch2 [
+              {
+                url = "https://github.com/NixOS/nixpkgs/pull/369415.diff?full_index=1";
+                hash = "sha256-KN1megdQEm1R1L+0GfZF1hj+8UMm0gsnEtplDGIMvHY=";
+              }
               # swapspace wrapper
               {
                 url = "https://github.com/NixOS/nixpkgs/pull/368539.diff";
@@ -219,7 +223,8 @@
           # TODO optional if system is linux
           system-manager = sysm;
         } // allSystemsJar.wrappedPkgs.${system};
-        formatter = treefmtCfg.wrapper;
+        # NEVER ever run `nix fmt` run `treefmt`
+        #formatter = treefmtCfg.wrapper;
         checks = {
           formatting = treefmtCfg.check self;
           git-hooks-check = inputs.git-hooks.lib.${system}.run {
