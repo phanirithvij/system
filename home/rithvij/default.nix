@@ -173,6 +173,8 @@ in
         "video/x-matroska" = [ "mpv.desktop" ];
         "x-scheme-handler/tg" = [ "org.telegram.desktop.desktop" ];
         "x-scheme-handler/tonsite" = [ "org.telegram.desktop.desktop" ];
+        "text/x-nfo" = [ "micro.desktop" ];
+        "text/plain" = [ "micro.desktop" ];
       };
     in
     {
