@@ -166,6 +166,7 @@
               ./opengist-module.patch
               # https://github.com/junegunn/fzf/pull/3918/files
               ./fzf-keybinds.patch
+              ./dprint-plugins.patch
             ];
         };
         overlays =

@@ -26,5 +26,14 @@ _: {
       "**/node_modules"
       "**/*-lock.json"
     ];
+    plugins = map toString (
+      with pkgs.dprint.plugins;
+      [
+        dprint-plugin-json
+        dprint-plugin-markdown
+        dprint-plugin-toml
+        g-plane-pretty_yaml
+      ]
+    );
   };
 }
