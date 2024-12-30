@@ -40,5 +40,4 @@ _exe onix build --no-link --print-out-paths "$(
 #  -o result/navi-master-portable.bundled
 
 _exe nix flake check
-_exe nix fmt
 #_exe nix run .#nix -- flake show
