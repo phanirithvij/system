@@ -38,6 +38,12 @@ more are in my zet but that is yet to be made public
       - github search "ludusavi lang:Nix" found many repos
   - [ ] heroic
   - [ ] prismlauncher
+- [ ] tty and buildserver profiles/specialisations
+  - tty means full nox (no X) all services
+  - buildserver means only nix services nothing else, also nox?
+- [ ] abandon kde plasma, move to xfce fully
+  - [ ] xfce4 wayland upcoming, follow it
+  - [ ] if I can get niri with steam working then use that too.
 
 ### ideas
 
