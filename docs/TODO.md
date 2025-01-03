@@ -29,6 +29,15 @@ more are in my zet but that is yet to be made public
     - can be removed and be replaced with navi cheat with a nix-shell -p
   - steam
     - needed if want games, no ifs no buts
+  - p7zip rar unfree
+- [ ] games
+  - [ ] ludusavi, rclone?
+    - ludusavi restore?
+      - windows games backups on nixos
+      - sheepo, rainworld, apeout, etc.
+      - github search "ludusavi lang:Nix" found many repos
+  - [ ] heroic
+  - [ ] prismlauncher
 
 ### ideas
 
