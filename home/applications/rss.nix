@@ -1,5 +1,27 @@
 { pkgs, ... }:
 {
+  /*
+    many rss tools
+    rsshub
+    https://github.com/RSS-Bridge/rss-bridge
+    freshrss
+    feedpushr
+    ntfy/gotify
+    https://github.com/QuiteRSS/quiterss
+    https://github.com/miniflux/v2
+    https://github.com/derek-zhou/airss
+    https://news.ycombinator.com/item?id=33469271
+    https://github.com/leafac/kill-the-newsletter
+    https://github.com/rss2email/rss2email
+    https://feed-me-up-scotty.vincenttunru.com/
+    feedbin
+    https://github.com/georgemandis/bubo-rss
+    openring https://news.ycombinator.com/item?id=33475112
+    https://statmodeling.stat.columbia.edu/blogs-i-read/
+      - example good UI layout for blogs-i-read idea
+    webring
+    buku, archivebox (not rss but hmm?)
+  */
   programs.newsboat = {
     enable = true;
     urls = map (x: { url = x; }) (
@@ -20,48 +42,82 @@
           golds
           pkgsite
           tcount
+          pfetch
         ]
       ))
       ++ [
+        # nixpkgs software releases
         "https://github.com/cloudcannon/pagefind/releases.atom" # homepage is not source url
         "https://invent.kde.org/multimedia/subtitlecomposer/-/tags?format=atom"
 
-        "https://andrewkelley.me/rss.xml"
+        # TODO group into categories!
+
+        # nix, nixos
         "https://ayats.org/feed.xml"
-        "https://bbengfort.github.io/index.xml"
-        "https://blog.adafruit.com/feed/"
-        "https://blog.janissary.xyz/feed.xml"
-        "https://blog.kowalczyk.info/atom.xml"
-        "https://blog.tiserbox.com/atom.xml"
         "https://bmcgee.ie/posts/index.xml"
-        "https://codewithoutrules.com/atom.xml"
-        "https://dwheeler.com/blog/index.rss"
-        "https://eli.thegreenplace.net/feeds/go.atom.xml"
+        "https://blog.janissary.xyz/feed.xml"
+        "https://nixos.mayflower.consulting/blog/index.xml"
         "https://exploring-better-ways.bellroy.com/rss.xml"
         "https://fbrs.io/atom.xml"
+        "https://ghedam.at/feed.xml"
+        "https://myme.no/atom-feed.xml"
+
+        # go
+        "https://bbengfort.github.io/index.xml"
+        "https://codewithoutrules.com/atom.xml"
+        "https://threedots.tech/index.xml"
+        "https://bitfieldconsulting.com/posts?format=rss"
+
+        # (python)
+        "https://python.libhunt.com/newsletter/feed"
+        "https://www.trickster.dev/post/index.xml"
+
+        # rust
+        "http://waywardmonkeys.org/feeds/all.atom.xml"
+        "https://this-week-in-rust.org/rss.xml"
+
+        # zig
+        "https://andrewkelley.me/rss.xml"
+        "https://ziglang.org/news/index.xml"
+        "https://mitchellh.com/feed.xml"
+
+        # hardware
+        "https://blog.adafruit.com/feed/"
+
+        # windows
+        "https://blog.kowalczyk.info/atom.xml"
+        "https://blog.tiserbox.com/atom.xml"
+        "https://dwheeler.com/blog/index.rss"
+        "https://eli.thegreenplace.net/feeds/go.atom.xml"
         "https://festivus.dev/index.xml"
+
+        # entertainment
         "https://fmhy.net/feed.rss"
         "https://gog-games.to/rss"
-        "http://habitatchronicles.com/feed/"
+
+        # tech news, programming lang changelogs
         "https://lwn.net/headlines/rss"
-        "https://mitchellh.com/feed.xml"
-        "http://nil.wallyjones.com/feeds/all.atom.xml"
-        "https://perens.com/feed/"
-        "https://pixel-druid.com/feed.rss"
-        "https://python.libhunt.com/newsletter/feed"
-        "https://rootknecht.net/index.xml"
-        "https://rsapkf.org/weblog/rss.xml"
-        "https://sparkfun.com/feeds/news"
+
+        # general tech
+        "http://habitatchronicles.com/feed/"
+
+        # discover new projects
         "https://terminaltrove.com/totw.xml"
         "https://terminaltrove.com/new.xml"
         "https://terminaltrove.com/blog.xml"
-        "https://this-week-in-rust.org/rss.xml"
-        "https://threedots.tech/index.xml"
-        "http://waywardmonkeys.org/feeds/all.atom.xml"
-        "https://www.trickster.dev/post/index.xml"
-        "https://ziglang.org/news/index.xml"
+        # TODO changelog nightly rss feed via kill-the-newsletter or rss-bridge or something
+        # they provide web readable urls
 
-        "https://letterboxd.com/eglerbot/rss"
+        # blog of thoughts (people)
+        "https://pixel-druid.com/feed.rss"
+        "https://rsapkf.org/weblog/rss.xml"
+        "https://kevincox.ca/feed.atom"
+
+        # unorganized
+        "http://nil.wallyjones.com/feeds/all.atom.xml"
+        "https://perens.com/feed/"
+        "https://rootknecht.net/index.xml"
+        "https://sparkfun.com/feeds/news"
       ]
     );
   };
