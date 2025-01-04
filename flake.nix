@@ -157,6 +157,10 @@
           patches =
             builtins.map legacyPackages.fetchpatch2 [
               {
+                url = "https://github.com/NixOS/nixpkgs/pull/370813.diff?full_index=1";
+                hash = "sha256-rooOtcrjsVDpW7odHPdKPFf37JqUtBl+mienaA7FQmM=";
+              }
+              {
                 url = "https://github.com/NixOS/nixpkgs/pull/369415.diff?full_index=1";
                 hash = "sha256-KN1megdQEm1R1L+0GfZF1hj+8UMm0gsnEtplDGIMvHY=";
               }
