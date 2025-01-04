@@ -32,15 +32,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # git-worktree helper
-    git-prole = {
-      url = "github:9999years/git-prole/main";
-      inputs.systems.follows = "systems";
-      inputs.crane.follows = "crane";
-      inputs.rust-overlay.follows = "rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/master";
       inputs.home-manager.follows = "home-manager";
@@ -72,7 +63,6 @@
 
     git-hooks.url = "github:cachix/git-hooks.nix";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
-    git-hooks.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     git-hooks.inputs.flake-compat.follows = "flake-compat";
 
     yaml2nix.url = "github:euank/yaml2nix";
@@ -159,10 +149,6 @@
               {
                 url = "https://github.com/NixOS/nixpkgs/pull/370813.diff?full_index=1";
                 hash = "sha256-rooOtcrjsVDpW7odHPdKPFf37JqUtBl+mienaA7FQmM=";
-              }
-              {
-                url = "https://github.com/NixOS/nixpkgs/pull/369415.diff?full_index=1";
-                hash = "sha256-KN1megdQEm1R1L+0GfZF1hj+8UMm0gsnEtplDGIMvHY=";
               }
               # swapspace wrapper
               {
