@@ -100,6 +100,7 @@
 
         # general tech
         "http://habitatchronicles.com/feed/"
+        "https://til.hashrocket.com/rss"
 
         # discover new projects
         "https://terminaltrove.com/totw.xml"
