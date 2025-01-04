@@ -13,8 +13,8 @@ _: {
   # use manual dprint fmt
   #programs.mdformat.enable = true;
 
-  programs.dprint.enable = true;
-  programs.dprint.settings = {
+  programs.dprint = {
+    enable = true;
     includes = [
       "**/*.{md,json,jsonc,toml,yml,yaml}"
       "*.{md,json,jsonc,toml,yml,yaml}"
@@ -23,15 +23,17 @@ _: {
       "**/node_modules"
       "**/*-lock.json"
     ];
-    plugins = map toString (
-      with pkgs.dprint-plugins;
-      [
-        dprint-plugin-json
-        dprint-plugin-markdown
-        dprint-plugin-toml
-        g-plane-pretty_yaml
-        (import ./pkgs/dprint/plugins.nix { inherit pkgs; })
-      ]
-    );
+    settings = {
+      plugins = map toString (
+        with pkgs.dprint-plugins;
+        [
+          dprint-plugin-json
+          dprint-plugin-markdown
+          dprint-plugin-toml
+          g-plane-pretty_yaml
+          (import ./pkgs/dprint/plugins.nix { inherit pkgs; })
+        ]
+      );
+    };
   };
 }

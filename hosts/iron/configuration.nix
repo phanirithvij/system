@@ -268,7 +268,8 @@ in
       zip
       xz
       unzip
-      p7zip
+      (p7zip.override { enableUnfree = true; })
+      peazip # todo use p7zip above instead of _7zz
       gnutar
       brotli
 
@@ -344,9 +345,10 @@ in
       5159
     ];
     allowedTCPPorts = [
-      26439
-      3249
-      5159
+      26439 # ??
+      3249 # ??
+      5159 # ??
+      8096 # jellyfin
     ];
   };
   networking.nameservers = nameservers;
