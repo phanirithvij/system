@@ -1,7 +1,7 @@
-{ flake-inputs, system, ... }:
+{ pkgs, ... }:
 {
   wrappers.git-prole = {
-    basePackage = flake-inputs.git-prole.packages.${system}.default;
+    basePackage = pkgs.git-prole;
     flags = [
       "--config"
       ./config.toml
