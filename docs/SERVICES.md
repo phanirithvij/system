@@ -1,7 +1,9 @@
 ## TODO
 
 A selfhosted heaven all in nixos
+Make sure all these run with system-manager + home-manager setup
 
+- [ ] silverbullet.md
 - [ ] Immich
   - https://github.com/NixOS/nixpkgs/pull/324127
 - [ ] Email server
@@ -12,9 +14,15 @@ A selfhosted heaven all in nixos
 - [x] Syncplay
   - Runs, tested once
 - [x] Jellyfin
+  - [ ] one pace agent
+- [ ] plex
+  - with hama, one pace agents
 - [ ] Caddy
+  - with extensions (available in nixpkgs)
 - [ ] Teldrive (own nur)
+  - [ ] rclone
 - [ ] chihaya (own nur)
+  - maybe nixpkgs upstream
 - [ ] pyload
 - [ ] archivebox
 - [ ] android-file-transfer automount
@@ -23,16 +31,15 @@ A selfhosted heaven all in nixos
   - I need to make it
   - Is it worth it for ~12MiBps extra?
   - fuse + wifi transfer from android devices
-- [ ] Wikipedia backups
-- [ ] kiwi
+- [ ] kiwix
+  - [ ] Wikipedia backups
 - [ ] searxng
 - [ ] Odoo corporate
-  - v18 in nixos-unstable
 - [x] your_spotify
   - customised to have SPOTIFY_CLIENT_ID to be secret too
 - [ ] buildbot-nix
   - CI w/ python
-- [ ] opengist
+- [ ] opengist (WIP)
   - code snippets, other things
   - invidual + corporate instances (pub/priv/unlisted gists)
   - alt. tclip by tailscale, but I call that vendor lock-in
@@ -44,7 +51,7 @@ A selfhosted heaven all in nixos
   - invidual + corporate instances (pub/priv/unlisted gists)
   - nixos module + sysm + data dir
   - restrict ssh, custom ssh/ui ports
-- [ ] qbittorrent server
+- [ ] qbittorrent server (WIP https://github.com/NixOS/nixpkgs/pull/287923)
   - with scripts (ntfy, gotify)
   - reddit.com/r/qBittorrent/comments/vyt1sz/comment/lpgxc2c
   - qbittorrentui (own nur)
@@ -62,14 +69,15 @@ A selfhosted heaven all in nixos
   - nixpkgs-tracker (has less branches)
 - [x] nixos landscape
   - always facing SSL errors
-  - cafkafk is busy with non-nix things
+  - author is busy with non-nix things
 - [ ] home-manager-option-search
 - [ ] nixos-search
 - [ ] old versions tracker
 - [ ] ofborg (necessary?)
-  - https://github.com/NixOS/ofborg/wiki/Operating-a-Builder/
+  - https://github.com/NixOS/ofborg/wiki/Operating-a-Builder
+  - ofborg offical sponsorship ended jan 1 2025, nixpkgs is moving to gha
 - [ ] docs (all)
-  - https://github.com/phanirithvij/mmdoc-nixpkgs-toc-gen.git
+  - https://github.com/phanirithvij/mmdoc-nixpkgs-toc-gen
 
 - pdf and docs tools
   - striling-pdf
@@ -81,7 +89,9 @@ A selfhosted heaven all in nixos
   - xournalpp (notes wacom)
   - rnote (notes wacom)
   - pinta
-  - sumatrapdf (win)
+  - sumatrapdf (wine, used it before, was good)
+    - https://github.com/emmanuelrosa/sumatrapdf-nix
+  - yacreader
 
 Another doc for selfhosted docker/podman stuff
 
