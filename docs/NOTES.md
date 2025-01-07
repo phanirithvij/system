@@ -124,13 +124,19 @@
     - but I like the touchpad scroll
   - hyprland flake too (I can give it up) (it is in hm and nixpkgs if needed)
   - flake-schemas, it can be its own project(directory), I don't need it in my nixos config really
+    - [x] builtins.getFlake and threw in in nurpkgs, so it is in cachix
   - crane, etc not needed
-  - blobdrop -> nixpkgs per my package request (done in my config)
+  - [x] blobdrop -> nixpkgs per my package request (done in my config)
 - TODO maintain own npins channels
   - since channels are minimal compared to github repo size
   - but channels can be generated on my own via local checkout of nixpkgs
   - no need for a network roundtrip
   - do something like what nixpkgs-review does and have a worktree and checkout the specific command and run the command to generate a channel.
+    - channels are good but treeshaking or something to remove dead nix code based on input nix expression would be better
+      - https://matrix.to/#/!kjdutkOsheZdjqYmqp:nixos.org/$KLCWy-2ZeuxKYxLUFHYI2otJnWXnqA7vrx5i5bI95bE
+    - eg. given a nix file, strip stuff from nixpkgs until the derivation "output" changes compared to full nixpkgs. (hash will change obviously)
+      - ca derivations?
+      - lazy trees?
 
 # nixey by other people
 
@@ -141,10 +147,15 @@ Useful links along with my annotations.
 ## Configs
 
 - see my github stars list https://github.com/stars/phanirithvij/lists/nixosothersdotfiles
+  - I star every nixos config I encounter (this is not good)
 - https://github.com/gvolpe/nix-config
   - nix flakes schema overlay
 - https://github.com/workflow/dotfiles
   - gha initial setup inspired by this
+- TODO document where I yanked what from
+- TODO yank wsl setup form https://github.com/grig-iv/nix-config/blob/main/home-manager/grig%40work-wsl.nix
+  - TODO yank repo cloning setup from the same
+  - TODO what I though git-repo-manager was. make it work. also git-prole declerative
 - [ ] postgresql backup with rustic
 - [ ] impermanence
   - not worth the effort imo
@@ -241,6 +252,8 @@ Useful links along with my annotations.
 - flakes merged (experimental)
 - flakehub
 - detsys grahamc flakes are stable post
+- detsys nix distribution
+  - seo paid adverts
 
 - srid permaban
 
@@ -259,16 +272,19 @@ Useful links along with my annotations.
   - over semantics discussion with nat418
 
 - ratioberatus quit, lix
-  - nix update mic92, no proper stable upgrade process
+  - nix version updated by mic92, no proper stable upgrade process
+    - [x] fixed likely as they have extensive tests after this incident
 - jonringer commit bits
   - anticipates backlash, gets backlash
     - "lies" about timeline
     - walks back and apologises (no one cares)
   - samueldr ragequit - nixos mobile abdandon
-  - xe ragequit
+  - xe quit
 - jonringer permaban
   - jonringer steps down from discord and reddit
   - jonringer doesn't step down from reddit (poly-repo fork)
+  - jonringer nix podcast episode
+  - jonringer ekala
 
 ### awesome
 
@@ -284,5 +300,5 @@ Useful links along with my annotations.
   - npins templates
   - nix-shell-templates
   - flake-templates (maybe same as above)
-  - use flake template feature for nix-shell-templates too? but make it work with old nix-* commands
+    - use flake template feature for nix-shell-templates too? but make it work with old nix-* commands
   - npins > flake-compat
