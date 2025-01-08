@@ -1,10 +1,6 @@
 {
-
   virtualisation.lxd.enable = true;
 
-  # TODO move this
-  users.users.rithvij = {
-    extraGroups = [ "lxd" ];
-  };
-
+  # TODO get the username from somewhere (nixos options)
+  users.users.rithvij.extraGroups = [ "lxd" ];
 }

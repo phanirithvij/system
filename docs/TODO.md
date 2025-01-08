@@ -3,6 +3,8 @@
 main system configuration including other whacky ideas
 more are in my zet but that is yet to be made public
 
+see ./todos folder as well
+
 ## TODO
 
 - [ ] topgrade config system update inside specialisation switches to default one

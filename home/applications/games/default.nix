@@ -11,8 +11,17 @@
     https://github.com/thilobillerbeck/dotfiles/blob/32815180d12079a6a9ab7263d70411008ac1e093/home-manager/modules/packages.nix#L123-L138
   */
   home.packages = with pkgs; [
-    heroic
-    gamescope
+    # TODO antimicrox
+    # TODO bottles
+    # TODO lutris
+    # TODO mangohud, gamemode
+    heroic # TODO backups for wine etc.
+    gamescope # TODO what is this?
+
     ludusavi # TODO service w/ rclone?
+
+    # TODO download scripts and rclone backup
+    # TODO tui?
+    lgogdownloader
   ];
 }

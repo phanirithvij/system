@@ -8,4 +8,5 @@
     };
   };
   programs.virt-manager.enable = true;
+  users.users.rithvij.extraGroups = [ "libvirtd" ];
 }

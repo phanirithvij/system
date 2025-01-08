@@ -1,7 +1,7 @@
 {
   inputs = {
     # THIS is dumb unless nixpkgs is based on nixos-unstable
-    # useful for git bisecting
+    # useful for git bisecting, use path:/abs/path instead for the same
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
@@ -147,13 +147,14 @@
           patches =
             builtins.map legacyPackages.fetchpatch2 [
               {
+                # guile-lzlib guix pr (landed)
                 url = "https://github.com/NixOS/nixpkgs/pull/370813.diff?full_index=1";
                 hash = "sha256-rooOtcrjsVDpW7odHPdKPFf37JqUtBl+mienaA7FQmM=";
               }
-              # swapspace wrapper
+              # dprint checks pr
               {
-                url = "https://github.com/NixOS/nixpkgs/pull/368539.diff";
-                hash = "sha256-IszfMYQNXI5/+vGwfjYoFYUy6vp7veXB6ab+lrbb1mI=";
+                url = "https://github.com/NixOS/nixpkgs/pull/370188.diff?full_index=1";
+                hash = "sha256-t9xB5QkY6geQ65SjXjAZHCgJO8hYkMsINuiitk9vCbQ=";
               }
             ]
             ++ [
