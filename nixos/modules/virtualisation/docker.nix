@@ -19,6 +19,7 @@
         };
       };
     };
+    users.users.rithvij.extraGroups = [ "docker" ];
     # broke xserver for me, had to git bisect
     # see https://github.com/NixOS/nixpkgs/pull/344174
     # hardware.nvidia-container-toolkit.enable = true;

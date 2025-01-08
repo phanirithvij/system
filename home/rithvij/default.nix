@@ -177,6 +177,10 @@ in
         "x-scheme-handler/tonsite" = [ "org.telegram.desktop.desktop" ];
         "text/x-nfo" = [ "micro.desktop" ];
         "text/plain" = [ "micro.desktop" ];
+        "x-scheme-handler/heroic" = [ "com.heroicgameslauncher.hgl.desktop" ];
+        "application/x-tar" = [ "peazip-extract-here.desktop" ];
+        "application/zip" = [ "peazip-extract-smart.desktop" ];
+        "application/vnd.rar" = [ "peazip-extract-here.desktop" ];
       };
     in
     {

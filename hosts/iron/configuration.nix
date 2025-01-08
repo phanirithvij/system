@@ -195,6 +195,8 @@ in
 
   # TODO learn what rtkit is
   security.rtkit.enable = true;
+  # TODO own nixos module audio.
+  # useful with tty/buildserver modes
   services.pipewire = {
     enable = true;
     pulse.enable = true;
@@ -233,18 +235,18 @@ in
     neededForUsers = true;
   };
 
+  # TODO muliple users each per directory
+  # I may never do this because I never had the need for two users
   users.users.rithvij = {
     isNormalUser = true;
     # Hint: my clash of clans username
     hashedPasswordFile = config.sops.secrets.rithvij_user_passwd.path;
     extraGroups = [
-      "wheel"
+      "wheel" # sudo group
       "video"
       "audio"
-      "networkmanager"
-      "docker"
       "input"
-      "libvirtd"
+      "networkmanager"
     ];
   };
 
@@ -252,28 +254,30 @@ in
   environment = {
     systemPackages = with pkgs; [
       wget2
-      xclip
+      xclip # TODO wl-clipboard-rs on wayland
 
-      ncdu
       lf
-      tmux # programs tmux
+      tmux # TODO programs.tmux wrapm in needed
 
-      fish # programs fish
+      fish # TODO programs.fish wrapm if needed
       go
-      microfetch
-      gparted
-      tree
-      upx
+      microfetch # TODO needed?
 
       zip
-      xz
       unzip
+      xz
       (p7zip.override { enableUnfree = true; })
-      peazip # todo use p7zip above instead of _7zz
       gnutar
+      # pigz
       brotli
+      peazip # TODO use the p7zip above instead of _7zz
 
       file
+      tree
+      ncdu
+      gparted # Important
+      upx
+
       which
       sysz
       progress
@@ -295,13 +299,14 @@ in
       smartmontools
       nvme-cli
       kdiskmark
+      # TODO qdirstat with dark mode
+      # qt5ct or something
 
       ksnip
 
       man-pages
       man-pages-posix
     ];
-    variables.EDITOR = "nvim";
     variables.VISUAL = "nvim";
   };
   # https://wiki.nixos.org/wiki/Man_pages
@@ -321,7 +326,12 @@ in
   #   enableSSHSupport = true;
   # };
 
-  programs.neovim.enable = true;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    vimAlias = true;
+    viAlias = true;
+  };
   services.openssh.enable = true;
   services.pr-tracker.enable = true;
 

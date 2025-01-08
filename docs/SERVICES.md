@@ -3,7 +3,7 @@
 A selfhosted heaven all in nixos
 Make sure all these run with system-manager + home-manager setup
 
-- [ ] silverbullet.md
+- [ ] silverbullet.md (in nixpkgs)
 - [ ] Immich
   - https://github.com/NixOS/nixpkgs/pull/324127
 - [ ] Email server
@@ -15,16 +15,16 @@ Make sure all these run with system-manager + home-manager setup
   - Runs, tested once
 - [x] Jellyfin
   - [ ] one pace agent
-- [ ] plex
+- [x] plex
   - with hama, one pace agents
 - [ ] Caddy
   - with extensions (available in nixpkgs)
 - [ ] Teldrive (own nur)
   - [ ] rclone
 - [ ] chihaya (own nur)
-  - maybe nixpkgs upstream
-- [ ] pyload
-- [ ] archivebox
+  - maybe upstream
+- [ ] pyload (available)
+- [ ] archivebox (WIP https://github.com/NixOS/nixpkgs/pull/354836)
 - [ ] android-file-transfer automount
   - disable kio kde thing
   - found https://bbs.archlinux.org/viewtopic.php?pid=1944871#p1944871
@@ -39,7 +39,7 @@ Make sure all these run with system-manager + home-manager setup
   - customised to have SPOTIFY_CLIENT_ID to be secret too
 - [ ] buildbot-nix
   - CI w/ python
-- [ ] opengist (WIP)
+- [ ] opengist (WIP @me)
   - code snippets, other things
   - invidual + corporate instances (pub/priv/unlisted gists)
   - alt. tclip by tailscale, but I call that vendor lock-in
@@ -51,17 +51,19 @@ Make sure all these run with system-manager + home-manager setup
   - invidual + corporate instances (pub/priv/unlisted gists)
   - nixos module + sysm + data dir
   - restrict ssh, custom ssh/ui ports
-- [ ] qbittorrent server (WIP https://github.com/NixOS/nixpkgs/pull/287923)
+- [ ] qbittorrent server
   - with scripts (ntfy, gotify)
   - reddit.com/r/qBittorrent/comments/vyt1sz/comment/lpgxc2c
   - qbittorrentui (own nur)
   - https://github.com/qbittorrent/qBittorrent/wiki/Running-qBittorrent-without-X-server-(WebUI-only,-systemd-service-set-up,-Ubuntu-15.04-or-newer)
-    - qbittorrent-nox
+    - qbittorrent-nox (WIP https://github.com/NixOS/nixpkgs/pull/287923)
+- [ ] restic/borg (available)
+  - rclone backends
 
 - Nix specific
 - [x] pr-tracker
   - [ ] https://github.com/matt1432/pr-tracker/issues/1
-  - https://github.com/NixOS/nixpkgs/pull/334482
+  - WIP https://github.com/NixOS/nixpkgs/pull/334482
   - [ ] make it work with local clone (not /var/lib)
     - and send a pr
     - as of now it works with /shed/Projects/nixhome/nixpkgs (own module based on mat1432's module)
@@ -73,6 +75,7 @@ Make sure all these run with system-manager + home-manager setup
 - [ ] home-manager-option-search
 - [ ] nixos-search
 - [ ] old versions tracker
+  - database goes ballistic 13GB
 - [ ] ofborg (necessary?)
   - https://github.com/NixOS/ofborg/wiki/Operating-a-Builder
   - ofborg offical sponsorship ended jan 1 2025, nixpkgs is moving to gha

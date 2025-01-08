@@ -1,6 +1,6 @@
-https://srid.ca/lxc-nixos
 https://www.thedroneely.com/posts/running-nixos-linux-containers/
 https://github.com/nix-community/nixos-generators/issues/79
+https://srid.ca/lxc-nixos
 
 Would you like to use LXD clustering? (yes/no) [default=no]:
 Do you want to configure a new storage pool? (yes/no) [default=yes]:
