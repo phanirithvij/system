@@ -38,6 +38,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
     flake-schemas.url = "github:DeterminateSystems/flake-schemas/main";
 
@@ -371,6 +376,7 @@
             # nixpkgs overlays not propagated
             extraSpecialArgs = { inherit pkgs; };
           };
+          # TODO rename vps
           vps = inputs.system-manager.lib.makeSystemConfig {
             modules = [ ./hosts/sysm/vps/configuration.nix ];
             extraSpecialArgs = { inherit pkgs; };
@@ -412,6 +418,33 @@
           };
         };
         nixosConfigurations = {
+          defaultIso = nixosSystem rec {
+            inherit system;
+            specialArgs = {
+              flake-inputs = inputs;
+            };
+            modules = [
+              toolsModule
+              overlayModule
+              inputs.sops-nix.nixosModules.sops
+              # home-manager baked in
+              inputs.home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  users.nixos = ./home/nixos;
+                  extraSpecialArgs = {
+                    flake-inputs = inputs;
+                    username = liveuser;
+                    hostname = livehost;
+                  };
+                  sharedModules = common-hm-modules ++ hmAliasModules;
+                };
+              }
+              ./hosts/nixos/iso.nix
+            ];
+          };
           ${linuxhost} = nixosSystem {
             inherit system;
             modules = [
@@ -428,16 +461,16 @@
               hostname = linuxhost;
             };
           };
-          defaultIso = nixosSystem rec {
+          wsl = nixosSystem {
             inherit system;
-            specialArgs = {
-              flake-inputs = inputs;
-            };
             modules = [
-              inputs.sops-nix.nixosModules.sops
-              inputs.home-manager.nixosModules.home-manager
               toolsModule
               overlayModule
+              inputs.sops-nix.nixosModules.sops
+              inputs.nixos-wsl.nixosModules.default
+              ./hosts/wsl/configuration.nix
+              # home-manager baked in
+              inputs.home-manager.nixosModules.home-manager
               {
                 home-manager = {
                   useGlobalPkgs = true;
@@ -445,14 +478,19 @@
                   users.nixos = ./home/nixos;
                   extraSpecialArgs = {
                     flake-inputs = inputs;
-                    username = liveuser;
+                    username = liveuser; # TODO wsl separate home config
                     hostname = livehost;
                   };
                   sharedModules = common-hm-modules ++ hmAliasModules;
                 };
               }
-              ./hosts/nixos/iso.nix
             ];
+            specialArgs = {
+              flake-inputs = inputs;
+              inherit system; # TODO needed?
+              username = "nixos";
+              hostname = "nixos";
+            };
           };
         };
         # keep all nix-on-droid hosts in same state

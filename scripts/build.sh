@@ -19,6 +19,8 @@ _exe onix build .#systemConfigs.gha -o result/sysm.gha
 _exe onix build .#systemConfigs.vps -o result/sysm.vps
 
 _exe onix build .#nixosConfigurations.iron.config.system.build.toplevel -o result/h-iron
+_exe onix build .#nixosConfigurations.wsl.config.system.build.toplevel -o result/h-wsl
+_exe onix build .#nixosConfigurations.wsl.config.system.build.tarballBuilder -o result/h-wsl-tar-ball-srcipt
 _exe onix build .#nixosConfigurations.defaultIso.config.system.build.isoImage -o result/h-iso
 
 _exe onix build --no-link --print-out-paths "$(
