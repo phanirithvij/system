@@ -30,6 +30,7 @@ in
     ../../nixos/applications/ntfy-rss.nix
     ../../nixos/applications/opengist.nix
     ../../nixos/applications/spotify.nix
+    ../../nixos/applications/tui.nix
     ../../nixos/modules/virtualisation
     ../../secrets
   ];
@@ -256,9 +257,6 @@ in
       wget2
       xclip # TODO wl-clipboard-rs on wayland
 
-      lf
-      tmux # TODO programs.tmux wrapm in needed
-
       fish # TODO programs.fish wrapm if needed
       go
       microfetch # TODO needed?
@@ -369,5 +367,5 @@ in
   # not supported with flakes
   # system.copySystemConfiguration = true;
 
-  system.stateVersion = "24.05"; # Don't change this at all? Did you read the comment?
+  system.stateVersion = "24.05"; # Don't change this at all
 }
