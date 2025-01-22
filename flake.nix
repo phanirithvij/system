@@ -151,11 +151,6 @@
           src = inputs.nixpkgs;
           patches =
             builtins.map legacyPackages.fetchpatch2 [
-              {
-                # guile-lzlib guix pr (landed)
-                url = "https://github.com/NixOS/nixpkgs/pull/370813.diff?full_index=1";
-                hash = "sha256-rooOtcrjsVDpW7odHPdKPFf37JqUtBl+mienaA7FQmM=";
-              }
               # dprint checks pr
               {
                 url = "https://github.com/NixOS/nixpkgs/pull/370188.diff?full_index=1";
@@ -170,7 +165,7 @@
             ++ [
               ./opengist-module.patch
               # https://github.com/junegunn/fzf/pull/3918/files
-              ./fzf-keybinds.patch
+              #./fzf-keybinds.patch
             ];
         };
         overlays =
