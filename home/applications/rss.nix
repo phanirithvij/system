@@ -80,6 +80,7 @@
         "https://andrewkelley.me/rss.xml"
         "https://ziglang.org/news/index.xml"
         "https://mitchellh.com/feed.xml"
+        "https://buttondown.email/ZigSHOWTIME/rss"
 
         # hardware
         "https://blog.adafruit.com/feed/"
