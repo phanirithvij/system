@@ -181,6 +181,8 @@ in
         "application/x-tar" = [ "peazip-extract-here.desktop" ];
         "application/zip" = [ "peazip-extract-smart.desktop" ];
         "application/vnd.rar" = [ "peazip-extract-here.desktop" ];
+        "image/jpeg" = [ "qimgv.desktop" ];
+        "image/png" = [ "qimgv.desktop" ];
       };
     in
     {
