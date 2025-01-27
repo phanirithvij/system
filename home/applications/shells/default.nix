@@ -3,6 +3,7 @@
   imports = [
     ./bash.nix
     ./fish.nix
+    ./lf.nix
   ];
   programs.atuin = {
     enable = true;
@@ -29,10 +30,6 @@
     enable = true;
     defaultCommand = "${pkgs.fd}/bin/fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
     fileWidgetCommand = "${pkgs.fd}/bin/fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
-  };
-  programs.lf = {
-    package = pkgs.wrappedPkgs.lf;
-    enable = true;
   };
   programs.starship = {
     enable = true;
