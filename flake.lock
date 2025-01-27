@@ -521,11 +521,11 @@
     "navi_config": {
       "flake": false,
       "locked": {
-        "lastModified": 1718241897,
-        "narHash": "sha256-Je0KyQ6WZEE1xbNGYFriw/xkTIfgeufqzZl2yQZOZkE=",
+        "lastModified": 1737991924,
+        "narHash": "sha256-OGXb/aBx8wFybbTWEbcc5kZsmSY5hjvi9TeN4maUJY0=",
         "owner": "phanirithvij",
         "repo": "navi",
-        "rev": "0e5a93e49e4853d39e3ba5fd717817d21c9139b8",
+        "rev": "09b096f25f51367dca8372ec3d22948110b254e4",
         "type": "github"
       },
       "original": {
