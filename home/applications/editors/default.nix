@@ -1,6 +1,6 @@
 _: {
   imports = [
     ./micro.nix
-    ./neovim
+    #./neovim # comes from nur-pkgs home/applications/nurpkgs.nix
   ];
 }

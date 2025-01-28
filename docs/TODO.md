@@ -305,6 +305,7 @@ see ./todos folder as well
     - allow firefox? but needs to be headless?
     - for now zram+swap16+swapspace removes the need for this
 - [ ] Nixvim - neovim
+  - Doing nvf instead
 - [ ] home-manager services
   - [ ] espanso fat (x11+wayland+custom)
 - [ ] jupyenv/jupyterhub/jupyterlab

@@ -1,3 +1,6 @@
+# TODO no longer using this
+# Adapt this in nvf
+# using nvf from nur-pkgs
 { pkgs, ... }:
 {
   # https://github.com/KubqoA/dotfiles/blob/ae3df4e00edb842da44716090cb448c156236932/modules/common/neovim/default.nix#L29
