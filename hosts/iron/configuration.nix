@@ -19,7 +19,7 @@ in
     ../../nixos/applications/bandwidth.nix
     ../../nixos/applications/cloudflare.nix
     ../../nixos/applications/mediaserver.nix
-    ../../nixos/applications/paperless.nix
+    # ../../nixos/applications/paperless.nix
     # ../../nixos/applications/tailscale.nix
     ../../nixos/applications/touchpad.nix
     ../../nixos/applications/guix
