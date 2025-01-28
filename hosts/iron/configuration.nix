@@ -361,6 +361,7 @@ in
     ];
   };
   networking.nameservers = nameservers;
+  networking.networkmanager.insertNameservers = [ "1.1.1.1" ];
 
   # TODO headscale
   # TODO modularise all of these
