@@ -9,7 +9,7 @@ in
     ../applications/bookmarks
     ../applications/bashmount.nix
     ../applications/docker
-    ../applications/editors.nix
+    ../applications/editors
 
     ../applications/games
     ../applications/git

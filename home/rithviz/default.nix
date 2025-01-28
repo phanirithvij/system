@@ -19,7 +19,7 @@
   imports = [
     ../applications/bookmarks
     ../applications/bashmount.nix
-    ../applications/editors.nix
+    ../applications/editors
     ../applications/git
     ../applications/media
     ../applications/shells

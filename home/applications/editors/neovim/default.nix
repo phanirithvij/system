@@ -1,18 +1,5 @@
 { pkgs, ... }:
 {
-  # nano like text editor, best tool for non-coding, not an ide
-  programs.micro = {
-    enable = true;
-    settings = {
-      colorscheme = "twilight";
-      relativeruler = true;
-      saveundo = true;
-      tabsize = 2;
-      tabstospaces = true;
-      wordwrap = true;
-    };
-  };
-
   # https://github.com/KubqoA/dotfiles/blob/ae3df4e00edb842da44716090cb448c156236932/modules/common/neovim/default.nix#L29
   programs.neovim = {
     enable = true;
