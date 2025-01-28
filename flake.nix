@@ -106,10 +106,7 @@
   };
 
   outputs =
-    {
-      self,
-      ...
-    }@inputs:
+    { self, ... }@inputs:
     let
       allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (system: rec {
         legacyPackages = inputs.nixpkgs.legacyPackages.${system};
@@ -204,7 +201,7 @@
         sysm = inputs.system-manager.packages.${system}.default;
         nix-schema = pkgs.nix-schema { inherit system; }; # nur-pkgs overlay, cachix cache
       in
-      rec {
+      {
         apps = {
           nix = {
             type = "app";
@@ -418,7 +415,7 @@
           };
         };
         nixosConfigurations = {
-          defaultIso = nixosSystem rec {
+          defaultIso = nixosSystem {
             inherit system;
             specialArgs = {
               flake-inputs = inputs;
