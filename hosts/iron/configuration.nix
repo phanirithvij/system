@@ -282,6 +282,7 @@ in
 
       libsmbios
       dmidecode
+      acpilight # xbacklight
 
       ddrescue
       ddrescueview
