@@ -25,7 +25,7 @@ _exe onix build .#nixosConfigurations.defaultIso.config.system.build.isoImage -o
 
 _exe onix build --no-link --print-out-paths "$(
   nix flake show --json --allow-import-from-derivation |
-    jq '.packages."x86_64-linux"|keys[]' |
+    jq '.packages.output.children."x86_64-linux".children|keys[]' |
     xargs -I '{}' echo -en '.#{} '
 )"
 
