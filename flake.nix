@@ -156,7 +156,7 @@
               # a-keys-path pr
               {
                 url = "https://github.com/NixOS/nixpkgs/pull/373994.diff?full_index=1";
-                hash = "sha256-wckUgpqeQDs67Ex5PYjMN98tN9G+9CknCkYcFpFPk3g=";
+                hash = "sha256-O344AY0ZlRMkJX94r4VuyyEC4mE10YbUnWQHTSn6smc=";
               }
             ]
             ++ [
