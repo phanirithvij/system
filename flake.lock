@@ -853,11 +853,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1738057021,
-        "narHash": "sha256-edITHAl7buVotoBaWDH2mPRm+mXKhUiENIvpyWlEY2A=",
+        "lastModified": 1738858016,
+        "narHash": "sha256-/5+r44QzzOIkl+VToOfluneCWWwo+9jXjHF8PCM49Z8=",
         "owner": "phanirithvij",
         "repo": "nur-packages",
-        "rev": "c7b06d63b974a3ad74e0a08486bd225bfa92d401",
+        "rev": "1e2fd1e9fe393642b1616b9aa3d8c2af3e85fe61",
         "type": "github"
       },
       "original": {
