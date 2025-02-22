@@ -1,7 +1,7 @@
 ## TODO
 
-A selfhosted heaven all in nixos
-Make sure all these run with system-manager + home-manager setup
+A selfhosted heaven all in nixos Make sure all these run with system-manager +
+home-manager setup
 
 - [ ] silverbullet.md (in nixpkgs)
 - [ ] Immich
@@ -57,7 +57,10 @@ Make sure all these run with system-manager + home-manager setup
   - qbittorrentui (own nur)
   - https://github.com/qbittorrent/qBittorrent/wiki/Running-qBittorrent-without-X-server-(WebUI-only,-systemd-service-set-up,-Ubuntu-15.04-or-newer)
     - qbittorrent-nox (WIP https://github.com/NixOS/nixpkgs/pull/287923)
+  - [ ] alternative uis
+    - https://github.com/jesec/flood
 - [ ] restic/borg (available)
+
   - rclone backends
 
 - Nix specific
@@ -66,7 +69,8 @@ Make sure all these run with system-manager + home-manager setup
   - WIP https://github.com/NixOS/nixpkgs/pull/334482
   - [ ] make it work with local clone (not /var/lib)
     - and send a pr
-    - as of now it works with /shed/Projects/nixhome/nixpkgs (own module based on mat1432's module)
+    - as of now it works with /shed/Projects/nixhome/nixpkgs (own module based
+      on mat1432's module)
 - [x] lightweight pr-tracker
   - nixpkgs-tracker (has less branches)
 - [x] nixos landscape
@@ -80,6 +84,7 @@ Make sure all these run with system-manager + home-manager setup
   - https://github.com/NixOS/ofborg/wiki/Operating-a-Builder
   - ofborg offical sponsorship ended jan 1 2025, nixpkgs is moving to gha
 - [ ] docs (all)
+
   - https://github.com/phanirithvij/mmdoc-nixpkgs-toc-gen
 
 - pdf and docs tools
