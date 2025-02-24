@@ -69,7 +69,9 @@ in
           p:
           applyPatches {
             inherit (p) src;
-            patches = [ ./opengist-icon.patch ];
+            # icon is not worth it to patch anymore
+            # leaving this skeleton for ease of patching in future
+            patches = [ ];
           };
         frontend' = opengist.passthru.frontend.overrideAttrs (p: {
           # custom profile picture
