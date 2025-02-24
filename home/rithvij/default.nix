@@ -107,6 +107,8 @@ in
       };
     }))
 
+    n-m3u8dl-re
+
     # TODO add this stuff
     #adb android-tools is too fat and heavy
     # rustdesk-server

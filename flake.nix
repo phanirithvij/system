@@ -158,6 +158,11 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/373994.diff?full_index=1";
                 hash = "sha256-O344AY0ZlRMkJX94r4VuyyEC4mE10YbUnWQHTSn6smc=";
               }
+              # n-m3u8dl-re pr
+              {
+                url = "https://github.com/NixOS/nixpkgs/pull/384692.diff?full_index=1";
+                hash = "sha256-g83rVdpUdakFmeU48jzQIsM84YhrF0a5CmZhVoC6aUE=";
+              }
             ]
             ++ [
               ./opengist-module.patch
