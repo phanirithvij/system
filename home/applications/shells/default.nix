@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 {
   imports = [
     ./bash.nix
@@ -40,5 +40,16 @@
       line_break.disabled = true;
     };
   };
-  programs.zoxide.enable = true;
+  # https://github.com/nix-community/home-manager/issues/6455
+  programs = {
+    zoxide = {
+      enable = true;
+      enableBashIntegration = false;
+    };
+    bash.initExtra =
+      lib.mkOrder 2000 # sh
+        ''
+          eval "$(${lib.getExe pkgs.zoxide} init bash)"    
+        '';
+  };
 }
