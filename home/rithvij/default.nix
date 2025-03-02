@@ -64,6 +64,7 @@ in
     pulsemixer
     bluetuith
     bluetui
+    #overskride
 
     devbox
 
