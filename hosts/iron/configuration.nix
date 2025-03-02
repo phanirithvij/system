@@ -64,6 +64,7 @@ in
   boot.binfmt = {
     emulatedSystems = [ "aarch64-linux" ];
   };
+  programs.nix-ld.enable = true;
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
