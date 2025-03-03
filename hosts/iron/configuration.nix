@@ -161,6 +161,8 @@ in
   };
 
   fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
+  # https://github.com/NixOS/nixpkgs/issues/386413 | ladybird
+  fonts.fontDir.enable = true;
 
   services.keyd = {
     enable = true;
