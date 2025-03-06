@@ -6,6 +6,10 @@
     channel.enable = false;
     # https://search.nixos.org/options?channel=unstable&show=nix.nixPath&query=nix.nixPath
     nixPath = [ "nixpkgs=flake:nixpkgs" ];
+    # system level registry
+    # https://discord.com/channels/568306982717751326/570351749848891393/1347223140375461990
+    # there is also user level registry
+    # https://nix-community.github.io/home-manager/options.xhtml#opt-nix.registry
     registry = {
       nixpkgs.flake = flake-inputs.nixpkgs;
       n.flake = flake-inputs.nixpkgs;
@@ -42,7 +46,7 @@
           "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964="
         ];
         # https://github.com/NixOS/nix/issues/8953#issuecomment-1919310666
-        # don't need it really
+        # global flake-registry, don't need it really
         flake-registry = "";
       };
   };
