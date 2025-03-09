@@ -59,6 +59,7 @@
         "https://nixos.mayflower.consulting/blog/index.xml"
         "https://exploring-better-ways.bellroy.com/rss.xml"
         "https://fbrs.io/atom.xml"
+        "https://fzakaria.com/feed.xml"
         "https://ghedam.at/feed.xml"
         "https://myme.no/atom-feed.xml"
 
