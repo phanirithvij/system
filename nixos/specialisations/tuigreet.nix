@@ -23,9 +23,8 @@
         xserver.enable = true;
         xserver.displayManager.startx.enable = true;
         xserver.displayManager.lightdm.enable = lib.mkForce false;
-
-        desktopManager.plasma6.enable = true;
       };
+      desktopManagers.xfce.enable = lib.mkDefault true;
     };
   };
 }
