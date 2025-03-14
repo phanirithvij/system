@@ -16,6 +16,8 @@ in
     ./hardware-configuration.nix
     ../../nixos/specialisations
     ../../nixos/profiles/desktop.nix
+    ../../nixos/modules/desktop-environments
+
     ../../nixos/applications/bandwidth.nix
     ../../nixos/applications/cloudflare.nix
     ../../nixos/applications/mediaserver.nix
@@ -228,7 +230,7 @@ in
     load = true;
     save = true;
   };
-  services.desktopManager.plasma6.enable = true;
+  desktopManagers.xfce.enable = lib.mkDefault true;
 
   programs.appimage = {
     enable = true;
