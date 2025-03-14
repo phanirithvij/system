@@ -31,6 +31,8 @@ in
     ./home-scripts.nix
     ../../secrets
 
+    ../services/password_manager.nix
+
     ../specialisations
   ];
 
@@ -209,6 +211,8 @@ in
     [build]
     rustc-wrapper = "sccache"
   '';
+
+  password_mgr.enable = true;
 
   home.stateVersion = "24.05";
 
