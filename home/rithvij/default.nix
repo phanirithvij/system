@@ -28,6 +28,7 @@ in
     ../applications/topgrade.nix
     ../applications/tui.nix
 
+    ./repos.nix
     ./home-scripts.nix
     ../../secrets
 
