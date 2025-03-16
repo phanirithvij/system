@@ -1,18 +1,21 @@
 # system
 
-main system configuration including other whacky ideas
-more are in my zet but that is yet to be made public
+main system configuration including other whacky ideas, more are in my zet but
+that is yet to be made public
 
 see ./todos folder as well
 
 ## TODO
 
-- [ ] topgrade config system update inside specialisation switches to default one
+- [ ] checkout replit/rippkgs
+- [ ] topgrade config system update inside specialisation switches to default
+      one
   - or ofcourse disable home-manager and nixos switch in the config fully
 - [ ] gitbatch forked
   - proper features, prevent crash
   - also it has a config file ~/.config/gitbatch/config.yml
-- [ ] xfce glibc g_file_replace?(_contents), for docklike and anyother things, so they can work with symlinks
+- [ ] xfce glibc g_file_replace?(\_contents), for docklike and anyother things,
+      so they can work with symlinks
   - https://github.com/geany/geany/issues/1533
   - https://github.com/nix-community/home-manager/issues/4537
   - https://github.com/bk138/gromit-mpx/commit/1242a929a01ba4f2a7ed41eda12d3c15fd18643d#diff-18680f57f5d32607a3b196afffe0d6ecb250af6c0a994b304b88fc91231250bfL652
@@ -20,8 +23,10 @@ see ./todos folder as well
   - [x] duf with aliases
     - i.e. a package provides its own aliases
     - [x] it is possible in home-manager but what about wrapm
-      - I don't think it is possible, wrapm wraps programs nothing to do with shell config
-    - implemented a basic abstraction which provides `programs.<name>-aliases.enable`
+      - I don't think it is possible, wrapm wraps programs nothing to do with
+        shell config
+    - implemented a basic abstraction which provides
+      `programs.<name>-aliases.enable`
 - [ ] auto gen statix, dprint config
   - like pre-commit-config.yml by git-hooks.nix
 - [ ] npins with flake inputs
@@ -70,7 +75,8 @@ see ./todos folder as well
 - [ ] matt1432
   - https://github.com/matt1432/nixos-configs
   - https://github.com/jorsn/flakegen
-- [ ] github board like https://github.com/users/kachick/projects/3?query=sort%3Aupdated-desc+is%3Aopen
+- [ ] github board like
+      https://github.com/users/kachick/projects/3?query=sort%3Aupdated-desc+is%3Aopen
   - would prefer something selfhosted (find one)
   - for now settle on this todo.md
   - link to private notes msft to tasks.org migration
@@ -79,7 +85,8 @@ see ./todos folder as well
 - [ ] checkout jj, git alternative
 - [ ] bookmarks
   - [ ] remove xc? somehow get navi cheats to work via cli without duplication
-    - nix attrsets for commands and converted to navi, espanso, etc? or ref by id/slug each command?
+    - nix attrsets for commands and converted to navi, espanso, etc? or ref by
+      id/slug each command?
     - or just yaml -> json -> nix lib.importJSON/builtins.fromJson
       - builtins.fromyaml non-existent, there's an open pr NixOS/nix#7340
     - raw text for cheats, etc
@@ -130,7 +137,8 @@ see ./todos folder as well
     - DeterminateSystems nix installer on non-nixos
   - Bootstrapping home-manager
     - `nix run home-manager/master --extra-experimental-features "nix-command flakes" -- switch --flake /home/rithvij/Projects/system#rithvij`
-    - To bootstrap home.nix config [see here](https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-standalone)
+    - To bootstrap home.nix config
+      [see here](https://nix-community.github.io/home-manager/index.xhtml#sec-flakes-standalone)
       - `nix run home-manager/master -- init #--switch`
 - [ ] glossary
   - sysm
@@ -150,8 +158,8 @@ see ./todos folder as well
   - shared /nix partition r/w?
     - garbage collection might get fked
       - gha cache to the rescue?
-    - use ext drive as backup nix store and nix-serve it when detected?
-      and use as another trusted substitutor?
+    - use ext drive as backup nix store and nix-serve it when detected? and use
+      as another trusted substitutor?
       - and never gc it?
       - makes no sense, substitutor won't solve the space issue
         - nfs mount?
@@ -192,8 +200,8 @@ see ./todos folder as well
 - [ ] awesomewm (one of my favs)
 - [ ] dwm ?
   - also c configuration seems cool
-  - maybe I can learn zig and package it via zig with nix
-    (just as a learning experience, ofc it is already in nixpkgs)
+  - maybe I can learn zig and package it via zig with nix (just as a learning
+    experience, ofc it is already in nixpkgs)
   - sxhkd/swhkd(rust+wayland)
 - [ ] xmonad
   - pros: can dabble in haskell
@@ -248,7 +256,8 @@ see ./todos folder as well
     - or in a different repo? but can 10GB hold it
     - iron hm seems to be 7GB (nix-tree)
   - [ ] repo/cache per host?
-  - [ ] detect files changed and do only nixos or hm build to not waste gha resources
+  - [ ] detect files changed and do only nixos or hm build to not waste gha
+        resources
 - [ ] selfhosted
   - nixos
   - sysm
@@ -315,13 +324,15 @@ see ./todos folder as well
   - flake-parts
   - snowfalllib (meh, completely changes everything)
 - [x] KDE plasma external monitor sleeping bug workaround
+
   - new user works but need to somehow make /home/rithvij move to the new user
-  - I did remove .cache didn't help, tried using default vals for all configs of plamsa
-    didn't help
+  - I did remove .cache didn't help, tried using default vals for all configs of
+    plamsa didn't help
   - so the bug is hard to track down given I know nothing about plasma
   - works fine in hyprland
 
 - [ ] headscale on local instead of vps
+
   - also vps configuration in nix/dockerfiles separate repo?
   - rustdesk-server, syncplay, tailscale, headscale
   - [ ] wait for fiber connection
@@ -344,6 +355,8 @@ see ./todos folder as well
   - https://github.com/alexellis/actions-batch
   - https://github.com/fawazahmed0/action-debug
   - https://github.com/phanirithvij/debug-action
+- [ ] systemd-nspawn nixos containers
+  - for docker like isolation
 
 ## termux/android
 
@@ -382,8 +395,8 @@ see ./todos folder as well
       - rclone lru disk cache per channel (think more)
 - [ ] cloudflared tunnel nixos service
   - multiple service (redis like)
-  - write the output endpoints to /run/secrets
-    or somewhere other processes can read from
+  - write the output endpoints to /run/secrets or somewhere other processes can
+    read from
 - [ ] trash-cli, trashy, gtrash, fzf, lf
   - tui? (oss contrib)
 - [ ] odoo 18 + fix tests
@@ -395,7 +408,8 @@ see ./todos folder as well
   - try w/ joystick + antimicrox personal setup
   - try out wrapper-manager too
     - feedpushr hm module + wrapper-manger + nixos module
-    - qbittorrentui wrappm (or) upstream XDG_CONFIG_HOME || ~/.config || macos too??
+    - qbittorrentui wrappm (or) upstream XDG_CONFIG_HOME || ~/.config || macos
+      too??
   - hotline miami wrapper
     - has a README with libs in gog folder
   - [ ] blog post (contrib)
@@ -419,4 +433,5 @@ see ./todos folder as well
 ### bookmarks
 
 - [ ] pr-tracker prs
-  - http://localhost:8000/pr-tracker?pr=328862 - rustdesk headless client service
+  - http://localhost:8000/pr-tracker?pr=328862 - rustdesk headless client
+    service
