@@ -25,7 +25,7 @@
       in
       {
         allowed-uris = "github: gitlab: git+ssh:// https://github.com/";
-        experimental-features = "nix-command flakes";
+        experimental-features = "nix-command flakes ca-derivations";
         auto-optimise-store = true;
         trusted-users = [ "@wheel" ];
         allowed-users = users;

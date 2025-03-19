@@ -76,6 +76,7 @@
         # rust
         "http://waywardmonkeys.org/feeds/all.atom.xml"
         "https://this-week-in-rust.org/rss.xml"
+        "https://blog.orhun.dev/rss.xml"
 
         # zig
         "https://andrewkelley.me/rss.xml"
@@ -115,6 +116,9 @@
         "https://pixel-druid.com/feed.rss"
         "https://rsapkf.org/weblog/rss.xml"
         "https://kevincox.ca/feed.atom"
+
+        # linux
+        "https://www.nico.schottelius.org/blog-archive/index.rss"
 
         # unorganized
         "http://nil.wallyjones.com/feeds/all.atom.xml"
