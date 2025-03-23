@@ -76,7 +76,7 @@
     unar # rar format
     ulauncher # TODO remove after checking if useful alts rofi, dmenu, voidlinux-youtuber-dotfiles, espanso
     viddy # watch alternative
-    wtf # fancy dashboard tui
+    wtfutil # fancy dashboard tui
     xplr # TODO something temp, remove later
     yq # yaml cli
     yadm # dotfile manager
