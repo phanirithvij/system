@@ -153,16 +153,6 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/370188.diff?full_index=1";
                 hash = "sha256-t9xB5QkY6geQ65SjXjAZHCgJO8hYkMsINuiitk9vCbQ=";
               }
-              # a-keys-path pr
-              {
-                url = "https://github.com/NixOS/nixpkgs/pull/373994.diff?full_index=1";
-                hash = "sha256-Z/5rsfA6xv/ynoF1/Hukagb/e1774ZrfWUHW80kvoHs=";
-              }
-              # n-m3u8dl-re pr
-              {
-                url = "https://github.com/NixOS/nixpkgs/pull/384692.diff?full_index=1";
-                hash = "sha256-g83rVdpUdakFmeU48jzQIsM84YhrF0a5CmZhVoC6aUE=";
-              }
             ]
             ++ [
               ./opengist-module.patch
