@@ -98,7 +98,7 @@ in
 
     # https://discourse.nixos.org/t/home-manager-collision-with-app-lib/51969
     # https://haseebmajid.dev/posts/2023-10-02-til-how-to-fix-package-binary-collisions-on-nix/
-    (lib.hiPrio rustdesk-flutter)
+    # (lib.hiPrio rustdesk-flutter) # BROKEN, TODO later
     (subtitlecomposer.overrideAttrs (_: {
       version = "0-unstable-2024-12-05";
       src = fetchFromGitLab {
