@@ -26,7 +26,7 @@ _exe onix build .#nixosConfigurations.defaultIso.config.system.build.isoImage -o
 _exe onix build --no-link --print-out-paths "$(
   nix flake show --json --allow-import-from-derivation |
     jq '.packages.output.children."x86_64-linux".children|keys[]' |
-    xargs -I '{}' echo -en '.#{} '
+    xargs -I '{}' echo -en '.#packages.x86_64-linux.{} '
 )"
 
 #_exe onix bundle .#navi-master -o result/navi-master.bundled
