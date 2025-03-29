@@ -111,8 +111,8 @@ in
     #package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
     # https://discourse.nixos.org/t/struggling-with-nvidia-prime/13794/3
     prime = {
-      intelBusId = "0@0:2:0";
-      nvidiaBusId = "1@0:0:0";
+      intelBusId = "PCI:0@0:2:0";
+      nvidiaBusId = "PCI:1@0:0:0";
       offload.enable = true;
       offload.enableOffloadCmd = true;
       # prime sync doesn't work shows only a mouse in a black screen
