@@ -119,16 +119,27 @@
           config = {
             # allowlist of unfree pkgs, for home-manager too
             # https://github.com/viperML/dotfiles/blob/43152b279e609009697346b53ae7db139c6cc57f/packages/default.nix#L64
+            # TODO these warnings should ideally be in nixpkgs itself (allow disabling viewing traces)
+            # TODO before that, why is eval done 3 times (try nh home switch)?
             allowUnfreePredicate =
               pkg:
               let
                 pname = lib.getName pkg;
                 byName = builtins.elem pname [
-                  "steam-unwrapped"
+                  #"steam-unwrapped"
                   "spotify"
                 ];
               in
               if byName then lib.warn "Allowing unfree package: ${pname}" true else false;
+            allowInsecurePredicate =
+              pkg:
+              let
+                pname = lib.getName pkg;
+                byName = builtins.elem pname [
+                  "beekeeper-studio" # Electron version 31 is EOL
+                ];
+              in
+              if byName then lib.warn "Allowing insecure package: ${pname}" true else false;
 
             packageOverrides = _: {
               # TODO espanso_wayland and espanso-x11 and use it in different places accordingly?
