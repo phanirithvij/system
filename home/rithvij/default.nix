@@ -11,6 +11,7 @@ in
     ../applications/docker
     ../applications/editors
 
+    ../applications/jj
     ../applications/games
     ../applications/git
     ../applications/go
