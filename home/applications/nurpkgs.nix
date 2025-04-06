@@ -7,16 +7,16 @@
 let
   #debug = lib.traceSeq (builtins.attrNames flake-inputs.nur-pkgs.packages.${system}) f;
   f = builtins.attrValues (
-    lib.attrsets.filterAttrs (
+    (lib.attrsets.filterAttrs (
       n: _:
       !builtins.elem n [
         "overlayShell"
-        "unstablePkgs" # but it doesn't show up in packages.${system}
-
+        "unstablePkgs"
         # broken
         "feedpushr"
       ]
-    ) flake-inputs.nur-pkgs.packages.${system}
+    ) flake-inputs.nur-pkgs.packages.${system})
+    // flake-inputs.nur-pkgs.packages.${system}.unstablePkgs
   );
 in
 {
