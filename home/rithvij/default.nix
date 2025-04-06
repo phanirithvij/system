@@ -49,7 +49,6 @@ in
   home.packages = with pkgs; [
     #rclone #tgdrive version from nur
     yq
-    viddy
     duf
     gdu
     # dprint # use treefmt with it per project from now on
