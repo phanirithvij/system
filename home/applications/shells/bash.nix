@@ -56,10 +56,11 @@
     shellAliases = {
       cat = "bat";
       opop = "xdg-open";
-      lac = "lazyconf";
+      lac = "lazyconf"; # TODO missing here, in yadm config I guess
       laz = "lazygit";
       lad = "lazydocker";
       lar = "lazygit_fzf";
+      # laj = lazyjj # in special.nix
       cd = "z";
       gb = "gitbatch";
       b = "btop";
@@ -69,6 +70,7 @@
       v = "vim";
       vim = "nvim";
       n = "v";
+      m = "micro";
 
       #tag = "tmsu";
 

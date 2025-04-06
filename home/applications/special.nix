@@ -60,6 +60,14 @@ rec {
         tma = "tmux a";
       }
     ]
+    [
+      pkgs.jujutsu
+      {
+        laj = "lazyjj";
+        ju = "jjui";
+        fjf = "jj-fzf";
+      }
+    ]
   ];
   aliasModules = map (a: mkAliasModule' (builtins.elemAt a 0) (builtins.elemAt a 1)) groups;
 }
