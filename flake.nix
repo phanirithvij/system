@@ -205,17 +205,19 @@
         grm = inputs.git-repo-manager.packages.${system}.default;
         hm = inputs.home-manager.packages.${system}.default;
         sysm = inputs.system-manager.packages.${system}.default;
-        nix-schema = pkgs.nix-schema { inherit system; }; # nur-pkgs overlay, cachix cache
+        #nix-schema = pkgs.nix-schema { inherit system; }; # nur-pkgs overlay, cachix cache
       in
       {
         apps = {
-          nix = {
-            type = "app";
-            program = "${nix-schema}/bin/nix-schema";
-          };
+          /*
+            nix = {
+              type = "app";
+              program = "${nix-schema}/bin/nix-schema";
+            };
+          */
         };
         packages = {
-          inherit nix-schema;
+          #inherit nix-schema;
           navi-master = pkgs.navi;
           git-repo-manager = grm;
           home-manager = hm;
@@ -325,7 +327,7 @@
             hm
             grm
             sysm
-            (pkgs.nix-schema { inherit system; })
+            #(pkgs.nix-schema { inherit system; })
           ];
         };
         overlayModule = {
