@@ -97,6 +97,11 @@ in
     "kernel.panic" = 5;
   };
 
+  hardware.graphics = {
+    extraPackages = with pkgs; [
+      nvidia-vaapi-driver
+    ];
+  };
   # TODO move all this hardware specific things to a module
   # eg. https://codeberg.org/mateidibu/nix-config/src/commit/c247b4525230271b77b37ee7259d5ef6c20aa11c/nixosModules/gpu-intel.nix#L11
   hardware.nvidia = {
