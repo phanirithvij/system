@@ -229,7 +229,7 @@
         checks = {
           formatting = treefmtCfg.check self;
           git-hooks-check = inputs.git-hooks.lib.${system}.run {
-            src = ./.;
+            src = pkgs.lib.cleanSource ./.;
             hooks = {
               deadnix = {
                 enable = true;
