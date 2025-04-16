@@ -6,6 +6,7 @@
     pkgs.gitcs
     pkgs.git-bug
     pkgs.git-absorb
+    pkgs.git-who
   ];
   imports = [
     ./gh.nix
