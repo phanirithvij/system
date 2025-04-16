@@ -62,6 +62,7 @@
         "https://fzakaria.com/feed.xml"
         "https://ghedam.at/feed.xml"
         "https://myme.no/atom-feed.xml"
+        "https://www.thedroneely.com/posts/rss.xml"
 
         # go
         "https://bbengfort.github.io/index.xml"
