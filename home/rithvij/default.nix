@@ -143,7 +143,7 @@ in
     enable = true;
     settings = {
       font = {
-        size = 14.25;
+        size = 12.25;
         normal = {
           family = "JetBrainsMono Nerd Font"; # TODO try Source Code Pro
         };
