@@ -30,6 +30,7 @@
     enable = true;
     defaultCommand = "${pkgs.fd}/bin/fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
     fileWidgetCommand = "${pkgs.fd}/bin/fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
+    tmux.enableShellIntegration = true; # for sesh
   };
   programs.starship = {
     enable = true;
