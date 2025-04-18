@@ -2,7 +2,7 @@
   aliases ? [ ],
   lib,
   name ? lib.getName pkg,
-  pkg,
+  pkg ? null,
 }:
 {
   config,
