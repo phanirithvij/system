@@ -260,7 +260,9 @@ in
       "input"
       "networkmanager"
     ];
+    shell = pkgs.fish;
   };
+  programs.fish.enable = true;
 
   # List packages installed in system profile.
   environment = {
