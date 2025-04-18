@@ -5,6 +5,7 @@
     ./fish.nix
     ./lf.nix
   ];
+  programs.global-aliases.enable = true;
   programs.atuin = {
     enable = true;
     flags = [ "--disable-up-arrow" ];
