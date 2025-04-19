@@ -24,7 +24,7 @@ _: {
       "**/*-lock.json"
     ];
     settings = {
-      plugins = map toString (
+      plugins = pkgs.dprint-plugins.iterPlugins (
         with pkgs.dprint-plugins;
         [
           dprint-plugin-json
