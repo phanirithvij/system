@@ -62,6 +62,11 @@
     niri.url = "github:sodiboo/niri-flake";
     niri.inputs.nixpkgs.follows = "nixpkgs";
     niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    niri.inputs.niri-unstable.follows = "niri-unstable-overview";
+
+    # TODO bug in nix flake path parsing with non utf8 branchname
+    # see https://matrix.to/#/!KIjqiaZyJFkPXxMmGQ:gnome.org/$6k_jnKTkDjMVWOGyBb3Ugvf1cvQ-n_P3HGguh6RhVAE
+    niri-unstable-overview.url = "github:phanirithvij/niri?ref=overview";
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
