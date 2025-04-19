@@ -6,7 +6,7 @@ _: {
   imports = [
     #./cinnamon.nix
     #./hyprland.nix
-    #./niri.nix
+    ./niri.nix
     ./tty.nix
     #./tuigreet.nix
     #./xfce
