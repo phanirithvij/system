@@ -105,6 +105,7 @@
         # general tech
         "http://habitatchronicles.com/feed/"
         "https://til.hashrocket.com/rss"
+        "https://unplannedobsolescence.com/atom.xml"
 
         # discover new projects
         "https://terminaltrove.com/totw.xml"
