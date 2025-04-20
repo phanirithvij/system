@@ -21,6 +21,12 @@ _: {
             echo $tokens[-1]
         end
         abbr -a -p anywhere !\$ --function last_history_token
+
+
+        # fish has alt+e or alt+v but I got used to bash binding
+        # see bind --all and https://fishshell.com/docs/current/cmds/bind.html
+        # implemented in fish-shell/fish-shell#3627
+        bind ctrl-x,ctrl-e edit_command_buffer
       '';
   };
 }
