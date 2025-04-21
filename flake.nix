@@ -308,7 +308,7 @@
           }:
           inputs.home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
-            modules = [ ./home/${username} ] ++ modules ++ hmAliasModules;
+            modules = [ ./home/users/${username} ] ++ modules ++ hmAliasModules;
             # TODO sharedModules sops
             extraSpecialArgs = {
               flake-inputs = inputs;
@@ -443,7 +443,7 @@
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;
-                  users.nixos = ./home/nixos;
+                  users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
                     flake-inputs = inputs;
                     username = liveuser;
@@ -485,7 +485,7 @@
                 home-manager = {
                   useGlobalPkgs = true;
                   useUserPackages = true;
-                  users.nixos = ./home/nixos;
+                  users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
                     flake-inputs = inputs;
                     username = liveuser; # TODO wsl separate home config

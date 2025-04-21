@@ -4,37 +4,37 @@ let
 in
 {
   imports = [
-    ../applications/android.nix
-    ../applications/audio
-    ../applications/bookmarks
-    ../applications/bashmount.nix
-    ../applications/docker
-    ../applications/editors
+    ../../applications/android.nix
+    ../../applications/audio
+    ../../applications/bookmarks
+    ../../applications/bashmount.nix
+    ../../applications/docker
+    ../../applications/editors
 
-    ../applications/jj
-    ../applications/games
-    ../applications/git
-    ../applications/go
-    ../applications/media
-    ../applications/nixy
+    ../../applications/jj
+    ../../applications/games
+    ../../applications/git
+    ../../applications/go
+    ../../applications/media
+    ../../applications/nixy
 
-    ../applications/nurpkgs.nix
+    ../../applications/nurpkgs.nix
 
-    ../applications/hyprland.nix
-    ../applications/rss.nix
-    ../applications/shells
-    ../applications/telegram
-    ../applications/terminals.nix
-    ../applications/tmux.nix
-    ../applications/topgrade.nix
-    ../applications/tui.nix
+    ../../applications/hyprland.nix
+    ../../applications/rss.nix
+    ../../applications/shells
+    ../../applications/telegram
+    ../../applications/terminals.nix
+    ../../applications/tmux.nix
+    ../../applications/topgrade.nix
+    ../../applications/tui.nix
 
     ./home-scripts.nix
-    ../../secrets
+    ../../../secrets
 
-    ../services/password_manager.nix
+    ../../services/password_manager.nix
 
-    ../specialisations
+    ../../specialisations
   ];
 
   home.username = username;
