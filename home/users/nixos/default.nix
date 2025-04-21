@@ -1,14 +1,14 @@
 { pkgs, username, ... }:
 {
   imports = [
-    ../applications/git
-    ../applications/shells
-    ../applications/bashmount.nix
-    ../applications/bookmarks
-    ../applications/nixy/nix.nix
-    ../applications/tmux.nix
+    ../../applications/git
+    ../../applications/shells
+    ../../applications/bashmount.nix
+    ../../applications/bookmarks
+    ../../applications/nixy/nix.nix
+    ../../applications/tmux.nix
 
-    ../../secrets
+    ../../../secrets
   ];
 
   home.username = username;

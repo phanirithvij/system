@@ -6,9 +6,9 @@
 }:
 {
   imports = [
-    ../applications/docker # TODO only if linux
-    ../applications/bashmount.nix # TODO only if linux
-    ../applications/tmux.nix
+    ../../applications/docker # TODO only if linux
+    ../../applications/bashmount.nix # TODO only if linux
+    ../../applications/tmux.nix
   ];
 
   home.username = username;

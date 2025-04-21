@@ -17,20 +17,20 @@
   news.display = "silent";
 
   imports = [
-    ../applications/bookmarks
-    ../applications/bashmount.nix
-    ../applications/editors
-    ../applications/git
-    ../applications/media
-    ../applications/shells
-    ../applications/tmux.nix
-    ../applications/topgrade.nix
-    ../applications/tui.nix
+    ../../applications/bookmarks
+    ../../applications/bashmount.nix
+    ../../applications/editors
+    ../../applications/git
+    ../../applications/media
+    ../../applications/shells
+    ../../applications/tmux.nix
+    ../../applications/topgrade.nix
+    ../../applications/tui.nix
 
     ./home-scripts.nix
-    ../../secrets
+    ../../../secrets
 
-    ../specialisations
+    ../../specialisations
   ];
 
   home.packages = with pkgs; [
