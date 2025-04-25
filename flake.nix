@@ -164,10 +164,10 @@
           src = inputs.nixpkgs;
           patches =
             builtins.map legacyPackages.fetchpatch2 [
-              # dprint iterPlugins
+              # dprint getPluginList
               {
-                url = "https://github.com/NixOS/nixpkgs/pull/398815.diff?full_index=1";
-                hash = "sha256-P06cYQdbRjQaoZHsWx9ONMlKXAw4bYFlrCfIVydqF6k=";
+                url = "https://github.com/NixOS/nixpkgs/commit/4812f94557b23363ebb1c6fe928eb70e50ea4a12.patch?full_index=1";
+                hash = "sha256-m0db8dcDbksQGKftRSmUUi7jqIAed4AaPKS36ipMkYc=";
               }
             ]
             ++ [
