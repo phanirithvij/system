@@ -7,6 +7,7 @@ see ./todos folder as well
 
 ## TODO
 
+- [ ] https://github.com/phanirithvij/nixpkgs-review-gha#todo
 - [ ] checkout replit/rippkgs
 - [ ] topgrade config system update inside specialisation switches to default
       one
