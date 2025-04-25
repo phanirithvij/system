@@ -24,9 +24,8 @@ _: {
       "**/*-lock.json"
     ];
     settings = {
-      plugins = pkgs.dprint-plugins.iterPlugins (
-        with pkgs.dprint-plugins;
-        [
+      plugins = pkgs.dprint-plugins.getPluginList (
+        ps: with ps; [
           dprint-plugin-json
           dprint-plugin-markdown
           dprint-plugin-toml
