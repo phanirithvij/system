@@ -9,8 +9,8 @@ in
 {
   services.espanso = {
     enable = true;
-    x11Support = true;
-    waylandSupport = true;
+    x11Support = lib.mkDefault true;
+    waylandSupport = lib.mkDefault true;
     # TODO config, matches
     # gh auth token | xclip -sel clipboard
     # https://github.com/phanirithvij
