@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, lib, ... }:
 let
   repoDir = "/shed/Projects/system";
   # can do ./symlink as source i.e. docklike.rc.symlink -> /abs/path/docklike.rc and ./docklike.rc.symlink as source
@@ -7,6 +7,12 @@ let
 in
 {
   imports = [ ./config/xfconf.nix ];
+
+  # espanso trim binary
+  services.espanso = {
+    x11Support = lib.mkForce true;
+    waylandSupport = lib.mkForce false;
+  };
 
   # TODO
   # docklike plugin config
