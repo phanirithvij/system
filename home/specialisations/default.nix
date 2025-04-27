@@ -1,12 +1,33 @@
-{ lib, config, ... }:
+{
+  lib,
+  config,
+  username,
+  hostname,
+  ...
+}:
 let
-  mkHmSpecialisation = name: {
-    specialisation.${name}.configuration = {
-      imports = [ (./. + "/${name}.nix") ];
-      # nh understands this location
-      xdg.dataFile."home-manager/specialisation".text = name;
+  spAccessor =
+    name:
+    if name == "" then
+      "$SYSTEM_DIR#homeConfigurations.${username}@${hostname}.activationPackage"
+    else
+      "$SYSTEM_DIR#homeConfigurations.${username}@${hostname}.config.specialisation.${name}.configuration.home.activationPackage";
+  # pl = builtins.replaceStrings [ "${placeholder "out"}" ] [ "@out@" ];
+  mkHmSpecialisation =
+    name:
+    let
+      x = lib.debug.traceSeq { val = spAccessor name; } "";
+    in
+    {
+      specialisation.${name}.configuration = {
+        imports = [ (./. + "/${name}.nix") ];
+        # nh understands this location
+        xdg.dataFile."home-manager/specialisation".text = name;
+        home.file."${config.xdg.cacheHome}/home-manager/${name}".text = x;
+        # xdg.dataFile."home-manager/outpath".text = pl "${placeholder "out"}";
+        # xdg.dataFile."home-manager/outpath".text = config.home.activationPackage.outPath; # infrec
+      };
     };
-  };
   # Move to archive if need to disable a specialisation
   specials = lib.pipe (builtins.readDir ./.) [
     (lib.filterAttrs (n: v: v != "directory" && n != "default.nix"))
@@ -25,7 +46,7 @@ in
     (_: specialisations)
     (_: no-specialisation)
   ];
-  xdg.configFile."specialisations".text = builtins.concatStringsSep "\n" specials;
+  xdg.dataFile."home-manager/specialisations".text = builtins.concatStringsSep "\n" specials;
   /*
     TODO
     specialisation sync with os script
