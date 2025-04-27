@@ -35,22 +35,6 @@
       export OWN_DIR="/shed/Projects/\!Own"
       export SYSTEM_DIR="/shed/Projects/system"
 
-      fzfalias() {
-        fzf --height 60% --layout=reverse \
-          --cycle --keep-right --padding=1,0,0,0 \
-          --color=label:bold --tabstop=1 --border=sharp \
-          --border-label="  $1  " \
-          "''${@:2}"
-      }
-      lazygit_fzf() {
-        local repo
-        repo=$(yq ".recentrepos | @tsv" ~/.config/lazygit/state.yml | sed -e "s/\"//g" -e "s/\\\\t/\n/g" | fzfalias "lazygit-repos")
-        if [ -n "$repo" ]; then
-           pushd "$repo" || return 1
-           lazygit
-           popd || return 1
-        fi
-      }
     '';
   };
 }
