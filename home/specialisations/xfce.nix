@@ -1,6 +1,12 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  hostname,
+  ...
+}:
 let
-  repoDir = "/shed/Projects/system";
+  hostvars = import ../../hosts/${hostname}/variables.nix;
+  repoDir = hostvars.SYSTEM_DIR;
   # can do ./symlink as source i.e. docklike.rc.symlink -> /abs/path/docklike.rc and ./docklike.rc.symlink as source
   # but impure
   symlink = config.lib.file.mkOutOfStoreSymlink;

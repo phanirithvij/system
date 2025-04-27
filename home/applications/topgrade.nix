@@ -5,7 +5,8 @@
 }:
 let
   #configDir = "${config.home.homeDirectory}/Projects/system"; # TODO impure??
-  configDir = "/shed/Projects/system";
+  hostvars = import ../../hosts/${hostname}/variables.nix;
+  configDir = hostvars.SYSTEM_DIR;
 in
 {
   programs.topgrade = {
