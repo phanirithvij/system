@@ -1,7 +1,5 @@
 {
-  config,
   pkgs,
-  lib,
   ...
 }:
 let
@@ -9,6 +7,7 @@ let
   jq = "${pkgs.jq}/bin/jq";
   sh = "${pkgs.bash}/bin/sh";
   nh = "${pkgs.nh}/bin/nh";
+  nix = "${pkgs.nix}/bin/nix";
 
   # I am slightly overcomplicating it
   # /etc/specialisation can be created https://github.com/Frontear/dotfiles/blob/8dac4f4f12c74746a6213a2a67d81428b248ca89/modules/nixos/extended/module.nix#L16
@@ -41,7 +40,7 @@ let
           /run/wrappers/bin/su $user -s ${sh} -c "${nh} home switch $SYSTEM_DIR"
         else
           home_gen=$(\
-            ${lib.getExe config.nix.package} \
+            ${nix} \
             --extra-experimental-features nix-command \
             --extra-experimental-features flakes \
             --no-link --print-out-paths \
@@ -68,7 +67,11 @@ in
     also:
       - idempotent
   */
-  system.userActivationScripts = {
-    hm-host-sp-sync.text = lib.getExe script;
-  };
+  /*
+    # TODO this should be in the system config
+    system.userActivationScripts = {
+      hm-host-sp-sync.text = lib.getExe script;
+    };
+  */
+  home.packages = [ script ];
 }
