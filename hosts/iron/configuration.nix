@@ -324,6 +324,7 @@ in
   # https://wiki.nixos.org/wiki/Man_pages
   documentation.dev.enable = true;
   documentation.man.enable = true;
+  documentation.man.generateCaches = lib.mkForce false; # programs.fish enables it
 
   programs.git = {
     enable = true;
