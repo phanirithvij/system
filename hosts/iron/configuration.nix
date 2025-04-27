@@ -2,9 +2,11 @@
   config,
   lib,
   pkgs,
+  hostname,
   ...
 }:
 let
+  hostvars = import ./variables.nix;
   nameservers = [
     "1.1.1.1"
     "100.100.100.100"
@@ -156,11 +158,11 @@ in
     wantedBy = [ "multi-user.target" ];
   };
 
-  networking.hostName = "iron";
+  networking.hostName = hostname;
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "Asia/Kolkata";
+  time.timeZone = hostvars.TimeZone;
 
   i18n.defaultLocale = "en_US.UTF-8";
   console = {
@@ -320,6 +322,10 @@ in
       man-pages-posix
     ];
     variables.VISUAL = "nvim";
+    # TODO ssessionVariables vs vvariables what's the diff
+    sessionVariables = {
+      inherit (hostvars) OWN_DIR SYSTEM_DIR;
+    };
   };
   # https://wiki.nixos.org/wiki/Man_pages
   documentation.dev.enable = true;

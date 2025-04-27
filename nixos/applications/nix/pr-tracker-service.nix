@@ -1,4 +1,5 @@
 {
+  hostname,
   config,
   lib,
   pkgs,
@@ -10,7 +11,8 @@ let
   # in the upstream PR
   # writeable by the grp
   # and git safe dir because initially it was owned by other user/grp
-  dataDir = "/shed/Projects/nixhome";
+  hostvars = import ../../../hosts/${hostname}/variables.nix;
+  dataDir = hostvars.NixpkgsHome;
   nixpkgsDir = "${dataDir}/nixpkgs";
   cfg = config.services.pr-tracker.enable;
 in

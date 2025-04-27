@@ -1,4 +1,12 @@
-{ pkgs, lib, ... }:
+{
+  pkgs,
+  lib,
+  hostname,
+  ...
+}:
+let
+  hostvars = import ../../../hosts/${hostname}/variables.nix;
+in
 {
   imports = [
     ./bash.nix
@@ -54,4 +62,12 @@
           eval "$(${lib.getExe pkgs.zoxide} init bash)"    
         '';
   };
+
+  home.sessionVariables = {
+    inherit (hostvars) SYSTEM_DIR OWN_DIR;
+  };
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    "$HOME/go/bin"
+  ];
 }
