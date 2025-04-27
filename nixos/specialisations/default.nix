@@ -8,11 +8,12 @@ _: {
     #./hyprland.nix
     ./niri.nix
     ./tty.nix
+    ./plasma.nix
     #./tuigreet.nix
     #./xfce
-    #./plasma.nix
 
     # NOTE specialisations cannot have '-' (OWN restriction, see the implementation in the below file)
-    ../applications/scripts/home-manager-switch-specialisation.nix
+    # TODO relocate to hm config with systemd oneshot
+    # ../applications/scripts/home-manager-switch-specialisation.nix
   ];
 }

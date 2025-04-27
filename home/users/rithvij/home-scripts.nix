@@ -5,5 +5,6 @@ _: {
     ../../applications/scripts/pr-tracker-hm-script.nix
     ../../applications/scripts/sops-edit-hm-script.nix
     ../../applications/scripts/nix-prefetch-patch.nix
+    ../../applications/scripts/home-manager-switch-specialisation.nix
   ];
 }
