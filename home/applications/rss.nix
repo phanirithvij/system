@@ -126,7 +126,7 @@
         "http://nil.wallyjones.com/feeds/all.atom.xml"
         "https://perens.com/feed/"
         "https://rootknecht.net/index.xml"
-        "https://sparkfun.com/feeds/news"
+        "https://rss.app/feeds/CGkjvxycb6QCW7uT.xml" # found from https://www.sparkfun.com/feeds
       ]
     );
   };
