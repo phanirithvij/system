@@ -7,6 +7,18 @@ see ./todos folder as well
 
 ## TODO
 
+- [ ] runtime sandbox
+  - [ ] hover-rs for temporary usage, not a wrapper
+  - [ ] boxxy wrapper
+    - https://github.com/viperML/wrapper-manager/issues/18
+    - https://github.com/queer/boxxy
+  - [ ] nixpak wrapper
+    - https://github.com/nixpak/nixpak
+  - [ ] firejail wrapper
+    - https://github.com/VAWVAW/nixos-lib/blob/main/lib/firejail.nix ??
+    - https://wiki.nixos.org/wiki/Firejail
+  - [ ] sumatrapdf flake wine wrapper
+    - https://github.com/emmanuelrosa/sumatrapdf-nix
 - [ ] https://github.com/phanirithvij/nixpkgs-review-gha#todo
 - [ ] checkout replit/rippkgs
 - [ ] topgrade config system update inside specialisation switches to default
