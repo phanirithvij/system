@@ -12,7 +12,7 @@
     #shouldn't be used as cachix cache becomes useless
     #nur-pkgs.inputs.nixpkgs.follows = "nixpkgs";
 
-    home-manager.url = "github:phanirithvij/home-manager/espanso-wl-no-pr";
+    home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     system-manager = {
