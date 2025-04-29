@@ -13,6 +13,9 @@ in
     ./fish.nix
     ./lf.nix
   ];
+
+  home.packages = [ pkgs.boxxy ];
+
   programs.global-aliases.enable = true;
   programs.atuin = {
     enable = true;
