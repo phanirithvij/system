@@ -12,8 +12,8 @@ let
       !builtins.elem n [
         "overlayShell"
         "unstablePkgs"
-        # broken
-        "feedpushr"
+        "feedpushr" # broken
+        "nixpkgs-track" # wrappedPkgs, don't use direct
       ]
     ) flake-inputs.nur-pkgs.packages.${system})
     // flake-inputs.nur-pkgs.packages.${system}.unstablePkgs
