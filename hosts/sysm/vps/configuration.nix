@@ -4,7 +4,7 @@
   # TODO many other services
   # opengist
   # opengist darwin builds with and without sandbox
-  config = rec {
+  config = {
     nixpkgs.hostPlatform = "x86_64-linux";
 
     environment = {

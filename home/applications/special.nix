@@ -13,8 +13,6 @@ let
       inherit (pkgs) lib;
       inherit pkg aliases;
     };
-in
-rec {
   # pkg, aliases
   # pkg -> programs."${lib.getName pkg}-aliases"
   groups = [
@@ -139,4 +137,7 @@ rec {
   aliasModules = [
     global
   ] ++ (map (a: mkAliasModule' (builtins.elemAt a 0) (builtins.elemAt a 1)) groups);
+in
+{
+  inherit groups aliasModules;
 }

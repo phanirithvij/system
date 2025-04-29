@@ -18,14 +18,18 @@ let
     ;
   nginxClientPort = 3222;
   clientEndpoint = "localhost:${toString nginxClientPort}";
-  settings = rec {
-    PORT = 3111;
-    CLIENT_ENDPOINT = "http://${clientEndpoint}";
-    API_ENDPOINT = "http://localhost:${toString PORT}";
-    # all this is a workaround for keeping this secret
-    # SPOTIFY_PUBLIC = config.sops.secrets.your_spotify_client_id_env.path;
-    MONGO_ENDPOINT = "mongodb://localhost:27017/your_spotify";
-  };
+  settings =
+    let
+      PORT = 3111;
+      API_ENDPOINT = "http://localhost:${toString PORT}";
+    in
+    {
+      inherit PORT API_ENDPOINT;
+      CLIENT_ENDPOINT = "http://${clientEndpoint}";
+      # all this is a workaround for keeping this secret
+      # SPOTIFY_PUBLIC = config.sops.secrets.your_spotify_client_id_env.path;
+      MONGO_ENDPOINT = "mongodb://localhost:27017/your_spotify";
+    };
   configEnv = concatMapAttrs (
     name: value:
     optionalAttrs (value != null) {
