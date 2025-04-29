@@ -164,11 +164,6 @@
           src = inputs.nixpkgs;
           patches =
             builtins.map legacyPackages.fetchpatch2 [
-              # dprint getPluginList
-              {
-                url = "https://github.com/NixOS/nixpkgs/commit/4812f94557b23363ebb1c6fe928eb70e50ea4a12.patch?full_index=1";
-                hash = "sha256-m0db8dcDbksQGKftRSmUUi7jqIAed4AaPKS36ipMkYc=";
-              }
             ]
             ++ [
               ./opengist-module.patch
