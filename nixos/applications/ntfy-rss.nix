@@ -11,10 +11,14 @@ in
 {
   services.ntfy-sh = {
     enable = true;
-    settings = rec {
-      listen-http = ":${toString ntfy-port}";
-      base-url = "http://iron${listen-http}";
-    };
+    settings =
+      let
+        base-url = "http://iron${listen-http}";
+        listen-http = ":${toString ntfy-port}";
+      in
+      {
+        inherit listen-http base-url;
+      };
   };
 
   sops.secrets.freshrss_password = {

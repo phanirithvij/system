@@ -113,88 +113,102 @@
   outputs =
     { self, ... }@inputs:
     let
-      allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (system: rec {
-        legacyPackages = inputs.nixpkgs.legacyPackages.${system};
-        inherit (legacyPackages) lib;
-        #pkgs = import inputs.nixpkgs {
-        #pkgs = import nixpkgs' {
-        # TODO still doesn't work on macos
-        pkgs = import (if (system == "x86_64-linux") then nixpkgs' else inputs.nixpkgs) {
-          inherit overlays system;
-          config = {
-            # allowlist of unfree pkgs, for home-manager too
-            # https://github.com/viperML/dotfiles/blob/43152b279e609009697346b53ae7db139c6cc57f/packages/default.nix#L64
-            # TODO these warnings should ideally be in nixpkgs itself (allow disabling viewing traces)
-            # TODO before that, why is eval done 3 times (try nh home switch)?
-            allowUnfreePredicate =
-              pkg:
-              let
-                pname = lib.getName pkg;
-                byName = builtins.elem pname [
-                  #"steam-unwrapped"
-                  "spotify"
-                ];
-              in
-              if byName then lib.warn "Allowing unfree package: ${pname}" true else false;
-            allowInsecurePredicate =
-              pkg:
-              let
-                pname = lib.getName pkg;
-                byName = builtins.elem pname [
-                  "beekeeper-studio" # Electron version 31 is EOL
-                ];
-              in
-              if byName then lib.warn "Allowing insecure package: ${pname}" true else false;
+      allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (
+        system:
+        let
+          wrappedPkgs = import ./pkgs/wrapped-pkgs {
+            inherit pkgs system;
+            flake-inputs = inputs;
+          };
+          legacyPackages = inputs.nixpkgs.legacyPackages.${system};
+          inherit (legacyPackages) lib;
+          # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
+          nixpkgs' = legacyPackages.applyPatches {
+            name = "nixpkgs-patched";
+            src = inputs.nixpkgs;
+            patches =
+              builtins.map legacyPackages.fetchpatch2 [
+              ]
+              ++ [
+                ./opengist-module.patch
+                # https://github.com/junegunn/fzf/pull/3918/files
+                #./fzf-keybinds.patch
+              ];
+          };
 
-            packageOverrides = _: {
-              # TODO espanso_wayland and espanso-x11 and use it in different places accordingly?
-              # made a pr to home-manager see https://github.com/nix-community/home-manager/pull/5930
-              /*
-                espanso = pkgs.espanso.override {
-                  x11Support = false;
-                  waylandSupport = true;
-                };
-              */
+          #pkgs = import inputs.nixpkgs {
+          #pkgs = import nixpkgs' {
+          # TODO still doesn't work on macos
+          pkgs = import (if (system == "x86_64-linux") then nixpkgs' else inputs.nixpkgs) {
+            inherit overlays system;
+            config = {
+              # allowlist of unfree pkgs, for home-manager too
+              # https://github.com/viperML/dotfiles/blob/43152b279e609009697346b53ae7db139c6cc57f/packages/default.nix#L64
+              # TODO these warnings should ideally be in nixpkgs itself (allow disabling viewing traces)
+              # TODO before that, why is eval done 3 times (try nh home switch)?
+              allowUnfreePredicate =
+                pkg:
+                let
+                  pname = lib.getName pkg;
+                  byName = builtins.elem pname [
+                    #"steam-unwrapped"
+                    "spotify"
+                  ];
+                in
+                if byName then lib.warn "Allowing unfree package: ${pname}" true else false;
+              allowInsecurePredicate =
+                pkg:
+                let
+                  pname = lib.getName pkg;
+                  byName = builtins.elem pname [
+                    "beekeeper-studio" # Electron version 31 is EOL
+                  ];
+                in
+                if byName then lib.warn "Allowing insecure package: ${pname}" true else false;
+
+              packageOverrides = _: {
+                # TODO espanso_wayland and espanso-x11 and use it in different places accordingly?
+                # made a pr to home-manager see https://github.com/nix-community/home-manager/pull/5930
+                /*
+                  espanso = pkgs.espanso.override {
+                    x11Support = false;
+                    waylandSupport = true;
+                  };
+                */
+              };
             };
           };
-        };
-        # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
-        nixpkgs' = legacyPackages.applyPatches {
-          name = "nixpkgs-patched";
-          src = inputs.nixpkgs;
-          patches =
-            builtins.map legacyPackages.fetchpatch2 [
-            ]
-            ++ [
-              ./opengist-module.patch
-              # https://github.com/junegunn/fzf/pull/3918/files
-              #./fzf-keybinds.patch
-            ];
-        };
-        overlays =
-          (import ./lib/overlays {
-            inherit system;
-            flake-inputs = inputs;
-          })
-          ++ [ inputs.niri.overlays.niri ]
-          ++ (builtins.attrValues
-            (import "${inputs.nur-pkgs}" {
-              # pkgs here is not being used in nur-pkgs overlays
-              #inherit pkgs;
-            }).overlays
-          )
-          ++ [
-            # wrappedPkgs imported into pkgs as pkgs.wrappedPkgs
-            # no need to pass them around
-            (_: _: {
-              inherit wrappedPkgs;
+
+          overlays =
+            (import ./lib/overlays {
+              inherit system;
+              flake-inputs = inputs;
             })
-          ];
-        wrappedPkgs = import ./pkgs/wrapped-pkgs {
-          inherit pkgs system;
-          flake-inputs = inputs;
-        };
-      });
+            ++ [ inputs.niri.overlays.niri ]
+            ++ (builtins.attrValues
+              (import "${inputs.nur-pkgs}" {
+                # pkgs here is not being used in nur-pkgs overlays
+                #inherit pkgs;
+              }).overlays
+            )
+            ++ [
+              # wrappedPkgs imported into pkgs as pkgs.wrappedPkgs
+              # no need to pass them around
+              (_: _: {
+                inherit wrappedPkgs;
+              })
+            ];
+        in
+        {
+          inherit
+            lib
+            pkgs
+            overlays
+            nixpkgs'
+            wrappedPkgs
+            ;
+        }
+      );
     in
     inputs.flake-utils.lib.eachDefaultSystem (
       system:
@@ -499,17 +513,22 @@
           };
         };
         # keep all nix-on-droid hosts in same state
-        nixOnDroidConfigurations = rec {
-          default = mdroid;
-          mdroid = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-            inherit pkgs;
-            extraSpecialArgs = {
-              flake-inputs = inputs;
-              hmSharedModules = hmAliasModules;
+        # TODO host level customisations and hostvars
+        nixOnDroidConfigurations =
+          let
+            mdroid = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+              inherit pkgs;
+              extraSpecialArgs = {
+                flake-inputs = inputs;
+                hmSharedModules = hmAliasModules;
+              };
+              modules = [ ./hosts/nod ];
             };
-            modules = [ ./hosts/nod ];
+          in
+          {
+            inherit mdroid;
+            default = mdroid;
           };
-        };
       }
     );
 }
