@@ -13,7 +13,8 @@ let
 in
 {
   home.packages = [
-    pkgs.wrappedPkgs.nixpkgs-track
+    # pkgs.wrappedPkgs.nixpkgs-track
+    pkgs.wrappedPkgs.nixpkgs-track-boxxed
     script
   ];
 }

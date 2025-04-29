@@ -116,7 +116,13 @@
       allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (
         system:
         let
-          wrappedPkgs = import ./pkgs/wrapped-pkgs {
+          wrappedPkgs =
+            import ./pkgs/wrapped-pkgs {
+              inherit pkgs system;
+              flake-inputs = inputs;
+            }
+            // boxxedPkgs;
+          boxxedPkgs = import ./pkgs/boxxy {
             inherit pkgs system;
             flake-inputs = inputs;
           };
