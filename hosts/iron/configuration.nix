@@ -135,7 +135,6 @@ in
     "modesetting"
     "nvidia"
   ];
-  nixpkgs.config.nvidia.acceptLicense = true;
   hardware.nvidia-container-toolkit.enable = true;
   # https://bbs.archlinux.org/viewtopic.php?id=287207
   # https://gitlab.freedesktop.org/mesa/mesa/-/issues/11429#note_2560673
