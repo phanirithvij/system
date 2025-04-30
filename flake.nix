@@ -148,6 +148,7 @@
           pkgs = import (if (system == "x86_64-linux") then nixpkgs' else inputs.nixpkgs) {
             inherit overlays system;
             config = {
+              nvidia.acceptLicense = true;
               # allowlist of unfree pkgs, for home-manager too
               # https://github.com/viperML/dotfiles/blob/43152b279e609009697346b53ae7db139c6cc57f/packages/default.nix#L64
               # TODO these warnings should ideally be in nixpkgs itself (allow disabling viewing traces)
@@ -157,8 +158,16 @@
                 let
                   pname = lib.getName pkg;
                   byName = builtins.elem pname [
-                    #"steam-unwrapped"
-                    "spotify"
+                    "spotify" # hm
+                    "hplip"
+                    "nvidia-x11"
+                    "cloudflare-warp"
+                    "nvidia-persistenced"
+                    "plexmediaserver"
+                    "p7zip"
+                    "steam"
+                    "steam-unwrapped"
+                    "nvidia-settings"
                   ];
                 in
                 if byName then lib.warn "Allowing unfree package: ${pname}" true else false;
@@ -167,7 +176,7 @@
                 let
                   pname = lib.getName pkg;
                   byName = builtins.elem pname [
-                    "beekeeper-studio" # Electron version 31 is EOL
+                    "beekeeper-studio" # Electron version 31 is EOL, hm
                   ];
                 in
                 if byName then lib.warn "Allowing insecure package: ${pname}" true else false;
@@ -472,6 +481,7 @@
           };
           ${linuxhost} = nixosSystem {
             inherit system;
+            inherit pkgs;
             modules = [
               toolsModule
               overlayModule
