@@ -170,6 +170,9 @@ in
   # ladybird browser? not ready yet obv and apple swift wtf?
   # servo? dead? ladybird dev says rust not good for oop (dom) based browsers
   programs.firefox.enable = true;
+  programs.firefox.package = pkgs.firefox.override {
+    cfg.speechSynthesisSupport = false;
+  };
 
   xdg.mimeApps =
     let
