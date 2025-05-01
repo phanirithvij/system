@@ -4,13 +4,13 @@ _: {
   # and multiple modes to choose from in boot menu
 
   imports = [
-    #./cinnamon.nix
-    #./hyprland.nix
-    ./niri.nix
+    #./xfce # now the default config
     ./tty.nix
-    ./plasma.nix
+    #./plasma.nix
+    #./niri.nix
+    #./hyprland.nix
+    #./cinnamon.nix
     #./tuigreet.nix
-    #./xfce
 
     # NOTE specialisations cannot have '-' (OWN restriction, see the implementation in the below file)
     # TODO relocate to hm config with systemd oneshot
