@@ -20,6 +20,7 @@ in
 
     ../../applications/nurpkgs.nix
 
+    ../../applications/gui.nix
     ../../applications/hyprland.nix
     ../../applications/rss.nix
     ../../applications/shells

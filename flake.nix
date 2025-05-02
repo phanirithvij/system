@@ -24,6 +24,7 @@
     wrapper-manager.url = "github:viperML/wrapper-manager/master";
     wrapper-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    # TODO should be in nixpkgs
     git-repo-manager = {
       url = "github:hakoerber/git-repo-manager/develop";
       inputs.crane.follows = "crane";
@@ -75,11 +76,20 @@
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks.inputs.flake-compat.follows = "flake-compat";
 
+    # TODO can and should be in nixpkgs
     yaml2nix.url = "github:euank/yaml2nix";
     # https://github.com/euank/yaml2nix/blob/3a6df359da40ee49cb9ed597c2400342b76f2083/flake.nix#L4
     yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
     yaml2nix.inputs.cargo2nix.follows = "cargo2nix";
     yaml2nix.inputs.flake-utils.follows = "flake-utils";
+
+    # TODO nixpkgs
+    bzmenu = {
+      url = "github:e-tho/bzmenu";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.rust-overlay.follows = "rust-overlay";
+      inputs.flake-utils.follows = "flake-utils";
+    };
 
     ### Indirect dependencies, dedup
 

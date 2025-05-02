@@ -33,6 +33,32 @@
         "type": "github"
       }
     },
+    "bzmenu": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": [
+          "rust-overlay"
+        ]
+      },
+      "locked": {
+        "lastModified": 1746021560,
+        "narHash": "sha256-5R7dtRO7P36LgCVzV0VcCFUlzVKQxnv6vJGdMPrX5R0=",
+        "owner": "e-tho",
+        "repo": "bzmenu",
+        "rev": "857a54ba6f3d48b252fedfa22202c4118c71d1db",
+        "type": "github"
+      },
+      "original": {
+        "owner": "e-tho",
+        "repo": "bzmenu",
+        "type": "github"
+      }
+    },
     "cargo2nix": {
       "inputs": {
         "flake-compat": [
@@ -907,6 +933,7 @@
     },
     "root": {
       "inputs": {
+        "bzmenu": "bzmenu",
         "cargo2nix": "cargo2nix",
         "crane": "crane",
         "flake-compat": "flake-compat",
