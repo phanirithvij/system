@@ -30,6 +30,8 @@ in
     ../../applications/topgrade.nix
     ../../applications/tui.nix
 
+    ../../applications/heavy.nix
+
     ./home-scripts.nix
     ../../../secrets
 

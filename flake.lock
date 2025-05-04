@@ -555,6 +555,29 @@
         "type": "github"
       }
     },
+    "lazy-apps": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "pre-commit-hooks": [
+          "git-hooks"
+        ]
+      },
+      "locked": {
+        "lastModified": 1746190473,
+        "narHash": "sha256-aLqXMulBkM3RnVsvDMdjXnrHJMkyAtJi+ZVmNQORnUw=",
+        "owner": "~rycee",
+        "repo": "lazy-apps",
+        "rev": "45feb432bc80430268ea55cf0031d02a8d45b366",
+        "type": "sourcehut"
+      },
+      "original": {
+        "owner": "~rycee",
+        "repo": "lazy-apps",
+        "type": "sourcehut"
+      }
+    },
     "navi_config": {
       "flake": false,
       "locked": {
@@ -943,6 +966,7 @@
         "git-repo-manager": "git-repo-manager",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "lazy-apps": "lazy-apps",
         "navi_config": "navi_config",
         "niri": "niri",
         "niri-unstable-overview": "niri-unstable-overview",

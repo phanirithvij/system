@@ -24,6 +24,10 @@
     wrapper-manager.url = "github:viperML/wrapper-manager/master";
     wrapper-manager.inputs.nixpkgs.follows = "nixpkgs";
 
+    lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # own fork/backup at https://github.com/phanirithvij/lazy-apps
+    lazy-apps.inputs.nixpkgs.follows = "nixpkgs";
+    lazy-apps.inputs.pre-commit-hooks.follows = "git-hooks";
+
     # TODO should be in nixpkgs
     git-repo-manager = {
       url = "github:hakoerber/git-repo-manager/develop";
@@ -126,16 +130,13 @@
       allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (
         system:
         let
-          wrappedPkgs =
-            import ./pkgs/wrapped-pkgs {
-              inherit pkgs system;
-              flake-inputs = inputs;
-            }
-            // boxxedPkgs;
-          boxxedPkgs = import ./pkgs/boxxy {
+          args = {
             inherit pkgs system;
             flake-inputs = inputs;
           };
+          boxxyPkgs = import ./pkgs/boxxy args;
+          lazyPkgs = import ./pkgs/lazy args;
+          wrappedPkgs = import ./pkgs/wrapped-pkgs args;
           legacyPackages = inputs.nixpkgs.legacyPackages.${system};
           inherit (legacyPackages) lib;
           # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
@@ -221,6 +222,8 @@
               # no need to pass them around
               (_: _: {
                 inherit wrappedPkgs;
+                inherit lazyPkgs;
+                inherit boxxyPkgs;
               })
             ];
         in
@@ -231,6 +234,8 @@
             overlays
             nixpkgs'
             wrappedPkgs
+            lazyPkgs
+            boxxyPkgs
             ;
         }
       );
@@ -245,6 +250,8 @@
         hm = inputs.home-manager.packages.${system}.default;
         sysm = inputs.system-manager.packages.${system}.default;
         #nix-schema = pkgs.nix-schema { inherit system; }; # nur-pkgs overlay, cachix cache
+
+        unNestAttrs = import ./lib/unnest.nix { inherit pkgs; };
       in
       {
         apps = {
@@ -255,14 +262,22 @@
             };
           */
         };
-        packages = {
-          #inherit nix-schema;
-          navi-master = pkgs.navi;
-          git-repo-manager = grm;
-          home-manager = hm;
-          # TODO optional if system is linux
-          system-manager = sysm;
-        } // allSystemsJar.wrappedPkgs.${system};
+        packages =
+          let
+            _pkgs =
+              {
+                #inherit nix-schema;
+                navi-master = pkgs.navi;
+                git-repo-manager = grm;
+                home-manager = hm;
+                # TODO optional if system is linux
+                system-manager = sysm;
+              }
+              // allSystemsJar.wrappedPkgs.${system}
+              // (unNestAttrs allSystemsJar.lazyPkgs.${system})
+              // allSystemsJar.boxxyPkgs.${system};
+          in
+          _pkgs;
         # NEVER ever run `nix fmt` run `treefmt`
         #formatter = treefmtCfg.wrapper;
         checks = {
