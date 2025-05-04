@@ -14,7 +14,7 @@ in
 {
   home.packages = [
     # pkgs.wrappedPkgs.nixpkgs-track
-    pkgs.wrappedPkgs.nixpkgs-track-boxxed
+    pkgs.wrappedPkgs.boxxed-nixpkgs-track
     script
   ];
 }
