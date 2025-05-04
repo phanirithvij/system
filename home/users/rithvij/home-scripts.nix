@@ -8,6 +8,8 @@ _: {
     ../../applications/scripts/home-manager-switch-specialisation.nix
     ../../applications/scripts/lazygit_fzf.nix
 
+    ../../applications/scripts/nom-wrapper.nix
+
     ../../applications/pr-tracker/nixpkgs-track
   ];
 }
