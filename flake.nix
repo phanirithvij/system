@@ -24,7 +24,9 @@
     wrapper-manager.url = "github:viperML/wrapper-manager/master";
     wrapper-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # own fork/backup at https://github.com/phanirithvij/lazy-apps
+    lazy-apps.url = "github:phanirithvij/lazy-apps/master";
+    # lazy-apps.url = "git+file:///shed/Projects/!Others/lazy-apps?shallow=1";
+    # lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # own fork/backup at
     lazy-apps.inputs.nixpkgs.follows = "nixpkgs";
     lazy-apps.inputs.pre-commit-hooks.follows = "git-hooks";
 

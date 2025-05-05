@@ -565,17 +565,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1746190473,
-        "narHash": "sha256-aLqXMulBkM3RnVsvDMdjXnrHJMkyAtJi+ZVmNQORnUw=",
-        "owner": "~rycee",
+        "lastModified": 1746438727,
+        "narHash": "sha256-ot+e0KN3A1lGO/1VOQwvcXUakfLK0mg7xu/+wxEf4oQ=",
+        "owner": "phanirithvij",
         "repo": "lazy-apps",
-        "rev": "45feb432bc80430268ea55cf0031d02a8d45b366",
-        "type": "sourcehut"
+        "rev": "da98f7b3f9a5e80da141bb5ec2da5acee46ec72a",
+        "type": "github"
       },
       "original": {
-        "owner": "~rycee",
+        "owner": "phanirithvij",
+        "ref": "master",
         "repo": "lazy-apps",
-        "type": "sourcehut"
+        "type": "github"
       }
     },
     "navi_config": {
