@@ -7,6 +7,10 @@ _: {
         # disable greet message
         set fish_greeting
 
+        # enable ctrl-s and ctrl-q
+        stty ixon
+        # ixoff is something else, see stackoverflow.com/q/6429515
+
         abbr -a -p anywhere L --set-cursor '%| less'
 
         # https://fishshell.com/docs/current/cmds/abbr.html
