@@ -7,6 +7,12 @@ see ./todos folder as well
 
 ## TODO
 
+- [ ] radicle services
+  - [ ] web via, radicle-explorer
+  - [ ] caddy to proxy radicle-httpd
+  - [ ] nixos module enable, nginx = null
+  - [ ] compos2nix or systemd-nspawn nixos container to not let it be
+        localhost:443
 - [ ] bootloaders
   - [ ] secure boot w/ lanzaboote
   - [ ] windows for each bootloader listed below
