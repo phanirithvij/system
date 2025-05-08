@@ -83,7 +83,7 @@ in
     yacreader
     localsend
     rclone-browser
-    spotify
+    lazyPkgs.spotify
 
     ffmpeg-headless
     sqlite-interactive

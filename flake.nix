@@ -256,6 +256,7 @@
         unNestAttrs = import ./lib/unnest.nix { inherit pkgs; };
       in
       {
+        lazyApps = unNestAttrs allSystemsJar.lazyPkgs.${system};
         apps = {
           /*
             nix = {
@@ -398,6 +399,7 @@
         nixosSystem = import (allSystemsJar.nixpkgs'.${system} + "/nixos/lib/eval-config.nix");
       in
       {
+        # TODO schema for lazyApps
         schemas = (builtins.removeAttrs inputs.flake-schemas.schemas [ "schemas" ]) // {
           systemConfigs = {
             version = 1;
