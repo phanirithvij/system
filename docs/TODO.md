@@ -7,6 +7,20 @@ see ./todos folder as well
 
 ## TODO
 
+- [ ] bootloaders
+  - [ ] secure boot w/ lanzaboote
+  - [ ] windows for each bootloader listed below
+  - [ ] other linuxes
+    - [ ] arch
+    - [ ] linux mint
+    - [ ] proxmox
+  - [x] limine (currently active)
+  - [x] grub
+  - [ ] systemd-boot
+  - [ ] refind -
+        https://github.com/search?q=language%3ANix+external+AND+rEFInd+NOT+is%3Afork&type=code
+  - [ ] uboot - not sure if people use it, seems like it is for
+        microcontrollers?
 - [ ] runtime sandbox
   - [ ] hover-rs for temporary usage, not a wrapper
   - [ ] boxxy wrapper
