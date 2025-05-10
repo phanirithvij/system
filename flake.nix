@@ -1,22 +1,15 @@
 {
   inputs = {
-    # THIS is dumb unless nixpkgs is based on nixos-unstable
-    # useful for git bisecting, use path:/abs/path instead for the same
-    #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
 
-    #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages/master";
     nur-pkgs.inputs.nix-update.follows = "nix-update";
-    #shouldn't be used as cachix cache becomes useless
-    #nur-pkgs.inputs.nixpkgs.follows = "nixpkgs";
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     system-manager = {
-      #url = "git+file:///shed/Projects/nixer/learn/numtide/system-manager";
       url = "github:numtide/system-manager/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -25,12 +18,10 @@
     wrapper-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     lazy-apps.url = "github:phanirithvij/lazy-apps/master";
-    # lazy-apps.url = "git+file:///shed/Projects/!Others/lazy-apps?shallow=1";
-    # lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # own fork/backup at
     lazy-apps.inputs.nixpkgs.follows = "nixpkgs";
     lazy-apps.inputs.pre-commit-hooks.follows = "git-hooks";
 
-    # TODO should be in nixpkgs
+    
     git-repo-manager = {
       url = "github:hakoerber/git-repo-manager/develop";
       inputs.crane.follows = "crane";
@@ -49,8 +40,7 @@
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
+    
     flake-schemas.url = "github:DeterminateSystems/flake-schemas/main";
 
     sops-nix.url = "github:Mic92/sops-nix/master";
@@ -70,9 +60,7 @@
     niri.inputs.nixpkgs.follows = "nixpkgs";
     niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     niri.inputs.niri-unstable.follows = "niri-unstable-overview";
-
-    # TODO bug in nix flake path parsing with non utf8 branchname
-    # see https://matrix.to/#/!KIjqiaZyJFkPXxMmGQ:gnome.org/$6k_jnKTkDjMVWOGyBb3Ugvf1cvQ-n_P3HGguh6RhVAE
+    
     niri-unstable-overview.url = "github:phanirithvij/niri?ref=overview";
 
     treefmt-nix.url = "github:numtide/treefmt-nix";
@@ -81,15 +69,12 @@
     git-hooks.url = "github:cachix/git-hooks.nix";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks.inputs.flake-compat.follows = "flake-compat";
-
-    # TODO can and should be in nixpkgs
-    yaml2nix.url = "github:euank/yaml2nix";
-    # https://github.com/euank/yaml2nix/blob/3a6df359da40ee49cb9ed597c2400342b76f2083/flake.nix#L4
+    
+    yaml2nix.url = "github:euank/yaml2nix";    
     yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
     yaml2nix.inputs.cargo2nix.follows = "cargo2nix";
     yaml2nix.inputs.flake-utils.follows = "flake-utils";
-
-    # TODO nixpkgs
+    
     bzmenu = {
       url = "github:e-tho/bzmenu";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -97,9 +82,6 @@
       inputs.flake-utils.follows = "flake-utils";
     };
 
-    ### Indirect dependencies, dedup
-
-    #systems.url = "github:nix-systems/default-linux";
     systems.url = "github:nix-systems/default";
 
     crane.url = "github:ipetkov/crane";
@@ -141,7 +123,7 @@
           wrappedPkgs = import ./pkgs/wrapped-pkgs args;
           legacyPackages = inputs.nixpkgs.legacyPackages.${system};
           inherit (legacyPackages) lib;
-          # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
+          
           nixpkgs' = legacyPackages.applyPatches {
             name = "nixpkgs-patched";
             src = inputs.nixpkgs;
@@ -154,28 +136,18 @@
               ]
               ++ [
                 ./opengist-module.patch
-                # https://github.com/junegunn/fzf/pull/3918/files
-                #./fzf-keybinds.patch
               ];
           };
-
-          #pkgs = import inputs.nixpkgs {
-          #pkgs = import nixpkgs' {
-          # TODO still doesn't work on macos
           pkgs = import (if (system == "x86_64-linux") then nixpkgs' else inputs.nixpkgs) {
             inherit overlays system;
             config = {
               nvidia.acceptLicense = true;
-              # allowlist of unfree pkgs, for home-manager too
-              # https://github.com/viperML/dotfiles/blob/43152b279e609009697346b53ae7db139c6cc57f/packages/default.nix#L64
-              # TODO these warnings should ideally be in nixpkgs itself (allow disabling viewing traces)
-              # TODO before that, why is eval done 3 times (try nh home switch)?
               allowUnfreePredicate =
                 pkg:
                 let
                   pname = lib.getName pkg;
                   byName = builtins.elem pname [
-                    "spotify" # hm
+                    "spotify" 
                     "hplip"
                     "nvidia-x11"
                     "cloudflare-warp"
@@ -193,24 +165,13 @@
                 let
                   pname = lib.getName pkg;
                   byName = builtins.elem pname [
-                    "beekeeper-studio" # Electron version 31 is EOL, hm
+                    "beekeeper-studio" 
                   ];
                 in
                 if byName then lib.warn "Allowing insecure package: ${pname}" true else false;
-
-              packageOverrides = _: {
-                # TODO espanso_wayland and espanso-x11 and use it in different places accordingly?
-                # made a pr to home-manager see https://github.com/nix-community/home-manager/pull/5930
-                /*
-                  espanso = pkgs.espanso.override {
-                    x11Support = false;
-                    waylandSupport = true;
-                  };
-                */
-              };
+              packageOverrides = _: { };
             };
           };
-
           overlays =
             (import ./lib/overlays {
               inherit system;
@@ -219,13 +180,9 @@
             ++ [ inputs.niri.overlays.niri ]
             ++ (builtins.attrValues
               (import "${inputs.nur-pkgs}" {
-                # pkgs here is not being used in nur-pkgs overlays
-                #inherit pkgs;
               }).overlays
             )
             ++ [
-              # wrappedPkgs imported into pkgs as pkgs.wrappedPkgs
-              # no need to pass them around
               (_: _: {
                 inherit wrappedPkgs;
                 inherit lazyPkgs;
@@ -255,29 +212,18 @@
         grm = inputs.git-repo-manager.packages.${system}.default;
         hm = inputs.home-manager.packages.${system}.default;
         sysm = inputs.system-manager.packages.${system}.default;
-        #nix-schema = pkgs.nix-schema { inherit system; }; # nur-pkgs overlay, cachix cache
-
         unNestAttrs = import ./lib/unnest.nix { inherit pkgs; };
       in
       {
         lazyApps = unNestAttrs allSystemsJar.lazyPkgs.${system};
-        apps = {
-          /*
-            nix = {
-              type = "app";
-              program = "${nix-schema}/bin/nix-schema";
-            };
-          */
-        };
+        apps = { };
         packages =
           let
             _pkgs =
               {
-                #inherit nix-schema;
                 navi-master = pkgs.navi;
                 git-repo-manager = grm;
                 home-manager = hm;
-                # TODO optional if system is linux
                 system-manager = sysm;
               }
               // allSystemsJar.wrappedPkgs.${system}
@@ -285,8 +231,6 @@
               // allSystemsJar.boxxyPkgs.${system};
           in
           _pkgs;
-        # NEVER ever run `nix fmt` run `treefmt`
-        #formatter = treefmtCfg.wrapper;
         checks = {
           formatting = treefmtCfg.check self;
           git-hooks-check = inputs.git-hooks.lib.${system}.run {
@@ -312,7 +256,7 @@
                 always_run = true;
                 stages = [ "prepare-commit-msg" ];
                 entry = toString (
-                  # if all are md files, skip ci
+                  
                   pkgs.writeShellScript "skip-ci-md" ''
                     COMMIT_MSG_FILE=$1
                     STAGED_FILES=$(git diff --cached --name-only)
@@ -349,7 +293,7 @@
         liveuser = "nixos";
 
         linuxhost = "iron";
-        hostdroid = "localhost"; # not possible to change it
+        hostdroid = "localhost"; 
         livehost = "nixos";
 
         pkgs = allSystemsJar.pkgs.${system};
@@ -365,7 +309,7 @@
           inputs.home-manager.lib.homeManagerConfiguration {
             inherit pkgs;
             modules = [ ./home/users/${username} ] ++ modules ++ hmAliasModules;
-            # TODO sharedModules sops
+            
             extraSpecialArgs = {
               flake-inputs = inputs;
               inherit system;
@@ -388,22 +332,15 @@
             hm
             grm
             sysm
-            #(pkgs.nix-schema { inherit system; })
+            
           ];
         };
         overlayModule = {
           nixpkgs.overlays = allSystemsJar.overlays.${system};
         };
-
-        #inherit (inputs.nixpkgs.lib) nixosSystem;
-        # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
-        # IFD BAD BAD AAAAAA!
-        # only option is to maintain a fork of nixpkgs as of now
-        # follow https://github.com/NixOS/nix/issues/3920
         nixosSystem = import (allSystemsJar.nixpkgs'.${system} + "/nixos/lib/eval-config.nix");
       in
       {
-        # TODO schema for lazyApps
         schemas = (builtins.removeAttrs inputs.flake-schemas.schemas [ "schemas" ]) // {
           systemConfigs = {
             version = 1;
@@ -439,44 +376,44 @@
         systemConfigs = {
           gha = inputs.system-manager.lib.makeSystemConfig {
             modules = [ ./hosts/sysm/gha/configuration.nix ];
-            # https://github.com/numtide/system-manager/issues/10
-            # nixpkgs overlays not propagated
+            
+            
             extraSpecialArgs = { inherit pkgs; };
           };
-          # TODO rename vps
+          
           vps = inputs.system-manager.lib.makeSystemConfig {
             modules = [ ./hosts/sysm/vps/configuration.nix ];
             extraSpecialArgs = { inherit pkgs; };
           };
         };
         homeConfigurations = {
-          # nixos main
+          
           "${user}@${linuxhost}" = homeConfig {
             username = user;
             hostname = linuxhost;
             modules = nix-index-hm-modules ++ common-hm-modules;
             inherit system;
           };
-          # non-nixos linux
+          
           ${uzer} = homeConfig {
             username = uzer;
             modules = nix-index-hm-modules ++ common-hm-modules;
             inherit system;
           };
-          # nix-on-droid
+          
           "${droid}@${hostdroid}" = homeConfig {
             username = droid;
             hostname = hostdroid;
             system = "aarch64-linux";
           };
-          # nixos live user
+          
           "${liveuser}@${livehost}" = homeConfig {
             username = liveuser;
             hostname = livehost;
             modules = common-hm-modules;
             inherit system;
           };
-          # TODO different repo with npins?
+          
           "runner" = homeConfig {
             username = "runner";
             hostname = "_______";
@@ -494,7 +431,7 @@
               toolsModule
               overlayModule
               inputs.sops-nix.nixosModules.sops
-              # home-manager baked in
+              
               inputs.home-manager.nixosModules.home-manager
               {
                 home-manager = {
@@ -524,7 +461,7 @@
             ];
             specialArgs = {
               flake-inputs = inputs;
-              inherit system; # TODO needed?
+              inherit system; 
               username = user;
               hostname = linuxhost;
             };
@@ -537,7 +474,7 @@
               inputs.sops-nix.nixosModules.sops
               inputs.nixos-wsl.nixosModules.default
               ./hosts/wsl/configuration.nix
-              # home-manager baked in
+              
               inputs.home-manager.nixosModules.home-manager
               {
                 home-manager = {
@@ -546,7 +483,7 @@
                   users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
                     flake-inputs = inputs;
-                    username = liveuser; # TODO wsl separate home config
+                    username = liveuser; 
                     hostname = livehost;
                   };
                   sharedModules = common-hm-modules ++ hmAliasModules;
@@ -555,14 +492,12 @@
             ];
             specialArgs = {
               flake-inputs = inputs;
-              inherit system; # TODO needed?
+              inherit system; 
               username = "nixos";
               hostname = "nixos";
             };
           };
         };
-        # keep all nix-on-droid hosts in same state
-        # TODO host level customisations and hostvars
         nixOnDroidConfigurations =
           let
             mdroid = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
