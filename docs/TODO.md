@@ -7,6 +7,11 @@ see ./todos folder as well
 
 ## TODO
 
+- [ ] torrent services
+  - [ ] PeerBanHelper
+  - [ ] btDownloadManager
+  - [ ] https://github.com/anacrolix/torrent/discussions/891
+  - https://reddit.com/r/qBittorrent/comments/13aulaz
 - [ ] earlyoom
   - https://dataswamp.org/~solene/2022-09-28-earlyoom.html
   - https://discourse.nixos.org/t/avoid-linux-locking-up-in-low-memory-situations-using-earlyoom/22072
