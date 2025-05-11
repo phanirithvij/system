@@ -7,6 +7,9 @@ see ./todos folder as well
 
 ## TODO
 
+- [ ] earlyoom
+  - https://dataswamp.org/~solene/2022-09-28-earlyoom.html
+  - https://discourse.nixos.org/t/avoid-linux-locking-up-in-low-memory-situations-using-earlyoom/22072
 - [ ] radicle services
   - [ ] web via, radicle-explorer
   - [ ] caddy to proxy radicle-httpd
