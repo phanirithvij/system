@@ -50,6 +50,8 @@
     backupFileExtension = "hm.bak";
     useGlobalPkgs = true;
     extraSpecialArgs = {
+      hostname = "nod";
+      username = "nix-on-droid";
       inherit flake-inputs;
     };
     sharedModules = hmSharedModules;
