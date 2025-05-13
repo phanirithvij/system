@@ -53,6 +53,6 @@
       inherit flake-inputs;
     };
     sharedModules = hmSharedModules;
-    config = ../../home/nix-on-droid;
+    config = ../../home/users/nix-on-droid;
   };
 }
