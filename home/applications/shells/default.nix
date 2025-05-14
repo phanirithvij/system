@@ -2,6 +2,7 @@
   pkgs,
   lib,
   hostname,
+  system,
   ...
 }:
 let
@@ -14,7 +15,7 @@ in
     ./lf.nix
   ];
 
-  home.packages = [ pkgs.boxxy ];
+  home.packages = lib.optional (system == "x86_64-linux") pkgs.boxxy;
 
   programs.global-aliases.enable = true;
   programs.atuin = {

@@ -473,9 +473,9 @@
           # nix-on-droid
           "${droid}@${hostdroid}" = homeConfig {
             username = droid;
-            hostname = hostdroid;
+            hostname = "nod"; # NOTE: nod = nix-on-droid, not the real hostname (it is localhost i.e. ${hostdroid})
             modules = common-hm-modules;
-            system = "aarch64-linux";
+            system = builtins.currentSystem or "aarch64-linux";
           };
           # nixos live user
           "${liveuser}@${livehost}" = homeConfig {
