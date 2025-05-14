@@ -1,7 +1,5 @@
 {
   pkgs,
-  flake-inputs,
-  hmSharedModules,
   ...
 }:
 {
@@ -47,15 +45,17 @@
   time.timeZone = "Asia/Kolkata";
 
   # TODO pkgs not passed?
-  home-manager = {
-    backupFileExtension = "hm.bak";
-    # useGlobalPkgs = true;
-    extraSpecialArgs = {
-      hostname = "nod";
-      username = "nix-on-droid";
-      inherit flake-inputs;
+  /*
+    home-manager = {
+      backupFileExtension = "hm.bak";
+      # useGlobalPkgs = true;
+      extraSpecialArgs = {
+        hostname = "nod";
+        username = "nix-on-droid";
+        inherit flake-inputs;
+      };
+      sharedModules = hmSharedModules;
+      config = ../../home/users/nix-on-droid;
     };
-    sharedModules = hmSharedModules;
-    config = ../../home/users/nix-on-droid;
-  };
+  */
 }
