@@ -4,9 +4,6 @@
   wifipassFile,
   ...
 }:
-let
-  inherit (pkgs) navi;
-in
 {
   home.file.".local/share/navi/cheats/phanirithvij__navi" = {
     source = flake-inputs.navi_config;
@@ -42,7 +39,7 @@ in
   programs.bash.initExtra = ''
     if [[ :$SHELLOPTS: =~ :(vi|emacs): ]]; then
       if [[ ! -f /tmp/navi_eval.sh ]]; then
-        ${navi}/bin/navi widget bash \
+        ${pkgs.navi}/bin/navi widget bash \
           | sed 's/_navi_widget/_navi_widget_currdir/g' \
           | sed 's/--print/--print --path "docs:."/g' \
           | sed 's/C-g/C-j/g' \
@@ -53,7 +50,7 @@ in
   '';
   programs.zsh.initExtra = ''
     if [[ $options[zle] = on ]]; then
-      ${navi}/bin/navi widget zsh \
+      ${pkgs.navi}/bin/navi widget zsh \
         | sed 's/_navi_widget/_navi_widget_currdir/g' \
         | sed 's/--print/--print --path "docs:."/g' \
         | sed 's/\^g/\^j/g'
@@ -62,7 +59,7 @@ in
     fi
   '';
   programs.fish.shellInit = ''
-    ${navi}/bin/navi widget fish \
+    ${pkgs.navi}/bin/navi widget fish \
       | sed 's/--print/--print --path "docs:."/g' \
       | sed 's/\\\\cg/\\\\cj/g' \
       | sed 's/_navi_smart_replace/_navi_smart_replace_currdir/g' \
