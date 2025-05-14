@@ -46,9 +46,10 @@
 
   time.timeZone = "Asia/Kolkata";
 
+  # TODO pkgs not passed?
   home-manager = {
     backupFileExtension = "hm.bak";
-    useGlobalPkgs = true;
+    # useGlobalPkgs = true;
     extraSpecialArgs = {
       hostname = "nod";
       username = "nix-on-droid";
