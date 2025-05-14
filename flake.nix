@@ -340,9 +340,16 @@
         };
       }
     )
-    // inputs.flake-utils.lib.eachDefaultSystemPassThrough (
-      system:
+    // (
       let
+        # Previously I used flake-utils.eachDefaultSystemPassThrough
+        # but that functions in a way
+        #  which allows only the last entry in the `defaultSystems` defined in flake-utils is used
+        # and even with --impure, on aarch64-linux there is a check https://github.com/numtide/flake-utils/pull/119/files#diff-25f00f391a440414afdc84d7191b5892db3492e1c0b9a45f9063be83e21d75e4R55
+        # which lets aarch64-linux to be in the defaultSystems[3] and not last one in the list
+        # TODO follow https://github.com/NixOS/nix/issues/3843
+        system = builtins.currentSystem or "x86_64-linux";
+
         user = "rithvij";
         uzer = "rithviz";
         droid = "nix-on-droid";
