@@ -147,9 +147,12 @@
             src = inputs.nixpkgs;
             patches =
               builtins.map legacyPackages.fetchpatch2 [
+                {
+                  url = "https://github.com/phanirithvij/nixpkgs/commit/1c3d4bb9cbc0a66f6053594ebf5c0c0aff9dda5f.patch?full_index=1";
+                  hash = "sha256-k8Q807DLiJlHM7sbawuXk4800CrHGeoLPXmDhuItyQU=";
+                }
               ]
               ++ [
-                ./opengist-module.patch
                 # https://github.com/junegunn/fzf/pull/3918/files
                 #./fzf-keybinds.patch
               ];
