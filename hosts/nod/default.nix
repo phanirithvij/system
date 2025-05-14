@@ -3,7 +3,7 @@
   ...
 }:
 {
-  imports = [ ./sshd.nix ];
+  imports = [ ]; # TODO ./sshd.nix
   environment.packages = with pkgs; [
     neovim
     openssh
