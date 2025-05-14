@@ -147,10 +147,6 @@
             src = inputs.nixpkgs;
             patches =
               builtins.map legacyPackages.fetchpatch2 [
-                {
-                  url = "https://github.com/NixOS/nixpkgs/pull/405151.diff?full_index=1";
-                  hash = "sha256-NlG1ZSvi2U9yqj/U/Lmh2FWNLorZvGHih1Pb2v8DXQs=";
-                }
               ]
               ++ [
                 ./opengist-module.patch
