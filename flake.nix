@@ -474,6 +474,7 @@
           "${droid}@${hostdroid}" = homeConfig {
             username = droid;
             hostname = hostdroid;
+            modules = common-hm-modules;
             system = "aarch64-linux";
           };
           # nixos live user
