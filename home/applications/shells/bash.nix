@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, username, ... }:
 {
   # TODO logrotate bash_history
   # TODO borgmatic backup to gdrive
@@ -7,7 +7,8 @@
   # TODO blesh
   # https://github.com/tars0x9752/home/tree/main/modules/blesh
   programs.bash = {
-    enable = true;
+    # disable it on nix-on-droid
+    enable = username != "nix-on-droid";
     enableCompletion = true;
     sessionVariables = {
       HISTTIMEFORMAT = "%Y-%m-%d-%H%M%S ";

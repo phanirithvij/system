@@ -27,7 +27,6 @@
     #xz
     #zip
     #unzip
-    #nh #not in 23.11
     iproute2
   ];
 
@@ -35,7 +34,7 @@
   environment.etcBackupExtension = ".bak";
 
   # Read the changelog before changing this value
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 
   # Set up nix for flakes
   nix.extraOptions = ''
@@ -43,6 +42,8 @@
   '';
 
   time.timeZone = "Asia/Kolkata";
+
+  user.shell = pkgs.fish; # chsh won't work
 
   # TODO pkgs not passed?
   /*
