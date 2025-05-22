@@ -145,17 +145,16 @@
           nixpkgs' = legacyPackages.applyPatches {
             name = "nixpkgs-patched";
             src = inputs.nixpkgs;
-            patches =
-              builtins.map legacyPackages.fetchpatch2 [
-                {
-                  url = "https://github.com/phanirithvij/nixpkgs/commit/1c3d4bb9cbc0a66f6053594ebf5c0c0aff9dda5f.patch?full_index=1";
-                  hash = "sha256-k8Q807DLiJlHM7sbawuXk4800CrHGeoLPXmDhuItyQU=";
-                }
-              ]
-              ++ [
-                # https://github.com/junegunn/fzf/pull/3918/files
-                #./fzf-keybinds.patch
-              ];
+            patches = builtins.map legacyPackages.fetchpatch2 [
+              {
+                url = "https://github.com/phanirithvij/nixpkgs/commit/1c3d4bb9cbc0a66f6053594ebf5c0c0aff9dda5f.patch?full_index=1";
+                hash = "sha256-k8Q807DLiJlHM7sbawuXk4800CrHGeoLPXmDhuItyQU=";
+              }
+            ];
+            # ++ [
+            # https://github.com/junegunn/fzf/pull/3918/files
+            # ./fzf-keybinds.patch
+            # ];
           };
 
           #pkgs = import inputs.nixpkgs {
@@ -464,8 +463,9 @@
             inherit system;
           };
           # non-nixos linux
-          ${uzer} = homeConfig {
+          "${uzer}@${linuxhost}" = homeConfig {
             username = uzer;
+            hostname = linuxhost;
             modules = nix-index-hm-modules ++ common-hm-modules;
             inherit system;
           };
@@ -512,6 +512,7 @@
                     flake-inputs = inputs;
                     username = liveuser;
                     hostname = livehost;
+                    inherit system;
                   };
                   sharedModules = common-hm-modules ++ hmAliasModules;
                 };
@@ -555,6 +556,7 @@
                     flake-inputs = inputs;
                     username = liveuser; # TODO wsl separate home config
                     hostname = livehost;
+                    inherit system;
                   };
                   sharedModules = common-hm-modules ++ hmAliasModules;
                 };
