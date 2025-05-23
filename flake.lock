@@ -565,11 +565,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1746680480,
-        "narHash": "sha256-yR6sx6WiOOJKE3KV4b9IJtGCYZNGuKHiV8sFu9WsPzs=",
+        "lastModified": 1748144986,
+        "narHash": "sha256-z8hAL/p3bRL1kVciC2F1LTQucORtLuqDqemDISRmXpM=",
         "owner": "phanirithvij",
         "repo": "lazy-apps",
-        "rev": "61c855c5f621f4c80cfafabb405c43525d0e4e43",
+        "rev": "896974de7f8b00027fb250b25186a72b5cfd5514",
         "type": "github"
       },
       "original": {
@@ -941,11 +941,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1747907986,
-        "narHash": "sha256-caDHnw4YPLy/EYpX4ma9OSpqaxh8CWdOI63+xtdNNTA=",
+        "lastModified": 1748063926,
+        "narHash": "sha256-ImOfzsTbtNSLec34hMJz69lfVxO2VSF0BNslf89suX0=",
         "owner": "phanirithvij",
         "repo": "nur-packages",
-        "rev": "356a65a8573a425ab2af33ffd34ad8654209da38",
+        "rev": "106bfbf253260ccb2ef31071e72febd7727dc8bf",
         "type": "github"
       },
       "original": {
