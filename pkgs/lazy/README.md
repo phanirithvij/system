@@ -12,3 +12,17 @@ need to figure out a way to make nix-store --realise drvPath work
   files.
   - but in this case, do we need to save the input drvs etc.. i.e. the whole
     tree
+- [ ] nom progress for first initialisation
+- [ ] TODO move to lazy apps
+  - beekeeper-studio
+  - tor-browser
+  - yacreader
+  - koreader
+  - subtitlecomposer
+  - scrcpy
+  - vliv
+  - heroic
+  - ludusavi
+  - lgogdownloader
+  - gamescope
+  - syncplay
