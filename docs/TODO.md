@@ -7,6 +7,28 @@ see ./todos folder as well
 
 ## TODO
 
+- try out
+  - gron, fastgron
+  - simdjson
+  - jqp (akavel/up tangent)
+- [ ] go through
+  - https://github.com/ngi-nix/ngipkgs
+  - https://github.com/selfhostedshow/show-notes/commit/3628aabde317c3068a9a3868afbf624a4dff15e8
+  - https://github.com/zhaofengli/colmena/blob/df694ee23be7ed7b2d8b42c245a640f0724eb06c/integration-tests/tools.nix#L31-L43
+- [ ] nixify https://github.com/HouariZegai/slides-remote, include
+      https://github.com/HouariZegai/slides-remote/pull/3
+- [ ] try out omnom - blocker https://github.com/NixOS/nixpkgs/pull/409314
+- [ ] try out mani - https://github.com/alajmo/mani
+- [ ] try out nix-maid
+  - https://github.com/viperML/nix-maid
+- [ ] try out hjem
+  - https://github.com/feel-co/hjem
+- [ ] guix update with rootless/unpreviliged guix-daemon
+  - https://github.com/NixOS/nixpkgs/issues/326500 - guix 1.4.0 is too old
+  - guix commit e2583b5a17bfdedc1d24b3bab2d752fbf8fa6db6
+  - guix-mirror on  master ❯ git remote -v
+    - origin https://git.guix.gnu.org/guix.git
+    - mirror https://codeberg.org/guix/guix-mirror
 - [ ] torrent services
   - [ ] PeerBanHelper
   - [ ] btDownloadManager
