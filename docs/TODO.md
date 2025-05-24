@@ -7,6 +7,16 @@ see ./todos folder as well
 
 ## TODO
 
+- [ ] try out nix-maid
+  - https://github.com/viperML/nix-maid
+- [ ] try out hjem
+  - https://github.com/feel-co/hjem
+- [ ] guix update with rootless/unpreviliged guix-daemon
+  - https://github.com/NixOS/nixpkgs/issues/326500 - guix 1.4.0 is too old
+  - guix commit e2583b5a17bfdedc1d24b3bab2d752fbf8fa6db6
+  - guix-mirror on  master ❯ git remote -v
+    - origin https://git.guix.gnu.org/guix.git
+    - mirror https://codeberg.org/guix/guix-mirror
 - [ ] torrent services
   - [ ] PeerBanHelper
   - [ ] btDownloadManager
