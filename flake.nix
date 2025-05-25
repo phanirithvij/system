@@ -580,7 +580,7 @@
                 flake-inputs = inputs;
                 hmSharedModules = hmAliasModules;
               };
-              modules = [ ./hosts/nod ];
+              minor= [ ];
             };
           in
           {
