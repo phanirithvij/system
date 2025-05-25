@@ -7,10 +7,16 @@ see ./todos folder as well
 
 ## TODO
 
+- [ ] system-manager + hm + prebuild alpine live iso
+  - nixos stable + alpine stable iso
+  - nixos unstable + alpine edge iso
 - try out
   - gron, fastgron
   - simdjson
   - jqp (akavel/up tangent)
+  ---
+  - systemctl-tui, isd
+  - efibooteditor (nixpkgs#411030), Elinvention/efiboots
 - [ ] go through
   - https://github.com/ngi-nix/ngipkgs
   - https://github.com/selfhostedshow/show-notes/commit/3628aabde317c3068a9a3868afbf624a4dff15e8
