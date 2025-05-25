@@ -540,6 +540,35 @@
               hostname = linuxhost;
             };
           };
+          limine-vm = nixosSystem {
+            inherit system;
+            inherit pkgs;
+            modules = [
+              {
+                system.stateVersion = "25.11";
+                boot.loader = {
+                  efi = {
+                    canTouchEfiVariables = true;
+                    efiSysMountPoint = "/boot/efi";
+                  };
+                  limine = {
+                    enable = true;
+                    style.wallpapers = [ ];
+                    style.wallpaperStyle = "centered";
+                    extraConfig = ''
+                      remember_last_entry: yes
+                    '';
+                  };
+                };
+              }
+            ];
+            specialArgs = {
+              flake-inputs = inputs;
+              inherit system; # TODO needed?
+              username = user;
+              hostname = "limine-vm";
+            };
+          };
           wsl = nixosSystem {
             inherit system;
             modules = [
