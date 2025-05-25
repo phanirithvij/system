@@ -145,16 +145,19 @@
           nixpkgs' = legacyPackages.applyPatches {
             name = "nixpkgs-patched";
             src = inputs.nixpkgs;
-            patches = builtins.map legacyPackages.fetchpatch2 [
-              {
-                url = "https://github.com/phanirithvij/nixpkgs/commit/1c3d4bb9cbc0a66f6053594ebf5c0c0aff9dda5f.patch?full_index=1";
-                hash = "sha256-k8Q807DLiJlHM7sbawuXk4800CrHGeoLPXmDhuItyQU=";
-              }
-            ];
-            # ++ [
-            # https://github.com/junegunn/fzf/pull/3918/files
-            # ./fzf-keybinds.patch
-            # ];
+            patches =
+              builtins.map legacyPackages.fetchpatch2 [
+                # opengist
+                {
+                  url = "https://github.com/phanirithvij/nixpkgs/commit/1c3d4bb9cbc0a66f6053594ebf5c0c0aff9dda5f.patch?full_index=1";
+                  hash = "sha256-k8Q807DLiJlHM7sbawuXk4800CrHGeoLPXmDhuItyQU=";
+                }
+              ]
+              ++ [
+                # https://github.com/junegunn/fzf/pull/3918/files
+                # ./fzf-keybinds.patch
+                ./revert-limine.patch
+              ];
           };
 
           #pkgs = import inputs.nixpkgs {
