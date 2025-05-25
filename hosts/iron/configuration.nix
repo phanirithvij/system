@@ -63,6 +63,7 @@ in
   services.btrfs.autoScrub = {
     enable = true;
     interval = "weekly";
+    fileSystems = [ "/" ];
   };
 
   # Zram allows using part of ram as a swap device
