@@ -156,6 +156,11 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/410935.patch?full_index=1";
                 hash = "sha256-/gBCJCSq0Yp4DlPmLs5GSIQ6K4Du+rEkcEKlG1Zp1vI=";
               }
+              # efibooteditor pr
+              {
+                url = "https://github.com/NixOS/nixpkgs/pull/411030.patch?full_index=1";
+                hash = "sha256-lkdBDsXOaDeICdttO3MhGAoOTudTxY5ht9nuZJH2tWg=";
+              }
             ];
             # ++ [
             # https://github.com/junegunn/fzf/pull/3918/files
