@@ -36,6 +36,7 @@ in
     ../../nixos/applications/selfhosted/qb.nix
     # ../../nixos/applications/spotify.nix
     ../../nixos/applications/tui.nix
+    ../../nixos/applications/scripts/gh-pr-checkout-shallow.nix
     ../../nixos/modules/virtualisation
     ../../secrets
   ];
