@@ -136,6 +136,7 @@
             inherit pkgs system;
             flake-inputs = inputs;
           };
+          binaryPkgs = import ./pkgs/binary args;
           boxxyPkgs = import ./pkgs/boxxy args;
           lazyPkgs = import ./pkgs/lazy args;
           wrappedPkgs = import ./pkgs/wrapped-pkgs args;
@@ -193,6 +194,7 @@
                     "p7zip"
                     "steam"
                     "steam-unwrapped"
+                    "honey-home"
                     "nvidia-settings"
                   ];
                 in
@@ -239,6 +241,7 @@
                 inherit wrappedPkgs;
                 inherit lazyPkgs;
                 inherit boxxyPkgs;
+                inherit binaryPkgs;
               })
             ];
         in
@@ -251,6 +254,7 @@
             wrappedPkgs
             lazyPkgs
             boxxyPkgs
+            binaryPkgs
             ;
         }
       );
@@ -291,7 +295,8 @@
               }
               // allSystemsJar.wrappedPkgs.${system}
               // (unNestAttrs allSystemsJar.lazyPkgs.${system})
-              // allSystemsJar.boxxyPkgs.${system};
+              // allSystemsJar.boxxyPkgs.${system}
+              // allSystemsJar.binaryPkgs.${system};
           in
           _pkgs;
         # NEVER ever run `nix fmt` run `treefmt`
