@@ -293,6 +293,8 @@ in
 
       ddrescue
       ddrescueview
+      efibooteditor
+      efibootmgr
 
       btop # replacement of htop/nmon
       iotop # io monitoring
