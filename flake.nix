@@ -165,7 +165,7 @@
               # qemu-vm switch-to-configuration-ng pr
               {
                 url = "https://github.com/NixOS/nixpkgs/pull/411422.patch?full_index=1";
-                hash = "sha256-uJIxJ6DhwMn9khg6+kdtp7+D9cfkX6JWdhk9TxOZjiw=";
+                hash = "sha256-Sj75XTiD3UVxVv8q1JfGl+zJMaOlO7oqFAnZwab4Gt8=";
               }
             ];
             # ++ [
