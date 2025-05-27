@@ -162,6 +162,11 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/411030.patch?full_index=1";
                 hash = "sha256-lkdBDsXOaDeICdttO3MhGAoOTudTxY5ht9nuZJH2tWg=";
               }
+              # qemu-vm switch-to-configuration-ng pr
+              {
+                url = "https://github.com/NixOS/nixpkgs/pull/411422.patch?full_index=1";
+                hash = "sha256-Sj75XTiD3UVxVv8q1JfGl+zJMaOlO7oqFAnZwab4Gt8=";
+              }
             ];
             # ++ [
             # https://github.com/junegunn/fzf/pull/3918/files
