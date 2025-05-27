@@ -217,6 +217,8 @@ in
           };
         };
       };
+      # TODO discord mute to get a2dp profile, will it ever work?
+      # actions.update-props."bluez5.autoswitch-profile" = true;
     };
   };
 
