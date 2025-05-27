@@ -48,4 +48,5 @@
   };
   system.switch.enableNg = true;
   system.switch.enable = false;
+  system.rebuild.enableNg = true;
 }

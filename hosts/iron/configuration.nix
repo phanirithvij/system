@@ -128,7 +128,18 @@ in
     "modesetting"
     "nvidia"
   ];
-  hardware.nvidia-container-toolkit.enable = true;
+  /*
+    virtualisation.vmVariant.services.xserver.videoDrivers = lib.mkForce [
+      "modesetting"
+      "nvidia"
+    ];
+    virtualisation.vmVariantWithBootLoader.services.xserver.videoDrivers = lib.mkForce [
+      "modesetting"
+      "nvidia"
+    ];
+  */
+  # The above are not taking effect
+  hardware.nvidia-container-toolkit.enable = true; # TODO disable for vm and vmwithbootloader
   # https://bbs.archlinux.org/viewtopic.php?id=287207
   # https://gitlab.freedesktop.org/mesa/mesa/-/issues/11429#note_2560673
   # https://codeberg.org/mateidibu/nix-config/src/commit/c247b4525230271b77b37ee7259d5ef6c20aa11c/nixosModules/gpu-intel.nix#L25
