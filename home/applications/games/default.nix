@@ -1,6 +1,8 @@
 { pkgs, ... }:
 {
-  imports = [ ];
+  imports = [
+    # ./minecraft.nix
+  ];
 
   /*
     https://github.com/search?q=lang%3ANix+ludusavi&type=code
