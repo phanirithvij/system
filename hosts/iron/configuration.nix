@@ -217,7 +217,7 @@ in
     enable = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
     # https://reddit.com/r/linux/comments/1em8biv/comment/lgxtmck
     wireplumber.extraConfig = {
       "10-disable-camera" = {
