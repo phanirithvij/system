@@ -167,6 +167,11 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/411422.patch?full_index=1";
                 hash = "sha256-Sj75XTiD3UVxVv8q1JfGl+zJMaOlO7oqFAnZwab4Gt8=";
               }
+              # test out nixos/howdy
+              {
+                url = "https://github.com/NixOS/nixpkgs/pull/216245.patch?full_index=1";
+                hash = "sha256-NB1CEayPYuKlHi7CeyRmsqlLgliRHH6UptvqTNfLzO4=";
+              }
             ];
             # ++ [
             # https://github.com/junegunn/fzf/pull/3918/files

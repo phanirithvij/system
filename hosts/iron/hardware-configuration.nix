@@ -18,10 +18,7 @@
     "sd_mod"
   ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [
-    "kvm-intel"
-    "v4l2loopback"
-  ];
+  boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
   boot.supportedFilesystems = [ "btrfs" ];
 

@@ -160,6 +160,8 @@ in
     wantedBy = [ "multi-user.target" ];
   };
 
+  services.howdy.enable = true;
+
   networking.hostName = hostname;
   networking.networkmanager.enable = true;
 
