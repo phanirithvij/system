@@ -19,6 +19,7 @@ see ./todos folder as well
   - efibooteditor (nixpkgs#411030), Elinvention/efiboots
 - [ ] go through
   - https://github.com/ngi-nix/ngipkgs
+  - https://github.com/flox/floxpkgs
   - https://github.com/selfhostedshow/show-notes/commit/3628aabde317c3068a9a3868afbf624a4dff15e8
   - https://github.com/zhaofengli/colmena/blob/df694ee23be7ed7b2d8b42c245a640f0724eb06c/integration-tests/tools.nix#L31-L43
 - [ ] nixify https://github.com/HouariZegai/slides-remote, include
