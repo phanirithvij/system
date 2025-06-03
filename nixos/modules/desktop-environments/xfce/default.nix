@@ -9,7 +9,15 @@
   config = lib.mkIf config.desktopManagers.xfce.enable {
     services.xserver.desktopManager.xfce.enable = true;
     services.xserver.desktopManager.xfce.enableScreensaver = false;
+    # TODO overlay better? https://github.com/breitnw/nixos/blob/main/home/breitnw/gui-programs/parole.nix
+    environment.xfce.excludePackages = [ pkgs.xfce.parole ]; # overriden below
     environment.systemPackages = with pkgs; [
+      # Add h264 support for parole media player
+      (xfce.parole.overrideAttrs (p: {
+        buildInputs = p.buildInputs ++ [
+          pkgs.gst_all_1.gst-libav
+        ];
+      }))
       plata-theme
       # TODO rofi custom theme, keybinds
       # xfce independant!
