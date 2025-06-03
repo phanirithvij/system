@@ -48,12 +48,21 @@ in
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot/efi";
     };
-    limine = {
+    grub = {
       enable = true;
-      style.wallpapers = [ ];
-      style.wallpaperStyle = "centered";
-      extraConfig = ''
-        remember_last_entry: yes
+      useOSProber = true;
+      efiSupport = true;
+      # btrfs can't have this feature of saving last booted entry
+      # https://forum.manjaro.org/t/converting-ext4-root-to-btrfs-brings-up-grub-error-sparse-file-not-allowed/154491
+      #default = "saved";
+      device = "nodev";
+      extraEntries = ''
+        menuentry "Reboot" {
+          reboot
+        }
+        menuentry "Poweroff" {
+          halt
+        }
       '';
     };
   };
