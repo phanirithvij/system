@@ -32,7 +32,7 @@ in
     ../../nixos/applications/nix/selfhosted
     ../../nixos/applications/nix/pr-tracker-service.nix
     ../../nixos/applications/ntfy-rss.nix
-    ../../nixos/applications/opengist.nix
+    # ../../nixos/applications/opengist.nix
     ../../nixos/applications/selfhosted/qb.nix
     # ../../nixos/applications/spotify.nix
     ../../nixos/applications/tui.nix
