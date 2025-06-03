@@ -1,12 +1,13 @@
 { pkgs, ... }:
 {
-  home.packages = [
-    pkgs.gitbatch
-    pkgs.gitcs
-    pkgs.git-bug
-    pkgs.git-absorb
-    pkgs.git-who
-    pkgs.wrappedPkgs.git-prole
+  home.packages = with pkgs; [
+    git-absorb
+    git-bug
+    gitbatch
+    gitcs
+    git-who
+    gitnr # tui to manage gitignore files
+    wrappedPkgs.git-prole
   ];
   imports = [
     ./gh.nix
