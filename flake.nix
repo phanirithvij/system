@@ -2,9 +2,9 @@
   inputs = {
     # THIS is dumb unless nixpkgs is based on nixos-unstable
     # useful for git bisecting, use path:/abs/path instead for the same
-    #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs?shallow=1";
+    #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs/nixos-unstable?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
 
     #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages/master";
