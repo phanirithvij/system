@@ -160,7 +160,7 @@
               # efibooteditor pr
               {
                 url = "https://github.com/NixOS/nixpkgs/pull/411030.patch?full_index=1";
-                hash = "sha256-lkdBDsXOaDeICdttO3MhGAoOTudTxY5ht9nuZJH2tWg=";
+                hash = "sha256-OqTw23SSxfhuiR678Rom/hRs0N8TYusAQ++dM8uXE4w=";
               }
               # qemu-vm switch-to-configuration-ng pr
               {
