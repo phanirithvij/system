@@ -98,6 +98,8 @@ in
     #redbean ape com
 
     python3
+    libnotify # notify-send
+    # TODO dunst
 
     # https://discourse.nixos.org/t/home-manager-collision-with-app-lib/51969
     # https://haseebmajid.dev/posts/2023-10-02-til-how-to-fix-package-binary-collisions-on-nix/
