@@ -221,6 +221,10 @@ in
 
   # TODO learn what rtkit is
   security.rtkit.enable = true;
+
+  # TODO distrobox broken by this pr https://github.com/NixOS/nixpkgs/pull/407748
+  # remove this hack after a fix
+  security.lsm = lib.mkForce [ ];
   # TODO own nixos module audio.
   # useful with tty/buildserver modes
   services.pipewire = {
