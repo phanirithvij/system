@@ -147,16 +147,14 @@
             name = "nixpkgs-patched";
             src = inputs.nixpkgs;
             patches = builtins.map legacyPackages.fetchpatch2 [
-              # opengist
-              {
-                url = "https://github.com/phanirithvij/nixpkgs/commit/1c3d4bb9cbc0a66f6053594ebf5c0c0aff9dda5f.patch?full_index=1";
-                hash = "sha256-k8Q807DLiJlHM7sbawuXk4800CrHGeoLPXmDhuItyQU=";
-              }
-              # limine tempfix
-              {
-                url = "https://github.com/NixOS/nixpkgs/pull/410935.patch?full_index=1";
-                hash = "sha256-/gBCJCSq0Yp4DlPmLs5GSIQ6K4Du+rEkcEKlG1Zp1vI=";
-              }
+              # opengist module
+              # TODO renable, disabling for now because of rl-2511 notes conflict
+              /*
+                {
+                  url = "https://github.com/phanirithvij/nixpkgs/commit/34be2e80d57c2fb93ece547d9b28947ae56cac92.patch?full_index=1";
+                  hash = "sha256-Wj+HpUJZ0HqHS040AWAMg5gJKYw+ZjP2rS5Qq5g6BUA=";
+                }
+              */
               # efibooteditor pr
               {
                 url = "https://github.com/NixOS/nixpkgs/pull/411030.patch?full_index=1";
