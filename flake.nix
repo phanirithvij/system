@@ -155,11 +155,6 @@
                   hash = "sha256-Wj+HpUJZ0HqHS040AWAMg5gJKYw+ZjP2rS5Qq5g6BUA=";
                 }
               */
-              # efibooteditor pr
-              {
-                url = "https://github.com/NixOS/nixpkgs/pull/411030.patch?full_index=1";
-                hash = "sha256-OqTw23SSxfhuiR678Rom/hRs0N8TYusAQ++dM8uXE4w=";
-              }
               # qemu-vm switch-to-configuration-ng pr
               {
                 url = "https://github.com/NixOS/nixpkgs/pull/411422.patch?full_index=1";
