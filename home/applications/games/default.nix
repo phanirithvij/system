@@ -25,5 +25,14 @@
     # TODO download scripts and rclone backup
     # TODO tui?
     lgogdownloader
+
+    a-keys-path # gmtk2020 winner
+    (
+      if pkgs ? honey-home then
+        throw "honey-home is now available in nixpkgs, remove the local thing in pkgs/binary"
+      else
+        binaryPkgs.honey-home # ld38 winner
+    )
+    oh-my-git
   ];
 }
