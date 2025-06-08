@@ -33,7 +33,7 @@ in
     ../../nixos/applications/nix/pr-tracker-service.nix
     ../../nixos/applications/ntfy-rss.nix
     # ../../nixos/applications/opengist.nix
-    ../../nixos/applications/selfhosted/qb.nix
+    ../../nixos/applications/selfhosted/qbittorrent.nix
     # ../../nixos/applications/spotify.nix
     ../../nixos/applications/tui.nix
     ../../nixos/applications/scripts/gh-pr-checkout-shallow.nix
