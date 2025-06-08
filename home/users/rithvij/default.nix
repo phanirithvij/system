@@ -84,6 +84,7 @@ in
     localsend
     rclone-browser
     lazyPkgs.spotify
+    losslesscut
 
     ffmpeg-headless
     sqlite-interactive

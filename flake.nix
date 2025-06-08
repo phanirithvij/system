@@ -160,6 +160,11 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/411422.patch?full_index=1";
                 hash = "sha256-Sj75XTiD3UVxVv8q1JfGl+zJMaOlO7oqFAnZwab4Gt8=";
               }
+              # losslesscut pr
+              {
+                url = "https://github.com/NixOS/nixpkgs/pull/385535.patch?full_index=1";
+                hash = "sha256-3U82JyUWHfnyxfY0W25B8IGGyiarmRVt8vxFumfG+5Q=";
+              }
             ];
             # ++ [
             # https://github.com/junegunn/fzf/pull/3918/files
