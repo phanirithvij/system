@@ -165,6 +165,11 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/385535.patch?full_index=1";
                 hash = "sha256-3U82JyUWHfnyxfY0W25B8IGGyiarmRVt8vxFumfG+5Q=";
               }
+              # qbittorrent module pr
+              {
+                url = "https://github.com/NixOS/nixpkgs/pull/287923.patch?full_index=1";
+                hash = "sha256-n2wRB7WKfjk0NWiqRDIapl9+7hE+0mL94xW45p2zvc4=";
+              }
             ];
             # ++ [
             # https://github.com/junegunn/fzf/pull/3918/files
