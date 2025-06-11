@@ -7,6 +7,7 @@ see ./todos folder as well
 
 ## TODO
 
+- [ ] water-sucks/optnix and nixos-cli
 - [ ] system-manager + hm + prebuild alpine live iso
   - nixos stable + alpine stable iso
   - nixos unstable + alpine edge iso
@@ -26,6 +27,7 @@ see ./todos folder as well
       https://github.com/HouariZegai/slides-remote/pull/3
 - [ ] try out omnom - blocker https://github.com/NixOS/nixpkgs/pull/409314
 - [ ] try out mani - https://github.com/alajmo/mani
+  - myrepos is another
 - [ ] try out nix-maid
   - https://github.com/viperML/nix-maid
 - [ ] try out hjem
