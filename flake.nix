@@ -414,7 +414,7 @@
         sysm = inputs.system-manager.packages.${system}.default;
         toolsModule = {
           environment.systemPackages = [
-            # hm
+            hm
             grm
             sysm
             #(pkgs.nix-schema { inherit system; })
