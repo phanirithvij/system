@@ -10,19 +10,7 @@ jobs:
       - run: |
           echo "Free space:"
           df -h
-      # https://github.com/workflow/dotfiles/blob/main/.github/workflows/nixos.yml
-      - name: "Maximize Disk Space"
-        run: |
-          sudo rm -rf $AGENT_TOOLSDIRECTORY
-          sudo rm -rf /usr/local/.ghcup
-          sudo rm -rf /usr/local/share/powershell
-          sudo rm -rf /usr/local/share/chromium
-          sudo rm -rf /usr/local/lib/node_modules
-          sudo rm -rf /usr/local/lib/heroku
-          sudo rm -rf /usr/local/lib/android
-          sudo rm -rf /var/lib/docker/overlay2
-          sudo rm -rf /home/linuxbrew
-          sudo rm -rf /home/runner/.rustup
+      - uses: wimpysworld/nothing-but-nix@main
       - uses: actions/checkout@v4
       # enables flakes, nix-command
       - uses: nixbuild/nix-quick-install-action@v30
