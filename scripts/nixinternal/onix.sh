@@ -4,6 +4,7 @@ function run_nom_command() {
   shift
   local args=
   if [[ -z ${CI+x} ]]; then
+    # TODO nixify this script, so nom should be ${lib.getExe pkgs.nom}
     args=" --log-format internal-json 2>&1 | nom --json"
   fi
   eval "$cmd $* $args"
