@@ -76,16 +76,16 @@ in
 
     # desktop apps
     #microsoft-edge # for its bing ai integration (slow af)
-    tor-browser
     qbittorrent
-    koreader
     qimgv
-    beekeeper-studio
     yacreader
     localsend
     rclone-browser
+    lazyPkgs.losslesscut
+    lazyPkgs.beekeeper-studio
     lazyPkgs.spotify
-    losslesscut
+    lazyPkgs.koreader
+    lazyPkgs.tor-browser
 
     ffmpeg-headless
     sqlite-interactive
