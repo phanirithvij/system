@@ -44,6 +44,11 @@ let
     vhs
     w3m
     zenith
+
+    losslesscut
+    beekeeper-studio
+    koreader
+    tor-browser
   ];
 
   listNixfilesInDir =
