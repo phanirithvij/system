@@ -7,6 +7,8 @@ see ./todos folder as well
 
 ## TODO
 
+- [ ] lazyapps ensure they run in gha actions
+  - [ ] add desktop icons to desktop lazyapps semi automatically?
 - [ ] water-sucks/optnix and nixos-cli
 - [ ] system-manager + hm + prebuild alpine live iso
   - nixos stable + alpine stable iso
