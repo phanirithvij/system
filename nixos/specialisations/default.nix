@@ -6,6 +6,7 @@ _: {
   imports = [
     #./xfce # now the default config
     ./tty.nix
+    # ./deepin.nix # for nostalgia
     #./plasma.nix
     #./niri.nix
     #./hyprland.nix
