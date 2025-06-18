@@ -26,6 +26,7 @@ in
     # ../../nixos/applications/paperless.nix
     # ../../nixos/applications/tailscale.nix
     ../../nixos/applications/touchpad.nix
+    ../../nixos/applications/gpg.nix
     ../../nixos/applications/guix
     ../../nixos/applications/nix
     ../../nixos/applications/nix/nixserve
