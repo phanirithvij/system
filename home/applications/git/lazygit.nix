@@ -5,6 +5,7 @@
     settings = {
       disableStartupPopups = true;
       git = {
+        overrideGpg = true;
         commit = {
           signOff = true;
         };
