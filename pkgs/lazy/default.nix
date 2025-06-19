@@ -45,7 +45,7 @@ let
     w3m
     zenith
 
-    losslesscut
+    # losslesscut # temp disable for nod
     beekeeper-studio
     koreader
     tor-browser

@@ -26,6 +26,12 @@
   # TODO espanso and navi should be decoupled
   sops.secrets.wifi_password_file = { };
 
+  home.packages = with pkgs; [
+    ripgrep
+    jq
+    fx
+  ];
+
   home.username = username;
   home.homeDirectory = "/data/data/com.termux.nix/files/home";
   home.stateVersion = "24.11";
