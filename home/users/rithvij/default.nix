@@ -82,7 +82,7 @@ in
     yacreader
     localsend
     rclone-browser
-    lazyPkgs.losslesscut
+    # lazyPkgs.losslesscut
     lazyPkgs.beekeeper-studio
     lazyPkgs.spotify
     lazyPkgs.koreader
