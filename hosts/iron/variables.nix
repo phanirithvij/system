@@ -3,6 +3,8 @@
   SYSTEM_DIR = "/shed/Projects/system";
   OWN_DIR = "/shed/Projects/\!Own";
 
+  DBX_CONTAINER_MANAGER = "docker"; # or podman
+
   MusicFolder = "/shed/music";
   NixpkgsHome = "/shed/Projects/nixhome";
 
