@@ -9,6 +9,7 @@ in
     ../../applications/asciinema.nix
     ../../applications/bookmarks
     ../../applications/bashmount.nix
+    ../../applications/distrobox
     ../../applications/docker
     ../../applications/editors
 

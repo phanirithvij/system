@@ -1,6 +1,5 @@
 { pkgs, ... }:
 {
-  imports = [ ./distrobox.nix ];
   home.packages = with pkgs; [
     lazydocker
     docker-compose
