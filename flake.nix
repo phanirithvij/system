@@ -553,6 +553,12 @@
               inputs.sops-nix.nixosModules.sops
               inputs.niri.nixosModules.niri
               ./hosts/${linuxhost}/configuration.nix
+              {
+                # prevent the patched nixpkgs from gc as well, not just flake inputs
+                system.extraDependencies = [
+                  allSystemsJar.nixpkgs'.${system}
+                ];
+              }
             ];
             specialArgs = {
               flake-inputs = inputs;
