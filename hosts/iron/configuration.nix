@@ -40,6 +40,9 @@ in
     ../../nixos/applications/scripts/gh-pr-checkout-shallow.nix
     ../../nixos/modules/virtualisation
     ../../secrets
+
+    # special module to keep nixos system flake's inputs
+    ../../nixos/modules/nix-keep-flake-inputs.nix
   ];
 
   docker-opts.nameservers = nameservers;
