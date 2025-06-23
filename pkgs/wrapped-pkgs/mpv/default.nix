@@ -10,7 +10,7 @@
         uosc
       ];
     };
-    flags = [
+    prependFlags = [
       "--config-dir=${./config}"
     ];
   };

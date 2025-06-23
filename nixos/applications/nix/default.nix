@@ -46,7 +46,6 @@
         flake-registry = "";
       };
   };
-  system.switch.enableNg = true;
-  system.switch.enable = false;
+  system.switch.enable = true;
   system.rebuild.enableNg = true;
 }
