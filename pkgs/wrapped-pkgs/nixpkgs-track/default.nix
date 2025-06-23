@@ -2,6 +2,7 @@
 # Custom wrapper around nixpkgs-track to allow separate dashboards
 {
   wrappers.nixpkgs-track = {
+    wrapperType = "shell";
     basePackage = pkgs.nixpkgs-track;
     pathAdd = [
       pkgs.gh

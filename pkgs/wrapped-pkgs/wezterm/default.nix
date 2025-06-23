@@ -2,7 +2,7 @@
 {
   wrappers.wezterm = {
     basePackage = pkgs.wezterm;
-    flags = [
+    prependFlags = [
       "--config-file"
       ./wezterm.lua
     ];

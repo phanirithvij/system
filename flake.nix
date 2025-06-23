@@ -22,7 +22,6 @@
     };
 
     wrapper-manager.url = "github:viperML/wrapper-manager/master";
-    wrapper-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     lazy-apps.url = "github:phanirithvij/lazy-apps/master";
     # lazy-apps.url = "git+file:///shed/Projects/!Others/lazy-apps?shallow=1";

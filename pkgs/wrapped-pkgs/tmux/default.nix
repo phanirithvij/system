@@ -5,7 +5,7 @@ in
 {
   wrappers.tmux = {
     basePackage = pkgs.tmux;
-    flags = [
+    prependFlags = [
       "-f"
       (replaceVars ./tmux.conf {
         resize-hook-script = ./resize-hook.sh;

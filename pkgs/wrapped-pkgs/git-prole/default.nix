@@ -2,7 +2,7 @@
 {
   wrappers.git-prole = {
     basePackage = pkgs.git-prole;
-    flags = [
+    prependFlags = [
       "--config"
       ./config.toml
     ];

@@ -2,7 +2,7 @@
 {
   wrappers.lf = {
     basePackage = pkgs.lf;
-    flags = [
+    prependFlags = [
       "-config"
       ./lfrc
     ];
