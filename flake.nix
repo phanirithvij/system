@@ -169,6 +169,11 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/287923.patch?full_index=1";
                 hash = "sha256-n2wRB7WKfjk0NWiqRDIapl9+7hE+0mL94xW45p2zvc4=";
               }
+              # octotail package
+              {
+                url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
+                hash = "sha256-dEQ3QZ6nhjGSngkrU0Q7bLXxym3SwYkTLa2+gUVtv+o=";
+              }
             ];
             # ++ [
             # https://github.com/junegunn/fzf/pull/3918/files
