@@ -16,4 +16,5 @@
     enable = true;
     settings = import ./gh-dash-config.nix;
   };
+  home.packages = [ pkgs.octotail ];
 }
