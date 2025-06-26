@@ -154,11 +154,6 @@
                   hash = "sha256-Wj+HpUJZ0HqHS040AWAMg5gJKYw+ZjP2rS5Qq5g6BUA=";
                 }
               */
-              # qemu-vm switch-to-configuration-ng pr
-              {
-                url = "https://github.com/NixOS/nixpkgs/pull/411422.patch?full_index=1";
-                hash = "sha256-Sj75XTiD3UVxVv8q1JfGl+zJMaOlO7oqFAnZwab4Gt8=";
-              }
               # losslesscut pr
               {
                 url = "https://github.com/NixOS/nixpkgs/pull/385535.patch?full_index=1";
