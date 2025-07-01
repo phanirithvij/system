@@ -5,6 +5,8 @@
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs/nixos-unstable?shallow=1";
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    # applyPatches fails because fetchpatch2 doesn't support patches with multiple changes to same file
+    nixpkgs-qb.url = "github:fsnkty/nixpkgs/init-nixos-qbittorrent";
 
     #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages/master";
@@ -158,11 +160,6 @@
               {
                 url = "https://github.com/NixOS/nixpkgs/pull/385535.patch?full_index=1";
                 hash = "sha256-3U82JyUWHfnyxfY0W25B8IGGyiarmRVt8vxFumfG+5Q=";
-              }
-              # qbittorrent module pr
-              {
-                url = "https://github.com/NixOS/nixpkgs/pull/287923.patch?full_index=1";
-                hash = "sha256-n2wRB7WKfjk0NWiqRDIapl9+7hE+0mL94xW45p2zvc4=";
               }
               # octotail package
               {
