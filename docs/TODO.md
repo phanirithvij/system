@@ -7,6 +7,7 @@ see ./todos folder as well
 
 ## TODO
 
+- [ ] can I use the system.extraDependencies with lazyPkgs?
 - [ ] lazyapps ensure they run in gha actions
   - [ ] add desktop icons to desktop lazyapps semi automatically?
 - [ ] water-sucks/optnix and nixos-cli
