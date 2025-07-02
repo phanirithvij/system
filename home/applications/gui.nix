@@ -1,10 +1,10 @@
-{ pkgs, flake-inputs, ... }:
+{ pkgs, ... }:
 {
-  home.packages = [
+  home.packages = with pkgs; [
     # TODO fuzzel is wayland-ONLY so need to detect if wayland and enable
     # For bzmenu and as well as niri
-    pkgs.fuzzel
-    pkgs.rofi
-    flake-inputs.bzmenu.packages.${pkgs.system}.default
+    fuzzel
+    rofi
+    nurPkgs.flakePkgs.bzmenu
   ];
 }

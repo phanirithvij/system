@@ -1,4 +1,7 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.wrappedPkgs.wezterm ];
+  home.packages = with pkgs; [
+    wrappedPkgs.wezterm
+    nurPkgs.flakePkgs.ghostty
+  ];
 }

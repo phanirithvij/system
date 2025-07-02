@@ -31,15 +31,6 @@
     lazy-apps.inputs.nixpkgs.follows = "nixpkgs";
     lazy-apps.inputs.pre-commit-hooks.follows = "git-hooks";
 
-    # TODO should be in nixpkgs
-    git-repo-manager = {
-      url = "github:hakoerber/git-repo-manager/develop";
-      inputs.crane.follows = "crane";
-      inputs.flake-utils.follows = "flake-utils";
-      inputs.rust-overlay.follows = "rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/master";
       inputs.home-manager.follows = "home-manager";
@@ -83,21 +74,6 @@
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks.inputs.flake-compat.follows = "flake-compat";
 
-    # TODO can and should be in nixpkgs
-    yaml2nix.url = "github:euank/yaml2nix";
-    # https://github.com/euank/yaml2nix/blob/3a6df359da40ee49cb9ed597c2400342b76f2083/flake.nix#L4
-    yaml2nix.inputs.nixpkgs.follows = "nixpkgs";
-    yaml2nix.inputs.cargo2nix.follows = "cargo2nix";
-    yaml2nix.inputs.flake-utils.follows = "flake-utils";
-
-    # TODO nixpkgs
-    bzmenu = {
-      url = "github:e-tho/bzmenu";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.rust-overlay.follows = "rust-overlay";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-
     ### Indirect dependencies, dedup
 
     #systems.url = "github:nix-systems/default-linux";
@@ -133,16 +109,17 @@
       allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (
         system:
         let
+          inherit (legacyPackages) lib;
           args = {
-            inherit pkgs system;
+            inherit pkgs system lib;
             flake-inputs = inputs;
           };
+          legacyPackages = inputs.nixpkgs.legacyPackages.${system};
+          wrappedPkgs = import ./pkgs/wrapped-pkgs args;
           binaryPkgs = import ./pkgs/binary args;
           boxxyPkgs = import ./pkgs/boxxy args;
           lazyPkgs = import ./pkgs/lazy args;
-          wrappedPkgs = import ./pkgs/wrapped-pkgs args;
-          legacyPackages = inputs.nixpkgs.legacyPackages.${system};
-          inherit (legacyPackages) lib;
+          nurPkgs = import ./pkgs/nurpkgs.nix args;
           # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
           nixpkgs' = legacyPackages.applyPatches {
             name = "nixpkgs-patched";
@@ -214,8 +191,9 @@
                 if byName then lib.warn "Allowing insecure package: ${pname}" true else false;
 
               packageOverrides = _: {
-                # TODO espanso_wayland and espanso-x11 and use it in different places accordingly?
-                # made a pr to home-manager see https://github.com/nix-community/home-manager/pull/5930
+                # No need to do this anymore
+                # A pr to home-manager for better default behavior was merged a while ago
+                # see https://github.com/nix-community/home-manager/pull/5930
                 /*
                   espanso = pkgs.espanso.override {
                     x11Support = false;
@@ -244,6 +222,7 @@
               (_: _: {
                 inherit wrappedPkgs;
                 inherit lazyPkgs;
+                inherit nurPkgs;
                 inherit boxxyPkgs;
                 inherit binaryPkgs;
               })
@@ -256,9 +235,10 @@
             overlays
             nixpkgs'
             wrappedPkgs
-            lazyPkgs
-            boxxyPkgs
             binaryPkgs
+            boxxyPkgs
+            lazyPkgs
+            nurPkgs
             ;
         }
       );
@@ -267,17 +247,18 @@
       system:
       let
         pkgs = allSystemsJar.pkgs.${system};
+        inherit (pkgs) lib;
         treefmtCfg =
           (inputs.treefmt-nix.lib.evalModule pkgs (import ./treefmt.nix { inherit pkgs; })).config.build;
-        grm = inputs.git-repo-manager.packages.${system}.default;
         hm = inputs.home-manager.packages.${system}.default;
         sysm = inputs.system-manager.packages.${system}.default;
         #nix-schema = pkgs.nix-schema { inherit system; }; # nur-pkgs overlay, cachix cache
 
         unNestAttrs = import ./lib/unnest.nix { inherit pkgs; };
+        lazyApps = unNestAttrs allSystemsJar.lazyPkgs.${system};
       in
       {
-        lazyApps = unNestAttrs allSystemsJar.lazyPkgs.${system};
+        inherit lazyApps;
         apps = {
           /*
             nix = {
@@ -292,15 +273,17 @@
               {
                 #inherit nix-schema;
                 navi-master = pkgs.navi;
-                git-repo-manager = grm;
                 home-manager = hm;
                 # TODO optional if system is linux
                 system-manager = sysm;
               }
+              // lazyApps
               // allSystemsJar.wrappedPkgs.${system}
-              // (unNestAttrs allSystemsJar.lazyPkgs.${system})
               // allSystemsJar.boxxyPkgs.${system}
-              // allSystemsJar.binaryPkgs.${system};
+              // allSystemsJar.binaryPkgs.${system}
+              // (lib.filterAttrs (_: v: lib.isDerivation v && !(v ? meta && v.meta.broken)) (
+                unNestAttrs allSystemsJar.nurPkgs.${system}
+              ));
           in
           _pkgs;
         # NEVER ever run `nix fmt` run `treefmt`
@@ -405,13 +388,11 @@
         common-hm-modules = [
           inputs.sops-nix.homeManagerModules.sops
         ];
-        grm = inputs.git-repo-manager.packages.${system}.default;
         hm = inputs.home-manager.packages.${system}.default;
         sysm = inputs.system-manager.packages.${system}.default;
         toolsModule = {
           environment.systemPackages = [
             hm
-            grm
             sysm
             #(pkgs.nix-schema { inherit system; })
           ];

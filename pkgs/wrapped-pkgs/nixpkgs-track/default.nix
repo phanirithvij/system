@@ -3,7 +3,7 @@
 {
   wrappers.nixpkgs-track = {
     wrapperType = "shell";
-    basePackage = pkgs.nixpkgs-track;
+    basePackage = pkgs.nurPkgs.flakePkgs.nixpkgs-track;
     pathAdd = [
       pkgs.gh
     ];
