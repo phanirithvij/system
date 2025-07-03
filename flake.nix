@@ -151,9 +151,9 @@
           };
 
           #pkgs = import inputs.nixpkgs {
-          #pkgs = import nixpkgs' {
           # TODO still doesn't work on macos
-          pkgs = import (if (system == "x86_64-linux") then nixpkgs' else inputs.nixpkgs) {
+          pkgs = import nixpkgs' {
+            #pkgs = import (if (system == "x86_64-linux") then nixpkgs' else inputs.nixpkgs) {
             inherit overlays system;
             config = {
               nvidia.acceptLicense = true;
