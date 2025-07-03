@@ -19,6 +19,8 @@
     ../../applications/shells
     ../../applications/tmux.nix
 
+    ./home-scripts.nix
+
     ../../../secrets
   ];
 
