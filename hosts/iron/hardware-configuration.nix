@@ -2,11 +2,56 @@
   config,
   lib,
   pkgs,
-  modulesPath,
   ...
 }:
 {
-  imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+  # this enables all firmware
+  # imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
+
+  # default value is enableAllFirmware which is false by default
+  # config.enableRedistributableFirmware = false;
+
+  # TODO nixos-generate-config can have this scan?
+  # sudo dmesg | rg 'Loading firmware.*(/nix/store/[a-z0-9]{32}-[^[:space:]]+)' -o -r '$1' | xargs -d'\n' -I{} realpath {}
+  #   /nix/store/[...]-wireless-regdb-2025.02.20-zstd/lib/firmware/regulatory.db.zst
+  #   /nix/store/[...]-wireless-regdb-2025.02.20-zstd/lib/firmware/regulatory.db.p7s.zst
+  #   /nix/store/[...]-linux-firmware-20250627-zstd/lib/firmware/iwlwifi-7265D-29.ucode.zst
+  #   /nix/store/[...]-linux-firmware-20250627-zstd/lib/firmware/i915/kbl_dmc_ver1_04.bin.zst
+  # sudo dmesg | rg 'firmware .* failed with error'
+  #   bluetooth hci0: Direct firmware load for intel/ibt-hw-37.8.10-fw-1.10.3.11.e.bseq failed with error -2
+  #   bluetooth hci0: Direct firmware load for intel/ibt-hw-37.8.bseq failed with error -2
+
+  # hardware.firmwareCompression is zstd by default (it is auto, but for new kernels it is zstd)
+  hardware.firmwareCompression = "none"; # disable because I do it myself, don't think it is idempotent
+  # enabled in nixos/modules/services/networking/networkmanager.nix
+  hardware.wirelessRegulatoryDatabase = lib.mkForce false; # I add the compressed version myself
+
+  hardware.firmware = with pkgs; [
+    (compressFirmwareZstd wireless-regdb)
+    (stdenv.mkDerivation {
+      phases = [
+        "unpackPhase"
+        "installPhase"
+      ];
+      name = "linux-firmware-filtered";
+      src = compressFirmwareZstd linux-firmware; # can get this from official nixos cache
+      installPhase = ''
+        runHook preInstall
+        mkdir -p $out/lib/firmware
+        pushd $src/lib/firmware || exit 1
+        files=(
+          iwlwifi-7265D-29.ucode*
+          i915/kbl_dmc_ver1_04.bin*
+          intel/ibt-hw-37.8.10-fw-1.10.3.11.e.bseq*
+          intel/ibt-hw-37.8.bseq*
+        )
+        cp --no-preserve=mode --parents ''${files[@]} $out/lib/firmware
+        chmod -w -R $out/lib/firmware
+        popd || exit 1
+        runHook postInstall
+      '';
+    })
+  ];
 
   boot.initrd.availableKernelModules = [
     "xhci_pci"
