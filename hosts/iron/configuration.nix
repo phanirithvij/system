@@ -136,7 +136,7 @@ in
       intelBusId = "PCI:0@0:2:0";
       nvidiaBusId = "PCI:1@0:0:0";
       offload.enable = true;
-      offload.enableOffloadCmd = true;
+      # offload.enableOffloadCmd = true;
       # prime sync doesn't work shows only a mouse in a black screen
       #sync.enable = true;
     };
@@ -282,19 +282,21 @@ in
 
   # TODO muliple users each per directory
   # I may never do this because I never had the need for two users
-  users.users.rithvij = {
-    isNormalUser = true;
-    # Hint: my clash of clans username
-    hashedPasswordFile = config.sops.secrets.rithvij_user_passwd.path;
-    extraGroups = [
-      "wheel" # sudo group
-      "video"
-      "audio"
-      "input"
-      "networkmanager"
-    ];
-    shell = pkgs.fish;
-  };
+  users.users.rithvij =
+    assert lib ? mine; # Ensure lib.mine propagates
+    {
+      isNormalUser = true;
+      # Hint: my clash of clans username
+      hashedPasswordFile = config.sops.secrets.rithvij_user_passwd.path;
+      extraGroups = [
+        "wheel" # sudo group
+        "video"
+        "audio"
+        "input"
+        "networkmanager"
+      ];
+      shell = pkgs.fish;
+    };
   programs.fish.enable = true;
 
   # List packages installed in system profile.
@@ -353,6 +355,9 @@ in
 
       man-pages
       man-pages-posix
+
+      # # offload.enableOffloadCmd yank
+      nvidia-offload
     ];
     variables.VISUAL = "nvim";
     # TODO ssessionVariables vs vvariables what's the diff

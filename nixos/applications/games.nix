@@ -1,6 +1,7 @@
-{ pkgs, ... }:
+{ config, lib, ... }:
 {
-  environment.systemPackages = with pkgs; [
-  ];
   programs.steam.enable = true;
+  environment.systemPackages = [
+    (lib.mine.GPUOffloadApp config.programs.steam.package "steam")
+  ];
 }

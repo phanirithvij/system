@@ -1,4 +1,8 @@
-{ config, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
 {
   imports = [
     ../modules/redis.nix
@@ -9,6 +13,7 @@
     environment.systemPackages =
       # Now for macos (gha) maybe I can avoid system-manager
       # and use the following via home-manager
+      assert lib ? mine; # ensure lib.mine propagates
       with pkgs;
       [
         duf

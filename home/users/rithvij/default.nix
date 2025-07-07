@@ -1,6 +1,15 @@
-{ pkgs, username, ... }:
+{
+  lib,
+  pkgs,
+  username,
+  config,
+  ...
+}:
 let
-  homeDir = "/home/${username}";
+  homeDir =
+    assert (lib ? hm);
+    assert (lib ? mine);
+    "/home/${username}";
 in
 {
   imports = [
@@ -145,6 +154,8 @@ in
     # hare?
     # yadm? chezmoi? dotdrop etc all unncessary with nix I think?
     # ntfy-sh
+
+    (lib.mine.GPUOffloadApp config.programs.firefox.package "firefox")
   ];
 
   programs.bottom.enable = true;

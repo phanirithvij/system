@@ -104,7 +104,7 @@
   };
 
   outputs =
-    { self, ... }@inputs:
+    inputs:
     let
       allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (
         system:
@@ -120,6 +120,7 @@
           boxxyPkgs = import ./pkgs/boxxy args;
           lazyPkgs = import ./pkgs/lazy args;
           nurPkgs = import ./pkgs/nurpkgs.nix args;
+          nvidia-offload = import ./pkgs/nvidia-offload.nix args;
           # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
           nixpkgs' = legacyPackages.applyPatches {
             name = "nixpkgs-patched";
@@ -219,18 +220,28 @@
             ++ [
               # wrappedPkgs imported into pkgs as pkgs.wrappedPkgs
               # no need to pass them around
-              (_: _: {
+              (final: prev: {
                 inherit wrappedPkgs;
                 inherit lazyPkgs;
                 inherit nurPkgs;
                 inherit boxxyPkgs;
                 inherit binaryPkgs;
+                inherit nvidia-offload;
+                lib = prev.lib // {
+                  mine = {
+                    unNestAttrs = import ./lib/unnest.nix { inherit pkgs; };
+                    GPUOffloadApp = final.callPackage ./lib/gpu-offload.nix { };
+                  };
+                };
               })
             ];
         in
         {
+          # nixpkgs overlays to lib don't apply, need to re-add them
+          # home-manager lib is required to use lib.mine in home-manager config
+          # https://github.com/nix-community/home-manager/issues/5980
+          hmlib = pkgs.lib.extend (_: _: inputs.home-manager.lib // { inherit (pkgs.lib) mine; });
           inherit
-            lib
             pkgs
             overlays
             nixpkgs'
@@ -239,6 +250,7 @@
             boxxyPkgs
             lazyPkgs
             nurPkgs
+            nvidia-offload
             ;
         }
       );
@@ -254,8 +266,7 @@
         sysm = inputs.system-manager.packages.${system}.default;
         #nix-schema = pkgs.nix-schema { inherit system; }; # nur-pkgs overlay, cachix cache
 
-        unNestAttrs = import ./lib/unnest.nix { inherit pkgs; };
-        lazyApps = unNestAttrs allSystemsJar.lazyPkgs.${system};
+        lazyApps = lib.mine.unNestAttrs allSystemsJar.lazyPkgs.${system};
       in
       {
         inherit lazyApps;
@@ -276,22 +287,23 @@
                 home-manager = hm;
                 # TODO optional if system is linux
                 system-manager = sysm;
+                nvidia-offload = allSystemsJar.nvidia-offload.${system};
               }
               // lazyApps
               // allSystemsJar.wrappedPkgs.${system}
               // allSystemsJar.boxxyPkgs.${system}
               // allSystemsJar.binaryPkgs.${system}
               // (lib.filterAttrs (_: v: lib.isDerivation v && !(v ? meta && v.meta.broken)) (
-                unNestAttrs allSystemsJar.nurPkgs.${system}
+                lib.mine.unNestAttrs allSystemsJar.nurPkgs.${system}
               ));
           in
           _pkgs;
         # NEVER ever run `nix fmt` run `treefmt`
         #formatter = treefmtCfg.wrapper;
         checks = {
-          formatting = treefmtCfg.check self;
+          formatting = treefmtCfg.check inputs.self;
           git-hooks-check = inputs.git-hooks.lib.${system}.run {
-            src = pkgs.lib.cleanSource ./.;
+            src = lib.cleanSource ./.;
             hooks = {
               deadnix = {
                 enable = true;
@@ -332,10 +344,10 @@
         };
 
         devShells.default = import ./flake/shell.nix {
+          inherit (inputs) self;
           inherit
             pkgs
             treefmtCfg
-            self
             system
             ;
         };
@@ -361,6 +373,7 @@
         livehost = "nixos";
 
         pkgs = allSystemsJar.pkgs.${system};
+        hmlib = allSystemsJar.hmlib.${system};
 
         hmAliasModules = (import ./home/applications/alias-groups.nix { inherit pkgs; }).aliasModules;
         homeConfig =
@@ -376,6 +389,7 @@
             # TODO sharedModules sops
             extraSpecialArgs = {
               flake-inputs = inputs;
+              lib = hmlib;
               inherit system;
               inherit username;
               inherit hostname;
@@ -502,9 +516,11 @@
         };
         nixosConfigurations = {
           defaultIso = nixosSystem {
-            inherit system;
+            inherit (pkgs) lib;
+            inherit system pkgs;
             specialArgs = {
               flake-inputs = inputs;
+              inherit (pkgs) lib;
             };
             modules = [
               toolsModule
@@ -518,6 +534,7 @@
                   useUserPackages = true;
                   users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
+                    lib = hmlib;
                     flake-inputs = inputs;
                     username = liveuser;
                     hostname = livehost;
@@ -530,8 +547,8 @@
             ];
           };
           ${linuxhost} = nixosSystem {
-            inherit system;
-            inherit pkgs;
+            inherit (pkgs) lib;
+            inherit system pkgs;
             modules = [
               toolsModule
               overlayModule
@@ -546,6 +563,7 @@
               }
             ];
             specialArgs = {
+              inherit (pkgs) lib;
               flake-inputs = inputs;
               inherit system; # TODO needed?
               username = user;
@@ -553,7 +571,8 @@
             };
           };
           wsl = nixosSystem {
-            inherit system;
+            inherit system pkgs;
+            inherit (pkgs) lib;
             modules = [
               toolsModule
               overlayModule
@@ -568,6 +587,7 @@
                   useUserPackages = true;
                   users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
+                    lib = hmlib;
                     flake-inputs = inputs;
                     username = liveuser; # TODO wsl separate home config
                     hostname = livehost;
@@ -578,6 +598,7 @@
               }
             ];
             specialArgs = {
+              inherit (pkgs) lib;
               flake-inputs = inputs;
               inherit system; # TODO needed?
               username = "nixos";
