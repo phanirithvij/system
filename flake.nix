@@ -362,7 +362,7 @@
 
         pkgs = allSystemsJar.pkgs.${system};
 
-        hmAliasModules = (import ./home/applications/special.nix { inherit pkgs; }).aliasModules;
+        hmAliasModules = (import ./home/applications/alias-groups.nix { inherit pkgs; }).aliasModules;
         homeConfig =
           {
             username,
