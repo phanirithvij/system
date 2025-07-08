@@ -7,12 +7,16 @@ see ./todos folder as well
 
 ## TODO
 
-- [ ] qbittorrent-nox user level systemd service
-- [ ] ssh-add systemd oneshot
-- [ ] distrobox-enter promnesia-arch oneshot
-- [ ] lazyapps in iso
-  - [ ] firefox
-- [ ] awesomewm, gparted in iso
+- [ ] permittedInsecurePackages not working via import nixpkgs args
+- [ ] home-manager or user level systemd services
+  - [ ] qbittorrent-nox user level systemd service
+  - [ ] ssh-add systemd oneshot
+  - [ ] distrobox-enter promnesia-arch oneshot
+- [ ] iso changes
+  - [ ] awesomewm
+  - [ ] gparted
+  - lazyapps
+    - [ ] firefox
 - [ ] can I use the system.extraDependencies with lazyPkgs?
 - [ ] lazyapps ensure they run in gha actions
   - [ ] add desktop icons to desktop lazyapps semi automatically?
@@ -68,10 +72,10 @@ see ./todos folder as well
     - [ ] arch
     - [ ] linux mint
     - [ ] proxmox
-  - [x] limine (currently active)
-  - [x] grub
+  - [x] limine (currently regressing bad)
+  - [x] grub (currently active)
   - [ ] systemd-boot
-  - [ ] refind -
+  - [ ] refind - https://github.com/NixOS/nixpkgs/pull/414394
         https://github.com/search?q=language%3ANix+external+AND+rEFInd+NOT+is%3Afork&type=code
   - [ ] uboot - not sure if people use it, seems like it is for
         microcontrollers?
@@ -108,8 +112,6 @@ see ./todos folder as well
         shell config
     - implemented a basic abstraction which provides
       `programs.<name>-aliases.enable`
-- [ ] auto gen statix, dprint config
-  - like pre-commit-config.yml by git-hooks.nix
 - [ ] npins with flake inputs
   - [ ] npins with local git repos as inputs
 - [ ] unfree apps
