@@ -1,4 +1,4 @@
 { pkgs, ... }:
 {
-  home.packages = [ pkgs.qpwgraph ];
+  home.packages = [ pkgs.lazyPkgs.qpwgraph ];
 }

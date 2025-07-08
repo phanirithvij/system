@@ -3,6 +3,8 @@
 A selfhosted heaven all in nixos Make sure all these run with system-manager +
 home-manager setup
 
+- [ ] laminar ci, nixosmodule not in nixpkgs
+- [ ] ytdl-sub (in nixpkgs)
 - [ ] silverbullet.md (in nixpkgs)
 - [ ] Immich
   - https://github.com/NixOS/nixpkgs/pull/324127

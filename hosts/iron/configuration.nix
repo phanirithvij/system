@@ -27,7 +27,7 @@ in
     # ../../nixos/applications/tailscale.nix
     ../../nixos/applications/touchpad.nix
     ../../nixos/applications/gpg.nix
-    ../../nixos/applications/guix
+    # ../../nixos/applications/guix # I don't use this
     ../../nixos/applications/nix
     ../../nixos/applications/nix/nixserve
     ../../nixos/applications/nix/selfhosted
@@ -306,10 +306,7 @@ in
   environment = {
     systemPackages = with pkgs; [
       wget2
-      xclip # TODO wl-clipboard-rs on wayland
 
-      fish # TODO programs.fish wrapm if needed
-      go
       microfetch # TODO needed?
 
       zip
@@ -372,6 +369,10 @@ in
   documentation.dev.enable = true;
   documentation.man.enable = true;
   documentation.man.generateCaches = lib.mkForce false; # programs.fish enables it
+
+  # comes enabled in graphical-desktop.nix module
+  # don't need it, also takes up a good amount of space
+  services.speechd.enable = lib.mkForce false;
 
   programs.git = {
     enable = true;

@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   home.packages = [
-    pkgs.syncplay
+    pkgs.lazyPkgs.syncplay
     pkgs.playerctl
   ];
   # TODO eliminate home-manager managed mpv

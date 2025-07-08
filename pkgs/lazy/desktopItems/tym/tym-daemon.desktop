@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=System;TerminalEmulator;
+Comment=Daemon process for tym
+Exec=tym --daemon
+GenericName=Terminal
+Icon=utilities-terminal
+Name=tym(daemon)
+StartupNotify=true
+Terminal=false
+TryExec=tym
+Type=Application
+X-GNOME-SingleWindow=false

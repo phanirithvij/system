@@ -1,0 +1,12 @@
+[Desktop Entry]
+Categories=System;TerminalEmulator;
+Comment=A tiny terminal for minimalists
+Exec=tym
+GenericName=Terminal
+Icon=utilities-terminal
+Name=tym
+StartupNotify=true
+Terminal=false
+TryExec=tym
+Type=Application
+X-GNOME-SingleWindow=false

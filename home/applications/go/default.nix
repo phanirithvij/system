@@ -1,7 +1,8 @@
 { pkgs, ... }:
 {
-  home.packages = [
-    pkgs.gogup
-    pkgs.gomtree
+  home.packages = with pkgs; [
+    lazyPkgs.go
+    gogup
+    gomtree
   ];
 }

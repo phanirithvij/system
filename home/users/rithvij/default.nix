@@ -69,10 +69,10 @@ in
     gdu
     # dprint # use treefmt with it per project from now on
 
-    #joplin # slow node tui app
+    #lazyPkgs.joplin # slow node tui app
 
     #ctpv
-    blobdrop
+    lazyPkgs.blobdrop
 
     glow # markdown previewer in terminal
     python3Packages.grip # markdown preview in browser
@@ -83,20 +83,22 @@ in
     bluetui
     #overskride
 
-    devbox
+    lazyPkgs.devbox
+    lazyPkgs.n-m3u8dl-re
 
     # desktop apps
     #microsoft-edge # for its bing ai integration (slow af)
     qbittorrent
     qimgv
-    yacreader
-    localsend
-    rclone-browser
     # lazyPkgs.losslesscut
     lazyPkgs.beekeeper-studio
-    lazyPkgs.spotify
     lazyPkgs.koreader
+    lazyPkgs.localsend
+    lazyPkgs.rclone-browser
+    lazyPkgs.spotify
     lazyPkgs.tor-browser
+    lazyPkgs.yacreader
+    lazyPkgs.subtitlecomposer
 
     ffmpeg-headless
     sqlite-interactive
@@ -117,18 +119,6 @@ in
     # https://discourse.nixos.org/t/home-manager-collision-with-app-lib/51969
     # https://haseebmajid.dev/posts/2023-10-02-til-how-to-fix-package-binary-collisions-on-nix/
     # (lib.hiPrio rustdesk-flutter) # BROKEN, TODO later
-    (subtitlecomposer.overrideAttrs (_: {
-      version = "0-unstable-2024-12-05";
-      src = fetchFromGitLab {
-        domain = "invent.kde.org";
-        owner = "multimedia";
-        repo = "subtitlecomposer";
-        rev = "dbe98938bcd82f19b8bc871a54e694b722d470b4";
-        hash = "sha256-VcTyaiVtiyb1unZYb9lWAStC9D1p0OkCW1IRwPtqBTg=";
-      };
-    }))
-
-    n-m3u8dl-re
 
     # TODO add this stuff
     #adb android-tools is too fat and heavy
@@ -142,7 +132,6 @@ in
     # gitoxide
     # du-dust
     # bore-cli
-    # coreutils
     # onefetch, tokei, scc, tcount
     # goteleport
     #
@@ -159,6 +148,8 @@ in
   ];
 
   programs.bottom.enable = true;
+  programs.bottom.package = pkgs.lazyPkgs.bottom;
+
   programs.alacritty = {
     enable = true;
     settings = {
@@ -172,6 +163,7 @@ in
   };
   programs.aria2.enable = true;
   programs.bun.enable = true;
+  programs.bun.package = pkgs.lazyPkgs.bun;
 
   programs.direnv = {
     enable = true;

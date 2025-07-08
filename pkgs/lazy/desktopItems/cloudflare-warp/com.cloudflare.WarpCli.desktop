@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Utility;Security;ConsoleOnly
+Exec=warp-cli --accept-tos registration token %u
+MimeType=x-scheme-handler/com.cloudflare.warp
+Name=Cloudflare Zero Trust Team Enrollment
+NoDisplay=true
+StartupNotify=false
+Terminal=true
+Type=Application
+Version=1.4

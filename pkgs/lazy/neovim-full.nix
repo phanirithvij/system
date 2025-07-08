@@ -1,5 +1,5 @@
 # TODO neovim full ide
-{ lazy-app, pkgs, ... }:
-lazy-app.override {
+{ mkLazyApp, pkgs, ... }:
+mkLazyApp {
   pkg = pkgs.tesseract;
 }

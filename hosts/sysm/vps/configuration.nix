@@ -21,6 +21,7 @@
     };
 
     services.syncplay.enable = true;
+    services.syncplay.package = pkgs.lazyPkgs.syncplay;
     #services.nginx.enable = true;
     #services.redis = {
     #  package = pkgs.valkey;

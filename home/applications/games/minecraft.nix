@@ -1,8 +1,8 @@
 { pkgs, ... }:
 {
-  # unmined
+  # TODO unmined
   home.packages = with pkgs; [
-    prismlauncher
-    steam-run
+    lazyPkgs.prismlauncher
+    lazyPkgs.steam-run
   ];
 }

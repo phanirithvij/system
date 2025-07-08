@@ -1,6 +1,7 @@
 _: {
   programs.fish = {
     enable = true;
+    # generateCompletions = false; # if not needed
     interactiveShellInit =
       # bash
       ''

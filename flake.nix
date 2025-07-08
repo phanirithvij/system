@@ -3,8 +3,8 @@
     # THIS is dumb unless nixpkgs is based on nixos-unstable
     # useful for git bisecting, use path:/abs/path instead for the same
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs/nixos-unstable?shallow=1";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     # applyPatches fails because fetchpatch2 doesn't support patches with multiple changes to same file
     nixpkgs-qb.url = "github:fsnkty/nixpkgs/init-nixos-qbittorrent";
 
@@ -26,7 +26,7 @@
     wrapper-manager.url = "github:viperML/wrapper-manager/master";
 
     lazy-apps.url = "github:phanirithvij/lazy-apps/master";
-    # lazy-apps.url = "git+file:///shed/Projects/!Others/lazy-apps?shallow=1";
+    # lazy-apps.url = "git+file:///shed/Projects/nixer/!core/lazy-apps?shallow=1";
     # lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # own fork/backup at
     lazy-apps.inputs.nixpkgs.follows = "nixpkgs";
     lazy-apps.inputs.pre-commit-hooks.follows = "git-hooks";
@@ -58,47 +58,42 @@
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.inputs.pre-commit-hooks.follows = "git-hooks";
 
-    niri.url = "github:sodiboo/niri-flake";
+    niri.url = "github:sodiboo/niri-flake/main";
     niri.inputs.nixpkgs.follows = "nixpkgs";
     niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-    niri.inputs.niri-unstable.follows = "niri-unstable-overview";
 
-    # TODO bug in nix flake path parsing with non utf8 branchname
-    # see https://matrix.to/#/!KIjqiaZyJFkPXxMmGQ:gnome.org/$6k_jnKTkDjMVWOGyBb3Ugvf1cvQ-n_P3HGguh6RhVAE
-    niri-unstable-overview.url = "github:phanirithvij/niri?ref=overview";
-
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.url = "github:numtide/treefmt-nix/main";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    git-hooks.url = "github:cachix/git-hooks.nix";
+    git-hooks.url = "github:cachix/git-hooks.nix/master";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks.inputs.flake-compat.follows = "flake-compat";
 
     ### Indirect dependencies, dedup
 
-    #systems.url = "github:nix-systems/default-linux";
-    systems.url = "github:nix-systems/default";
+    #systems.url = "github:nix-systems/default-linux/main";
+    systems.url = "github:nix-systems/default/main";
 
-    crane.url = "github:ipetkov/crane";
+    crane.url = "github:ipetkov/crane/master";
 
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.url = "github:numtide/flake-utils/main";
     flake-utils.inputs.systems.follows = "systems";
 
-    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.url = "github:edolstra/flake-compat/master";
     flake-compat.flake = false;
 
-    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay.url = "github:oxalica/rust-overlay/master";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     cargo2nix = {
-      url = "github:cargo2nix/cargo2nix/release-0.11.0";
+      url = "github:cargo2nix/cargo2nix/release-0.12";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    nix-update.url = "github:Mic92/nix-update";
+    nix-update.url = "github:Mic92/nix-update/main";
     nix-update.inputs.nixpkgs.follows = "nixpkgs";
     nix-update.inputs.treefmt-nix.follows = "treefmt-nix";
   };
@@ -298,6 +293,9 @@
               ));
           in
           _pkgs;
+
+        inherit inputs; # just for inspection
+
         # NEVER ever run `nix fmt` run `treefmt`
         #formatter = treefmtCfg.wrapper;
         checks = {
@@ -414,6 +412,11 @@
         overlayModule = {
           nixpkgs.overlays = allSystemsJar.overlays.${system};
         };
+        versionModule = {
+          # NOTE: these while good to have, will FOR SURE rebuild the whole system for every new commit in nixpkgs and current repo respectively
+          system.nixos.revision = inputs.nixpkgs.rev or inputs.nixpkgs.shortRev;
+          system.configurationRevision = inputs.self.rev or "dirty";
+        };
 
         #inherit (inputs.nixpkgs.lib) nixosSystem;
         # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
@@ -523,6 +526,7 @@
               inherit (pkgs) lib;
             };
             modules = [
+              versionModule
               toolsModule
               overlayModule
               inputs.sops-nix.nixosModules.sops
@@ -550,6 +554,7 @@
             inherit (pkgs) lib;
             inherit system pkgs;
             modules = [
+              versionModule
               toolsModule
               overlayModule
               inputs.sops-nix.nixosModules.sops
@@ -574,6 +579,7 @@
             inherit system pkgs;
             inherit (pkgs) lib;
             modules = [
+              versionModule
               toolsModule
               overlayModule
               inputs.sops-nix.nixosModules.sops

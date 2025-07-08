@@ -7,6 +7,11 @@ see ./todos folder as well
 
 ## TODO
 
+- nix store has 4 or 5 nixpkgs versions
+  - see where they are coming from
+  - nixpkgs main, stable, qbittorrent module, nur-pkgs (if outdated compared to
+    main), and all getFlakes from nur-pkgs?
+    - but getFlakes from nur-pkgs should be cached in cachix
 - [ ] permittedInsecurePackages not working via import nixpkgs args
 - [ ] home-manager or user level systemd services
   - [ ] qbittorrent-nox user level systemd service

@@ -1,6 +1,6 @@
 # https://discourse.nixos.org/t/how-to-filter-nixpkgs-by-metadata/27473/10
 {
-  pkgs ? import (builtins.getFlake "github:nixos/nixpkgs") { },
+  pkgs ? import (builtins.getFlake "github:nixos/nixpkgs/nixos-unstable") { },
   username ? "phanirithvij",
 }:
 let

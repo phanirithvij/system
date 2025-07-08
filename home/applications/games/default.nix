@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
-    # ./minecraft.nix
+    ./minecraft.nix
   ];
 
   /*
@@ -17,22 +17,22 @@
     # TODO bottles
     # TODO lutris
     # TODO mangohud, gamemode
-    heroic # TODO backups for wine etc.
-    gamescope # TODO what is this?
+    lazyPkgs.heroic # TODO backups for wine etc.
+    lazyPkgs.gamescope # TODO what is this?
 
-    ludusavi # TODO service w/ rclone?
+    lazyPkgs.ludusavi # TODO service w/ rclone?
 
     # TODO download scripts and rclone backup
     # TODO tui?
-    lgogdownloader
+    lazyPkgs.lgogdownloader
 
-    a-keys-path # gmtk2020 winner
+    lazyPkgs.a-keys-path # gmtk2020 winner
     (
       if pkgs ? honey-home then
         throw "honey-home is now available in nixpkgs, remove the local thing in pkgs/binary"
       else
         binaryPkgs.honey-home # ld38 winner
     )
-    oh-my-git
+    lazyPkgs.oh-my-git
   ];
 }
