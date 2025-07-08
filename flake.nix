@@ -445,14 +445,22 @@
         systemConfigs = {
           gha = inputs.system-manager.lib.makeSystemConfig {
             modules = [ ./hosts/sysm/gha/configuration.nix ];
-            # https://github.com/numtide/system-manager/issues/10
-            # nixpkgs overlays not propagated
-            extraSpecialArgs = { inherit pkgs; };
+            overlays = allSystemsJar.overlays.${system};
+            extraSpecialArgs = {
+              inherit (pkgs) lib; # for GPUOffloadApp
+              # NOTE and TODO:
+              # system-manager likely needs nixGL not nvidia-offload
+              # home-manager also has some nixGL stuff
+              # nixGL also has alternatives https://github.com/soupglasses/nix-system-graphics#comparison-table
+            };
           };
           # TODO rename vps
           vps = inputs.system-manager.lib.makeSystemConfig {
             modules = [ ./hosts/sysm/vps/configuration.nix ];
-            extraSpecialArgs = { inherit pkgs; };
+            overlays = allSystemsJar.overlays.${system};
+            extraSpecialArgs = {
+              inherit (pkgs) lib;
+            };
           };
         };
         homeConfigurations = {
