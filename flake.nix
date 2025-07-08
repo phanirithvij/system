@@ -183,12 +183,12 @@
               allowInsecurePredicate =
                 pkg:
                 let
-                  pname = lib.getName pkg;
-                  byName = builtins.elem pname [
-                    "beekeeper-studio" # Electron version 31 is EOL, hm
+                  name = "${lib.getName pkg}-${lib.getVersion pkg}";
+                  byName = builtins.elem name [
+                    "beekeeper-studio-5.2.12" # Electron version 31 is EOL, hm
                   ];
                 in
-                if byName then lib.warn "Allowing insecure package: ${pname}" true else false;
+                if byName then lib.warn "Allowing insecure package: ${name}" true else false;
 
               packageOverrides = _: {
                 # No need to do this anymore
