@@ -58,47 +58,42 @@
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.inputs.pre-commit-hooks.follows = "git-hooks";
 
-    niri.url = "github:sodiboo/niri-flake";
+    niri.url = "github:sodiboo/niri-flake/main";
     niri.inputs.nixpkgs.follows = "nixpkgs";
     niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
-    niri.inputs.niri-unstable.follows = "niri-unstable-overview";
 
-    # TODO bug in nix flake path parsing with non utf8 branchname
-    # see https://matrix.to/#/!KIjqiaZyJFkPXxMmGQ:gnome.org/$6k_jnKTkDjMVWOGyBb3Ugvf1cvQ-n_P3HGguh6RhVAE
-    niri-unstable-overview.url = "github:phanirithvij/niri?ref=overview";
-
-    treefmt-nix.url = "github:numtide/treefmt-nix";
+    treefmt-nix.url = "github:numtide/treefmt-nix/main";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    git-hooks.url = "github:cachix/git-hooks.nix";
+    git-hooks.url = "github:cachix/git-hooks.nix/master";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks.inputs.flake-compat.follows = "flake-compat";
 
     ### Indirect dependencies, dedup
 
-    #systems.url = "github:nix-systems/default-linux";
-    systems.url = "github:nix-systems/default";
+    #systems.url = "github:nix-systems/default-linux/main";
+    systems.url = "github:nix-systems/default/main";
 
-    crane.url = "github:ipetkov/crane";
+    crane.url = "github:ipetkov/crane/master";
 
-    flake-utils.url = "github:numtide/flake-utils";
+    flake-utils.url = "github:numtide/flake-utils/main";
     flake-utils.inputs.systems.follows = "systems";
 
-    flake-compat.url = "github:edolstra/flake-compat";
+    flake-compat.url = "github:edolstra/flake-compat/master";
     flake-compat.flake = false;
 
-    rust-overlay.url = "github:oxalica/rust-overlay";
+    rust-overlay.url = "github:oxalica/rust-overlay/master";
     rust-overlay.inputs.nixpkgs.follows = "nixpkgs";
 
     cargo2nix = {
-      url = "github:cargo2nix/cargo2nix/release-0.11.0";
+      url = "github:cargo2nix/cargo2nix/release-0.12";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
       inputs.flake-compat.follows = "flake-compat";
       inputs.rust-overlay.follows = "rust-overlay";
     };
 
-    nix-update.url = "github:Mic92/nix-update";
+    nix-update.url = "github:Mic92/nix-update/main";
     nix-update.inputs.nixpkgs.follows = "nixpkgs";
     nix-update.inputs.treefmt-nix.follows = "treefmt-nix";
   };
