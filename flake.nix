@@ -293,6 +293,9 @@
               ));
           in
           _pkgs;
+
+        inherit inputs; # just for inspection
+
         # NEVER ever run `nix fmt` run `treefmt`
         #formatter = treefmtCfg.wrapper;
         checks = {
@@ -409,6 +412,11 @@
         overlayModule = {
           nixpkgs.overlays = allSystemsJar.overlays.${system};
         };
+        versionModule = {
+          # NOTE: these while good to have, will FOR SURE rebuild the whole system for every new commit in nixpkgs and current repo respectively
+          system.nixos.revision = inputs.nixpkgs.rev or inputs.nixpkgs.shortRev;
+          system.configurationRevision = inputs.self.rev or "dirty";
+        };
 
         #inherit (inputs.nixpkgs.lib) nixosSystem;
         # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
@@ -518,6 +526,7 @@
               inherit (pkgs) lib;
             };
             modules = [
+              versionModule
               toolsModule
               overlayModule
               inputs.sops-nix.nixosModules.sops
@@ -545,6 +554,7 @@
             inherit (pkgs) lib;
             inherit system pkgs;
             modules = [
+              versionModule
               toolsModule
               overlayModule
               inputs.sops-nix.nixosModules.sops
@@ -569,6 +579,7 @@
             inherit system pkgs;
             inherit (pkgs) lib;
             modules = [
+              versionModule
               toolsModule
               overlayModule
               inputs.sops-nix.nixosModules.sops
