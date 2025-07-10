@@ -65,6 +65,7 @@
         "https://nixos.mayflower.consulting/blog/index.xml"
         "https://notashelf.dev/rss.xml"
         "https://thedroneely.com/posts/rss.xml"
+        "https://trofi.github.io/feed/rss.xml"
 
         # go
         "https://bbengfort.github.io/index.xml"
