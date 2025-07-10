@@ -513,11 +513,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1748144986,
-        "narHash": "sha256-z8hAL/p3bRL1kVciC2F1LTQucORtLuqDqemDISRmXpM=",
+        "lastModified": 1752162877,
+        "narHash": "sha256-HAer8q6Ponu1aIMstxjECK1yHiu6/cDt3yuSQzlYe+I=",
         "owner": "phanirithvij",
         "repo": "lazy-apps",
-        "rev": "896974de7f8b00027fb250b25186a72b5cfd5514",
+        "rev": "8ed4ae26749f813f7599d72da71f2acb07756d64",
         "type": "github"
       },
       "original": {

@@ -1,5 +1,5 @@
 { mkLazyApp, pkgs, ... }:
 mkLazyApp {
-  pkg = pkgs.spotify;
+  pkg = pkgs.nurPkgs.unstablePkgs.subtitlecomposer;
   debugLogs = true;
 }

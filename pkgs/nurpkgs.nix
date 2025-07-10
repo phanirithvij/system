@@ -11,7 +11,9 @@ let
     n: v:
     let
       # skip individual packages by name
-      byName = builtins.elem n [ ];
+      byName = builtins.elem n [
+        "subtitlecomposer" # used in lazyPkgs, don't use directly
+      ];
       # skip packages marked as broken
       broken = v ? meta && v.meta.broken;
     in

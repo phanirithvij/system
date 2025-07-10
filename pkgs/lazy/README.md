@@ -14,15 +14,11 @@ need to figure out a way to make nix-store --realise drvPath work
     tree
 - [ ] nom progress for first initialisation
 - [ ] TODO move to lazy apps
-  - beekeeper-studio
-  - tor-browser
-  - yacreader
-  - koreader
-  - subtitlecomposer
-  - scrcpy
   - vliv
-  - heroic
-  - ludusavi
-  - lgogdownloader
-  - gamescope
+  - [x] heroic
+    - [ ] electron (parent, lazy this if possible)
+  - jampack
+  - deno
+    - nvf (parent, don't mklazy this)
   - syncplay
+- some of these might require them to be be cachix or some custom gc root logic
