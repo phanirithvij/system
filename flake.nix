@@ -3,8 +3,8 @@
     # THIS is dumb unless nixpkgs is based on nixos-unstable
     # useful for git bisecting, use path:/abs/path instead for the same
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs/nixos-unstable?shallow=1";
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     # applyPatches fails because fetchpatch2 doesn't support patches with multiple changes to same file
     nixpkgs-qb.url = "github:fsnkty/nixpkgs/init-nixos-qbittorrent";
 
