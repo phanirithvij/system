@@ -195,6 +195,9 @@ in
     useXkbConfig = true; # use xkb.options in tty.
   };
 
+  # fonts.enableDefaultPackages = lib.mkForce false; # enabled in graphical-desktop.nix
+  # TODO bloated, strace alacritty and wezterm to determine required font files
+  # remove the rest, cache this package in nur
   fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
   # https://github.com/NixOS/nixpkgs/issues/386413 | ladybird
   fonts.fontDir.enable = true;
