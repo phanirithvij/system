@@ -6,8 +6,12 @@
     basePackage = pkgs.mpv.override {
       scripts = with pkgs.mpvScripts; [
         # TODO sponsorblock, yt-dlp etc.
+        # TODO keybinds not working
+        sponsorblock-minimal
         thumbfast
         uosc
+        occivink.encode
+        occivink.seekTo
       ];
     };
     prependFlags = [
