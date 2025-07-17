@@ -29,7 +29,7 @@ in
             ''
         );
         start_now = true;
-        replace = false; # set to true for containers which need to always get recreated
+        replace = true; # set to true for containers which need to always get recreated
       };
     };
   };

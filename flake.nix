@@ -394,7 +394,7 @@
             };
           };
         nix-index-hm-modules = [
-          inputs.nix-index-database.hmModules.nix-index
+          inputs.nix-index-database.homeModules.nix-index
           { programs.nix-index-database.comma.enable = true; }
         ];
         common-hm-modules = [
