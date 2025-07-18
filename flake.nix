@@ -139,6 +139,11 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
                 hash = "sha256-dEQ3QZ6nhjGSngkrU0Q7bLXxym3SwYkTLa2+gUVtv+o=";
               }
+              # nvme-rs module
+              {
+                url = "https://github.com/NixOS/nixpkgs/pull/410730.patch?full_index=1";
+                hash = "sha256-5YUz1uXc1B/T5d4KLfskH6bzys0Dn/vC11Dq7ik7+Os=";
+              }
             ];
             # ++ [
             # https://github.com/junegunn/fzf/pull/3918/files
