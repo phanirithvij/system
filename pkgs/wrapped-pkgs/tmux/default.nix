@@ -11,12 +11,11 @@ in
         resize-hook-script = ./resize-hook.sh;
       })
     ];
-    pathAdd =
-      [
-        pkgs.valkey # redis-cli
-      ]
-      ++ (with pkgs.tmuxPlugins; [
-        battery
-      ]);
+    pathAdd = [
+      pkgs.valkey # redis-cli
+    ]
+    ++ (with pkgs.tmuxPlugins; [
+      battery
+    ]);
   };
 }

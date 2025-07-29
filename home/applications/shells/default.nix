@@ -69,7 +69,8 @@ in
 
   home.sessionVariables = {
     inherit (hostvars) SYSTEM_DIR OWN_DIR;
-  } // lib.mkIf (hostvars ? DBX_CONTAINER_MANAGER) { inherit (hostvars) DBX_CONTAINER_MANAGER; };
+  }
+  // lib.mkIf (hostvars ? DBX_CONTAINER_MANAGER) { inherit (hostvars) DBX_CONTAINER_MANAGER; };
   home.sessionPath = [
     "$HOME/.local/bin"
     "$HOME/go/bin"

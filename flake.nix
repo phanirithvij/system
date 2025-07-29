@@ -5,8 +5,6 @@
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs/nixos-unstable?shallow=1";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
-    # applyPatches fails because fetchpatch2 doesn't support patches with multiple changes to same file
-    nixpkgs-qb.url = "github:fsnkty/nixpkgs/init-nixos-qbittorrent";
 
     #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages/master";
@@ -144,6 +142,11 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/410730.patch?full_index=1";
                 hash = "sha256-5YUz1uXc1B/T5d4KLfskH6bzys0Dn/vC11Dq7ik7+Os=";
               }
+              # wget2 fix
+              {
+                url = "https://github.com/NixOS/nixpkgs/pull/429170.patch?full_index=1";
+                hash = "sha256-FizfmhWvG/BReiPX+4jGIMZesZ5TQACP+Viym5X5ooA=";
+              }
             ];
             # ++ [
             # https://github.com/junegunn/fzf/pull/3918/files
@@ -151,10 +154,7 @@
             # ];
           };
 
-          #pkgs = import inputs.nixpkgs {
-          # TODO still doesn't work on macos
           pkgs = import nixpkgs' {
-            #pkgs = import (if (system == "x86_64-linux") then nixpkgs' else inputs.nixpkgs) {
             inherit overlays system;
             config = {
               nvidia.acceptLicense = true;
@@ -280,22 +280,21 @@
         };
         packages =
           let
-            _pkgs =
-              {
-                #inherit nix-schema;
-                navi-master = pkgs.navi;
-                home-manager = hm;
-                # TODO optional if system is linux
-                system-manager = sysm;
-                nvidia-offload = allSystemsJar.nvidia-offload.${system};
-              }
-              // lazyApps
-              // allSystemsJar.wrappedPkgs.${system}
-              // allSystemsJar.boxxyPkgs.${system}
-              // allSystemsJar.binaryPkgs.${system}
-              // (lib.filterAttrs (_: v: lib.isDerivation v && !(v ? meta && v.meta.broken)) (
-                lib.mine.unNestAttrs allSystemsJar.nurPkgs.${system}
-              ));
+            _pkgs = {
+              #inherit nix-schema;
+              navi-master = pkgs.navi;
+              home-manager = hm;
+              # TODO optional if system is linux
+              system-manager = sysm;
+              nvidia-offload = allSystemsJar.nvidia-offload.${system};
+            }
+            // lazyApps
+            // allSystemsJar.wrappedPkgs.${system}
+            // allSystemsJar.boxxyPkgs.${system}
+            // allSystemsJar.binaryPkgs.${system}
+            // (lib.filterAttrs (_: v: lib.isDerivation v && !(v ? meta && v.meta.broken)) (
+              lib.mine.unNestAttrs allSystemsJar.nurPkgs.${system}
+            ));
           in
           _pkgs;
 

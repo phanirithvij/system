@@ -136,7 +136,8 @@ let
   };
   aliasModules = [
     global
-  ] ++ (map (a: mkAliasModule' (builtins.elemAt a 0) (builtins.elemAt a 1)) groups);
+  ]
+  ++ (map (a: mkAliasModule' (builtins.elemAt a 0) (builtins.elemAt a 1)) groups);
 in
 {
   inherit groups aliasModules;
