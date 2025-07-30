@@ -13,13 +13,11 @@
 
   home.username = username;
 
-  # TODO macos
-  #home.homeDirectory = "/Users/${username}";
-  home.homeDirectory = "/home/${username}";
+  home.homeDirectory =
+    if pkgs.stdenv.hostPlatform.isDarwin then "/Users/${username}" else "/home/${username}";
 
   home.packages = with pkgs; [
     curl
-    wget2
     wget
     sysz # TODO only if linux
     # TODO system-manager conf has these for linux runner
