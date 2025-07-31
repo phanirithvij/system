@@ -7,6 +7,8 @@
   imports = [
     ../modules/redis.nix
     ../modules/swapspace.nix
+    ../modules/tmate-ssh-server.nix
+    ../modules/cloudflared.nix
   ];
   config = {
     nixpkgs.hostPlatform = "x86_64-linux";
@@ -15,22 +17,7 @@
       # and use the following via home-manager
       assert lib ? mine; # ensure lib.mine propagates
       with pkgs;
-      [
-        duf
-        fzf
-        gdu
-        wrappedPkgs.lf
-        lazygit
-        neovim
-        ripgrep
-        wrappedPkgs.tmux
-        viddy
-      ]
-      ++ [
-        nix-output-monitor
-        nixfmt-rfc-style
-        npins
-      ]
+      [ duf ]
       ++ [
         (writeShellScriptBin "dufi" ''
           CLICOLOR_FORCE=1 COLORTERM="truecolor" viddy --disable_auto_save -p -d -n 0.5 \
@@ -62,5 +49,8 @@
         user = "runner"; # TODO make it work with users.users.redis-redrum
       };
     };
+    services.tmate-ssh-server.enable = true;
+    services.tmate-ssh-server.host = "$(cat /etc/ngrok-tcp-hostname)"; # will work at runtime?
+    # systemd.services.tmate-ssh-server.enable = lib.mkForce false; # TODO generate service file but disable?
   };
 }

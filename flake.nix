@@ -16,7 +16,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     system-manager = {
-      #url = "git+file:///shed/Projects/nixer/learn/numtide/system-manager";
+      #url = "git+file:///shed/Projects/nixer/community-projects/numtide/system-manager";
       url = "github:numtide/system-manager/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
