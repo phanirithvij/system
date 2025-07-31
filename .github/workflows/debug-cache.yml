@@ -1,15 +1,13 @@
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
-  # cron: weekly
+
 jobs:
-  build:
+  debug:
+    name: debug-cache
     runs-on: ubuntu-latest
+    # runs-on: macos-13
     steps:
-      - uses: actions/checkout@v4
-      - uses: wimpysworld/nothing-but-nix@main
-      # enables flakes, nix-command
+      - run: sudo swapoff /mnt/swapfile && sudo rm /mnt/swapfile
       - uses: DeterminateSystems/nix-installer-action@main
         with:
           determinate: false
@@ -17,9 +15,7 @@ jobs:
             trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= loudgolem-nur-pkgs-0.cachix.org-1:OINy4hRqrmCH0sslp+tQo4hiBEZJEgA1epza03g5rvY=
             substituters = https://nix-community.cachix.org https://cache.nixos.org https://loudgolem-nur-pkgs-0.cachix.org
       - uses: DeterminateSystems/magic-nix-cache-action@main
-      - run: nix build .#systemConfigs.gha && sudo ./result/bin/activate
-      - run: nix build .#homeConfigurations."runner".activationPackage
-      - run: nix run .#home-manager -- switch --flake . -b bak
-      #- name: Debugging with browser
-      #  uses: fawazahmed0/action-debug@v2
-      - run: bash scripts/build.sh
+      - uses: actions/checkout@v4
+      - run: nix build .#homeConfigurations."runner".activationPackage --impure && ./result/activate
+      - name: Debugging with browser
+        uses: fawazahmed0/action-debug@v2
