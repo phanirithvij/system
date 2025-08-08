@@ -12,19 +12,23 @@
             owner = "phanirithvij";
             repo = "lazy-apps";
             rev = "master";
-            hash = "sha256-cXSYhGgnMBgNesS8vT4S24ipAY0p6mzvt7eTemQqblM=";
+            hash = "sha256-iHVH/z3hEGkQrxmPTWWQ/Z9LAVeYn0dRlTcR71OMRXY=";
           }
         )).mkLazyApps
           { inherit pkgs; }
       ).lazy-app;
   },
-  repl ? false, # cd pkgs/lazy; nix repl -f default.nix --arg repl true
-}@args:
+  repl ? false, # cd pkgs/lazy; env NIXPKGS_ALLOW_UNFREE=1 nix repl -f default.nix --arg repl true --impure
+}:
+#}@args:
 let
   inherit (flake-inputs.lazy-apps.packages.${system}) lazy-app;
-  cargs = args // {
-    inherit mkLazyApp;
-  };
+  # NOTE: major unintuitive thing here
+  # args will be empty!!! defaulted arguments are not included in the bound attribute set
+  # see https://github.com/tazjin/nix-1p/blob/53fad775b8f985800e5eeb724523708f247e8e3e/README.md?plain=1#L288
+  # https://code.tvl.fyi/about/nix/nix-1p#functions
+  # cargs = args // {
+  cargs = { inherit mkLazyApp pkgs; };
 
   desktopItems = lib.fileset.toSource {
     fileset = lib.fileset.fileFilter (file: file.hasExt "desktop") ./desktopItems;

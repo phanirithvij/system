@@ -7,7 +7,12 @@ see ./todos folder as well
 
 ## TODO
 
-- lemurs specialisation or some unused module
+- [ ] run snitch maybe?
+- [ ] nix-monitored, https://github.com/search?q=nix-monitored&type=code
+- [ ] restructure repo to use divnix/std or hive
+- [ ] move all projects, git repos to single location so that mani can be used
+      to keep them uptodate
+- [ ] lemurs specialisation or some unused module, it was merged in nixpkgs
 - nix store has 4 or 5 nixpkgs versions
   - see where they are coming from
   - nixpkgs main, stable, qbittorrent module, nur-pkgs (if outdated compared to
