@@ -7,6 +7,7 @@ see ./todos folder as well
 
 ## TODO
 
+- move all projects, git repos to single location
 - lemurs specialisation or some unused module
 - nix store has 4 or 5 nixpkgs versions
   - see where they are coming from
