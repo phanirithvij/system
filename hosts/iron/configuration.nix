@@ -67,6 +67,9 @@ in
         menuentry "Poweroff" {
           halt
         }
+        menuentry "Firmware Settings" {
+          fwsetup
+        }
       '';
     };
   };
@@ -118,7 +121,7 @@ in
   # https://github.com/search?q=language%3ANix+dyndbg+AND+drivers%2Fbase%2Ffirmware_loader%2Fmain.c&type=code
   # https://github.com/NixOS/nixpkgs/issues/148197#issuecomment-1121407764
   #   https://github.com/samueldr/nixpkgs/commit/cbf7aa4ca386a7a0165aa0531772523760402861
-  boot.kernelParams = [ ''dyndbg="file drivers/base/firmware_loader/main.c +fmp"'' ];
+  #boot.kernelParams = [ ''dyndbg="file drivers/base/firmware_loader/main.c +fmp"'' ];
 
   hardware.graphics = {
     extraPackages = with pkgs; [
@@ -394,13 +397,7 @@ in
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    vimAlias = true;
-    viAlias = true;
-  };
+  environment.variables.EDITOR = "nvim";
   services.openssh.enable = true;
   services.pr-tracker.enable = true;
 

@@ -55,6 +55,7 @@
         # nix, nixos
         "https://ayats.org/feed.xml"
         "https://bmcgee.ie/posts/index.xml"
+        "https://blog.eigenvalue.net/rss.xml"
         "https://blog.janissary.xyz/feed.xml"
         "https://chattingdarkly.org/@chrism.rss"
         "https://exploring-better-ways.bellroy.com/rss.xml"

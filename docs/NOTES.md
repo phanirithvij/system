@@ -4,7 +4,8 @@
 
 - home-manager manages itself for now in a single user env
   - Allows users to manage their own version
-- in a multi-user scenario a single global home-manager can be enabled in the flake modules
+- in a multi-user scenario a single global home-manager can be enabled in the
+  flake modules
   ```nix
   nixosConfigurations = {
     iron = nixpkgs.lib.nixosSystem {
@@ -20,13 +21,15 @@
   ```
 - nix flake show can be used with `| less`
   - for home-manager it crashes (too big?)
-- nix schema supported nix can be installed form detsys's nix fork with schema support
+- nix schema supported nix can be installed form detsys's nix fork with schema
+  support
 - nix portable exists which installs nix without sudo
   - would've been very useful when I was in uni with sudo disabled
 - formatter is nixfmt-rfc-style
   - treefmt+dprint for other things
 - dprint broken with treefmt-nix need to file an issue TODO
-- git-repo-manager for git repos own and others and symlink to appropriate locations
+- git-repo-manager for git repos own and others and symlink to appropriate
+  locations
   - eg. for go projects etc. ~/Projects/go
   - zig -> ~/Projects/zig
   - system -> ~/Projects/system -> ~/Projects/\!Own/system
@@ -35,7 +38,8 @@
   - tried on one for navi and firefox
 - home-manager has specialisations as well like nixos.
   - [ ] I need to try it out.
-- editor setup w/ lsp should be #1 priority for nix before writing/preusing non-trivial nix
+- editor setup w/ lsp should be #1 priority for nix before writing/preusing
+  non-trivial nix
   - noogle is very useful for jumping to stdlib src
   - nix pills is very very useful
   - nix.dev tuts
@@ -54,26 +58,31 @@
   - by-name manual migration comes with issues?
   - faced when writing opengist update script
   - https://matrix.to/#/!kjdutkOsheZdjqYmqp:nixos.org/$ChkVlbom95iNwaNoCBb0H0m4EpXoybi2H92X4EZvWJI
-  - hm espanso https://matrix.to/#/!kjdutkOsheZdjqYmqp:nixos.org/$qPRxcb3wHaAN5cJJXCUUnCIrGv8wkGcax0bnaO_5HQo
+  - hm espanso
+    https://matrix.to/#/!kjdutkOsheZdjqYmqp:nixos.org/$qPRxcb3wHaAN5cJJXCUUnCIrGv8wkGcax0bnaO_5HQo
 - focaltech driver pr
   - makePkgconfigItem
     - https://github.com/NixOS/nixpkgs/pull/354311#discussion_r1835286178
 - IFD is not simply `${drv}` but `import "${drv}"`
   - which is why cargo pacakges, yarn packages etc. have lockfiles in nixpkgs
   - because `${src}/Cargo.lock` will be imported by buildRustpackage etc.
-- use fetchpatch2 whenever possible over fetchpatch, because fetchpatch is old/outdated, fetchpatch2 fixes issues
+- use fetchpatch2 whenever possible over fetchpatch, because fetchpatch is
+  old/outdated, fetchpatch2 fixes issues
   - patches might not get applied correctly if using fetchpatch
   - also `?full_index=1` for patch urls for github patches for reproducibility.
 - requireFile
   - non-redistributable files user warning with file hash verified
-  - also can write an fixed output derivation maybe a python script which downloads the files, https://nix.dev/manual/nix/stable/glossary#gloss-fixed-output-derivation
+  - also can write an fixed output derivation maybe a python script which
+    downloads the files,
+    https://nix.dev/manual/nix/stable/glossary#gloss-fixed-output-derivation
 - git bisect with nixos-rebuild vm (nix-hour #8 18:20)
   - `nix-build <nixpkgs/nixos> --arg configuration ./configuration.nix -A vm`
   - `nix-build ./nixos --arg configuration ./configuration.nix -A vm`
   - echo $LINES $COLUMNS (outside vm) (nhr#8 32:28)
   - stty rows 28 cols 128 (resize vm console area)
 - git bisect run "command"
-- `nix-build -A something --arg config '{ allowUnfree = true; }'` (nix-hour #8 33:48)
+- `nix-build -A something --arg config '{ allowUnfree = true; }'` (nix-hour #8
+  33:48)
   - argstr
   - arg is for nixpkgs
   - nix-instantiate -A same as above
@@ -82,13 +91,16 @@
   - What is it exactly?
 - modulesPath is a flake compatible thing (nix-hour #8 20:05)
 - just `nix-shell -p` gives patchelf, make etc. stdenv (nix-hour #8 29:15)
-- previously mkShell couldn't be built then `inputDerviation` had to be used (nix-hour #11)
+- previously mkShell couldn't be built then `inputDerviation` had to be used
+  (nix-hour #11)
 - __noChroot to escape sandbox if relaxed (nix-hour #12 29:30)
 - buildEnv
   - pkgsPath passAsFile
-- nix-locate, nix-index, nix-index-database, comma, command-not-found.dbPath, NIX_AUTO_RUN (nix-hour #63)
+- nix-locate, nix-index, nix-index-database, comma, command-not-found.dbPath,
+  NIX_AUTO_RUN (nix-hour #63)
 - `nix repl .`
-- `nix repl .` in system flake and can do `nixosConfigurations.iron.config/options`
+- `nix repl .` in system flake and can do
+  `nixosConfigurations.iron.config/options`
 - `_module.args` (nix-hour #63 52:21 npins)
 - [ ] make nix-hour into a blog
   - https://github.com/allrealmsoflife/nix-hour-transcripts
@@ -107,23 +119,34 @@
   - https://github.com/sonigy/YCS/issues/58#issuecomment-2389179106
   - https://www.reddit.com/r/youtubedl/comments/15fcrmd/transcript_extract_from_youtube_videos_ytdlp/
   - https://github.com/yt-dlp/yt-dlp/issues/7496
+- 2025-08-10T12:41, had to do
+  `sudo btrfs rescue zero-log /dev/disk/by-label/nixroot` from live iso to be
+  able to boot into linux, common issue
+  https://www.phoronix.com/news/Btrfs-Log-Tree-Corruption-Fix
 
 ### Ramblings or thoughts
 
 - If I don't need pure evaluation then flake-compat is good enough?
   - Does it mean pure evaluation is useful or not?
-  - from my impression pure eval is great since you need to explicitly define everything
-  - but flake-compat disallows it? I think the default behavior of nix-* vs nix cli has changed that's all?
+  - from my impression pure eval is great since you need to explicitly define
+    everything
+  - but flake-compat disallows it? I think the default behavior of nix-* vs nix
+    cli has changed that's all?
   - so with old cli we need to do --pure and with new we need --impure?
 - Can I migrate to npins?
-  - all this drama about how flakes are not that good is irritating and influencing me to avoid them.
-  - but npins might not satisfy every need I have, since there are flakes which I depend on as of now.
-  - multiple instances of nixpkgs, and patching nixpkgs can be done without flakes
-  - niri cannot be used without flakes as of now (since it is not in nixpkgs?) (verify this) (I can give it up)
+  - all this drama about how flakes are not that good is irritating and
+    influencing me to avoid them.
+  - but npins might not satisfy every need I have, since there are flakes which
+    I depend on as of now.
+  - multiple instances of nixpkgs, and patching nixpkgs can be done without
+    flakes
+  - niri cannot be used without flakes as of now (since it is not in nixpkgs?)
+    (verify this) (I can give it up)
     - I will use niri when I can use it withou a touchpad?
     - but I like the touchpad scroll
   - hyprland flake too (I can give it up) (it is in hm and nixpkgs if needed)
-  - flake-schemas, it can be its own project(directory), I don't need it in my nixos config really
+  - flake-schemas, it can be its own project(directory), I don't need it in my
+    nixos config really
     - [x] builtins.getFlake and threw in in nurpkgs, so it is in cachix
   - crane, etc not needed
   - [x] blobdrop -> nixpkgs per my package request (done in my config)
@@ -131,10 +154,13 @@
   - since channels are minimal compared to github repo size
   - but channels can be generated on my own via local checkout of nixpkgs
   - no need for a network roundtrip
-  - do something like what nixpkgs-review does and have a worktree and checkout the specific command and run the command to generate a channel.
-    - channels are good but treeshaking or something to remove dead nix code based on input nix expression would be better
+  - do something like what nixpkgs-review does and have a worktree and checkout
+    the specific command and run the command to generate a channel.
+    - channels are good but treeshaking or something to remove dead nix code
+      based on input nix expression would be better
       - https://matrix.to/#/!kjdutkOsheZdjqYmqp:nixos.org/$KLCWy-2ZeuxKYxLUFHYI2otJnWXnqA7vrx5i5bI95bE
-    - eg. given a nix file, strip stuff from nixpkgs until the derivation "output" changes compared to full nixpkgs. (hash will change obviously)
+    - eg. given a nix file, strip stuff from nixpkgs until the derivation
+      "output" changes compared to full nixpkgs. (hash will change obviously)
       - ca derivations?
       - lazy trees?
 
@@ -146,16 +172,19 @@ Useful links along with my annotations.
 
 ## Configs
 
-- see my github stars list https://github.com/stars/phanirithvij/lists/nixosothersdotfiles
+- see my github stars list
+  https://github.com/stars/phanirithvij/lists/nixosothersdotfiles
   - I star every nixos config I encounter (this is not good)
 - https://github.com/gvolpe/nix-config
   - nix flakes schema overlay
 - https://github.com/workflow/dotfiles
   - gha initial setup inspired by this
 - TODO document where I yanked what from
-- TODO yank wsl setup form https://github.com/grig-iv/nix-config/blob/main/home-manager/grig%40work-wsl.nix
+- TODO yank wsl setup form
+  https://github.com/grig-iv/nix-config/blob/main/home-manager/grig%40work-wsl.nix
   - TODO yank repo cloning setup from the same
-  - TODO what I though git-repo-manager was. make it work. also git-prole declerative
+  - TODO what I though git-repo-manager was. make it work. also git-prole
+    declerative
 - [ ] postgresql backup with rustic
 - [ ] impermanence
   - not worth the effort imo
@@ -174,9 +203,11 @@ Useful links along with my annotations.
 ## Blogs
 
 - https://jade.fyi/blog/flakes-arent-real/
-  - convinced me to use flakes only if necessary, I decided to go on with flakes for my system config
+  - convinced me to use flakes only if necessary, I decided to go on with flakes
+    for my system config
   - also plan to try npins and if I can get it working stay there
-    - upd: npins for simple projects with few inputs, flakes if they provide quality flakes w/ tons of stuff
+    - upd: npins for simple projects with few inputs, flakes if they provide
+      quality flakes w/ tons of stuff
   - flake inputs are inflexible
     - https://github.com/NixOS/nix/issues/3966
     - https://github.com/jorsn/flakegen
@@ -229,7 +260,8 @@ Useful links along with my annotations.
 
 ### blocked/halted/stale
 
-- lazy trees - only helps with local flakes, shallow clones or github:x/x can't utilise it
+- lazy trees - only helps with local flakes, shallow clones or github:x/x can't
+  utilise it
 - flake schemas - useful for flake checks it seems
 - nix upgrade-nix blocked in favor of detsys/nix-installer
 - ca-derviations (halted due to lack of funds, my best guess)
@@ -300,5 +332,6 @@ Useful links along with my annotations.
   - npins templates
   - nix-shell-templates
   - flake-templates (maybe same as above)
-    - use flake template feature for nix-shell-templates too? but make it work with old nix-* commands
+    - use flake template feature for nix-shell-templates too? but make it work
+      with old nix-* commands
   - npins > flake-compat

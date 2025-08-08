@@ -74,7 +74,8 @@
     sysz # systemctl tui
     timeshift # system restore points
     unar # rar format
-    ulauncher # TODO remove after checking if useful alts rofi, dmenu, voidlinux-youtuber-dotfiles, espanso
+    # this needs ulauncher v6, https://github.com/NixOS/nixpkgs/issues/430262
+    #ulauncher # TODO remove after checking if useful alts rofi, dmenu, voidlinux-youtuber-dotfiles, espanso
     viddy # watch alternative
     wtfutil # fancy dashboard tui
     xplr # TODO something temp, remove later
