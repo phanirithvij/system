@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
-  # neovim nvf from nur
-  home.packages = [ pkgs.nurPkgs.flakePkgs.nvf ];
+  programs.neovim = {
+    package = pkgs.nurPkgs.flakePkgs.nvf;
+    defaultEditor = true;
+    vimAlias = true;
+    viAlias = true;
+  };
 }

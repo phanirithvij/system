@@ -14,6 +14,9 @@
       menuentry "Poweroff" {
         halt
       }
+      menuentry "Firmware Settings" {
+        fwsetup
+      }
     '';
   };
 }

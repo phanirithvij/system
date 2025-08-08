@@ -3,11 +3,19 @@
 A selfhosted heaven all in nixos Make sure all these run with system-manager +
 home-manager setup
 
+- [ ] ente
+  - fully foss it seems?
+  - see https://github.com/NixOS/nixpkgs/issues/292641
+- [ ] nextcloud
+  - full
+  - modular (only enable specific parts, if that is possible)
+- [ ] castopod (in nixpkgs)
+- [ ] audiobookshelf (in nixpkgs)
+- [ ] AzuraCast (not in nixpkgs)
 - [ ] laminar ci, nixosmodule not in nixpkgs
 - [ ] ytdl-sub (in nixpkgs)
 - [ ] silverbullet.md (in nixpkgs)
-- [ ] Immich
-  - https://github.com/NixOS/nixpkgs/pull/324127
+- [ ] Immich (in nixpkgs)
 - [ ] Email server
   - not worth it is the online consensus
   - but worth it as a learning experience

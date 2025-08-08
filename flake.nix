@@ -1,6 +1,7 @@
 {
   inputs = {
     # THIS is dumb unless nixpkgs is based on nixos-unstable
+    # TODO checkout https://github.com/blitz/hydrasect
     # useful for git bisecting, use path:/abs/path instead for the same
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs/nixos-unstable?shallow=1";
     nixpkgs.url = "github:phanirithvij/nixpkgs/nixos-patched"; # managed via nix-patcher
@@ -8,15 +9,13 @@
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-patcher.url = "github:phanirithvij/nixpkgs-patcher/main";
 
-    nix-patcher.url = "github:phanirithvij/nix-patcher/main"; # to manage own nixpkgs fork
-    nix-patcher.inputs.nixpkgs.follows = "nixpkgs";
-    # it can also manage other flake inputs forks
-
     #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages/master";
     nur-pkgs.inputs.nix-update.follows = "nix-update";
-    #shouldn't be used as cachix cache becomes useless
+    #follows shouldn't be used as cachix cache becomes useless
     #nur-pkgs.inputs.nixpkgs.follows = "nixpkgs";
+    # TODO in nur-pkgs gha we build for nixos-unstable and nixpkgs-unstable
+    # but what if nur-pkgs.flake.inputs.nixpkgs is outdated? does cache still work?
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -26,14 +25,6 @@
       url = "github:numtide/system-manager/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    wrapper-manager.url = "github:viperML/wrapper-manager/master";
-
-    lazy-apps.url = "github:phanirithvij/lazy-apps/master";
-    # lazy-apps.url = "git+file:///shed/Projects/nixer/!core/lazy-apps?shallow=1";
-    # lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # own fork/backup at
-    lazy-apps.inputs.nixpkgs.follows = "nixpkgs";
-    lazy-apps.inputs.pre-commit-hooks.follows = "git-hooks";
 
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/master";
@@ -46,25 +37,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
-    flake-schemas.url = "github:DeterminateSystems/flake-schemas/main";
+    wrapper-manager.url = "github:viperML/wrapper-manager/master";
+
+    # lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # upstream
+    # lazy-apps.url = "git+file:///shed/Projects/nixer/core/lazy-apps?shallow=1";
+    lazy-apps.url = "github:phanirithvij/lazy-apps/master"; # hard fork
+    lazy-apps.inputs.nixpkgs.follows = "nixpkgs";
+    lazy-apps.inputs.pre-commit-hooks.follows = "git-hooks";
 
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    navi_config.url = "github:phanirithvij/navi/main";
-    navi_config.flake = false;
 
-    nix-index-database.url = "github:nix-community/nix-index-database/main";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
-
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=main";
-    hyprland.inputs.nixpkgs.follows = "nixpkgs";
-    hyprland.inputs.pre-commit-hooks.follows = "git-hooks";
-
-    niri.url = "github:sodiboo/niri-flake/main";
-    niri.inputs.nixpkgs.follows = "nixpkgs";
-    niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
     treefmt-nix.url = "github:numtide/treefmt-nix/main";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -72,6 +56,16 @@
     git-hooks.url = "github:cachix/git-hooks.nix/master";
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks.inputs.flake-compat.follows = "flake-compat";
+
+    navi_config.url = "github:phanirithvij/navi/main";
+    navi_config.flake = false;
+
+    nix-index-database.url = "github:nix-community/nix-index-database/main";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+
+    nix-patcher.url = "github:phanirithvij/nix-patcher/main"; # to manage own nixpkgs fork
+    nix-patcher.inputs.nixpkgs.follows = "nixpkgs";
+    # it can also manage other flake inputs forks
 
     ###### PATCHES #######
 
@@ -114,6 +108,21 @@
     ### end nixpkgs-patcher patches
 
     ###### END PATCHES #######
+
+    # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
+    flake-schemas.url = "github:DeterminateSystems/flake-schemas/main";
+
+    # hyprland.url = "github:hyprwm/Hyprland/main";
+    # hyprland.submodules = true; # no such thing? but inputs.self.submodules exist
+    # as per https://github.com/mightyiam/input-branches#the-setup
+    # that thing also has issues, https://github.com/NixOS/nix/issues/13571
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=main"; # FIXME doesn't work with nix-patcher
+    hyprland.inputs.nixpkgs.follows = "nixpkgs";
+    hyprland.inputs.pre-commit-hooks.follows = "git-hooks";
+
+    niri.url = "github:sodiboo/niri-flake/main";
+    niri.inputs.nixpkgs.follows = "nixpkgs";
+    niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
     ### Indirect dependencies, dedup
 

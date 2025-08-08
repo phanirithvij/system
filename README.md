@@ -42,13 +42,18 @@
 
 ### switch
 
-requires: home-switch, os-switch
-RunDeps: async
+requires: home-switch, os-switch RunDeps: async
 
 ### os-boot
 
 ```
 nh os boot .
+```
+
+### os-test
+
+```
+nh os test .
 ```
 
 ### os-switch
@@ -78,13 +83,13 @@ nix flake update --commit-lock-file
 ### iso-build
 
 ```
-nom build .#nixosConfigurations.defaultIso.config.system.build.isoImage
+nom build .#nixosConfigurations.defaultIso.config.system.build.isoImage --no-link
 ```
 
 ### home-build
 
 ```
-nom build .#homeConfigurations."rithvij@iron".activationPackage
+nom build .#homeConfigurations."rithvij@iron".activationPackage --no-link
 nh home build .
 ```
 
@@ -92,7 +97,7 @@ nh home build .
 
 ```
 nixos-rebuild build --flake .#iron
-nom build .#nixosConfigurations.iron.config.system.build.toplevel
+nom build .#nixosConfigurations.iron.config.system.build.toplevel --no-link
 nh os build . -H iron
 ```
 
