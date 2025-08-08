@@ -1,6 +1,7 @@
 {
   inputs = {
     # THIS is dumb unless nixpkgs is based on nixos-unstable
+    # TODO checkout https://github.com/blitz/hydrasect
     # useful for git bisecting, use path:/abs/path instead for the same
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs/nixos-unstable?shallow=1";
     nixpkgs.url = "github:phanirithvij/nixpkgs/nixos-patched"; # managed via nix-patcher
@@ -15,8 +16,10 @@
     #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages/master";
     nur-pkgs.inputs.nix-update.follows = "nix-update";
-    #shouldn't be used as cachix cache becomes useless
+    #follows shouldn't be used as cachix cache becomes useless
     #nur-pkgs.inputs.nixpkgs.follows = "nixpkgs";
+    # TODO in nur-pkgs gha we build for nixos-unstable and nixpkgs-unstable
+    # but what if nur-pkgs.flake.inputs.nixpkgs is outdated? does cache still work?
 
     home-manager.url = "github:nix-community/home-manager/master";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -29,9 +32,9 @@
 
     wrapper-manager.url = "github:viperML/wrapper-manager/master";
 
-    lazy-apps.url = "github:phanirithvij/lazy-apps/master";
-    # lazy-apps.url = "git+file:///shed/Projects/nixer/!core/lazy-apps?shallow=1";
-    # lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # own fork/backup at
+    # lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # upstream
+    # lazy-apps.url = "git+file:///shed/Projects/nixer/core/lazy-apps?shallow=1";
+    lazy-apps.url = "github:phanirithvij/lazy-apps/master"; # hard fork
     lazy-apps.inputs.nixpkgs.follows = "nixpkgs";
     lazy-apps.inputs.pre-commit-hooks.follows = "git-hooks";
 
@@ -58,7 +61,11 @@
     nix-index-database.url = "github:nix-community/nix-index-database/main";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=main";
+    # hyprland.url = "github:hyprwm/Hyprland/main";
+    # hyprland.submodules = true; # no such thing? but inputs.self.submodules exist
+    # as per https://github.com/mightyiam/input-branches#the-setup
+    # that thing also has issues, https://github.com/NixOS/nix/issues/13571
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=main"; # FIXME doesn't work with nix-patcher
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.inputs.pre-commit-hooks.follows = "git-hooks";
 

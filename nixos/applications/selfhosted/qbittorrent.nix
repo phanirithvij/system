@@ -1,12 +1,12 @@
 { pkgs, ... }:
 {
-  # TODO qbittorrent-nox
+  # TODO qbittorrent-nox and qbittorrent sharing same db
   services.qbittorrent = {
-    enable = true;
+    enable = false;
     package = pkgs.qbittorrent-nox;
     serverConfig.LegalNotice.Accepted = true;
     group = "users";
   };
 
-  services.flood.enable = true;
+  #services.flood.enable = true;
 }
