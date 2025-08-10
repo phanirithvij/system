@@ -72,6 +72,8 @@
     #systems.url = "github:nix-systems/default-linux/main";
     systems.url = "github:nix-systems/default/main";
 
+    crane.url = "github:ipetkov/crane/master";
+
     flake-utils.url = "github:numtide/flake-utils/main";
     flake-utils.inputs.systems.follows = "systems";
 
