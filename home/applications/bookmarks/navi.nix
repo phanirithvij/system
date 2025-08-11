@@ -16,6 +16,9 @@
       # pass
       cat ${wifipassFile} | grep <pwlist> | cut -d'=' -f2
       $ pwlist: cat ${wifipassFile} | cut -d'=' -f1
+
+      # connect
+      cat ${wifipassFile} | grep <pwlist> | cut -d'=' -f2 | nmcli device wifi connect <pwlist> --ask
     '';
   };
   programs.tealdeer = {
