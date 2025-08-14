@@ -142,10 +142,10 @@
                 url = "https://github.com/NixOS/nixpkgs/pull/410730.patch?full_index=1";
                 hash = "sha256-5YUz1uXc1B/T5d4KLfskH6bzys0Dn/vC11Dq7ik7+Os=";
               }
-              # wget2 fix
+              # plexmediaserver security update
               {
-                url = "https://github.com/NixOS/nixpkgs/pull/429170.patch?full_index=1";
-                hash = "sha256-01vh2A/PJ1LPXjEeMCbgdke9el+NYN6FLdxovF8lJZg=";
+                url = "https://github.com/NixOS/nixpkgs/pull/433769.patch?full_index=1";
+                hash = "sha256-4pWTYqKUJuboGu1bVvjyW5W7riI7NFxTfER0xoSDNNI=";
               }
             ];
             # ++ [
