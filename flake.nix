@@ -307,26 +307,18 @@
           git-hooks-check = inputs.git-hooks.lib.${system}.run {
             src = lib.cleanSource ./.;
             hooks = {
-              deadnix = {
+              # ideally the formatting check from above can be used but they don't really go together
+              # one can do nix build .#checks.system.formatting but that is beyond slow
+              treefmt = {
                 enable = true;
                 stages = [ "pre-push" ];
-              };
-              statix = {
-                enable = true;
-                stages = [ "pre-push" ];
-              };
-              nixfmt-rfc-style = {
-                enable = true;
-                stages = [
-                  "pre-push"
-                  "pre-commit"
-                ];
+                package = treefmtCfg.wrapper;
               };
               skip-ci-check = {
                 enable = true;
                 always_run = true;
                 stages = [ "prepare-commit-msg" ];
-                entry = toString (
+                entry = builtins.toString (
                   # if all are md files, skip ci
                   pkgs.writeShellScript "skip-ci-md" ''
                     COMMIT_MSG_FILE=$1
