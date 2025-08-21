@@ -775,6 +775,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-patcher": {
+      "locked": {
+        "lastModified": 1755771249,
+        "narHash": "sha256-i7smdU4QRlBxztu8BE65EAiqBsRQq1HK0D5SkYeAL0o=",
+        "owner": "phanirithvij",
+        "repo": "nixpkgs-patcher",
+        "rev": "1b2f5a0d51ab51e57948979ace933da28814f579",
+        "type": "github"
+      },
+      "original": {
+        "owner": "phanirithvij",
+        "ref": "main",
+        "repo": "nixpkgs-patcher",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1754937576,
@@ -885,6 +901,7 @@
         "nix-update": "nix-update",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-patcher": "nixpkgs-patcher",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur-pkgs": "nur-pkgs",
         "rust-overlay": "rust-overlay",

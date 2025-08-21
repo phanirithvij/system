@@ -1,4 +1,9 @@
-{ flake-inputs, pkgs, ... }:
+{
+  flake-inputs,
+  lib,
+  pkgs,
+  ...
+}:
 {
   nix = {
     # https://discourse.nixos.org/t/24-05-add-flake-to-nix-path/46310/14
@@ -10,7 +15,7 @@
     # https://discord.com/channels/568306982717751326/570351749848891393/1347223140375461990
     # there is also user level registry
     # https://nix-community.github.io/home-manager/options.xhtml#opt-nix.registry
-    registry = {
+    registry = lib.mkForce {
       nixpkgs.flake = flake-inputs.nixpkgs;
       n.flake = flake-inputs.nixpkgs;
     };
