@@ -96,6 +96,9 @@
     nix-update.inputs.treefmt-nix.follows = "treefmt-nix";
   };
 
+  # TODO some overlay for fzf with this patch applied
+  # https://github.com/junegunn/fzf/pull/3918/files
+
   outputs =
     inputs:
     let
@@ -148,10 +151,6 @@
                 hash = "sha256-b7CT8/SpbPNcUNhg8xxCosntqaidZz2zBpmyjOfbUuU=";
               }
             ];
-            # ++ [
-            # https://github.com/junegunn/fzf/pull/3918/files
-            # ./fzf-keybinds.patch
-            # ];
           };
 
           pkgs = import nixpkgs' {
