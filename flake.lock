@@ -775,6 +775,82 @@
         "type": "github"
       }
     },
+    "nixpkgs-patch-385535": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-zEA3b0RIuuMT1ryiGK00z/nmJOtpyJ2EL0ddK+8Fitc=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/385535.patch?full_index=1"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/385535.patch?full_index=1"
+      }
+    },
+    "nixpkgs-patch-410730": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-302MHeycJv6Uxi+Ko1JNzoutQtRqBxmnqIadhzA9xOw=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/410730.patch?full_index=1"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/410730.patch?full_index=1"
+      }
+    },
+    "nixpkgs-patch-419929": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-gBIMV4RO1bCwvrArEsQ5Gu3+BiRaNhLVTWqauODUZ30=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1"
+      }
+    },
+    "nixpkgs-patch-428674": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-LJcLrxkHM0z9WjbPm7GGPAYDVi7jCNo3FL1HwgsXaQ0=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/428674.patch?full_index=1"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/428674.patch?full_index=1"
+      }
+    },
+    "nixpkgs-patch-433769": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-hgf8DIGAHk6gmq1TiiFtiahyrwtAer/Xh71BsA0Wqqc=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/433769.patch?full_index=1"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/433769.patch?full_index=1"
+      }
+    },
+    "nixpkgs-patcher": {
+      "locked": {
+        "lastModified": 1755771249,
+        "narHash": "sha256-i7smdU4QRlBxztu8BE65EAiqBsRQq1HK0D5SkYeAL0o=",
+        "owner": "phanirithvij",
+        "repo": "nixpkgs-patcher",
+        "rev": "1b2f5a0d51ab51e57948979ace933da28814f579",
+        "type": "github"
+      },
+      "original": {
+        "owner": "phanirithvij",
+        "ref": "main",
+        "repo": "nixpkgs-patcher",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1754937576,
@@ -885,6 +961,12 @@
         "nix-update": "nix-update",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-patch-385535": "nixpkgs-patch-385535",
+        "nixpkgs-patch-410730": "nixpkgs-patch-410730",
+        "nixpkgs-patch-419929": "nixpkgs-patch-419929",
+        "nixpkgs-patch-428674": "nixpkgs-patch-428674",
+        "nixpkgs-patch-433769": "nixpkgs-patch-433769",
+        "nixpkgs-patcher": "nixpkgs-patcher",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur-pkgs": "nur-pkgs",
         "rust-overlay": "rust-overlay",

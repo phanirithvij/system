@@ -5,6 +5,7 @@
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs/nixos-unstable?shallow=1";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs-patcher.url = "github:phanirithvij/nixpkgs-patcher/main";
 
     #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages/master";
@@ -102,6 +103,17 @@
   outputs =
     inputs:
     let
+      # so nixpkgs-patcher
+      # PROS:
+      # - handles system arg
+      # - can cram in flake inputs to auto track hashes
+      # - supports fetchpatch2 supplied patches instead of cramming patches in flake inputs
+      patched = inputs.nixpkgs-patcher.lib {
+        nixpkgsPatcher.inputs = inputs;
+        nixpkgsPatcher.patchInputRegex = ".*-nixpkgs-patch$"; # default: "^nixpkgs-patch-.*"
+      };
+      inherit (patched) nixpkgs' args';
+
       allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (
         system:
         let
@@ -117,41 +129,6 @@
           lazyPkgs = import ./pkgs/lazy args;
           nurPkgs = import ./pkgs/nurpkgs.nix args;
           nvidia-offload = import ./pkgs/nvidia-offload.nix args;
-          # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
-          nixpkgs' = legacyPackages.applyPatches {
-            name = "nixpkgs-patched";
-            src = inputs.nixpkgs;
-            patches = builtins.map legacyPackages.fetchpatch2 [
-              # opengist module
-              # TODO renable, disabling for now because of rl-2511 notes conflict
-              /*
-                {
-                  url = "https://github.com/phanirithvij/nixpkgs/commit/34be2e80d57c2fb93ece547d9b28947ae56cac92.patch?full_index=1";
-                  hash = "sha256-Wj+HpUJZ0HqHS040AWAMg5gJKYw+ZjP2rS5Qq5g6BUA=";
-                }
-              */
-              # losslesscut pr
-              {
-                url = "https://github.com/NixOS/nixpkgs/pull/385535.patch?full_index=1";
-                hash = "sha256-3U82JyUWHfnyxfY0W25B8IGGyiarmRVt8vxFumfG+5Q=";
-              }
-              # octotail package
-              {
-                url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
-                hash = "sha256-dEQ3QZ6nhjGSngkrU0Q7bLXxym3SwYkTLa2+gUVtv+o=";
-              }
-              # nvme-rs module
-              {
-                url = "https://github.com/NixOS/nixpkgs/pull/410730.patch?full_index=1";
-                hash = "sha256-5YUz1uXc1B/T5d4KLfskH6bzys0Dn/vC11Dq7ik7+Os=";
-              }
-              # plexmediaserver security update
-              {
-                url = "https://github.com/NixOS/nixpkgs/pull/433769.patch?full_index=1";
-                hash = "sha256-b7CT8/SpbPNcUNhg8xxCosntqaidZz2zBpmyjOfbUuU=";
-              }
-            ];
-          };
 
           pkgs = import nixpkgs' {
             inherit overlays system;
@@ -243,7 +220,6 @@
           inherit
             pkgs
             overlays
-            nixpkgs'
             wrappedPkgs
             binaryPkgs
             boxxyPkgs
@@ -368,6 +344,8 @@
         pkgs = allSystemsJar.pkgs.${system};
         hmlib = allSystemsJar.hmlib.${system};
 
+        nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
+
         hmAliasModules = (import ./home/applications/alias-groups.nix { inherit pkgs; }).aliasModules;
         homeConfig =
           {
@@ -413,13 +391,6 @@
           system.nixos.revision = inputs.nixpkgs.rev or inputs.nixpkgs.shortRev;
           system.configurationRevision = inputs.self.rev or "dirty";
         };
-
-        #inherit (inputs.nixpkgs.lib) nixosSystem;
-        # https://discourse.nixos.org/t/tips-tricks-for-nixos-desktop/28488/14
-        # IFD BAD BAD AAAAAA!
-        # only option is to maintain a fork of nixpkgs as of now
-        # follow https://github.com/NixOS/nix/issues/3920
-        nixosSystem = import (allSystemsJar.nixpkgs'.${system} + "/nixos/lib/eval-config.nix");
       in
       {
         schemas = inputs.flake-schemas.schemas // {
@@ -545,7 +516,8 @@
                 };
               }
               ./hosts/nixos/iso.nix
-            ];
+            ]
+            ++ args'.modules;
           };
           ${linuxhost} = nixosSystem {
             inherit (pkgs) lib;
@@ -561,11 +533,10 @@
               inputs.lazy-apps.nixosModules.default
               {
                 # prevent the patched nixpkgs from gc as well, not just flake inputs
-                system.extraDependencies = [
-                  allSystemsJar.nixpkgs'.${system}
-                ];
+                system.extraDependencies = [ nixpkgs' ];
               }
-            ];
+            ]
+            ++ args'.modules;
             specialArgs = {
               inherit (pkgs) lib;
               flake-inputs = inputs;
@@ -602,7 +573,8 @@
                   sharedModules = common-hm-modules ++ hmAliasModules;
                 };
               }
-            ];
+            ]
+            ++ args'.modules;
             specialArgs = {
               inherit (pkgs) lib;
               flake-inputs = inputs;
