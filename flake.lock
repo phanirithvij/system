@@ -833,30 +833,6 @@
         "url": "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1"
       }
     },
-    "nixpkgs-patch-428674": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-LJcLrxkHM0z9WjbPm7GGPAYDVi7jCNo3FL1HwgsXaQ0=",
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/428674.patch?full_index=1"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/428674.patch?full_index=1"
-      }
-    },
-    "nixpkgs-patch-433769": {
-      "flake": false,
-      "locked": {
-        "narHash": "sha256-hgf8DIGAHk6gmq1TiiFtiahyrwtAer/Xh71BsA0Wqqc=",
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/433769.patch?full_index=1"
-      },
-      "original": {
-        "type": "file",
-        "url": "https://github.com/NixOS/nixpkgs/pull/433769.patch?full_index=1"
-      }
-    },
     "nixpkgs-patcher": {
       "locked": {
         "lastModified": 1755771249,
@@ -1003,6 +979,18 @@
         "type": "github"
       }
     },
+    "pr-428674-nixpkgs-patch": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-LJcLrxkHM0z9WjbPm7GGPAYDVi7jCNo3FL1HwgsXaQ0=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/428674.patch?full_index=1"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/428674.patch?full_index=1"
+      }
+    },
     "root": {
       "inputs": {
         "cargo2nix": "cargo2nix",
@@ -1025,12 +1013,11 @@
         "nixpkgs-patch-385535": "nixpkgs-patch-385535",
         "nixpkgs-patch-410730": "nixpkgs-patch-410730",
         "nixpkgs-patch-419929": "nixpkgs-patch-419929",
-        "nixpkgs-patch-428674": "nixpkgs-patch-428674",
-        "nixpkgs-patch-433769": "nixpkgs-patch-433769",
         "nixpkgs-patcher": "nixpkgs-patcher",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-upstream": "nixpkgs-upstream",
         "nur-pkgs": "nur-pkgs",
+        "pr-428674-nixpkgs-patch": "pr-428674-nixpkgs-patch",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
         "system-manager": "system-manager",
