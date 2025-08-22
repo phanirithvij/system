@@ -315,11 +315,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1755184403,
-        "narHash": "sha256-wx5EEb6CGuCmUJjgHtIQ37kyBYEnxxQzvJpJ2iofP5Q=",
+        "lastModified": 1755687691,
+        "narHash": "sha256-o9co4SENS25l3L5RQJ4PY3pCJAs35jjz7K8GU905Chs=",
         "ref": "main",
-        "rev": "60d769a89908c29e19100059985db15a7b6bab6a",
-        "revCount": 6363,
+        "rev": "1ac1ff457ab8ef1ae6a8f2ab17ee7965adfa729f",
+        "revCount": 6383,
         "submodules": true,
         "type": "git",
         "url": "https://github.com/hyprwm/Hyprland"
@@ -680,6 +680,28 @@
         "type": "github"
       }
     },
+    "nix-patcher": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "patch2pr": "patch2pr"
+      },
+      "locked": {
+        "lastModified": 1755838856,
+        "narHash": "sha256-dRxw0Ck44wx5oAAiH8Iw/4HfFJrxTJydFh64Vnt5y68=",
+        "owner": "phanirithvij",
+        "repo": "nix-patcher",
+        "rev": "a956fbd94fcf7286c3f64f76291d06259645e8fe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "phanirithvij",
+        "ref": "main",
+        "repo": "nix-patcher",
+        "type": "github"
+      }
+    },
     "nix-update": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -729,16 +751,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1755027561,
-        "narHash": "sha256-IVft239Bc8p8Dtvf7UAACMG5P3ZV+3/aO28gXpGtMXI=",
-        "owner": "NixOS",
+        "lastModified": 1750864583,
+        "narHash": "sha256-YCU88osdagDsxL4MUa9b7KUG/N8L9GAH7j2B/kRWjAg=",
+        "owner": "phanirithvij",
         "repo": "nixpkgs",
-        "rev": "005433b926e16227259a1843015b5b2b7f7d1fc3",
+        "rev": "7376a8f1bb7c10957e73e3354786685476d1f2e8",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable",
+        "owner": "phanirithvij",
+        "ref": "nixos-patched",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -802,7 +824,7 @@
     "nixpkgs-patch-419929": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-gBIMV4RO1bCwvrArEsQ5Gu3+BiRaNhLVTWqauODUZ30=",
+        "narHash": "sha256-c7iBLB1mteyTOBZH4AuRauDwukibBBlx4GEJPpgPR9M=",
         "type": "file",
         "url": "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1"
       },
@@ -863,6 +885,22 @@
       "original": {
         "owner": "NixOS",
         "ref": "nixos-25.05",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-upstream": {
+      "locked": {
+        "lastModified": 1755615617,
+        "narHash": "sha256-HMwfAJBdrr8wXAkbGhtcby1zGFvs+StOp19xNsbqdOg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "20075955deac2583bb12f07151c2df830ef346b4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -943,6 +981,28 @@
         "type": "github"
       }
     },
+    "patch2pr": {
+      "inputs": {
+        "nixpkgs": [
+          "nix-patcher",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1755838639,
+        "narHash": "sha256-ZGB+OpScoLPAI+SHv42aTm40sMQ5fcGs0j9xf+gKOH0=",
+        "owner": "phanirithvij",
+        "repo": "patch2pr",
+        "rev": "19c8162102ef36fe5d68fba68ee244cf0794bbaa",
+        "type": "github"
+      },
+      "original": {
+        "owner": "phanirithvij",
+        "ref": "use-git",
+        "repo": "patch2pr",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "cargo2nix": "cargo2nix",
@@ -958,6 +1018,7 @@
         "niri": "niri",
         "nix-index-database": "nix-index-database",
         "nix-on-droid": "nix-on-droid",
+        "nix-patcher": "nix-patcher",
         "nix-update": "nix-update",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
@@ -968,6 +1029,7 @@
         "nixpkgs-patch-433769": "nixpkgs-patch-433769",
         "nixpkgs-patcher": "nixpkgs-patcher",
         "nixpkgs-stable": "nixpkgs-stable",
+        "nixpkgs-upstream": "nixpkgs-upstream",
         "nur-pkgs": "nur-pkgs",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",

@@ -3,9 +3,14 @@
     # THIS is dumb unless nixpkgs is based on nixos-unstable
     # useful for git bisecting, use path:/abs/path instead for the same
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs/nixos-unstable?shallow=1";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:phanirithvij/nixpkgs/nixos-patched"; # managed via nix-patcher
+    nixpkgs-upstream.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-patcher.url = "github:phanirithvij/nixpkgs-patcher/main";
+
+    nix-patcher.url = "github:phanirithvij/nix-patcher/main"; # to manage own nixpkgs fork
+    nix-patcher.inputs.nixpkgs.follows = "nixpkgs";
+    # it can also manage other flake inputs forks
 
     #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages/master";
@@ -246,6 +251,7 @@
       {
         inherit lazyApps;
         apps = {
+          nix-patcher = inputs.nix-patcher.apps.${system}.default;
           /*
             nix = {
               type = "app";
