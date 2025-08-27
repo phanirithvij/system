@@ -48,7 +48,12 @@
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    devshell.url = "github:numtide/devshell/main";
+    devshell.inputs.nixpkgs.follows = "nixpkgs";
 
+    #devshell-lib.url = "path:/shed/Projects/own/ownix/nix-shell-templates";
+    devshell-lib.url = "github:phanirithvij/nix-shell-templates/main";
+    devshell-lib.flake = false;
 
     treefmt-nix.url = "github:numtide/treefmt-nix/main";
     treefmt-nix.inputs.nixpkgs.follows = "nixpkgs";
@@ -371,14 +376,25 @@
           };
         };
 
-        devShells.default = import ./flake/shell.nix {
-          inherit (inputs) self;
-          inherit
-            pkgs
-            treefmtCfg
-            system
-            ;
-        };
+        devShells.default =
+          (import (inputs.devshell-lib + "/lib/devshells.nix") {
+            name = "system";
+            inherit pkgs treefmtCfg;
+            enableTreefmt = true;
+            tools = with pkgs; [
+              cachix
+              nixp
+              nh
+              xc
+            ];
+            packages = inputs.self.checks.${system}.git-hooks-check.enabledPackages; # these don't show up in menu
+            extraCommands = [ ]; # should be in the format list of attrs devshell expects
+            devshell = import inputs.devshell { nixpkgs = pkgs; };
+          }).shell.overrideAttrs # devshell is a `derivation` which has no overrideAttrs (it is an stdenv.mkdrv thing)
+            (o: {
+              name = "system";
+              shellHook = o.shellHook + inputs.self.checks.${system}.git-hooks-check.shellHook;
+            });
       }
     )
     // (
@@ -435,12 +451,10 @@
         ];
         hm = inputs.home-manager.packages.${system}.default;
         sysm = inputs.system-manager.packages.${system}.default;
-        nixp = inputs.nix-patcher.packages.${system}.nix-patcher;
         toolsModule = {
           environment.systemPackages = [
             hm
             sysm
-            nixp # TODO move to main devshell
             #(pkgs.nix-schema { inherit system; })
           ];
         };
