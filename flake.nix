@@ -3,9 +3,14 @@
     # THIS is dumb unless nixpkgs is based on nixos-unstable
     # useful for git bisecting, use path:/abs/path instead for the same
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs/nixos-unstable?shallow=1";
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:phanirithvij/nixpkgs/nixos-patched"; # managed via nix-patcher
+    nixpkgs-upstream.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-patcher.url = "github:phanirithvij/nixpkgs-patcher/main";
+
+    nix-patcher.url = "github:phanirithvij/nix-patcher/main"; # to manage own nixpkgs fork
+    nix-patcher.inputs.nixpkgs.follows = "nixpkgs";
+    # it can also manage other flake inputs forks
 
     #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages/master";
@@ -239,6 +244,7 @@
           (inputs.treefmt-nix.lib.evalModule pkgs (import ./treefmt.nix { inherit pkgs; })).config.build;
         hm = inputs.home-manager.packages.${system}.default;
         sysm = inputs.system-manager.packages.${system}.default;
+        nixp = inputs.nix-patcher.packages.${system}.nix-patcher;
         #nix-schema = pkgs.nix-schema { inherit system; }; # nur-pkgs overlay, cachix cache
 
         lazyApps = lib.mine.unNestAttrs allSystemsJar.lazyPkgs.${system};
@@ -246,6 +252,7 @@
       {
         inherit lazyApps;
         apps = {
+          nix-patcher = inputs.nix-patcher.apps.${system}.default;
           /*
             nix = {
               type = "app";
@@ -261,6 +268,7 @@
               home-manager = hm;
               # TODO optional if system is linux
               system-manager = sysm;
+              nix-patcher = nixp;
               nvidia-offload = allSystemsJar.nvidia-offload.${system};
             }
             // lazyApps
@@ -376,10 +384,12 @@
         ];
         hm = inputs.home-manager.packages.${system}.default;
         sysm = inputs.system-manager.packages.${system}.default;
+        nixp = inputs.nix-patcher.packages.${system}.nix-patcher;
         toolsModule = {
           environment.systemPackages = [
             hm
             sysm
+            nixp # TODO move to main devshell
             #(pkgs.nix-schema { inherit system; })
           ];
         };
