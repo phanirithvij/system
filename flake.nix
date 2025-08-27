@@ -73,6 +73,48 @@
     git-hooks.inputs.nixpkgs.follows = "nixpkgs";
     git-hooks.inputs.flake-compat.follows = "flake-compat";
 
+    ###### PATCHES #######
+
+    ### nix-patcher patches
+
+    # follow https://github.com/NixOS/nix/issues/3920
+
+    ## NOTE
+    ## nix-patcher fails to work due to various reasons
+    ##   I fixed some issues in https://github.com/phanirithvij/nix-patcher
+    ##   as well as https://github.com/phanirithvij/patch2pr
+
+    # losslesscut pr
+    nixpkgs-patch-385535.url = "https://github.com/NixOS/nixpkgs/pull/385535.patch?full_index=1";
+    nixpkgs-patch-385535.flake = false;
+    # nvme-rs module
+    nixpkgs-patch-410730.url = "https://github.com/NixOS/nixpkgs/pull/410730.patch?full_index=1";
+    nixpkgs-patch-410730.flake = false;
+    # octotail package (mine)
+    nixpkgs-patch-419929.url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
+    nixpkgs-patch-419929.flake = false;
+    # lf 36 -> 37 (temp testdrive)
+    nixpkgs-patch-436726.url = "https://github.com/NixOS/nixpkgs/pull/436726.patch?full_index=1";
+    nixpkgs-patch-436726.flake = false;
+
+    # TODO disabling for now because of rl-2511 notes conflict
+    # opengist module (mine, its complex with createDBLocal etc.)
+    #nixpkgs-patch-10.url = "https://github.com/phanirithvij/nixpkgs/commit/34be2e80d57c2fb93ece547d9b28947ae56cac92.patch?full_index=1";
+    #nixpkgs-patch-10.flake = false;
+
+    ### end nix-patcher patches
+
+    ### nixpkgs-patcher patches
+
+    # TODO review https://github.com/NixOS/nixpkgs/pull/428674
+    # opengist module (new)
+    pr-428674-nixpkgs-patch.url = "https://github.com/NixOS/nixpkgs/pull/428674.patch?full_index=1";
+    pr-428674-nixpkgs-patch.flake = false;
+
+    ### end nixpkgs-patcher patches
+
+    ###### END PATCHES #######
+
     ### Indirect dependencies, dedup
 
     #systems.url = "github:nix-systems/default-linux/main";
