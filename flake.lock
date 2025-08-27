@@ -79,6 +79,44 @@
         "type": "github"
       }
     },
+    "devshell": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1741473158,
+        "narHash": "sha256-kWNaq6wQUbUMlPgw8Y+9/9wP0F8SHkjy24/mN3UAppg=",
+        "owner": "numtide",
+        "repo": "devshell",
+        "rev": "7c9e793ebe66bcba8292989a68c0419b737a22a0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "ref": "main",
+        "repo": "devshell",
+        "type": "github"
+      }
+    },
+    "devshell-lib": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1756280941,
+        "narHash": "sha256-QJrcAvSUaFU5Lns/D3px1oEIiANNmVp9o1hLlMQuG/w=",
+        "owner": "phanirithvij",
+        "repo": "nix-shell-templates",
+        "rev": "1b798f537fb8ff6b7c331371f80924bc0a6564f1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "phanirithvij",
+        "ref": "main",
+        "repo": "nix-shell-templates",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -1007,6 +1045,8 @@
       "inputs": {
         "cargo2nix": "cargo2nix",
         "crane": "crane",
+        "devshell": "devshell",
+        "devshell-lib": "devshell-lib",
         "flake-compat": "flake-compat",
         "flake-schemas": "flake-schemas",
         "flake-utils": "flake-utils",
