@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }:
 {
@@ -66,7 +67,8 @@
     "kvm-intel"
     "v4l2loopback"
   ];
-  boot.extraModulePackages = [ pkgs.linuxPackages.v4l2loopback ];
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
   boot.supportedFilesystems = [ "btrfs" ];
 
   # TODO blogpost of sort doing this migration step by step
