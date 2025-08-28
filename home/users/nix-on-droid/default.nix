@@ -13,6 +13,7 @@
         wifipassFile = config.sops.secrets.wifi_password_file.path;
       }
     ))
+    ../../applications/direnv.nix
     ../../applications/git
     ../../applications/go
     ../../applications/nixy/nix.nix

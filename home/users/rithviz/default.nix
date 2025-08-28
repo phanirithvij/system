@@ -19,6 +19,7 @@
   imports = [
     ../../applications/bookmarks
     ../../applications/bashmount.nix
+    ../../applications/direnv.nix
     ../../applications/editors
     ../../applications/git
     ../../applications/media
