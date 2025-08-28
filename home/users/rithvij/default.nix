@@ -18,6 +18,7 @@ in
     ../../applications/asciinema.nix
     ../../applications/bookmarks
     ../../applications/bashmount.nix
+    ../../applications/direnv.nix
     ../../applications/distrobox
     ../../applications/docker
     ../../applications/editors
@@ -164,16 +165,6 @@ in
   programs.aria2.enable = true;
   programs.bun.enable = true;
   programs.bun.package = pkgs.lazyPkgs.bun;
-
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-    config = {
-      global.disable_stdin = true;
-      global.strict_env = true;
-      global.hide_env_diff = true;
-    };
-  };
 
   # TODO firefox with extensions configure
   # Ensures impurity can't exist by restricting extensions from being installed
