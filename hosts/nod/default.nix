@@ -1,12 +1,17 @@
 {
+  lib,
   pkgs,
   ...
 }:
+let
+  hostvars = import ./variables.nix;
+in
 {
-  imports = [ ]; # TODO ./sshd.nix
+  imports = [
+    ./modules/sshd.nix
+    ./modules/nix.nix
+  ];
   environment.packages = with pkgs; [
-    neovim
-    openssh
     which
     file
     procps
@@ -33,17 +38,14 @@
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
   environment.etcBackupExtension = ".bak";
 
+  environment.sessionVariables = { inherit (hostvars) SYSTEM_DIR; };
+
   # Read the changelog before changing this value
   system.stateVersion = "24.05";
 
-  # Set up nix for flakes
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
-
   time.timeZone = "Asia/Kolkata";
 
-  user.shell = pkgs.fish; # chsh won't work
+  user.shell = lib.getExe pkgs.fish; # chsh won't work
 
   # TODO pkgs not passed?
   /*

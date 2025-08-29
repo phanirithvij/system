@@ -71,7 +71,6 @@
     rustup # cargo, rust
     #rtx # package version manager for linux asdf rust clone (now installing via cargo as nix version is behind)
     screenfetch # neofetch alternative
-    starship # prompt custom
     sysz # systemctl tui
     timeshift # system restore points
     unar # rar format

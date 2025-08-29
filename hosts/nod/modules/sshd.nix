@@ -1,9 +1,15 @@
-{ config, pkgs, ... }:
-# TODO https://github.com/nix-community/nix-on-droid/wiki/SSH-access
+{
+  flake-inputs,
+  config,
+  pkgs,
+  ...
+}:
+# https://github.com/nix-community/nix-on-droid/wiki/SSH-access
 let
+  openssh' = flake-inputs.nixdroidpkgs.packages.${pkgs.stdenv.system}.openssh;
   sshdTmpDirectory = "${config.user.home}/sshd-tmp";
   sshdDirectory = "${config.user.home}/sshd";
-  pathToPubKey = "...";
+  pathToPubKey = flake-inputs.ssh-keys;
   port = 8022;
 in
 {
@@ -26,11 +32,16 @@ in
   '';
 
   environment.packages = [
+    # ssh package needs to be patched to allow passwd auth
+    # https://github.com/nix-community/nix-on-droid/issues/70#issuecomment-2443024588
+    #pkgs.openssh
+    openssh'
+    flake-inputs.nixdroidpkgs.packages.${pkgs.stdenv.system}.termux-auth
     (pkgs.writeScriptBin "sshd-start" ''
       #!${pkgs.runtimeShell}
 
       echo "Starting sshd in non-daemonized way on port ${toString port}"
-      ${pkgs.openssh}/bin/sshd -f "${sshdDirectory}/sshd_config" -D
+      ${openssh'}/bin/sshd -f "${sshdDirectory}/sshd_config" -D
     '')
   ];
 }

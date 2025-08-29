@@ -14,6 +14,7 @@
       }
     ))
     ../../applications/direnv.nix
+    ../../applications/editors
     ../../applications/git
     ../../applications/go
     ../../applications/nixy/nix.nix
@@ -30,12 +31,18 @@
   sops.secrets.wifi_password_file = { };
 
   home.packages = with pkgs; [
-    ripgrep
+    viddy
+    duf
+    gdu
     jq
     fx
+    ripgrep
+    trash-cli
   ];
+
+  programs.neovim-nvf.enable = false; # prefer the lightweight micro editor
 
   home.username = username;
   home.homeDirectory = "/data/data/com.termux.nix/files/home";
-  home.stateVersion = "24.11";
+  home.stateVersion = "25.05";
 }

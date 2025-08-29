@@ -32,6 +32,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixdroidpkgs.url = "github:horriblename/nixdroidpkgs/main";
+    nixdroidpkgs.inputs.nixpkgs.follows = "nixpkgs";
+
     nixos-wsl = {
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -64,6 +67,10 @@
 
     navi_config.url = "github:phanirithvij/navi/main";
     navi_config.flake = false;
+
+    # idea from gh:heywoodlh/nixos-configs
+    ssh-keys.url = "https://github.com/phanirithvij.keys";
+    ssh-keys.flake = false;
 
     nix-index-database.url = "github:nix-community/nix-index-database/main";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
@@ -164,17 +171,6 @@
   outputs =
     inputs:
     let
-      # so nixpkgs-patcher
-      # PROS:
-      # - handles system arg
-      # - can cram in flake inputs to auto track hashes
-      # - supports fetchpatch2 supplied patches instead of cramming patches in flake inputs
-      patched = inputs.nixpkgs-patcher.lib {
-        nixpkgsPatcher.inputs = inputs;
-        nixpkgsPatcher.patchInputRegex = ".*-nixpkgs-patch$"; # default: "^nixpkgs-patch-.*"
-      };
-      inherit (patched) nixpkgs' args';
-
       allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (
         system:
         let
@@ -191,8 +187,19 @@
           nurPkgs = import ./pkgs/nurpkgs.nix args;
           nvidia-offload = import ./pkgs/nvidia-offload.nix args;
 
-          pkgs = import nixpkgs' {
-            inherit overlays system;
+          # so nixpkgs-patcher
+          # PROS:
+          # - handles system arg
+          # - can cram in flake inputs to auto track hashes
+          # - supports fetchpatch2 supplied patches instead of cramming patches in flake inputs
+          patched = inputs.nixpkgs-patcher.lib {
+            nixpkgsPatcher.inputs = inputs;
+            nixpkgsPatcher.patchInputRegex = ".*-nixpkgs-patch$"; # default: "^nixpkgs-patch-.*"
+            modules = [ { nixpkgs.hostPlatform = system; } ]; # without this, impure will be required
+          };
+
+          pkgs = import patched.nixpkgs' {
+            inherit system overlays;
             config = {
               nvidia.acceptLicense = true;
               # allowlist of unfree pkgs, for home-manager too
@@ -288,6 +295,7 @@
             nurPkgs
             nvidia-offload
             ;
+          inherit (patched) nixpkgs' args';
         }
       );
     in
@@ -308,7 +316,6 @@
       {
         inherit lazyApps;
         apps = {
-          nix-patcher = inputs.nix-patcher.apps.${system}.default;
           /*
             nix = {
               type = "app";
@@ -337,7 +344,7 @@
           in
           _pkgs;
 
-        inherit inputs; # just for inspection
+        inherit pkgs inputs; # just for inspection
 
         # NEVER ever run `nix fmt` run `treefmt`
         #formatter = treefmtCfg.wrapper;
@@ -417,7 +424,8 @@
         livehost = "nixos";
 
         pkgs = allSystemsJar.pkgs.${system};
-        hmlib = allSystemsJar.hmlib.${system};
+        nixpkgs' = allSystemsJar.nixpkgs'.${system};
+        args' = allSystemsJar.args'.${system};
 
         nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
 
@@ -430,12 +438,12 @@
             system ? "x86_64-linux",
           }:
           inputs.home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
+            pkgs = allSystemsJar.pkgs.${system};
             modules = [ ./home/users/${username} ] ++ modules ++ hmAliasModules;
             # TODO sharedModules sops
             extraSpecialArgs = {
               flake-inputs = inputs;
-              lib = hmlib;
+              lib = allSystemsJar.hmlib.${system};
               inherit system;
               inherit username;
               inherit hostname;
@@ -581,7 +589,7 @@
                   useUserPackages = true;
                   users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
-                    lib = hmlib;
+                    lib = allSystemsJar.hmlib.${system};
                     flake-inputs = inputs;
                     username = liveuser;
                     hostname = livehost;
@@ -639,7 +647,7 @@
                   useUserPackages = true;
                   users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
-                    lib = hmlib;
+                    lib = allSystemsJar.hmlib.${system};
                     flake-inputs = inputs;
                     username = liveuser; # TODO wsl separate home config
                     hostname = livehost;
@@ -663,8 +671,9 @@
         # TODO host level customisations and hostvars
         nixOnDroidConfigurations =
           let
+            system = builtins.currentSystem or "aarch64-linux";
             mdroid = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-              inherit pkgs;
+              pkgs = allSystemsJar.pkgs.${system};
               extraSpecialArgs = {
                 flake-inputs = inputs;
                 hmSharedModules = hmAliasModules;
