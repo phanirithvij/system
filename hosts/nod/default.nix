@@ -1,12 +1,11 @@
 {
+  lib,
   pkgs,
   ...
 }:
 {
-  imports = [ ]; # TODO ./sshd.nix
+  imports = [ ./sshd.nix ];
   environment.packages = with pkgs; [
-    neovim
-    openssh
     which
     file
     procps
@@ -43,7 +42,7 @@
 
   time.timeZone = "Asia/Kolkata";
 
-  user.shell = pkgs.fish; # chsh won't work
+  user.shell = lib.getExe pkgs.fish; # chsh won't work
 
   # TODO pkgs not passed?
   /*
