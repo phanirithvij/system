@@ -14,6 +14,7 @@
       }
     ))
     ../../applications/direnv.nix
+    ../../applications/editors
     ../../applications/git
     ../../applications/go
     ../../applications/nixy/nix.nix

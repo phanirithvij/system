@@ -765,6 +765,29 @@
         "type": "github"
       }
     },
+    "nixdroidpkgs": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "termux-auth": "termux-auth",
+        "termux-packages": "termux-packages"
+      },
+      "locked": {
+        "lastModified": 1746794649,
+        "narHash": "sha256-GZKmDCvnXJv2EXzTAwHXnVX/4sUCqFaCeLGgTtCQg70=",
+        "owner": "horriblename",
+        "repo": "nixdroidpkgs",
+        "rev": "4afd1e8d473902ff29b14ef97af51aaeea24be8b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "horriblename",
+        "ref": "main",
+        "repo": "nixdroidpkgs",
+        "type": "github"
+      }
+    },
     "nixos-wsl": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -1060,6 +1083,7 @@
         "nix-on-droid": "nix-on-droid",
         "nix-patcher": "nix-patcher",
         "nix-update": "nix-update",
+        "nixdroidpkgs": "nixdroidpkgs",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-patch-385535": "nixpkgs-patch-385535",
@@ -1073,6 +1097,7 @@
         "pr-428674-nixpkgs-patch": "pr-428674-nixpkgs-patch",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
+        "ssh-keys": "ssh-keys",
         "system-manager": "system-manager",
         "systems": "systems_2",
         "treefmt-nix": "treefmt-nix",
@@ -1137,6 +1162,18 @@
         "type": "github"
       }
     },
+    "ssh-keys": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-lUc/Pm3TqSzNCCCNSINtX0RwWwKxI1xGNbU/VlOe6Ak=",
+        "type": "file",
+        "url": "https://github.com/phanirithvij.keys"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/phanirithvij.keys"
+      }
+    },
     "system-manager": {
       "inputs": {
         "nixpkgs": [
@@ -1186,6 +1223,38 @@
         "owner": "nix-systems",
         "ref": "main",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "termux-auth": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1727351185,
+        "narHash": "sha256-GbAzu7PPvFZY9zPZBq9XxmNEsbvA4jwvw79pmQ4vAuw=",
+        "owner": "termux",
+        "repo": "termux-auth",
+        "rev": "0bb85b4faa24f4259cfd217ac1865c1b9c4ffc2a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "termux",
+        "repo": "termux-auth",
+        "type": "github"
+      }
+    },
+    "termux-packages": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1746793234,
+        "narHash": "sha256-iel8GPpNNwtj/XWxvD/Wx2+v8H5IU85Tx1pYKpJe4B4=",
+        "owner": "termux",
+        "repo": "termux-packages",
+        "rev": "bb381b573d55b379943a8129ed29f2599d73cb44",
+        "type": "github"
+      },
+      "original": {
+        "owner": "termux",
+        "repo": "termux-packages",
         "type": "github"
       }
     },
