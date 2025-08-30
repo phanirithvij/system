@@ -99,9 +99,6 @@
     # octotail package (mine)
     nixpkgs-patch-419929.url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
     nixpkgs-patch-419929.flake = false;
-    # lf 36 -> 37 (temp testdrive)
-    nixpkgs-patch-436726.url = "https://github.com/NixOS/nixpkgs/pull/436726.patch?full_index=1";
-    nixpkgs-patch-436726.flake = false;
 
     # TODO disabling for now because of rl-2511 notes conflict
     # opengist module (mine, its complex with createDBLocal etc.)
