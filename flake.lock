@@ -812,11 +812,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1756577853,
-        "narHash": "sha256-uyvRvj1+2cIQ3r4POMYggeXNQdv4UuTa9GYlz+shMr0=",
+        "lastModified": 1756658018,
+        "narHash": "sha256-TrQ4RcUXO45mJLYtWM7VJLOwkJc7gqyd9WP/CGKpGKk=",
         "owner": "phanirithvij",
         "repo": "nixpkgs",
-        "rev": "28520991a69f2d84def53bd9de9a6f243c6147d2",
+        "rev": "da5cc518ccb173a2806f90a75d16eabe34b358e2",
         "type": "github"
       },
       "original": {
@@ -892,6 +892,18 @@
       "original": {
         "type": "file",
         "url": "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1"
+      }
+    },
+    "nixpkgs-patch-439514": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-RHXwqUksXExwvk5LuTWlIxvFKsqkZDfcLmeGkWh0gn8=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/439514.patch?full_index=1"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/439514.patch?full_index=1"
       }
     },
     "nixpkgs-patcher": {
@@ -1077,6 +1089,7 @@
         "nixpkgs-patch-385535": "nixpkgs-patch-385535",
         "nixpkgs-patch-410730": "nixpkgs-patch-410730",
         "nixpkgs-patch-419929": "nixpkgs-patch-419929",
+        "nixpkgs-patch-439514": "nixpkgs-patch-439514",
         "nixpkgs-patcher": "nixpkgs-patcher",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-upstream": "nixpkgs-upstream",
