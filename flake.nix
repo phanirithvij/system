@@ -99,6 +99,9 @@
     # octotail package (mine)
     nixpkgs-patch-419929.url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
     nixpkgs-patch-419929.flake = false;
+    # nvidia-persistenced fix build (mine)
+    nixpkgs-patch-439514.url = "https://github.com/NixOS/nixpkgs/pull/439514.patch?full_index=1";
+    nixpkgs-patch-439514.flake = false;
 
     # TODO disabling for now because of rl-2511 notes conflict
     # opengist module (mine, its complex with createDBLocal etc.)
