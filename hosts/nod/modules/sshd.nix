@@ -1,7 +1,7 @@
 {
+  flake-inputs,
   config,
   pkgs,
-  flake-inputs,
   ...
 }:
 # https://github.com/nix-community/nix-on-droid/wiki/SSH-access

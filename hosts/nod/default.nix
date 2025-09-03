@@ -4,7 +4,10 @@
   ...
 }:
 {
-  imports = [ ./sshd.nix ];
+  imports = [
+    ./modules/sshd.nix
+    ./modules/nix.nix
+  ];
   environment.packages = with pkgs; [
     which
     file
@@ -34,11 +37,6 @@
 
   # Read the changelog before changing this value
   system.stateVersion = "24.05";
-
-  # Set up nix for flakes
-  nix.extraOptions = ''
-    experimental-features = nix-command flakes
-  '';
 
   time.timeZone = "Asia/Kolkata";
 
