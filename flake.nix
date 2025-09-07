@@ -99,9 +99,6 @@
     # octotail package (mine)
     nixpkgs-patch-419929.url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
     nixpkgs-patch-419929.flake = false;
-    # nvidia-persistenced fix build (mine)
-    nixpkgs-patch-439514.url = "https://github.com/NixOS/nixpkgs/pull/439514.patch?full_index=1";
-    nixpkgs-patch-439514.flake = false;
 
     # TODO disabling for now because of rl-2511 notes conflict
     # opengist module (mine, its complex with createDBLocal etc.)
@@ -230,7 +227,7 @@
                 let
                   name = "${lib.getName pkg}-${lib.getVersion pkg}";
                   byName = builtins.elem name [
-                    "beekeeper-studio-5.2.12" # Electron version 31 is EOL, hm
+                    "beekeeper-studio-5.3.4" # Electron version 31 is EOL, hm
                   ];
                 in
                 if byName then lib.warn "Allowing insecure package: ${name}" true else false;

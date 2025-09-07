@@ -32,7 +32,7 @@
   locations
   - eg. for go projects etc. ~/Projects/go
   - zig -> ~/Projects/zig
-  - system -> ~/Projects/system -> ~/Projects/\!Own/system
+  - system -> ~/Projects/system -> ~/Projects/own/system
 - nix bundle works but initial startup is slow
 - nix bundle ralismarks/nix-appimage doesn't work on non-nix system
   - tried on one for navi and firefox

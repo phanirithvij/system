@@ -1,7 +1,6 @@
 {
   pkgs,
   config,
-  sops,
   ...
 }:
 let

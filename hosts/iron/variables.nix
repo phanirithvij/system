@@ -1,7 +1,7 @@
 # iron, host specific constants
 {
   SYSTEM_DIR = "/shed/Projects/system";
-  OWN_DIR = "/shed/Projects/\!Own";
+  OWN_DIR = "/shed/Projects/own";
 
   DBX_CONTAINER_MANAGER = "docker"; # or podman
 
