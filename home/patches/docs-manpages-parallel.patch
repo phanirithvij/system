@@ -1,0 +1,21 @@
+commit 2d8b45cc9cd5d30b4193554c893db94fe94b2e52
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Tue Sep 9 13:55:34 2025 +0530
+
+    docs: disable parallel building of manpages
+
+    Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+
+diff --git a/docs/default.nix b/docs/default.nix
+index f1566895..7939c855 100644
+--- a/docs/default.nix
++++ b/docs/default.nix
+@@ -187,7 +187,7 @@ let
+         # Generate manpages.
+         mkdir -p $out/share/man/man5
+         mkdir -p $out/share/man/man1
+-        nixos-render-docs -j $NIX_BUILD_CORES options manpage \
++        nixos-render-docs options manpage \
+           --revision ${revision} \
+           --header ${./home-configuration-nix-header.5} \
+           --footer ${./home-configuration-nix-footer.5} \

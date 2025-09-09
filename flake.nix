@@ -17,7 +17,9 @@
     # TODO in nur-pkgs gha we build for nixos-unstable and nixpkgs-unstable
     # but what if nur-pkgs.flake.inputs.nixpkgs is outdated? does cache still work?
 
-    home-manager.url = "github:nix-community/home-manager/master";
+    home-manager.url = "github:phanirithvij/home-manager/patched";
+    home-manager-upstream.url = "github:nix-community/home-manager/master";
+    home-manager-upstream.inputs.nixpkgs.follows = "nixpkgs";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     system-manager = {
@@ -75,6 +77,7 @@
     nix-index-database.url = "github:nix-community/nix-index-database/main";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    #nix-patcher.url = "path:/shed/Projects/others/nixpkgs-maintain/nix-patcher";
     nix-patcher.url = "github:phanirithvij/nix-patcher/main"; # to manage own nixpkgs fork
     nix-patcher.inputs.nixpkgs.follows = "nixpkgs";
     # it can also manage other flake inputs forks
@@ -104,6 +107,9 @@
     # opengist module (mine, its complex with createDBLocal etc.)
     #nixpkgs-patch-10.url = "https://github.com/phanirithvij/nixpkgs/commit/34be2e80d57c2fb93ece547d9b28947ae56cac92.patch?full_index=1";
     #nixpkgs-patch-10.flake = false;
+
+    home-manager-patch-10.url = ./home/patches/docs-manpages-parallel.patch;
+    home-manager-patch-10.flake = false;
 
     ### end nix-patcher patches
 
