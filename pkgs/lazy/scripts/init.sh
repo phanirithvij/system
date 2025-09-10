@@ -15,5 +15,6 @@ cp -r --no-preserve=all \
       --no-out-link
   )"/* "$TMPDIR_APPS"
 
+mkdir -p "$APPLICATIONS_DIR"
 cp -rL "$TMPDIR_APPS"/* "$APPLICATIONS_DIR"
 rm -rf "$TMPDIR_APPS"
