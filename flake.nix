@@ -105,6 +105,9 @@
     # nh new version
     nixpkgs-patch-441268.url = "https://github.com/NixOS/nixpkgs/pull/441268.patch?full_index=1";
     nixpkgs-patch-441268.flake = false;
+    # iredis update
+    nixpkgs-patch-441881.url = "https://github.com/NixOS/nixpkgs/pull/441881.patch?full_index=1";
+    nixpkgs-patch-441881.flake = false;
 
     # TODO disabling for now because of rl-2511 notes conflict
     # opengist module (mine, its complex with createDBLocal etc.)
