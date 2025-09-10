@@ -1,0 +1,6 @@
+# See https://github.com/NixOS/nixpkgs/issues/423762 for historical context.
+* text=auto eol=lf
+# Don't force LF line endings for diff/patch files, as they might be correctly
+# patching CRLF line endings from an upstream source package.
+*.diff !text !eol
+*.patch !text !eol
