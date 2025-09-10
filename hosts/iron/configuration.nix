@@ -371,10 +371,8 @@ in
       nvidia-offload
     ];
     variables.VISUAL = "nvim";
-    # TODO ssessionVariables vs vvariables what's the diff
-    sessionVariables = {
-      inherit (hostvars) OWN_DIR SYSTEM_DIR;
-    };
+    # TODO sessionVariables vs variables what's the diff
+    sessionVariables = hostvars;
   };
   # https://wiki.nixos.org/wiki/Man_pages
   documentation.dev.enable = true;

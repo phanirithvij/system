@@ -1,4 +1,9 @@
-{ pkgs, username, ... }:
+{
+  pkgs,
+  username,
+  lib,
+  ...
+}:
 {
   imports = [
     ../../applications/git
@@ -12,7 +17,7 @@
   ];
 
   home.username = username;
-  home.homeDirectory = "/home/${username}";
+  home.homeDirectory = lib.mkDefault "/home/${username}";
 
   home.packages = with pkgs; [
     curl

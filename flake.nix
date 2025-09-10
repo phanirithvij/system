@@ -538,14 +538,14 @@
         };
         homeConfigurations = {
           # nixos main
-          "${user}@${linuxhost}" = homeConfig {
+          ${user} = homeConfig {
             username = user;
             hostname = linuxhost;
             modules = nix-index-hm-modules ++ common-hm-modules;
             inherit system;
           };
           # non-nixos linux
-          "${uzer}@${linuxhost}" = homeConfig {
+          ${uzer} = homeConfig {
             username = uzer;
             hostname = linuxhost;
             modules = nix-index-hm-modules ++ common-hm-modules;
@@ -566,9 +566,9 @@
             inherit system;
           };
           # TODO different repo with npins?
-          "runner" = homeConfig {
+          runner = homeConfig {
             username = "runner";
-            hostname = "_______";
+            hostname = "unknown";
             modules = nix-index-hm-modules ++ common-hm-modules;
             inherit system;
           };

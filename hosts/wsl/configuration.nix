@@ -9,7 +9,7 @@
   ];
 
   wsl.enable = true;
-  wsl.defaultUser = "nixos";
+  wsl.defaultUser = "rithvij";
 
   environment = {
     systemPackages = with pkgs; [

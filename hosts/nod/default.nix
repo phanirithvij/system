@@ -38,7 +38,7 @@ in
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
   environment.etcBackupExtension = ".bak";
 
-  environment.sessionVariables = { inherit (hostvars) SYSTEM_DIR; };
+  environment.sessionVariables = hostvars;
 
   # Read the changelog before changing this value
   system.stateVersion = "24.05";
