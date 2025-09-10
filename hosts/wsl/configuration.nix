@@ -5,39 +5,39 @@
   imports = [
     # <nixos-wsl/modules> # non flake
     ../../nixos/applications/nix
+    ../../nixos/applications/tui.nix
     ../../secrets
   ];
 
   wsl.enable = true;
   wsl.defaultUser = "rithvij";
 
+  users.users = {
+    rithvij.isNormalUser = true;
+    nixos.isNormalUser = true;
+    nixos.group = "nixos";
+  };
+  users.groups.nixos = { };
+
   environment = {
     systemPackages = with pkgs; [
       wget2
-      lf
-      lazygit
-      tmux
+      wget
+      curl
     ];
     variables.VISUAL = "nvim";
   };
-  programs.git = {
-    enable = true;
-    package = pkgs.gitFull;
-  };
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
 
   programs.neovim = {
     enable = true;
     defaultEditor = true;
     vimAlias = true;
     viAlias = true;
+  };
+
+  programs.git = {
+    enable = true;
+    package = pkgs.gitFull;
   };
 
   system.stateVersion = "25.05"; # no need to change
