@@ -103,6 +103,7 @@ let
     "python3.pkgs.gdown" # can be just gdown
     "qpwgraph"
     "rclone-browser"
+    "remmina"
     "scrcpy"
     "steam"
     "steam-run"

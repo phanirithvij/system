@@ -1,0 +1,69 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  build-wsl:
+    runs-on: ubuntu-latest
+    # TODO if nixos.wsl exists with same repo commit hash in previous wf artifacts, continue to run-wsl
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/nix-installer-action@main
+        with:
+          determinate: false
+          extra-conf: |
+            trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= loudgolem-nur-pkgs-0.cachix.org-1:OINy4hRqrmCH0sslp+tQo4hiBEZJEgA1epza03g5rvY=
+            substituters = https://nix-community.cachix.org https://cache.nixos.org https://loudgolem-nur-pkgs-0.cachix.org
+      # this thing is broken, it is uploading existing entries and taking hours
+      #- uses: DeterminateSystems/magic-nix-cache-action@main
+      - run: |
+          nix build .#nixosConfigurations.wsl.config.system.build.tarballBuilder -o result/h-wsl-tar-ball-script
+          sudo ./result/h-wsl-tar-ball-script/bin/nixos-wsl-tarball-builder
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nixos.wsl
+          path: nixos.wsl
+          compression-level: 0
+  run-wsl:
+    needs: build-wsl
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v5
+        with:
+          name: nixos.wsl
+          path: .
+      - name: wsl
+        run: |
+          wsl --set-default-version 2
+          wsl --update
+          wsl --install --no-launch --from-file .\nixos.wsl
+          wsl -s NixOS
+          #wsl "sudo nix-channel --update"
+          #wsl "sudo nixos-rebuild switch"
+      # TODO: move below to a separate modular action (which supports all systems, and gui/shell options)
+      - name: init rdp
+        run: |
+          # darkmode https://superuser.com/a/1590444
+          New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name SystemUsesLightTheme -Value 0 -Type Dword -Force
+          New-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0 -Type Dword -Force
+
+          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
+          Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -name "UserAuthentication" -Value 1
+
+          Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "$Env:GHA_RDP_PASSWD" -Force)
+        env:
+          GHA_RDP_PASSWD: ${{ secrets.GHA_RDP_PASSWD }}
+      - name: ngrok
+        run: |
+          iex "& {$(irm get.scoop.sh)} -RunAsAdmin"
+          scoop install ngrok --global
+
+          $env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."
+          Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+          refreshenv
+
+          ngrok config add-authtoken $Env:NGROK_AUTH_TOKEN
+          ngrok tcp 3389 --log stdout
+        env:
+          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
