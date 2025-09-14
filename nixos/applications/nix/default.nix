@@ -29,6 +29,9 @@
         ];
       in
       {
+        # see https://github.com/NixOS/nixpkgs/pull/442687#discussion_r2347105354
+        allow-import-from-derivation = false; # default is true
+        trace-import-from-derivation = true; # trace if I do use it
         allowed-uris = "github: gitlab: git+ssh:// https://github.com/";
         experimental-features = "nix-command flakes ca-derivations";
         auto-optimise-store = true;
