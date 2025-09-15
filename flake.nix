@@ -102,9 +102,6 @@
     # octotail package (mine)
     nixpkgs-patch-419929.url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
     nixpkgs-patch-419929.flake = false;
-    # nh new version
-    nixpkgs-patch-441268.url = "https://github.com/NixOS/nixpkgs/pull/441268.patch?full_index=1";
-    nixpkgs-patch-441268.flake = false;
     # iredis update
     nixpkgs-patch-441881.url = "https://github.com/NixOS/nixpkgs/pull/441881.patch?full_index=1";
     nixpkgs-patch-441881.flake = false;
