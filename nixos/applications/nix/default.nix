@@ -26,6 +26,7 @@
           "root"
           "rithvij"
           "hydra" # TODO maybe hydra needs @wheel
+          "nod-builder"
         ];
       in
       {
@@ -35,7 +36,10 @@
         allowed-uris = "github: gitlab: git+ssh:// https://github.com/";
         experimental-features = "nix-command flakes ca-derivations";
         auto-optimise-store = true;
-        trusted-users = [ "@wheel" ];
+        trusted-users = [
+          "@wheel"
+          "nod-builder"
+        ];
         allowed-users = users;
         #sandbox = "relaxed";
         http-connections = 50;

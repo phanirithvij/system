@@ -73,9 +73,18 @@ in
       '';
     };
   };
-  boot.binfmt = {
-    #emulatedSystems = [ "aarch64-linux" ];
+
+  # for nix-on-droid and cross compilation
+  # WARNING: enabling this allows aarch64 programs to run inside nix sandbox too
+  boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
+
+  # https://github.com/nix-community/nix-on-droid/wiki/Use-a-remote-builder-with-qemu
+  users.users.nod-builder = {
+    createHome = true;
+    isNormalUser = true;
+    uid = 10815; # manual, need to change?
   };
+
   programs.nix-ld.enable = true;
   services.btrfs.autoScrub = {
     enable = true;

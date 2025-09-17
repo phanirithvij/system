@@ -8,23 +8,23 @@ source "$SCRIPT_DIR"/nixinternal/exe.sh
 
 mkdir -p result
 
-_exe onix build .#devShells.x86_64-linux.default -o result/shell
+_exe onix build .#devShells.x86_64-linux.default -o result/shell --allow-import-from-derivation
 
-_exe onix build .#homeConfigurations."runner".activationPackage -o result/hm-runner
-_exe onix build .#homeConfigurations."nixos@nixos".activationPackage -o result/hm-nixos
-_exe onix build .#homeConfigurations.rithvij.activationPackage -o result/hm-rithvij
-_exe onix build .#homeConfigurations.rithviz.activationPackage -o result/hm-rithviz
+_exe onix build .#homeConfigurations."runner".activationPackage -o result/hm-runner --allow-import-from-derivation
+_exe onix build .#homeConfigurations."nixos@nixos".activationPackage -o result/hm-nixos --allow-import-from-derivation
+_exe onix build .#homeConfigurations.rithvij.activationPackage -o result/hm-rithvij --allow-import-from-derivation
+_exe onix build .#homeConfigurations.rithviz.activationPackage -o result/hm-rithviz --allow-import-from-derivation
 
-_exe onix build .#systemConfigs.gha -o result/sysm.gha
-_exe onix build .#systemConfigs.vps -o result/sysm.vps
+_exe onix build .#systemConfigs.gha -o result/sysm.gha --allow-import-from-derivation
+_exe onix build .#systemConfigs.vps -o result/sysm.vps --allow-import-from-derivation
 
-_exe onix build .#nixosConfigurations.iron.config.system.build.toplevel -o result/h-iron
+_exe onix build .#nixosConfigurations.iron.config.system.build.toplevel -o result/h-iron --allow-import-from-derivation
 #_exe onix build .#nixosConfigurations.wsl.config.system.build.toplevel -o result/h-wsl
-_exe onix build .#nixosConfigurations.wsl.config.system.build.tarballBuilder -o result/h-wsl-tar-ball-script
+_exe onix build .#nixosConfigurations.wsl.config.system.build.tarballBuilder -o result/h-wsl-tar-ball-script --allow-import-from-derivation
 #_exe onix build .#nixosConfigurations.defaultIso.config.system.build.isoImage -o result/h-iso
 
-_exe onix build --no-link --print-out-paths "$(
-  nix flake show --json --allow-import-from-derivation |
+_exe onix build --no-link --print-out-paths --allow-import-from-derivation --impure "$(
+  nix flake show --json --allow-import-from-derivation --impure |
     jq '.packages."x86_64-linux"|keys[]' |
     xargs -I '{}' echo -en '.#packages.x86_64-linux.{} '
 )"
@@ -41,5 +41,5 @@ _exe onix build --no-link --print-out-paths "$(
 #  .#navi-master \
 #  -o result/navi-master-portable.bundled
 
-_exe nix flake check
+_exe nix flake check --allow-import-from-derivation
 #_exe nix run .#nix -- flake show
