@@ -82,6 +82,7 @@ in
         });
       in
       opengist.overrideAttrs (p: {
+        frontend = frontend';
         postPatch = ''
           cp -R ${frontend'}/public/{manifest.json,assets} public/
         '';
