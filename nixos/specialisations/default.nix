@@ -6,11 +6,11 @@ _: {
   imports = [
     #./xfce # now the default config
     ./tty.nix
-    # ./deepin.nix # for nostalgia
     #./plasma.nix
     #./niri.nix
     #./hyprland.nix
     #./cinnamon.nix
+    # ./deepin.nix # for nostalgia, removed from nixpkgs at some point
     #./tuigreet.nix
 
     # NOTE specialisations cannot have '-' (OWN restriction, see the implementation in the below file)
