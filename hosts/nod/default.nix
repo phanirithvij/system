@@ -47,6 +47,18 @@ in
 
   user.shell = lib.getExe pkgs.fish; # chsh won't work
 
+  # can't properly run tailscale without app, on later android versions
+  # it's kind of possible see, https://github.com/termux/termux-packages/issues/10166
+  # https://github.com/tailscale/tailscale/issues/8006
+
+  # make tailscale work on nod
+  # WARNING: didn't work, had to use <hostname>.tail4aa8d.ts.net in ssh config
+  environment.etc."resolv.conf".text = lib.mkForce ''
+    nameserver 100.100.100.100
+    nameserver 1.1.1.1
+    nameserver 8.8.8.8
+  '';
+
   # TODO pkgs not passed?
   /*
     home-manager = {

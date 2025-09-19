@@ -1,0 +1,55 @@
+on:
+  workflow_dispatch:
+
+jobs:
+  builder:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      # todo system-manager and hm switch, both are slow
+      - uses: tailscale/github-action@v3
+        with:
+          oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+          oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+          tags: tag:ci
+          version: latest
+          use-cache: "true"
+      - uses: cachix/install-nix-action@master
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
+      - name: change node name
+        run: |
+          sudo tailscale set --hostname="gha-system-$(nix-instantiate --raw --eval --expr 'builtins.currentSystem')"
+      - name: install utils
+        run: nix profile add nixpkgs#{lf,viddy,ripgrep,nix-output-monitor,fzf,neovim,gdu,duf,lazygit}
+      - name: ssh setup
+        run: |
+          mkdir -p ~/.ssh
+
+          # add pub keys
+          echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE57GFyCOihS1pDvAe6fzldbm2xdNfAe4VhZXYh1w5sv" >> ~/.ssh/authorized_keys
+          echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8/+FK1TAZV7p1a92/ykOXqPGt34rsiHxXLgVG3b/3x" >> ~/.ssh/authorized_keys
+
+          # https://askubuntu.com/a/649959
+          # https://unix.stackexchange.com/q/548327
+          chmod go-w ~/
+          chmod 700 ~/.ssh
+          chmod 600 ~/.ssh/authorized_keys
+
+          # default shell to fish
+          sudo apt install fish
+          sudo chsh -s $(which fish) $(whoami)
+          fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher && fisher install lilyball/nix-env.fish"
+
+          # set password just in case
+          echo -e "root:${USER_PASSWD}\nrunner:${USER_PASSWD}" | sudo chpasswd
+        env:
+          # hint clash of clans username
+          USER_PASSWD: ${{ secrets.GHA_RUNNER_PASSWD }}
+        # required to keep it alive
+      - name: noop
+        run: while true; do sleep 10; done;
+        # uses: fawazahmed0/action-debug@v2
