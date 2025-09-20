@@ -19,7 +19,10 @@
       nixpkgs.flake = flake-inputs.nixpkgs;
       n.flake = flake-inputs.nixpkgs;
     };
-    package = pkgs.nixVersions.latest;
+    # for maralorn/nix-output-monitor#201
+    # and for https://discourse.nixos.org/t/-/69577
+    package = pkgs.nixVersions.git; # I wanna bleed on the edge
+    #package = pkgs.nixVersions.latest;
     settings =
       let
         users = [
