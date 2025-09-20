@@ -12,10 +12,20 @@ let
       name = "lazy-app-applications-${pname}";
       phases = [ "installPhase" ];
       installPhase = ''
+        shopt -s globstar
+
         mkdir -p "$out/${pname}"
-        pushd "${pkg.pkg}/share/applications" >/dev/null 2>&1 || exit 0
-        ls -l
+        pushd "${pkg.pkg}/share/applications" >/dev/null || exit 0
         cp -rL *.desktop "$out/${pname}"
+        pushd "$out/${pname}" >/dev/null 2>&1 || exit 0
+        source ${./sanitize_drv_name.sh}
+        for i in **/*.desktop; do
+          new=$(sanitize_derivation_name "$i")
+          if [[ "$i" != "$new" ]]; then
+            mv "$i" "$new"
+          fi
+        done
+        popd >/dev/null 2>&1 || exit 0
       '';
     };
   paths = lib.attrValues (lib.mapAttrs getApplications lazyApps);

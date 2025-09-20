@@ -8,4 +8,4 @@ MimeType=text/html;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xm
 Name=Tor Browser
 StartupWMClass=Tor Browser
 Type=Application
-Version=1.4
+Version=1.5

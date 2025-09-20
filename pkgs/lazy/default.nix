@@ -82,6 +82,7 @@ let
     "go"
     "heroic"
     "hledger"
+    "honey-home"
     "iredis"
     "joplin"
     "k3s"

@@ -8,4 +8,4 @@ Name=LocalSend
 StartupNotify=true
 StartupWMClass=localsend_app
 Type=Application
-Version=1.4
+Version=1.5

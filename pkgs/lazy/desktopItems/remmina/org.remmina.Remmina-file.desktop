@@ -7,7 +7,7 @@ Comment=Access remote desktops with Remmina
 Comment[hr]=Pristupite udaljenim radnim površinama pomoću Remmine
 Categories=GTK;GNOME;X-GNOME-NetworkSettings;Network;
 Keywords=remote desktop;rdp;vnc;ssh;spice;
-TryExec=/nix/store/sy8zfx1zsa7fvy1csyijsp8642wgchxl-remmina-1.4.41/bin/remmina
+TryExec=/nix/store/27ral367j9xx7mg7bpnz0b4dz5c8gpfc-remmina-1.4.41/bin/remmina
 Exec=remmina-file-wrapper -c %U
 Icon=org.remmina.Remmina
 MimeType=application/x-remmina;x-scheme-handler/remmina;x-scheme-handler/rdp;x-scheme-handler/spice;x-scheme-handler/vnc;
@@ -20,4 +20,4 @@ X-Desktop-File-Install-Version=0.24
 [Desktop Action Edit]
 Name=Remmina Edit
 Name[hr]=Remmina uređivanje
-Exec=/nix/store/sy8zfx1zsa7fvy1csyijsp8642wgchxl-remmina-1.4.41/bin/remmina -e %U
+Exec=/nix/store/27ral367j9xx7mg7bpnz0b4dz5c8gpfc-remmina-1.4.41/bin/remmina -e %U
