@@ -160,6 +160,13 @@ in
           family = "JetBrainsMono Nerd Font"; # TODO try Source Code Pro
         };
       };
+      keyboard.bindings = [
+        {
+          key = "N";
+          mods = "Shift|Control";
+          action = "CreateNewWindow";
+        }
+      ];
     };
   };
   programs.aria2.enable = true;
