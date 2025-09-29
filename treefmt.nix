@@ -22,6 +22,7 @@ _: {
     excludes = [
       "**/node_modules"
       "**/*-lock.json"
+      "home/applications/rss/feeds.json"
     ];
     settings = {
       plugins = pkgs.dprint-plugins.getPluginList (
