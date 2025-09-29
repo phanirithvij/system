@@ -3,3 +3,4 @@ temp/
 tmp/
 .direnv
 .pre-commit-config.yaml
+.worktrees
