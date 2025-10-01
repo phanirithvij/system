@@ -96,9 +96,6 @@
     # losslesscut pr
     nixpkgs-patch-385535.url = "https://github.com/NixOS/nixpkgs/pull/385535.patch?full_index=1";
     nixpkgs-patch-385535.flake = false;
-    # nvme-rs module
-    nixpkgs-patch-410730.url = "https://github.com/NixOS/nixpkgs/pull/410730.patch?full_index=1";
-    nixpkgs-patch-410730.flake = false;
     # octotail package (mine)
     nixpkgs-patch-419929.url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
     nixpkgs-patch-419929.flake = false;
