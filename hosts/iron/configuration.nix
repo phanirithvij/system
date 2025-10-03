@@ -48,6 +48,7 @@ in
   docker-opts.nameservers = nameservers;
 
   boot.loader = {
+    timeout = 0;
     efi = {
       canTouchEfiVariables = true;
       efiSysMountPoint = "/boot/efi";
@@ -56,6 +57,7 @@ in
       enable = true;
       useOSProber = true;
       efiSupport = true;
+      timeoutStyle = "hidden"; # with menu shift interrupt wont work, see U&L 219061
       # btrfs can't have this feature of saving last booted entry
       # https://forum.manjaro.org/t/converting-ext4-root-to-btrfs-brings-up-grub-error-sparse-file-not-allowed/154491
       #default = "saved";
