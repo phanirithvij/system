@@ -47,6 +47,7 @@ in
 
   docker-opts.nameservers = nameservers;
 
+  boot.initrd.compressorArgs = [ "-1" ]; # disable compression to see how if affects boot time
   boot.loader = {
     timeout = 0;
     efi = {
