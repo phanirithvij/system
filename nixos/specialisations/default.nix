@@ -5,6 +5,7 @@ _: {
 
   imports = [
     #./xfce # now the default config
+    ./empty.nix
     ./tty.nix
     #./plasma.nix
     #./niri.nix

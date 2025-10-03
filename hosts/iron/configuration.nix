@@ -15,6 +15,10 @@ let
 in
 {
   imports = [
+    # TODO allow easy swapping empty specialisation to be default
+    # To measure services impact on boot
+    # That requires I move all of these into some desktop.nix, and have a xfce specialisation ready to hotswap via bootmenu
+    # issue is inheritParentConfig, all other specialisations set it true; not empty
     ./hardware-configuration.nix
     ../../nixos/specialisations
     ../../nixos/profiles/desktop.nix
