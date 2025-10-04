@@ -20,6 +20,7 @@ in
     # That requires I move all of these into some desktop.nix, and have a xfce specialisation ready to hotswap via bootmenu
     # issue is inheritParentConfig, all other specialisations set it true; not empty
     ./hardware-configuration.nix
+    ./boot-optimisations.nix
     ../../nixos/specialisations
     ../../nixos/profiles/desktop.nix
     ../../nixos/modules/desktop-environments
@@ -303,7 +304,6 @@ in
     binfmt = true;
   };
 
-  services.fwupd.enable = true;
   sops.secrets.rithvij_user_passwd = {
     neededForUsers = true;
   };
