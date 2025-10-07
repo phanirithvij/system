@@ -62,6 +62,7 @@
         "https://fbrs.io/atom.xml"
         "https://fzakaria.com/feed.xml"
         "https://ghedam.at/feed.xml"
+        "https://michael.stapelberg.ch/feed.xml" # go, nix
         "https://myme.no/atom-feed.xml"
         "https://nixos.mayflower.consulting/blog/index.xml"
         "https://notashelf.dev/rss.xml"
