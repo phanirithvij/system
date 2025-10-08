@@ -1025,11 +1025,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1759816938,
-        "narHash": "sha256-rLHycuK9qnzc58iUoBZV1+MZhNdK+wslBUVs+QNCASw=",
+        "lastModified": 1759909338,
+        "narHash": "sha256-9koszNUGcDx1xpZamLIrWFtJ5WhApx3HxgObn27TKm4=",
         "owner": "phanirithvij",
         "repo": "nur-packages",
-        "rev": "17d6c7448e73fa29f5213ae064860a518f7976ce",
+        "rev": "39f1285d36386eec97fb04b1c4c81f4da443204b",
         "type": "github"
       },
       "original": {
