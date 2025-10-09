@@ -3,6 +3,9 @@
 A selfhosted heaven all in nixos Make sure all these run with system-manager +
 home-manager setup
 
+- [ ] tubearchivist
+  - tried with oci containers but not indexing videos properly
+  - nixpkgs service is halted due to elastic search old version
 - [ ] ente
   - fully foss it seems?
   - see https://github.com/NixOS/nixpkgs/issues/292641
