@@ -124,6 +124,7 @@
         "https://pixel-druid.com/feed.rss"
         "https://rsapkf.org/weblog/rss.xml"
         "https://kevincox.ca/feed.atom"
+        "https://rosano.ca/blog/feed" # lofi software
 
         # linux
         "https://www.nico.schottelius.org/blog-archive/index.rss"
