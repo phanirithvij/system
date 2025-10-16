@@ -125,6 +125,9 @@
         "https://rsapkf.org/weblog/rss.xml"
         "https://kevincox.ca/feed.atom"
         "https://rosano.ca/blog/feed" # lofi software
+        "https://blog.vaxry.net/feed" # hyprland, foss+politics
+        "https://geohot.github.io/blog/feed.xml" # famous guy
+        "https://antfu.me/feed.xml" # slidevjs
 
         # linux
         "https://www.nico.schottelius.org/blog-archive/index.rss"
