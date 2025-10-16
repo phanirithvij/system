@@ -255,9 +255,12 @@ in
     powerOnBoot = true;
   };
 
-  powerManagement.powerUpCommands = ''
-    ${lib.getBin pkgs.util-linux}/bin/rfkill unblock bluetooth
-  '';
+  /*
+    # TODO execute after the /dev/rfkill gets made
+    powerManagement.powerUpCommands = ''
+      ${lib.getBin pkgs.util-linux}/bin/rfkill unblock bluetooth
+    '';
+  */
 
   hardware.opentabletdriver.enable = true;
 
