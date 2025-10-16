@@ -81,6 +81,7 @@ let
     "gimp"
     "gitui"
     "go"
+    "gping"
     "heroic"
     "hledger"
     "honey-home"
@@ -104,6 +105,7 @@ let
     "puffin"
     "prismlauncher"
     "python3.pkgs.gdown" # can be just gdown
+    "qimgv"
     "qpwgraph"
     "rclone-browser"
     "remmina"

@@ -84,13 +84,15 @@ in
     bluetui
     #overskride
 
+    lazyPkgs.gping
+
     lazyPkgs.devbox
     lazyPkgs.n-m3u8dl-re
 
     # desktop apps
     #microsoft-edge # for its bing ai integration (slow af)
     qbittorrent
-    qimgv
+    lazyPkgs.qimgv
     # lazyPkgs.losslesscut
     lazyPkgs.beekeeper-studio
     lazyPkgs.koreader
@@ -129,7 +131,6 @@ in
     # neovide
     # cargo-zigbuild
     # zig
-    # gping
     # gitoxide
     # du-dust
     # bore-cli
