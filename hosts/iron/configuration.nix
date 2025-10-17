@@ -371,6 +371,7 @@ in
       iotop # io monitoring
       iftop # network monitoring
 
+      unixtools.netstat
       iptables
       btrfs-progs
       compsize # btrfs compression stats
