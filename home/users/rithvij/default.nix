@@ -62,6 +62,7 @@ in
     "Xft.dpi" = 172;
   };
 
+  # TODO make all of these lazy
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     #rclone #tgdrive version from nur
