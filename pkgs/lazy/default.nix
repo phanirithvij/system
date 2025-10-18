@@ -161,6 +161,7 @@ let
       value = mkLazyApp {
         pkg = lib.getAttrFromPath (lib.splitString "." name) pkgs;
         exe = name;
+        debugLogs = true;
       };
     }) pkgsList
   );
