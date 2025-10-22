@@ -4,6 +4,7 @@ _: {
     configuration = {
       system.nixos.tags = [ "sp:empty" ];
       imports = [ ../../hosts/iron/hardware-configuration.nix ];
+      system.stateVersion = "25.05";
     };
   };
 }
