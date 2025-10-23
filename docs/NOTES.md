@@ -123,6 +123,44 @@
   `sudo btrfs rescue zero-log /dev/disk/by-label/nixroot` from live iso to be
   able to boot into linux, common issue
   https://www.phoronix.com/news/Btrfs-Log-Tree-Corruption-Fix
+- found
+  - https://matrix.to/#/!VRULIdgoKmKPzJZzjj:nixos.org/$Ke_KRFl34HU-uuuJpFvbZX4wxLr_bFDrTo8qcRZWwZo
+  - `things like https://cache.nixos.org/5yzw0vhkyszf2d179m0qfkgxmp5wjjx4.narinfo have no deriver but are in the cache anyway... do those ever get fetched? wouldn't they always be present locally because they're created as part of instantiation?`
+    by `raboof`
+    ```
+    dramforever:you don't have to eval to download stuff from cache.nixos.org, there's nix copy
+    dramforever: uh, with --substitute-on-destination
+    dramforever: or you can nix copy --from https://cache.nixos.org a path
+    dramforever: but the point is no, it won't always be present locally
+    raboof: right, you can, but I wondered if/when that happens in practice
+    dramforever: --substitute-on-destination definitely happens in practice
+    ```
+  - `nix copy --from https://cache.nixos.org /nix/store/5yzw0vhkyszf2d179m0qfkgxmp5wjjx4-move-docs.sh`
+  - ```
+    StorePath: /nix/store/5yzw0vhkyszf2d179m0qfkgxmp5wjjx4-move-docs.sh
+    URL: nar/1j51vzwlgpfh4hryzk0ay7rbl0jz67kl9286ljr2vrqy22nv0zzs.nar.xz
+    Compression: xz
+    FileHash: sha256:1j51vzwlgpfh4hryzk0ay7rbl0jz67kl9286ljr2vrqy22nv0zzs
+    FileSize: 424
+    NarHash: sha256:0cmbvppwh1m6pzjirhhmpmgbgkaa5lmag14c241a6l7rxypwlm9c
+    NarSize: 816
+    References:
+    Sig: cache.nixos.org-1:yi4wzfyy1Ansv9CIujkxHT0Sa8OqakVRRkf2PWbcgtm+BOQyQGTwDGhLualFmN9QFtJhpLvPzn6KlABkXK3ICw==
+    CA: fixed:r:sha256:0cmbvppwh1m6pzjirhhmpmgbgkaa5lmag14c241a6l7rxypwlm9c
+    ```
+  - something weird, narinfo advanced
+- came across dendritic pattern by mightyiam and dendrix
+  https://vic.github.io/dendrix/
+  - it looks cool but the idea of using flakes for this means need to use flakes
+    - flakes performance issues and limitations
+      - [ ] TODO make a nixos wiki page? reference flakes-arent-real blog post?
+      - https://reddit.com/r/NixOS/comments/1mvfceq
+  - I _am_ currently using flakes for my system config but have been thinking
+    forever to migrate to npins or something
+- npins like projects
+  - niv
+  - https://github.com/nikstur/lon
+  - https://github.com/Fuwn/yae
 
 ### Ramblings or thoughts
 
