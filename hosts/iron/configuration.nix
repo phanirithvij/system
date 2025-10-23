@@ -439,6 +439,7 @@ in
       5159
     ];
     allowedTCPPorts = [
+      8021 # gotify temp, via nspawn-nixos
       26439 # ??
       3249 # ??
       5159 # ??
