@@ -175,13 +175,16 @@
   outputs =
     inputs:
     let
+      getFlakeInputs = system: inputs // { nixpkgs' = allSystemsJar.nixpkgs'.${system}; };
       allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (
         system:
         let
           inherit (legacyPackages) lib;
           args = {
             inherit pkgs system lib;
-            flake-inputs = inputs;
+            flake-inputs = inputs // {
+              inherit (patched) nixpkgs';
+            };
           };
           legacyPackages = inputs.nixpkgs.legacyPackages.${system};
           wrappedPkgs = import ./pkgs/wrapped-pkgs args;
@@ -256,7 +259,9 @@
           overlays =
             (import ./lib/overlays {
               inherit system;
-              flake-inputs = inputs;
+              flake-inputs = inputs // {
+                inherit (patched) nixpkgs';
+              };
             })
             ++ [ inputs.niri.overlays.niri ]
             ++ (builtins.attrValues
@@ -448,7 +453,7 @@
             modules = [ ./home/users/${username} ] ++ modules ++ hmAliasModules;
             # TODO sharedModules sops
             extraSpecialArgs = {
-              flake-inputs = inputs;
+              flake-inputs = getFlakeInputs system;
               lib = allSystemsJar.hmlib.${system};
               inherit system;
               inherit username;
@@ -578,7 +583,7 @@
             inherit (pkgs) lib;
             inherit system pkgs;
             specialArgs = {
-              flake-inputs = inputs;
+              flake-inputs = getFlakeInputs system;
               inherit (pkgs) lib;
             };
             modules = [
@@ -596,7 +601,7 @@
                   users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
                     lib = allSystemsJar.hmlib.${system};
-                    flake-inputs = inputs;
+                    flake-inputs = getFlakeInputs system;
                     username = liveuser;
                     hostname = livehost;
                     inherit system;
@@ -628,7 +633,7 @@
             ++ args'.modules;
             specialArgs = {
               inherit (pkgs) lib;
-              flake-inputs = inputs;
+              flake-inputs = getFlakeInputs system;
               inherit system; # TODO needed?
               username = user;
               hostname = linuxhost;
@@ -654,7 +659,7 @@
                   users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
                     lib = allSystemsJar.hmlib.${system};
-                    flake-inputs = inputs;
+                    flake-inputs = getFlakeInputs system;
                     username = liveuser; # TODO wsl separate home config
                     hostname = livehost;
                     inherit system;
@@ -666,7 +671,7 @@
             ++ args'.modules;
             specialArgs = {
               inherit (pkgs) lib;
-              flake-inputs = inputs;
+              flake-inputs = getFlakeInputs system;
               inherit system; # TODO needed?
               username = "nixos";
               hostname = "nixos";
@@ -681,7 +686,7 @@
             mdroid = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
               pkgs = allSystemsJar.pkgs.${system};
               extraSpecialArgs = {
-                flake-inputs = inputs;
+                flake-inputs = getFlakeInputs system;
                 hmSharedModules = hmAliasModules;
               };
               modules = [ ./hosts/nod ];

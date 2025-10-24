@@ -7,11 +7,13 @@
 # https://github.com/nix-community/nix-on-droid/blob/master/modules/environment/nix.nix
 {
   nix = {
-    nixPath = [ "nixpkgs=flake:nixpkgs" ];
+    # This is making it copying "/nix/store/...-nixpkgs-20250625.aabcfcc-patched" to the store
+    #nixPath = [ "nixpkgs=flake:nixpkgs" ];
+    nixPath = [ "nixpkgs=${flake-inputs.nixpkgs'}" ];
     # system level registry
     registry = lib.mkForce {
-      nixpkgs.flake = flake-inputs.nixpkgs;
-      n.flake = flake-inputs.nixpkgs;
+      nixpkgs.flake = flake-inputs.nixpkgs';
+      n.flake = flake-inputs.nixpkgs';
     };
     package = pkgs.nixVersions.latest;
     substituters = [

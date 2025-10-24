@@ -10,14 +10,16 @@
     # https://discourse.nixos.org/t/where-is-nix-path-supposed-to-be-set/16434/5
     channel.enable = false;
     # https://search.nixos.org/options?channel=unstable&show=nix.nixPath&query=nix.nixPath
-    nixPath = [ "nixpkgs=flake:nixpkgs" ];
+    # This is making it copying "/nix/store/...-nixpkgs-20250625.aabcfcc-patched" to the store
+    #nixPath = [ "nixpkgs=flake:nixpkgs" ];
+    nixPath = [ "nixpkgs=${flake-inputs.nixpkgs'}" ];
     # system level registry
     # https://discord.com/channels/568306982717751326/570351749848891393/1347223140375461990
     # there is also user level registry
     # https://nix-community.github.io/home-manager/options.xhtml#opt-nix.registry
     registry = lib.mkForce {
-      nixpkgs.flake = flake-inputs.nixpkgs;
-      n.flake = flake-inputs.nixpkgs;
+      nixpkgs.flake = flake-inputs.nixpkgs';
+      n.flake = flake-inputs.nixpkgs';
     };
     # for maralorn/nix-output-monitor#201
     # and for https://discourse.nixos.org/t/-/69577
