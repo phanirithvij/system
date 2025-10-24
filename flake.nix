@@ -117,6 +117,10 @@
     pr-428674-nixpkgs-patch.url = "https://github.com/NixOS/nixpkgs/pull/428674.patch?full_index=1";
     pr-428674-nixpkgs-patch.flake = false;
 
+    # ly: 1.2.0
+    pr-454744-nixpkgs-patch.url = "https://github.com/NixOS/nixpkgs/pull/454744.patch?full_index=1";
+    pr-454744-nixpkgs-patch.flake = false;
+
     ### end nixpkgs-patcher patches
 
     ###### END PATCHES #######

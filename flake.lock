@@ -1073,6 +1073,18 @@
         "url": "https://github.com/NixOS/nixpkgs/pull/428674.patch?full_index=1"
       }
     },
+    "pr-454744-nixpkgs-patch": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-C8nx7o1fyVn1z2BUhnhHp9qlQJt+rD29P28AbawvQRU=",
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/454744.patch?full_index=1"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://github.com/NixOS/nixpkgs/pull/454744.patch?full_index=1"
+      }
+    },
     "root": {
       "inputs": {
         "cargo2nix": "cargo2nix",
@@ -1104,6 +1116,7 @@
         "nixpkgs-upstream": "nixpkgs-upstream",
         "nur-pkgs": "nur-pkgs",
         "pr-428674-nixpkgs-patch": "pr-428674-nixpkgs-patch",
+        "pr-454744-nixpkgs-patch": "pr-454744-nixpkgs-patch",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
         "ssh-keys": "ssh-keys",
