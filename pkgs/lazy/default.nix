@@ -102,6 +102,7 @@ let
     "n-m3u8dl-re"
     "oh-my-git"
     "onboard"
+    "podman-tui"
     "puffin"
     "prismlauncher"
     "python3.pkgs.gdown" # can be just gdown
