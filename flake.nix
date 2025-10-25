@@ -403,6 +403,7 @@
               (nh.override {
                 inherit (allSystemsJar.nurPkgs.${system}.flakePkgs) nix-output-monitor;
               })
+              allSystemsJar.nurPkgs.${system}.flakePkgs.nix-output-monitor
               xc
             ];
             packages = inputs.self.checks.${system}.git-hooks-check.enabledPackages; # these don't show up in menu
