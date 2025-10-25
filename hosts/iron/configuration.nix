@@ -389,6 +389,9 @@ in
 
       # # offload.enableOffloadCmd yank
       nvidia-offload
+
+      mosh
+      eternal-terminal
     ];
     variables.VISUAL = "nvim";
     # TODO sessionVariables vs variables what's the diff

@@ -10,6 +10,8 @@ in
   imports = [
     ./modules/sshd.nix
     ./modules/nix.nix
+    ./modules/mosh.nix
+    ./modules/et.nix # mosh alt
   ];
   environment.packages = with pkgs; [
     which
@@ -33,6 +35,9 @@ in
     #zip
     #unzip
     iproute2
+    wget
+    curl
+    aria2
   ];
 
   # Backup etc files instead of failing to activate generation if a file already exists in /etc
