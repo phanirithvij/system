@@ -1,0 +1,49 @@
+commit b04f7a78c6a1679d04746276250e319febd8f414
+Author: phanirithvij <phanirithvij2000@gmail.com>
+Date:   Sat Oct 25 15:53:19 2025 +0530
+
+    flake.lock: Update
+    
+    Flake lock file updates:
+    
+    • Updated input 'nixpkgs':
+        'github:nixos/nixpkgs/dda3dcd3fe03e991015e9a74b22d35950f264a54?narHash=sha256-Ua0drDHawlzNqJnclTJGf87dBmaO/tn7iZ%2BTCkTRpRc%3D' (2025-05-08)
+      → 'github:nixos/nixpkgs/01f116e4df6a15f4ccdffb1bcd41096869fb385c?narHash=sha256-f/QCJM/YhrV/lavyCVz8iU3rlZun6d%2BdAiC3H%2BCDle4%3D' (2025-10-22)
+    • Updated input 'termux-packages':
+        'github:termux/termux-packages/bb381b573d55b379943a8129ed29f2599d73cb44?narHash=sha256-iel8GPpNNwtj/XWxvD/Wx2%2Bv8H5IU85Tx1pYKpJe4B4%3D' (2025-05-09)
+      → 'github:termux/termux-packages/a7c413ea3c7ada2ec721a836765985f7141b11cd?narHash=sha256-w8%2BoG%2BfYTmRrkjcYq9ss59NhKxXza1YfWWtK5EoAJCk%3D' (2025-10-25)
+
+diff --git a/flake.lock b/flake.lock
+index 4bba99f..a074a1e 100644
+--- a/flake.lock
++++ b/flake.lock
+@@ -2,11 +2,11 @@
+   "nodes": {
+     "nixpkgs": {
+       "locked": {
+-        "lastModified": 1746663147,
+-        "narHash": "sha256-Ua0drDHawlzNqJnclTJGf87dBmaO/tn7iZ+TCkTRpRc=",
++        "lastModified": 1761114652,
++        "narHash": "sha256-f/QCJM/YhrV/lavyCVz8iU3rlZun6d+dAiC3H+CDle4=",
+         "owner": "nixos",
+         "repo": "nixpkgs",
+-        "rev": "dda3dcd3fe03e991015e9a74b22d35950f264a54",
++        "rev": "01f116e4df6a15f4ccdffb1bcd41096869fb385c",
+         "type": "github"
+       },
+       "original": {
+@@ -42,11 +42,11 @@
+     "termux-packages": {
+       "flake": false,
+       "locked": {
+-        "lastModified": 1746793234,
+-        "narHash": "sha256-iel8GPpNNwtj/XWxvD/Wx2+v8H5IU85Tx1pYKpJe4B4=",
++        "lastModified": 1761373580,
++        "narHash": "sha256-w8+oG+fYTmRrkjcYq9ss59NhKxXza1YfWWtK5EoAJCk=",
+         "owner": "termux",
+         "repo": "termux-packages",
+-        "rev": "bb381b573d55b379943a8129ed29f2599d73cb44",
++        "rev": "a7c413ea3c7ada2ec721a836765985f7141b11cd",
+         "type": "github"
+       },
+       "original": {
