@@ -47,7 +47,9 @@ in
     ../../secrets
 
     # special module to keep nixos system flake's inputs
-    ../../nixos/modules/nix-keep-flake-inputs.nix
+    # FIXME, broke for some reason, maybe nixpkgs' in flake-inputs idk
+    # but not likely nixpkgs' because it worked after adding it for a day
+    #../../nixos/modules/nix-keep-flake-inputs.nix
   ];
 
   docker-opts.nameservers = nameservers;
