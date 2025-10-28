@@ -125,6 +125,7 @@ let
     "vhs"
     "w3m"
     "wezterm"
+    "zellij"
     "zenith"
 
     # losslesscut # temp disable for nod

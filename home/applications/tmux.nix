@@ -11,6 +11,7 @@ in
   home.packages = [
     pkgs.wrappedPkgs.tmux
     pkgs.tmuxp
+    pkgs.lazyPkgs.zellij
     # dmux
     # tmate?
   ];
