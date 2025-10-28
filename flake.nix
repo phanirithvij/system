@@ -321,6 +321,8 @@
         hm = inputs.home-manager.packages.${system}.default;
         sysm = inputs.system-manager.packages.${system}.default;
         nixp = inputs.nix-patcher.packages.${system}.nix-patcher;
+        nh' = allSystemsJar.nurPkgs.${system}.nh;
+        nom' = allSystemsJar.nurPkgs.${system}.flakePkgs.nix-output-monitor;
         #nix-schema = pkgs.nix-schema { inherit system; }; # nur-pkgs overlay, cachix cache
 
         lazyApps = lib.mine.unNestAttrs allSystemsJar.lazyPkgs.${system};
@@ -401,12 +403,10 @@
             inherit pkgs treefmtCfg;
             enableTreefmt = true;
             tools = with pkgs; [
-              cachix
               nixp
-              (nh.override {
-                inherit (allSystemsJar.nurPkgs.${system}.flakePkgs) nix-output-monitor;
-              })
-              allSystemsJar.nurPkgs.${system}.flakePkgs.nix-output-monitor
+              nh'
+              nom'
+              cachix
               xc
             ];
             packages = inputs.self.checks.${system}.git-hooks-check.enabledPackages; # these don't show up in menu
