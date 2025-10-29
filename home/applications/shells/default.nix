@@ -47,7 +47,6 @@ in
   };
   programs.starship = {
     enable = true;
-    package = pkgs.nurPkgs.starship;
     settings = {
       add_newline = false;
       aws.disabled = true;
@@ -65,7 +64,6 @@ in
       # https://starship.rs/config/#username
       # disable showing username in remote sessions
       #username.detect_env_vars = [ "!SSH_CONNECTION" ]; #not working
-      # patched starship instead, in nurpkgs
     };
   };
   # https://github.com/nix-community/home-manager/issues/6455
