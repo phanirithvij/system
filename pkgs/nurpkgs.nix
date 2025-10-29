@@ -2,11 +2,15 @@
   flake-inputs,
   lib,
   system,
+  pkgs,
   ...
 }:
 let
+  nurPkgsOriginal = flake-inputs.nur-pkgs.lib.getNurPkgs {
+    inherit pkgs system;
+  };
   inherit (lib) isDerivation;
-  #debug = lib.traceSeq (builtins.attrNames flake-inputs.nur-pkgs.packages.${system}) f;
+  #debug = lib.traceSeq (builtins.attrNames nurPkgsOriginal) f;
   unstablePkgs' = lib.attrsets.filterAttrs (
     n: v:
     let
@@ -20,7 +24,7 @@ let
     (if byName then lib.warn "Manually disabled nur package: ${n}" false else true)
     && (if broken then lib.warn "Skipping broken nur package: ${n}" false else true)
     && (isDerivation v)
-  ) flake-inputs.nur-pkgs.packages.${system}.unstablePkgs;
+  ) nurPkgsOriginal.packages.unstablePkgs;
   flakePkgs' = lib.attrsets.filterAttrs (
     n: v:
     let
@@ -36,7 +40,7 @@ let
     (if byName then lib.warn "Manually disabled nur package: ${n}" false else true)
     && (if broken then lib.warn "Skipping broken nur package: ${n}" false else true)
     && (isDerivation v)
-  ) flake-inputs.nur-pkgs.packages.${system}.flakePkgs;
+  ) nurPkgsOriginal.packages.flakePkgs;
   rest = lib.attrsets.filterAttrs (
     n: v:
     let
@@ -55,7 +59,7 @@ let
     && (if byName then lib.warn "Manually disabled nur package: ${n}" false else true)
     && (if broken then lib.warn "Skipping broken nur package: ${n}" false else true)
     && (isDerivation v)
-  ) flake-inputs.nur-pkgs.packages.${system};
+  ) nurPkgsOriginal.packages;
 
   # leaves are filtered, good and unnested packages
   leaves = builtins.attrValues (rest // flakePkgs' // unstablePkgs');
@@ -64,5 +68,5 @@ rest
 // {
   inherit leaves;
   # has all original entires for flakePkgs and unstablePkgs including broken
-  inherit (flake-inputs.nur-pkgs.packages.${system}) flakePkgs unstablePkgs;
+  inherit (nurPkgsOriginal.packages) flakePkgs unstablePkgs;
 }

@@ -194,7 +194,24 @@
           binaryPkgs = import ./pkgs/binary args;
           boxxyPkgs = import ./pkgs/boxxy args;
           lazyPkgs = import ./pkgs/lazy args;
-          nurPkgs = import ./pkgs/nurpkgs.nix args;
+          nurPkgs = import ./pkgs/nurpkgs.nix (
+            args
+            // {
+              # 2nd nixpkgs evaluation, override pkgs
+              pkgs = import inputs.nur-pkgs.inputs.nixpkgs {
+                inherit system;
+                config = {
+                  allowUnfreePredicate =
+                    pkg:
+                    let
+                      pname = lib.getName pkg;
+                      byName = builtins.elem pname [ "textual-window" ];
+                    in
+                    if byName then lib.warn "NurPkgs allowing unfree package: ${pname}" true else false;
+                };
+              };
+            }
+          );
           nvidia-offload = import ./pkgs/nvidia-offload.nix args;
 
           # so nixpkgs-patcher
@@ -328,7 +345,7 @@
         lazyApps = lib.mine.unNestAttrs allSystemsJar.lazyPkgs.${system};
       in
       {
-        inherit lazyApps;
+        inherit lazyApps allSystemsJar;
         apps = {
           /*
             nix = {
