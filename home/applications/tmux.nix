@@ -12,6 +12,7 @@ in
     pkgs.wrappedPkgs.tmux
     pkgs.tmuxp
     pkgs.lazyPkgs.zellij
+    pkgs.nurPkgs.tvmux
     # dmux
     # tmate?
   ];

@@ -238,8 +238,8 @@
                 let
                   pname = lib.getName pkg;
                   byName = builtins.elem pname [
-                    "spotify" # hm
-                    "hplip"
+                    "spotify" # in lazyapps used in home-manager
+                    "hplip" # printer
                     "nvidia-x11"
                     "cloudflare-warp"
                     "nvidia-persistenced"
