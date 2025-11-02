@@ -10,10 +10,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: wimpysworld/nothing-but-nix@main
       # enables flakes, nix-command
-      - uses: DeterminateSystems/nix-installer-action@main
+      - uses: cachix/install-nix-action@master
         with:
-          determinate: false
-          extra-conf: |
+          extra_nix_config: |
             trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= loudgolem-nur-pkgs-0.cachix.org-1:OINy4hRqrmCH0sslp+tQo4hiBEZJEgA1epza03g5rvY=
             substituters = https://nix-community.cachix.org https://cache.nixos.org https://loudgolem-nur-pkgs-0.cachix.org
       - uses: DeterminateSystems/magic-nix-cache-action@main

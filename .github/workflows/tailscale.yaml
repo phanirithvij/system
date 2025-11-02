@@ -20,6 +20,8 @@ jobs:
       - uses: cachix/install-nix-action@master
         with:
           nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            system-features = kvm benchmark big-parallel nixos-test uid-range
       - name: change node name
         run: |
           sudo tailscale set --hostname="gha-system-$(nix-instantiate --raw --eval --expr 'builtins.currentSystem')"
