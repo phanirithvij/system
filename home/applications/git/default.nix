@@ -2,7 +2,7 @@
 {
   home.packages = with pkgs; [
     git-absorb
-    git-bug
+    #git-bug # should be in nur
     gitbatch
     gitcs
     git-who

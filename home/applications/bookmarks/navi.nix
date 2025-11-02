@@ -30,6 +30,7 @@
   };
   programs.navi = {
     enable = true;
+    package = pkgs.nurPkgs.unstablePkgs.navi;
     enableBashIntegration = false;
     enableZshIntegration = true;
     enableFishIntegration = true;

@@ -39,7 +39,7 @@ in
           ${pkgs.git}/bin/git config --global --add safe.directory ${nixpkgsDir}
         '';
         ExecStart = ''
-          ${pkgs.pr-tracker}/bin/pr-tracker \
+          ${pkgs.nurPkgs.pr-tracker}/bin/pr-tracker \
           --remote origin --mount pr-tracker \
           --path ${nixpkgsDir} \
           --user-agent 'pr-tracker (alyssais)' \

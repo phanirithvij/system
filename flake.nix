@@ -287,7 +287,7 @@
             ++ (builtins.attrValues
               (import "${inputs.nur-pkgs}" {
                 # pkgs here is not being used in nur-pkgs overlays
-                #inherit pkgs;
+                #inherit pkgs; # WIP maybe get overlays from nurPkgs.overlays?
               }).overlays
             )
             ++ [
