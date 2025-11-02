@@ -161,6 +161,7 @@
   - niv
   - https://github.com/nikstur/lon
   - https://github.com/Fuwn/yae
+- pythonRelaxDeps has boolean and list values
 
 ### Ramblings or thoughts
 
