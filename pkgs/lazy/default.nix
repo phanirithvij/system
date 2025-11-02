@@ -125,6 +125,8 @@ let
     "vhs"
     "w3m"
     "wezterm"
+    "yt-dlp"
+    "ytfzf"
     "zellij"
     "zenith"
 
