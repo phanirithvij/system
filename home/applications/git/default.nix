@@ -6,7 +6,7 @@
     gitbatch
     gitcs
     git-who
-    gitnr # tui to manage gitignore files
+    lazyPkgs.gitnr # tui to manage gitignore files
     wrappedPkgs.git-prole
   ];
   imports = [

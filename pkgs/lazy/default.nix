@@ -79,6 +79,7 @@ let
     "fx"
     "gamescope"
     "gimp"
+    "gitnr"
     "gitui"
     "go"
     "gping"
