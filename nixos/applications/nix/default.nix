@@ -2,6 +2,7 @@
   flake-inputs,
   lib,
   pkgs,
+  config,
   ...
 }:
 {
@@ -25,6 +26,11 @@
     # and for https://discourse.nixos.org/t/-/69577
     package = pkgs.nixVersions.git; # I wanna bleed on the edge
     #package = pkgs.nixVersions.latest;
+    # https://github.com/NixOS/nix/issues/6536#issuecomment-1254858889
+    # can fail at runtime https://github.com/NixOS/nix/issues/6536#issuecomment-2774658643
+    extraOptions = ''
+      !include ${config.sops.secrets.nix_access_tokens.path}
+    '';
     settings =
       let
         users = [
@@ -63,6 +69,8 @@
         flake-registry = "";
       };
   };
+  sops.secrets.nix_access_tokens.mode = "0440";
+
   system.switch.enable = true;
   system.rebuild.enableNg = true;
 }
