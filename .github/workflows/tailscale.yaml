@@ -25,8 +25,6 @@ jobs:
       - name: change node name
         run: |
           sudo tailscale set --hostname="gha-system-$(nix-instantiate --raw --eval --expr 'builtins.currentSystem')"
-      - name: install utils
-        run: nix profile add nixpkgs#{lf,viddy,ripgrep,nix-output-monitor,fzf,neovim,gdu,duf,lazygit}
       - name: ssh setup
         run: |
           mkdir -p ~/.ssh
@@ -51,6 +49,8 @@ jobs:
         env:
           # hint clash of clans username
           USER_PASSWD: ${{ secrets.GHA_RUNNER_PASSWD }}
+      - name: install utils
+        run: nix profile add nixpkgs#{lf,viddy,ripgrep,nix-output-monitor,fzf,neovim,gdu,duf,lazygit}
         # required to keep it alive
       - name: noop
         run: while true; do sleep 10; done;
