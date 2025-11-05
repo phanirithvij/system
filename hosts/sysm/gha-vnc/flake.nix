@@ -17,6 +17,7 @@
     systemConfigs.default = inputs.system-manager.lib.makeSystemConfig {
       modules = [
         inputs.nix-system-graphics.systemModules.default
+        ../modules/vnc-fluxbox.nix
         {
           config = {
             nixpkgs.hostPlatform = builtins.currentSystem; # And thus --impure is required

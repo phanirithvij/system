@@ -56,10 +56,11 @@ jobs:
       - name: setup sysm config with vnc
         run: |
           pushd hosts/sysm/gha-vnc
-          nix build -L .#systemConfigs.default.config.build.toplevel --impure
+          nix build -L .#systemConfigs.default --impure
           cp /etc/nix/nix.conf nix.conf.old && cat nix.conf.old
-          sudo rm /etc/nix/nix.conf # Interferes with sysm activation
+          sudo rm /etc/nix/nix.conf # interferes with sysm activation
           sudo ./result/bin/activate
+          sudo systemctl restart nix-daemon # reflect on new settings
           popd
       - name: install utils
         run: nix profile add nixpkgs#{lf,viddy,ripgrep,nix-output-monitor,fzf,neovim,gdu,duf,lazygit,micro,qimgv,alacritty}
