@@ -49,6 +49,27 @@ jobs:
         env:
           # hint clash of clans username
           USER_PASSWD: ${{ secrets.GHA_RUNNER_PASSWD }}
+      - name: Install VNC server and desktop environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            x11vnc \
+            xvfb \
+            fluxbox \
+            xterm
+      - name: Start Xvfb
+        run: |
+          Xvfb :99 -screen 0 1024x768x24 &
+          echo "DISPLAY=:99" >> $GITHUB_ENV
+          sleep 2
+      - name: Start Fluxbox window manager
+        run: |
+          fluxbox &
+          sleep 2
+      - name: Start VNC server
+        run: |
+          x11vnc -display :99 -forever -nopw -shared -rfbport 5900 &
+          sleep 2
       - name: install utils
         run: nix profile add nixpkgs#{lf,viddy,ripgrep,nix-output-monitor,fzf,neovim,gdu,duf,lazygit}
         # required to keep it alive
