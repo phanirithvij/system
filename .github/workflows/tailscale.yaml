@@ -8,7 +8,9 @@ jobs:
         os: [ubuntu-latest, ubuntu-24.04-arm]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4 # TODO some @commit thing, dependabot?
+      - name: save gh access token for later
+        run: echo "ENV_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       # todo system-manager and hm switch, both are slow
       - uses: tailscale/github-action@v3
         with:
@@ -20,8 +22,10 @@ jobs:
       - uses: cachix/install-nix-action@master
         with:
           nix_path: nixpkgs=channel:nixos-unstable
-          extra_nix_config: |
-            system-features = kvm benchmark big-parallel nixos-test uid-range
+          # below being set via sysm's nix.settings
+          #extra_nix_config: |
+          # system-features = kvm benchmark big-parallel nixos-test uid-range
+      - uses: DeterminateSystems/magic-nix-cache-action@main # FIXME: fairly broken
       - name: change node name
         run: |
           sudo tailscale set --hostname="gha-system-$(nix-instantiate --raw --eval --expr 'builtins.currentSystem')"
@@ -49,29 +53,16 @@ jobs:
         env:
           # hint clash of clans username
           USER_PASSWD: ${{ secrets.GHA_RUNNER_PASSWD }}
-      - name: Install VNC server and desktop environment
+      - name: setup sysm config with vnc
         run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            x11vnc \
-            xvfb \
-            fluxbox \
-            xterm
-      - name: Start Xvfb
-        run: |
-          Xvfb :99 -screen 0 1024x768x24 &
-          echo "DISPLAY=:99" >> $GITHUB_ENV
-          sleep 2
-      - name: Start Fluxbox window manager
-        run: |
-          fluxbox &
-          sleep 2
-      - name: Start VNC server
-        run: |
-          x11vnc -display :99 -forever -nopw -shared -rfbport 5900 &
-          sleep 2
+          pushd hosts/sysm/gha-vnc
+          nix build -L .#systemConfigs.default.config.build.toplevel --impure
+          cp /etc/nix/nix.conf nix.conf.old && cat nix.conf.old
+          sudo rm /etc/nix/nix.conf # Interferes with sysm activation
+          sudo ./result/bin/activate
+          popd
       - name: install utils
-        run: nix profile add nixpkgs#{lf,viddy,ripgrep,nix-output-monitor,fzf,neovim,gdu,duf,lazygit}
+        run: nix profile add nixpkgs#{lf,viddy,ripgrep,nix-output-monitor,fzf,neovim,gdu,duf,lazygit,micro,qimgv,alacritty}
         # required to keep it alive
       - name: noop
         run: while true; do sleep 10; done;
