@@ -6,10 +6,10 @@ jobs:
     runs-on: ubuntu-latest
     # TODO if nixos.wsl exists with same repo commit hash in previous wf artifacts, continue to run-wsl
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
           persist-credentials: false
-      - uses: cachix/install-nix-action@master
+      - uses: cachix/install-nix-action@7ec16f2c061ab07b235a7245e06ed46fe9a1cab6 # master
         with:
           extra_nix_config: |
             trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= loudgolem-nur-pkgs-0.cachix.org-1:OINy4hRqrmCH0sslp+tQo4hiBEZJEgA1epza03g5rvY=
@@ -19,7 +19,7 @@ jobs:
       - run: |
           nix build .#nixosConfigurations.wsl.config.system.build.tarballBuilder -o result/h-wsl-tar-ball-script
           sudo ./result/h-wsl-tar-ball-script/bin/nixos-wsl-tarball-builder
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         with:
           name: nixos.wsl
           path: nixos.wsl
@@ -28,8 +28,8 @@ jobs:
     needs: build-wsl
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v5
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
+      - uses: actions/download-artifact@634f93cb2916e3fdff6788551b99b062d0335ce0 # v5.0.0
         with:
           persist-credentials: false
         with:

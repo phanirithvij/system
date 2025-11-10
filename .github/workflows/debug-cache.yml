@@ -8,15 +8,15 @@ jobs:
     # runs-on: macos-13
     steps:
       - run: sudo swapoff /mnt/swapfile && sudo rm /mnt/swapfile
-      - uses: cachix/install-nix-action@master
+      - uses: cachix/install-nix-action@7ec16f2c061ab07b235a7245e06ed46fe9a1cab6 # master
         with:
           extra_nix_config: |
             trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= loudgolem-nur-pkgs-0.cachix.org-1:OINy4hRqrmCH0sslp+tQo4hiBEZJEgA1epza03g5rvY=
             substituters = https://nix-community.cachix.org https://cache.nixos.org https://loudgolem-nur-pkgs-0.cachix.org
-      - uses: DeterminateSystems/magic-nix-cache-action@main
-      - uses: actions/checkout@v4
+      - uses: DeterminateSystems/magic-nix-cache-action@9934a5f127967bcd92e99961e365730ba57253de # main
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
           persist-credentials: false
       - run: nix build .#homeConfigurations."runner".activationPackage --impure && ./result/activate
       - name: Debugging with browser
-        uses: fawazahmed0/action-debug@v2
+        uses: fawazahmed0/action-debug@9185bd49adec95e03592e3e6036d86f70d5ef423 # v2

@@ -8,26 +8,27 @@ jobs:
         os: [ubuntu-latest, ubuntu-24.04-arm]
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4 # TODO some @commit thing, dependabot?
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
           persist-credentials: false
       - name: save gh access token for later
         run: echo "ENV_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       # todo system-manager and hm switch, both are slow
-      - uses: tailscale/github-action@v3
+      - uses: tailscale/github-action@6cae46e2d796f265265cfcf628b72a32b4d7cade # v3.3.0
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
           tags: tag:ci
           version: latest
           use-cache: "true"
-      - uses: cachix/install-nix-action@master
+      - uses: cachix/install-nix-action@7ec16f2c061ab07b235a7245e06ed46fe9a1cab6 # master
         with:
           nix_path: nixpkgs=channel:nixos-unstable
           # below being set via sysm's nix.settings
           #extra_nix_config: |
           # system-features = kvm benchmark big-parallel nixos-test uid-range
-      - uses: DeterminateSystems/magic-nix-cache-action@main # FIXME: fairly broken
+        # FIXME: fairly broken
+      - uses: DeterminateSystems/magic-nix-cache-action@9934a5f127967bcd92e99961e365730ba57253de # main
       - name: change node name
         run: |
           sudo tailscale set --hostname="gha-system-$(nix-instantiate --raw --eval --expr 'builtins.currentSystem')"
