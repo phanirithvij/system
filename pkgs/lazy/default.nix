@@ -79,6 +79,10 @@ let
     "fx"
     "gamescope"
     "gimp"
+    "git-absorb"
+    "gitbatch"
+    "gitcs"
+    "git-who"
     "gitnr"
     "gitui"
     "go"
@@ -130,6 +134,7 @@ let
     "ytfzf"
     "zellij"
     "zenith"
+    "zizmor"
 
     # losslesscut # temp disable for nod
     "beekeeper-studio"

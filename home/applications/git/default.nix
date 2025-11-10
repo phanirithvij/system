@@ -1,12 +1,14 @@
 { pkgs, config, ... }:
 {
   home.packages = with pkgs; [
-    git-absorb
     #git-bug # should be in nur
-    gitbatch
-    gitcs
-    git-who
+    lazyPkgs.gitbatch
+    lazyPkgs.git-absorb
+    lazyPkgs.gitcs
+    lazyPkgs.git-who
     lazyPkgs.gitnr # tui to manage gitignore files
+    lazyPkgs.gitui
+    lazyPkgs.zizmor # gha security linter thing
     wrappedPkgs.git-prole
   ];
   imports = [

@@ -9,6 +9,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4 # TODO some @commit thing, dependabot?
+        with:
+          persist-credentials: false
       - name: save gh access token for later
         run: echo "ENV_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
       # todo system-manager and hm switch, both are slow

@@ -7,6 +7,8 @@ jobs:
     # TODO if nixos.wsl exists with same repo commit hash in previous wf artifacts, continue to run-wsl
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
       - uses: cachix/install-nix-action@master
         with:
           extra_nix_config: |
@@ -28,6 +30,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/download-artifact@v5
+        with:
+          persist-credentials: false
         with:
           name: nixos.wsl
           path: .
