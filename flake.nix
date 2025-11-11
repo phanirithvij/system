@@ -104,6 +104,10 @@
     nixpkgs-patch-419929.url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
     nixpkgs-patch-419929.flake = false;
 
+    # tmuxp update fix
+    nixpkgs-patch-459938.url = "https://github.com/NixOS/nixpkgs/pull/459938.patch?full_index=1";
+    nixpkgs-patch-459938.flake = false;
+
     # TODO disabling for now because of rl-2511 notes conflict
     # opengist module (mine, its complex with createDBLocal etc.)
     #nixpkgs-patch-10.url = "https://github.com/phanirithvij/nixpkgs/commit/34be2e80d57c2fb93ece547d9b28947ae56cac92.patch?full_index=1";

@@ -9,10 +9,12 @@
         commit = {
           signOff = true;
         };
-        paging = {
-          colorArg = "always";
-          pager = "${pkgs.delta}/bin/delta --dark --paging=never";
-        };
+        pagers = [
+          {
+            colorArg = "always";
+            pager = "${pkgs.delta}/bin/delta --dark --paging=never";
+          }
+        ];
         autoFetch = false;
         # deprecated, <c-l> and select default, becomes imperative
         log.order = "default"; # large repos, default is topo-order
