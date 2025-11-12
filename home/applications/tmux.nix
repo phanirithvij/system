@@ -3,7 +3,7 @@ let
   # https://github.com/joshmedeski/sesh/issues/87#issuecomment-2238078834
   seshTmuxScript = pkgs.writeShellScript "sesh_startup_script.sh" ''
     if [[ -e ".tmuxp.yaml" || -e ".tmuxp.yml" ]]; then
-      tmuxp load -y .; exit
+      tmuxp load -y -a .; exit
     fi
   '';
 in

@@ -43,11 +43,14 @@
   programs.bash.initExtra = ''
     if [[ :$SHELLOPTS: =~ :(vi|emacs): ]]; then
       if [[ ! -f /tmp/navi_eval.sh ]]; then
+        #echo "set -x" > /tmp/navi_eval.sh
         ${pkgs.navi}/bin/navi widget bash \
           | sed 's/_navi_widget/_navi_widget_currdir/g' \
           | sed 's/--print/--print --path "docs:."/g' \
           | sed 's/C-g/C-j/g' \
           > /tmp/navi_eval.sh
+        #  >> /tmp/navi_eval.sh
+        #echo "set +x" >> /tmp/navi_eval.sh
         fi
       source /tmp/navi_eval.sh
     fi
@@ -62,7 +65,7 @@
       source /tmp/navi_eval.zsh
     fi
   '';
-  programs.fish.shellInit = ''
+  programs.fish.interactiveShellInit = ''
     ${pkgs.navi}/bin/navi widget fish \
       | sed 's/--print/--print --path "docs:."/g' \
       | sed 's/\\\\cg/\\\\cj/g' \

@@ -328,7 +328,8 @@ in
         "input"
         "networkmanager"
       ];
-      shell = pkgs.fish;
+      shell = pkgs.fish; # chsh equivalent
+      #shell = pkgs.bash;
     };
   programs.fish.enable = true;
 
