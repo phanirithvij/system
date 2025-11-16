@@ -52,7 +52,7 @@ in
     systemd.sockets.pr-tracker = {
       description = "pr tracker socket";
       wantedBy = [ "sockets.target" ];
-      listenStreams = [ "0.0.0.0:8000" ];
+      listenStreams = [ "0.0.0.0:8123" ];
       #socketConfig.Accept = true;
       #socketConfig.Service = "pr-tracker.service";
     };
