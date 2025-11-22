@@ -156,6 +156,7 @@ in
   programs.alacritty = {
     enable = true;
     settings = {
+      terminal.shell.program = "${pkgs.fish}/bin/fish";
       font = {
         size = 11; # 11 aligns bottom gap, see https://github.com/alacritty/alacritty/issues/6113#issuecomment-1147105216
         normal = {

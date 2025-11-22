@@ -9,6 +9,7 @@ in
       "-f"
       (replaceVars ./tmux.conf {
         resize-hook-script = ./resize-hook.sh;
+        fish = "${pkgs.fish}/bin/fish";
       })
     ];
     pathAdd = [
