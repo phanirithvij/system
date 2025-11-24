@@ -1,4 +1,9 @@
-{ lib, modulesPath, ... }:
+{
+  lib,
+  modulesPath,
+  pkgs,
+  ...
+}:
 {
   specialisation.tty = {
     inheritParentConfig = true;
@@ -20,6 +25,22 @@
         # TODO disable graphical profile
       };
       desktopManagers.xfce.enable = lib.mkForce false;
+
+      # From ngipkgs pretlax nixos test
+      # Use kmscon <https://www.freedesktop.org/wiki/Software/kmscon/>
+      # to provide a slightly nicer console, and while we're at it,
+      # also use a nice font.
+      # With kmscon, we can for example zoom in/out using [Ctrl] + [+]
+      # and [Ctrl] + [-]
+      services.kmscon = {
+        enable = true;
+        fonts = [
+          {
+            name = "Fira Code";
+            package = pkgs.fira-code;
+          }
+        ];
+      };
     };
   };
 }
