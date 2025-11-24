@@ -226,7 +226,13 @@ in
   # fonts.enableDefaultPackages = lib.mkForce false; # enabled in graphical-desktop.nix
   # TODO bloated, strace alacritty and wezterm to determine required font files
   # remove the rest, cache this package in nur
-  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
+  fonts.packages = with pkgs.nerd-fonts; [
+    #fira-code
+    #fira-mono
+    jetbrains-mono
+    #pkgs.cascadia-code
+    #pkgs.source-code-pro
+  ];
   # https://github.com/NixOS/nixpkgs/issues/386413 | ladybird
   fonts.fontDir.enable = true;
 

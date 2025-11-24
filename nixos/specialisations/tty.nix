@@ -34,10 +34,14 @@
       # and [Ctrl] + [-]
       services.kmscon = {
         enable = true;
+        hwRender = true;
+        extraConfig = ''
+          font-size=14
+        '';
         fonts = [
           {
-            name = "Fira Code";
-            package = pkgs.fira-code;
+            name = "JetBrainsMono Nerd Font";
+            package = pkgs.nerd-fonts.jetbrains-mono;
           }
         ];
       };

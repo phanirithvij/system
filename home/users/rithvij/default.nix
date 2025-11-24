@@ -160,7 +160,11 @@ in
       font = {
         size = 11; # 11 aligns bottom gap, see https://github.com/alacritty/alacritty/issues/6113#issuecomment-1147105216
         normal = {
-          family = "JetBrainsMono Nerd Font"; # TODO try Source Code Pro
+          family = "JetBrainsMono Nerd Font";
+          #family = "FiraCode Nerd Font Mono";
+          #family = "FiraMono Nerd Font";
+          #family = "CascadiaCode";
+          #family = "SourceCodePro";
         };
       };
       keyboard.bindings = [
