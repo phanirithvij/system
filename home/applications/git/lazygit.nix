@@ -3,6 +3,9 @@
   programs.lazygit = {
     enable = true;
     settings = {
+      # TODO EDITOR and VISUAL not working clearly a bug
+      # found this hack via https://github.com/jesseduffield/lazygit/issues/514#issuecomment-2616748964
+      os.editPreset = "micro";
       disableStartupPopups = true;
       git = {
         overrideGpg = true;
