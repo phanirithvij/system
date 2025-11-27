@@ -39,6 +39,7 @@ in
     ../../nixos/applications/nix/pr-tracker-service.nix
     ../../nixos/applications/ntfy-rss.nix
     # ../../nixos/applications/opengist.nix
+    ../../nixos/applications/reaction
     ../../nixos/applications/selfhosted/qbittorrent.nix
     # ../../nixos/applications/spotify.nix
     ../../nixos/applications/tui.nix
