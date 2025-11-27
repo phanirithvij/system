@@ -1126,6 +1126,23 @@
         "type": "github"
       }
     },
+    "reaction-module": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1764316723,
+        "narHash": "sha256-Y4Kdg4oq3CbYzFdQckvmdlwvqxB6fWM21hYA7wZkVWo=",
+        "owner": "phanirithvij",
+        "repo": "reaction-nixos",
+        "rev": "dae576a54a35cdcb7eb87d2234f984cf57857873",
+        "type": "github"
+      },
+      "original": {
+        "owner": "phanirithvij",
+        "ref": "cfg-valid",
+        "repo": "reaction-nixos",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "cargo2nix": "cargo2nix",
@@ -1158,6 +1175,7 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-upstream": "nixpkgs-upstream",
         "nur-pkgs": "nur-pkgs",
+        "reaction-module": "reaction-module",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
         "ssh-keys": "ssh-keys",
