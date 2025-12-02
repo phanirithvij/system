@@ -265,6 +265,8 @@ in
     '';
   */
 
+  powerManagement.cpuFreqGovernor = "performance";
+
   hardware.opentabletdriver.enable = true;
 
   # TODO learn what rtkit is
