@@ -11,6 +11,9 @@
   # default value is enableAllFirmware which is false by default
   # config.enableRedistributableFirmware = false;
 
+  # TODO split up linux-firmware pacakge into
+  # million little pieces like alpine or a few pieces like arch
+
   # TODO nixos-generate-config can have this scan?
   # sudo dmesg | rg 'Loading firmware.*(/nix/store/[a-z0-9]{32}-[^[:space:]]+)' -o -r '$1' | xargs -d'\n' -I{} realpath {}
   #   /nix/store/[...]-wireless-regdb-2025.02.20-zstd/lib/firmware/regulatory.db.zst
@@ -20,6 +23,12 @@
   # sudo dmesg | rg 'firmware .* failed with error'
   #   bluetooth hci0: Direct firmware load for intel/ibt-hw-37.8.10-fw-1.10.3.11.e.bseq failed with error -2
   #   bluetooth hci0: Direct firmware load for intel/ibt-hw-37.8.bseq failed with error -2
+
+  # https://serverfault.com/questions/1026598/know-which-firmware-my-linux-kernel-has-loaded-since-booting
+  # https://github.com/search?q=language%3ANix+dyndbg+AND+drivers%2Fbase%2Ffirmware_loader%2Fmain.c&type=code
+  # https://github.com/NixOS/nixpkgs/issues/148197#issuecomment-1121407764
+  #   https://github.com/samueldr/nixpkgs/commit/cbf7aa4ca386a7a0165aa0531772523760402861
+  #boot.kernelParams = [ ''dyndbg="file drivers/base/firmware_loader/main.c +fmp"'' ];
 
   # hardware.firmwareCompression is zstd by default (it is auto, but for new kernels it is zstd)
   hardware.firmwareCompression = "none"; # disable because I do it myself, don't think it is idempotent

@@ -86,6 +86,7 @@ in
 
   # for nix-on-droid and cross compilation
   # WARNING: enabling this allows aarch64 programs to run inside nix sandbox too
+  # WARNING: slower than a gha aarch64-linux native builder, ideally I shouldn't use it at all
   boot.binfmt.emulatedSystems = [ "aarch64-linux" ];
 
   # https://github.com/nix-community/nix-on-droid/wiki/Use-a-remote-builder-with-qemu
@@ -124,6 +125,7 @@ in
       "-v"
     ];
   };
+  services.fstrim.enable = true;
 
   boot.kernel.sysctl = {
     # REISUB
@@ -132,15 +134,6 @@ in
     # see https://unix.stackexchange.com/q/29567 https://superuser.com/q/1853565
     "kernel.panic" = 5;
   };
-
-  # TODO split up linux-firmware pacakge into
-  # million little pieces like alpine or a few pieces like arch
-
-  # https://serverfault.com/questions/1026598/know-which-firmware-my-linux-kernel-has-loaded-since-booting
-  # https://github.com/search?q=language%3ANix+dyndbg+AND+drivers%2Fbase%2Ffirmware_loader%2Fmain.c&type=code
-  # https://github.com/NixOS/nixpkgs/issues/148197#issuecomment-1121407764
-  #   https://github.com/samueldr/nixpkgs/commit/cbf7aa4ca386a7a0165aa0531772523760402861
-  #boot.kernelParams = [ ''dyndbg="file drivers/base/firmware_loader/main.c +fmp"'' ];
 
   hardware.graphics = {
     extraPackages = with pkgs; [
