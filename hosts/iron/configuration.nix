@@ -213,8 +213,10 @@ in
 
   networking.hostName = hostname;
   networking.networkmanager.enable = true;
+  # https://kokada.dev/blog/an-unordered-list-of-hidden-gems-inside-nixos/
+  #networking.networkmanager.wifi.backend = "iwd";
+  # TODO get the iwd thing to work properly
 
-  # Set your time zone.
   time.timeZone = hostvars.TimeZone;
 
   i18n.defaultLocale = "en_US.UTF-8";
