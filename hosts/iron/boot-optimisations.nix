@@ -39,7 +39,7 @@
   # MEDIUM WINS:
 
   # 6. systemd-binfmt (1.3s) - only if you don't use cross-arch execution
-  boot.binfmt.emulatedSystems = lib.mkForce [ ]; # If you don't need this
+  # boot.binfmt.emulatedSystems = lib.mkForce [ ]; # If you don't need this
 
   # 7. Reduce module load time (4.5s)
   # boot.initrd.systemd.enable = true; # Modern faster init
