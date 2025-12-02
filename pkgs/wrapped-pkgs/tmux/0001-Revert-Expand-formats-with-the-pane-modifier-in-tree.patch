@@ -1,0 +1,92 @@
+From c7170a7a0a5c77cd22039ec5ebf92627756d2b67 Mon Sep 17 00:00:00 2001
+From: phanirithvij <phanirithvij2000@gmail.com>
+Date: Wed, 3 Dec 2025 02:03:00 +0530
+Subject: [PATCH] Revert "Expand formats with the pane modifier in tree mode so
+ that #() doesn't"
+
+This reverts commit 34a35b0f0954de47592b7d68bb8555b864f439c5.
+---
+ window-tree.c | 21 +++++----------------
+ 1 file changed, 5 insertions(+), 16 deletions(-)
+
+diff --git a/window-tree.c b/window-tree.c
+index 183c64d0..a55f8499 100644
+--- a/window-tree.c
++++ b/window-tree.c
+@@ -297,7 +297,6 @@ window_tree_build_pane(struct session *s, struct winlink *wl,
+ 	struct mode_tree_item		*mti;
+ 	char				*name, *text;
+ 	u_int				 idx;
+-	struct format_tree		*ft;
+ 
+ 	window_pane_index(wp, &idx);
+ 
+@@ -307,11 +306,8 @@ window_tree_build_pane(struct session *s, struct winlink *wl,
+ 	item->winlink = wl->idx;
+ 	item->pane = wp->id;
+ 
+-	ft = format_create(NULL, NULL, FORMAT_PANE|wp->id, 0);
+-	format_defaults(ft, NULL, s, wl, wp);
+-	text = format_expand(ft, data->format);
++	text = format_single(NULL, data->format, NULL, s, wl, wp);
+ 	xasprintf(&name, "%u", idx);
+-	format_free(ft);
+ 
+ 	mti = mode_tree_add(data->data, parent, item, (uint64_t)wp, name, text,
+ 	    -1);
+@@ -349,7 +345,6 @@ window_tree_build_window(struct session *s, struct winlink *wl,
+ 	struct window_pane		*wp, **l;
+ 	u_int				 n, i;
+ 	int				 expanded;
+-	struct format_tree		*ft;
+ 
+ 	item = window_tree_add_item(data);
+ 	item->type = WINDOW_TREE_WINDOW;
+@@ -357,11 +352,8 @@ window_tree_build_window(struct session *s, struct winlink *wl,
+ 	item->winlink = wl->idx;
+ 	item->pane = -1;
+ 
+-	ft = format_create(NULL, NULL, FORMAT_PANE|wl->window->active->id, 0);
+-	format_defaults(ft, NULL, s, wl, NULL);
+-	text = format_expand(ft, data->format);
++	text = format_single(NULL, data->format, NULL, s, wl, NULL);
+ 	xasprintf(&name, "%u", wl->idx);
+-	format_free(ft);
+ 
+ 	if (data->type == WINDOW_TREE_SESSION ||
+ 	    data->type == WINDOW_TREE_WINDOW)
+@@ -379,6 +371,7 @@ window_tree_build_window(struct session *s, struct winlink *wl,
+ 	if (TAILQ_NEXT(wp, entry) == NULL) {
+ 		if (!window_tree_filter_pane(s, wl, wp, filter))
+ 			goto empty;
++		return (1);
+ 	}
+ 
+ 	l = NULL;
+@@ -416,10 +409,9 @@ window_tree_build_session(struct session *s, void *modedata,
+ 	struct window_tree_itemdata	*item;
+ 	struct mode_tree_item		*mti;
+ 	char				*text;
+-	struct winlink			*wl = s->curw, **l;
++	struct winlink			*wl, **l;
+ 	u_int				 n, i, empty;
+ 	int				 expanded;
+-	struct format_tree		*ft;
+ 
+ 	item = window_tree_add_item(data);
+ 	item->type = WINDOW_TREE_SESSION;
+@@ -427,10 +419,7 @@ window_tree_build_session(struct session *s, void *modedata,
+ 	item->winlink = -1;
+ 	item->pane = -1;
+ 
+-	ft = format_create(NULL, NULL, FORMAT_PANE|wl->window->active->id, 0);
+-	format_defaults(ft, NULL, s, NULL, NULL);
+-	text = format_expand(ft, data->format);
+-	format_free(ft);
++	text = format_single(NULL, data->format, NULL, s, NULL, NULL);
+ 
+ 	if (data->type == WINDOW_TREE_SESSION)
+ 		expanded = 0;
+-- 
+2.51.2
+
