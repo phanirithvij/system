@@ -161,7 +161,15 @@
   - niv
   - https://github.com/nikstur/lon
   - https://github.com/Fuwn/yae
+  - fricklerhandwerk/flake-inputs (*) - my preferred approach
 - pythonRelaxDeps has boolean and list values
+- https://reddit.com/r/NixOS/comments/1pb9rnz
+  - feels like other than nixpkgs, ngipkgs and by-name structure and modules and
+    tests structures
+  - and the nur structure I guess
+  - no other structure is work investing in
+  - think std/hive or flake-parts with dendritic etc.
+    - seem nice but flakes are slow
 
 ### Ramblings or thoughts
 
