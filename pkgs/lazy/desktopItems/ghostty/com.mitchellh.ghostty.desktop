@@ -3,8 +3,8 @@ Version=1.0
 Name=Ghostty
 Type=Application
 Comment=A terminal emulator
-TryExec=/nix/store/1b720nw1xi48c9ss2czd0glgb9s1bgr3-ghostty-1.2.1/bin/ghostty
-Exec=/nix/store/1b720nw1xi48c9ss2czd0glgb9s1bgr3-ghostty-1.2.1/bin/ghostty --gtk-single-instance=true
+TryExec=/nix/store/cw06kj1lzi934nqx6gsjcr5pdfganm59-ghostty-1.3.0-dev/bin/ghostty
+Exec=/nix/store/cw06kj1lzi934nqx6gsjcr5pdfganm59-ghostty-1.3.0-dev/bin/ghostty --gtk-single-instance=true
 Icon=com.mitchellh.ghostty
 Categories=System;TerminalEmulator;
 Keywords=terminal;tty;pty;
@@ -23,4 +23,4 @@ X-KDE-Shortcuts=Ctrl+Alt+T
 
 [Desktop Action new-window]
 Name=New Window
-Exec=/nix/store/1b720nw1xi48c9ss2czd0glgb9s1bgr3-ghostty-1.2.1/bin/ghostty --gtk-single-instance=true
+Exec=/nix/store/cw06kj1lzi934nqx6gsjcr5pdfganm59-ghostty-1.3.0-dev/bin/ghostty --gtk-single-instance=true
