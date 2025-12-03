@@ -57,6 +57,12 @@
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    oranc.url = "github:linyinfeng/oranc/main";
+    oranc.inputs.flake-parts.follows = "flake-parts";
+    oranc.inputs.nixpkgs.follows = "nixpkgs";
+    oranc.inputs.treefmt-nix.follows = "treefmt-nix";
+    oranc.inputs.crane.follows = "crane";
+
     devshell.url = "github:numtide/devshell/main";
     devshell.inputs.nixpkgs.follows = "nixpkgs";
 
@@ -150,6 +156,9 @@
 
     crane.url = "github:ipetkov/crane/master";
 
+    flake-parts.url = "github:hercules-ci/flake-parts/main";
+    flake-parts.inputs.nixpkgs-lib.follows = "nixpkgs";
+
     flake-utils.url = "github:numtide/flake-utils/main";
     flake-utils.inputs.systems.follows = "systems";
 
@@ -168,6 +177,7 @@
     };
 
     nix-update.url = "github:Mic92/nix-update/main";
+    nix-update.inputs.flake-parts.follows = "flake-parts";
     nix-update.inputs.nixpkgs.follows = "nixpkgs";
     nix-update.inputs.treefmt-nix.follows = "treefmt-nix";
   };

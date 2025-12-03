@@ -1,8 +1,5 @@
 { config, pkgs, ... }:
 {
-  # TODO
-  # attic
-  # harmonia
   sops.secrets.nix-serve-privkey = { };
   services.nix-serve = {
     enable = true;

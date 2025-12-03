@@ -1,0 +1,43 @@
+on:
+  workflow_dispatch:
+    inputs:
+      derivation:
+        description: "The flake ref to be built"
+        required: true
+        default: "github:nixos/nixpkgs/nixpkgs-unstable#lazygit"
+      package_repository:
+        description: "Package repository to push to"
+        required: true
+        default: phanirithvij/oranc-test
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: cachix/install-nix-action@master
+        with:
+          github_access_token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: linyinfeng/oranc-action@main
+        with:
+          repositoryPart1: ${{ github.repository_owner }}
+          repositoryPart2: oranc-test # TODO can be a secret if planning to make it a private registry
+          orancServerContainer: "${{ job.services.oranc.id }}"
+          initialize: "true"
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_PAT_TOKEN }}
+          signingKey: ${{ secrets.NIX_SIGNING_KEY }}
+      # TODO copy from oranc-action setup on nur-pkgs
+      - run: nix build -L ${{ inputs.derivation }}
+      - name: push to ghcr manually
+        run: |
+          readlink -f result \
+            | sudo -E /tmp/oranc-action/oranc/bin/oranc push \
+              --excluded-signing-key-pattern '^$' --already-signed \
+              --repository ${{ inputs.package_repository }}
+        env:
+          ORANC_USERNAME: ${{ github.repository_owner }}
+          ORANC_PASSWORD: ${{ secrets.GH_PAT_TOKEN }}
+          ORANC_SIGNING_KEY: ${{ secrets.NIX_SIGNING_KEY }}

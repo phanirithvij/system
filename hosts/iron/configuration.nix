@@ -34,8 +34,8 @@ in
     ../../nixos/applications/gpg.nix
     # ../../nixos/applications/guix # I don't use this
     ../../nixos/applications/nix
-    ../../nixos/applications/nix/nixserve
     ../../nixos/applications/nix/selfhosted
+    ../../nixos/applications/nix/substituters
     ../../nixos/applications/nix/pr-tracker-service.nix
     ../../nixos/applications/ntfy-rss.nix
     # ../../nixos/applications/opengist.nix

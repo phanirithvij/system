@@ -153,7 +153,6 @@
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": [
-          "nix-update",
           "nixpkgs"
         ]
       },
@@ -167,6 +166,7 @@
       },
       "original": {
         "owner": "hercules-ci",
+        "ref": "main",
         "repo": "flake-parts",
         "type": "github"
       }
@@ -805,7 +805,9 @@
     },
     "nix-update": {
       "inputs": {
-        "flake-parts": "flake-parts",
+        "flake-parts": [
+          "flake-parts"
+        ],
         "nixpkgs": [
           "nixpkgs"
         ],
@@ -1104,6 +1106,36 @@
         "type": "github"
       }
     },
+    "oranc": {
+      "inputs": {
+        "crane": [
+          "crane"
+        ],
+        "flake-parts": [
+          "flake-parts"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "treefmt-nix": [
+          "treefmt-nix"
+        ]
+      },
+      "locked": {
+        "lastModified": 1764446632,
+        "narHash": "sha256-edbkkXRvmW8kOTO5yWDX2xfl72uOcNZUb+GCXWEn6G4=",
+        "owner": "linyinfeng",
+        "repo": "oranc",
+        "rev": "3a9eb02b955b5170e80707c07244ad39a5cc1bbe",
+        "type": "github"
+      },
+      "original": {
+        "owner": "linyinfeng",
+        "ref": "main",
+        "repo": "oranc",
+        "type": "github"
+      }
+    },
     "patch2pr": {
       "inputs": {
         "nixpkgs": [
@@ -1133,6 +1165,7 @@
         "devshell": "devshell",
         "devshell-lib": "devshell-lib",
         "flake-compat": "flake-compat",
+        "flake-parts": "flake-parts",
         "flake-schemas": "flake-schemas",
         "flake-utils": "flake-utils",
         "git-hooks": "git-hooks",
@@ -1158,6 +1191,7 @@
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-upstream": "nixpkgs-upstream",
         "nur-pkgs": "nur-pkgs",
+        "oranc": "oranc",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
         "ssh-keys": "ssh-keys",

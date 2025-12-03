@@ -29,7 +29,7 @@
     # https://github.com/NixOS/nix/issues/6536#issuecomment-1254858889
     # can fail at runtime https://github.com/NixOS/nix/issues/6536#issuecomment-2774658643
     extraOptions = ''
-      !include ${config.sops.secrets.nix_access_tokens.path}
+      !include ${config.sops.templates.nix_access_tokens.path}
     '';
     settings =
       let
@@ -69,7 +69,16 @@
         flake-registry = "";
       };
   };
-  sops.secrets.nix_access_tokens.mode = "0440";
+
+  sops.secrets.github_pat = {
+    owner = config.users.users.rithvij.name;
+  };
+  sops.templates.nix_access_tokens = {
+    # nix-daemon is root in multi-user
+    # so only nix-daemon can access it, not even nix cli
+    mode = "0400";
+    content = "access-tokens = github.com=${config.sops.placeholder."github_pat"}";
+  };
 
   system.switch.enable = true;
   system.rebuild.enableNg = true;

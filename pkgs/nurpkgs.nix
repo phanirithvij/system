@@ -33,6 +33,7 @@ let
         "nixpkgs-track" # used in wrappedPkgs, don't use directly
         "nix-tree" # used in lazyPkgs, don't use directly
         "ghostty" # used in lazyPkgs, don't use directly
+        "oranc" # must not be in hm packages, added in env.syspkgs
       ];
       # skip packages marked as broken
       broken = v ? meta && v.meta.broken;
