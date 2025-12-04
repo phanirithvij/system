@@ -137,11 +137,13 @@
     # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
     flake-schemas.url = "github:DeterminateSystems/flake-schemas/main";
 
-    # hyprland.url = "github:hyprwm/Hyprland/main";
-    # hyprland.submodules = true; # no such thing? but inputs.self.submodules exist
+    # https://github.com/hyprwm/Hyprland/issues/9314#issuecomment-2634051281
+    hyprland.url = "https://github.com/hyprwm/Hyprland.git";
+    hyprland.type = "git";
+    hyprland.submodules = true; # inputs.self.submodules exists, and inputs.xxx.submodules is only for type git?
     # as per https://github.com/mightyiam/input-branches#the-setup
     # that thing also has issues, https://github.com/NixOS/nix/issues/13571
-    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=main"; # FIXME doesn't work with nix-patcher
+    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=main"; # FIXME doesn't work with nix-patcher
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.inputs.pre-commit-hooks.follows = "git-hooks";
 
