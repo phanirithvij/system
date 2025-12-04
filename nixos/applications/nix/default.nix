@@ -70,12 +70,8 @@
       };
   };
 
-  sops.secrets.github_pat = {
-    owner = config.users.users.rithvij.name;
-  };
+  sops.secrets.github_pat.owner = config.users.users.rithvij.name;
   sops.templates.nix_access_tokens = {
-    # nix-daemon is root in multi-user
-    # so only nix-daemon can access it, not even nix cli
     mode = "0400";
     content = "access-tokens = github.com=${config.sops.placeholder."github_pat"}";
   };
