@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 if [ ! -f oranc-test.key ]; then
-        nix key generate-secret --key-name "oranc-test-key" >oranc-test.key
-        cat oranc-test.key | nix key convert-secret-to-public >oranc-test.pub.key
+  nix key generate-secret --key-name "oranc-test-key" >oranc-test.key
+  cat oranc-test.key | nix key convert-secret-to-public >oranc-test.pub.key
 fi
 
 export ORANC_USERNAME="phanirithvij"
@@ -25,8 +25,8 @@ oranc push --repository "$OCI_REPOSITORY" --allow-immutable-db initialize --prio
 #oranc push --repository "$OCI_REPOSITORY" --allow-immutable-db
 
 nom build \
-        github:nixos/nixpkgs/nixpkgs-unstable#path \
-        --no-link --print-out-paths |
-        sudo oranc push \
-                --repository "$OCI_REPOSITORY" \
-                --already-signed --excluded-signing-key-pattern '^$'
+  github:nixos/nixpkgs/nixpkgs-unstable#path \
+  --no-link --print-out-paths |
+  sudo oranc push \
+    --repository "$OCI_REPOSITORY" \
+    --already-signed --excluded-signing-key-pattern '^$'
