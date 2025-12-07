@@ -7,12 +7,13 @@
     lazy-apps.packages.${system}.lazy-app =
       (
         # IFD? what about npins imports?
+        # TODO: flake-inputs
         (import (
           pkgs.fetchFromGitHub {
             owner = "phanirithvij";
             repo = "lazy-apps";
             rev = "master";
-            hash = "sha256-iHVH/z3hEGkQrxmPTWWQ/Z9LAVeYn0dRlTcR71OMRXY=";
+            hash = "sha256-3U87bUzrRfo59ciATj016CIgg21WKh8L6oYDitarpgg=";
           }
         )).mkLazyApps
           { inherit pkgs; }
@@ -29,6 +30,21 @@ let
   # https://code.tvl.fyi/about/nix/nix-1p#functions
   # cargs = args // {
   cargs = { inherit mkLazyApp pkgs; };
+
+  appIcons = lib.fileset.toSource {
+    # TODO figure out a way to filter for only valid icon types, svg, png etc.
+    fileset = lib.fileset.fileFilter (file: !file.hasExt "nix") ./desktopItems;
+    root = ./appIcons;
+  };
+
+  # there is no perfect structure to app icons like desktop files
+  # TODO find the valid paths they could be
+  getAppIcons =
+    name:
+    lib.optional (builtins.pathExists "${appIcons}/${name}") "${appIcons}/${name}"
+    ++ lib.optionals (builtins.pathExists "${appIcons}/${name}") (
+      lib.filesystem.listFilesRecursive "${appIcons}/${name}"
+    );
 
   desktopItems = lib.fileset.toSource {
     fileset = lib.fileset.fileFilter (file: file.hasExt "desktop") ./desktopItems;
@@ -72,6 +88,7 @@ let
     "chezmoi"
     "cloudflare-warp"
     "devbox"
+    "discord"
     "expect"
     "fastfetch"
     "feh"
@@ -140,6 +157,7 @@ let
     "zellij"
     "zenith"
     "zizmor"
+    "zoom-us"
 
     # losslesscut # temp disable for nod
     "beekeeper-studio"
@@ -164,6 +182,7 @@ let
         lib.hasSuffix "nix" f
         && !(lib.hasSuffix "default.nix" f)
         && !(lib.hasSuffix "bundle-lazy-apps.nix" f)
+        && !(lib.hasSuffix "bundle-original-apps.nix" f)
       ))
       (map builtins.toString)
       (map (lib.removeSuffix ".nix"))

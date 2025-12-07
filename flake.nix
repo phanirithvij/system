@@ -268,6 +268,8 @@
                     "steam-unwrapped"
                     "honey-home"
                     "nvidia-settings"
+                    "discord"
+                    "zoom"
                   ];
                 in
                 if byName then lib.warn "Allowing unfree package: ${pname}" true else false;

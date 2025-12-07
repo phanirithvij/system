@@ -1,11 +1,30 @@
 {
   gitRoot,
-  ...
+  pkgs ? import <nixpkgs> { },
+  lib ? pkgs.lib,
 }:
-with import <nixpkgs> { };
 let
+  inherit (pkgs) stdenv;
   flk = builtins.getFlake (toString gitRoot);
   lazyApps = flk.lazyApps.${builtins.currentSystem};
+
+  /*
+    TODO not just applications should bundle all of them
+      icons
+      mime registrations
+      desktop menu entries (applications, applications-merged)
+    Do I need to have option to enable these like module options?
+  */
+
+  /*
+    TODO option to have a lazy indicator, like dropbox corner icon
+    should be pretty hard to implement?
+     magick convert
+       arbitrary paths
+       arbitrary sized
+       arbitrary image types even svgs?
+    If this can be implemented then custom icons can also be
+  */
   getApplications =
     pname: pkg:
     stdenv.mkDerivation {
@@ -25,6 +44,7 @@ let
             mv "$i" "$new"
           fi
         done
+
         popd >/dev/null 2>&1 || exit 0
       '';
     };
