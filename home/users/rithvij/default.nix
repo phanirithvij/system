@@ -18,6 +18,7 @@ in
     ../../applications/asciinema.nix
     ../../applications/bookmarks
     ../../applications/bashmount.nix
+    ../../applications/desktop
     ../../applications/direnv.nix
     ../../applications/distrobox
     ../../applications/docker
@@ -36,7 +37,6 @@ in
     ../../applications/hyprland.nix
     ../../applications/rss.nix
     ../../applications/shells
-    ../../applications/telegram
     ../../applications/terminals.nix
     ../../applications/tmux.nix
     ../../applications/topgrade.nix
