@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Network;InstantMessaging
+Exec=Discord
+GenericName=All-in-one cross-platform voice and text chat for gamers
+Icon=discord
+MimeType=x-scheme-handler/discord
+Name=Discord
+StartupWMClass=discord
+Type=Application
+Version=1.5

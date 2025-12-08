@@ -104,7 +104,7 @@ Name[sv]=Skapa en ny anslutningsprofil
 Name[tr]=Yeni Bir Bağlantı Profili Oluştur
 Name[uk]=Створити новий профіль з'єднання
 Name[zh_CN]=新建连接配置
-Exec=/nix/store/p3gh69qxv9vm45ccsvzv8r00b3csr8bd-remmina-1.4.41/bin/remmina --new
+Exec=/nix/store/hhb19zjlwqbkyb4463yhbjh082dnc1bi-remmina-1.4.41/bin/remmina --new
 
 [Desktop Action Kiosk]
 # Start Remmina with a minimal interface for kiosk/thin client mode
@@ -114,7 +114,7 @@ Name[fr]=Démarrer Remmina en mode Kiosque
 Name[hr]=Pokreni Remminu u Kisok načinu
 Name[it]=Avvia Remmina in modo Chiosco
 Name[uk]=Запустити Remmina у режимі кіоску
-Exec=/nix/store/p3gh69qxv9vm45ccsvzv8r00b3csr8bd-remmina-1.4.41/bin/remmina --kiosk
+Exec=/nix/store/hhb19zjlwqbkyb4463yhbjh082dnc1bi-remmina-1.4.41/bin/remmina --kiosk
 
 [Desktop Action Tray]
 Name=Start Remmina Minimized
@@ -139,10 +139,10 @@ Name[sv]=Starta Remmina minimerat
 Name[tr]=Remmina'yı Küçültülmüş Başlat
 Name[uk]=Запустити Remmina у системному лотку
 Name[zh_CN]=启动后自动最小化
-Exec=/nix/store/p3gh69qxv9vm45ccsvzv8r00b3csr8bd-remmina-1.4.41/bin/remmina --icon
+Exec=/nix/store/hhb19zjlwqbkyb4463yhbjh082dnc1bi-remmina-1.4.41/bin/remmina --icon
 
 [Desktop Action Quit]
 Name=Quit
 Name[hr]=Zatvori
 Name[uk]=Вийти
-Exec=/nix/store/p3gh69qxv9vm45ccsvzv8r00b3csr8bd-remmina-1.4.41/bin/remmina --quit
+Exec=/nix/store/hhb19zjlwqbkyb4463yhbjh082dnc1bi-remmina-1.4.41/bin/remmina --quit
