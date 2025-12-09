@@ -56,6 +56,8 @@
         http-connections = 50;
         log-lines = 50;
         # below need to be user specific? so home-manager?
+        # NOTE: trusted-substituters will not work!
+        # found it the hard way when working on Tomas's dotfiles
         substituters = [
           "https://loudgolem-nur-pkgs-0.cachix.org"
           "https://nix-community.cachix.org"
