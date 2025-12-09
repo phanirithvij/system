@@ -1162,11 +1162,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1765179640,
-        "narHash": "sha256-28TLFt7q9KXt3GnS2cAKFHBsgOm6Zn38NmNcgC6NhKw=",
+        "lastModified": 1765281270,
+        "narHash": "sha256-01Hil4wAfYR98FBP6CWWVmDX2+nJZdiGaKG/E7NXO88=",
         "owner": "phanirithvij",
         "repo": "nur-packages",
-        "rev": "1d12a9f9d1b67d656e0cb7814d92b47ef3473cd0",
+        "rev": "a99298f70ad655d3afa9b9f349a6197e72562a57",
         "type": "github"
       },
       "original": {
