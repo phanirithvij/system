@@ -34,11 +34,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixdroidpkgs-upstream.url = "github:horriblename/nixdroidpkgs/main";
-    nixdroidpkgs-upstream.inputs.nixpkgs.follows = "nixpkgs";
-    nixdroidpkgs-upstream.inputs.termux-auth.follows = "";
-    nixdroidpkgs-upstream.inputs.termux-packages.follows = "";
-    nixdroidpkgs.url = "github:phanirithvij/nixdroidpkgs/patched"; # nix-patcher
+    nixdroidpkgs.url = "github:horriblename/nixdroidpkgs/main";
     nixdroidpkgs.inputs.nixpkgs.follows = "nixpkgs";
 
     nixos-wsl = {
@@ -117,9 +113,6 @@
 
     home-manager-patch-10.url = ./home/patches/docs-manpages-parallel.patch;
     home-manager-patch-10.flake = false;
-
-    nixdroidpkgs-patch-01.url = ./hosts/nod/patches/nixdroidpkgs-flake-update.patch;
-    nixdroidpkgs-patch-01.flake = false;
 
     ### end nix-patcher patches
 
