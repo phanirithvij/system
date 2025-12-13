@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   config,
   ...
@@ -30,7 +31,7 @@
     content = "access-tokens = github.com=${config.sops.placeholder."github_pat"}";
   };
 
-  nix.package = pkgs.nixVersions.git; # keep in sync with host to avoid multiple nix versions
+  nix.package = lib.mkForce pkgs.nixVersions.git; # keep in sync with host to avoid multiple nix versions
   nix.extraOptions = ''
     netrc-file = ${config.sops.templates.nix_netrc.path}
     !include ${config.sops.templates.nix_access_tokens.path}
