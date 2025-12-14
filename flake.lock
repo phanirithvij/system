@@ -1006,7 +1006,7 @@
     "nixpkgs-patch-419929": {
       "flake": false,
       "locked": {
-        "narHash": "sha256-jMExeebZ0X99DETrCI6ULz5AaPqA9PJXDCyg/QkY/S8=",
+        "narHash": "sha256-uw+rZNWxosWkcfkvbOqaAJbv7chWbbPgW1+yieEzrKk=",
         "type": "file",
         "url": "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1"
       },
