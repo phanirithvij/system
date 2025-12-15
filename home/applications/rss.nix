@@ -131,6 +131,7 @@
         "https://antfu.me/feed.xml" # slidevjs
 
         # linux
+        "https://www.apalrd.net/index.xml"
         "https://www.nico.schottelius.org/blog-archive/index.rss"
 
         # unorganized

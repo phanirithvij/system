@@ -126,3 +126,26 @@ Another doc for selfhosted docker/podman stuff
 
 - All the above services
   - just in case I leave nixos due to the toxicity
+
+Not foss, but freeware/anti-features
+
+- [ ] basecamp once writebook
+  - `https://auth.once.com/download/<your-purchase-code-for-writebook>` to get
+    source code
+  - requireFile I guess for src.
+  - Learn how to package ruby on rails stuff
+- [ ] basecamp fizzy kanban
+  - https://github.com/basecamp/fizzy
+  - https://github.com/basecamp/fizzy-saas
+  - https://github.com/basecamp/fizzy/blob/main/docs/docker-deployment.md
+  - https://github.com/basecamp/fizzy/blob/main/docs/development.md
+  - some custom source available license, disallowing competing product
+- [ ] octotail
+  - it is foss https://github.com/getbettr/octotail
+  - https://github.com/NixOS/nixpkgs/pull/419929
+  - todos in the above pr
+  - it's anti features because it has to do with github and even undocumented apis, very flaky setup
+- [ ] Teldrive
+  - it is foss
+  - it has to do with telegram file uploads
+  - telegram server is closed source, except mtproto whatever
