@@ -113,6 +113,7 @@
         "http://habitatchronicles.com/feed/"
         "https://til.hashrocket.com/rss"
         "https://unplannedobsolescence.com/atom.xml"
+        "https://romanzipp.com/rss"
 
         # discover new projects
         "https://terminaltrove.com/totw.xml"
