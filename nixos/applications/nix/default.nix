@@ -79,5 +79,4 @@
   };
 
   system.switch.enable = true;
-  system.rebuild.enableNg = true;
 }

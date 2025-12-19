@@ -13,7 +13,7 @@
       docker = {
         enable = true;
         enableOnBoot = true;
-        package = pkgs.docker_25;
+        package = pkgs.docker_29;
         daemon.settings = {
           dns = config.docker-opts.nameservers;
         };
