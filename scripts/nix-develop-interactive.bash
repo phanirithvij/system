@@ -29,6 +29,30 @@ if [ "$in_nix_shell" -eq 0 ]; then
   return 1
 fi
 
+# TODO fzf tui? (some source <tmpfile>.sh every run?)
+# rust/zig/go whatever, they can generate commands to source in the nix-shell (like zoxide init bash)
+# or write a new shell which can execve commands and show in the outer shell
+# given a lib.fileset -> symlink tree to original paths (mkoutofstoresymlink adjacent?)
+#   relative to file's position? why is src so akward to use ../../. maybe have some way to pass auto src to files like callpackage
+#   fileset root does it work with ../.. or just ./.?
+# shell arg or env var to allow localBuild (skip unpack and rely on proper source mapping maybe src=. or src=filesetSymlinkTree)
+#   for all derivations which have relative sources
+#   for all derivations which have sources like fetchfrom... don't alter those?
+#   cntr and `repl ? false` with --arg repl true come to mind
+#     but nix develop can't accept --arg I think
+# e.g. customUnpackPhase added to prePhases
+# or set dontUnpack true
+# custom out if legacy nix shell
+# detect if in nix-shell vs nix develop -f . or flakes
+#   see /nix/store presense in $out before overriding it
+# Am i just looking for storeDir = ./. instead of /nix/store?
+#   NO
+#   unique hash prefix for development projects are blockers for me, they will lose local build cache
+#   rebuilds of the world due to custom store dir are unacceptable they will lose binary cache
+#   better nix-portable? https://github.com/Ninlives/relocatable.nix/blob/main/template.sh
+#     nix-portable needs proot or bubblewrap but not relocatable.nix?
+# numtide/build-go-cache? but not really..
+
 # phases detection taken from
 # https://github.com/NixOS/nixpkgs/blob/master/pkgs/stdenv/generic/setup.sh
 all_phases="${prePhases[*]:-} unpackPhase patchPhase ${preConfigurePhases[*]:-} \
@@ -57,6 +81,4 @@ for phase in ${all_phases[*]}; do
     echo "Skipping..."
     ;;
   esac
-
-  # https://discourse.nixos.org/t/nix-build-phases-run-nix-build-phases-interactively/36090/4
 done
