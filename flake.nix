@@ -105,6 +105,9 @@
     # octotail package (mine)
     nixpkgs-patch-419929.url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
     nixpkgs-patch-419929.flake = false;
+    # goupile modue (check if different from vm, mine)
+    nixpkgs-patch-470416.url = "https://github.com/NixOS/nixpkgs/pull/470416.patch?full_index=1";
+    nixpkgs-patch-470416.flake = false;
     # debug stage-1 boot issue
     nixpkgs-patch-10.url = ./nixos/patches/0001-try-debug-mnt-issue.patch;
     nixpkgs-patch-10.flake = false;
