@@ -946,10 +946,10 @@
     "nixpkgs": {
       "locked": {
         "lastModified": 1750864583,
-        "narHash": "sha256-fhxcfcYYSj9VcIHYGeqV3b96GFVXhi3ixEmp7FRtAJQ=",
+        "narHash": "sha256-YMJovVtzFP9aeMxeRak9UiNszScf+VGkwiV/y0xkYdA=",
         "owner": "phanirithvij",
         "repo": "nixpkgs",
-        "rev": "1235be65208273a845717f4d885a3b8ff7ac777d",
+        "rev": "ef86ba0384d2403b807d1835efa1913be39b2e2d",
         "type": "github"
       },
       "original": {
@@ -990,6 +990,18 @@
         "rev": "49ee0e94463abada1de470c9c07bfc12b36dcf40",
         "type": "github"
       }
+    },
+    "nixpkgs-patch-10": {
+      "flake": false,
+      "locked": {
+        "path": "nixos/patches/0001-try-debug-mnt-issue.patch",
+        "type": "path"
+      },
+      "original": {
+        "path": "nixos/patches/0001-try-debug-mnt-issue.patch",
+        "type": "path"
+      },
+      "parent": []
     },
     "nixpkgs-patch-385535": {
       "flake": false,
@@ -1235,6 +1247,7 @@
         "nixdroidpkgs": "nixdroidpkgs",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-patch-10": "nixpkgs-patch-10",
         "nixpkgs-patch-385535": "nixpkgs-patch-385535",
         "nixpkgs-patch-419929": "nixpkgs-patch-419929",
         "nixpkgs-patcher": "nixpkgs-patcher",

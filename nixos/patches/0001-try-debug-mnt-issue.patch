@@ -1,0 +1,35 @@
+From c97332a00b2cb5483a979a9738d14c2edad2b64a Mon Sep 17 00:00:00 2001
+From: phanirithvij <phanirithvij2000@gmail.com>
+Date: Tue, 23 Dec 2025 11:20:24 +0530
+Subject: [PATCH] try debug mnt issue
+
+Signed-off-by: phanirithvij <phanirithvij2000@gmail.com>
+---
+ nixos/modules/system/boot/stage-1-init.sh | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/nixos/modules/system/boot/stage-1-init.sh b/nixos/modules/system/boot/stage-1-init.sh
+index b8dbfb70c0bb..6e9044403e15 100644
+--- a/nixos/modules/system/boot/stage-1-init.sh
++++ b/nixos/modules/system/boot/stage-1-init.sh
+@@ -666,6 +666,8 @@ if [ ! -e "$targetRoot/$stage2Init" ]; then
+     fi
+ fi
+ 
++set -x
++
+ mkdir -m 0755 -p $targetRoot/proc $targetRoot/sys $targetRoot/dev $targetRoot/run
+ 
+ mount --move /proc $targetRoot/proc
+@@ -673,6 +675,8 @@ mount --move /sys $targetRoot/sys
+ mount --move /dev $targetRoot/dev
+ mount --move /run $targetRoot/run
+ 
++set +x
++
+ exec env -i $(type -P switch_root) "$targetRoot" "$stage2Init"
+ 
+ fail # should never be reached
+-- 
+2.51.2
+
