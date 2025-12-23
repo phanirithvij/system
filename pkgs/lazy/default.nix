@@ -148,6 +148,7 @@ let
     "tg-archive"
     "tmsu"
     "tym"
+    "ungoogled-chromium"
     "variety"
     "vhs"
     "w3m"
