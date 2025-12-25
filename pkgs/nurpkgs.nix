@@ -52,6 +52,7 @@ let
       byNameNoWarn = builtins.elem n [
         "unstablePkgs"
         "flakePkgs"
+        "gitbatch" # used in lazyPkgs, don't use directly
       ];
       # skip packages marked as broken
       broken = v ? meta && v.meta.broken;
@@ -62,12 +63,14 @@ let
     && (isDerivation v)
   ) nurPkgsOriginal.packages;
 
-  # leaves are filtered, good and unnested packages
+  # leaves are filtered, good and unnested packages (For this host)
   leaves = builtins.attrValues (rest // flakePkgs' // unstablePkgs');
+  # all include all packages.
+  all = nurPkgsOriginal.packages;
 in
 rest
 // {
-  inherit leaves;
+  inherit leaves all;
   # has all original entires for flakePkgs and unstablePkgs including broken
   inherit (nurPkgsOriginal.packages) flakePkgs unstablePkgs;
 }

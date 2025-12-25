@@ -98,7 +98,6 @@ let
     "gamescope"
     "gimp"
     "git-absorb"
-    "gitbatch"
     "gitcs"
     "git-who"
     "gitnr"

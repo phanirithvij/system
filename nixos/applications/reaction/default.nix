@@ -1,7 +1,7 @@
-{ pkgs, flake-inputs, ... }:
+{ pkgs, ... }:
 {
   imports = [
-    "${flake-inputs.reaction-module}/modules/common/reaction.nix"
+    #"${flake-inputs.reaction-module}/modules/common/reaction.nix"
     #"${flake-inputs.reaction-module}/modules/common/reaction-custom.nix"
     #"${flake-inputs.reaction-module}/modules/common/monit.nix"
   ];

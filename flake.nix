@@ -150,10 +150,6 @@
     niri.inputs.nixpkgs.follows = "nixpkgs";
     niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
-    # ideally a nixpkgs patch but for now use as a flake input
-    reaction-module.url = "github:phanirithvij/reaction-nixos/cfg-valid";
-    reaction-module.flake = false;
-
     ### Indirect dependencies, dedup
 
     #systems.url = "github:nix-systems/default-linux/main";
