@@ -41,6 +41,7 @@ in
     # ../../nixos/applications/opengist.nix
     ../../nixos/applications/reaction
     ../../nixos/applications/selfhosted/jackett.nix
+    ../../nixos/applications/selfhosted/mariadb-dolphie.nix
     ../../nixos/applications/selfhosted/qbittorrent.nix
     ../../nixos/applications/selfhosted/goupile.nix
     # ../../nixos/applications/spotify.nix
