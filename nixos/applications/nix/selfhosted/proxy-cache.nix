@@ -7,9 +7,10 @@
   networking.fqdn = "localhost:3239";
   services.caddy = {
     enable = true;
+    # TODO move to nur-pkgs and overlay it
     package = pkgs.caddy.withPlugins {
       plugins = [ "github.com/caddyserver/cache-handler@v0.16.0" ];
-      hash = "sha256-Oq79YKHMd2sZVapTYqoe/xlZuyTL0JBpUIRnKL+bOFI=";
+      hash = "sha256-XTFwYo3o7il3UfnE2QuJM+UoGTu0Yw+8ka0p9czdgEM=";
     };
     virtualHosts."proxy-cache.${config.networking.fqdn}" = {
       extraConfig = ''
