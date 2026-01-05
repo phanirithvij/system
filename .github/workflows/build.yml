@@ -6,6 +6,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
         with:
@@ -17,7 +19,46 @@ jobs:
           extra_nix_config: |
             trusted-public-keys = cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY= nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs= loudgolem-nur-pkgs-0.cachix.org-1:OINy4hRqrmCH0sslp+tQo4hiBEZJEgA1epza03g5rvY=
             substituters = https://nix-community.cachix.org https://cache.nixos.org https://loudgolem-nur-pkgs-0.cachix.org
+      - name: setup netrc for oranc
+        run: |
+          sudo tee /etc/nix/netrc > /dev/null <<EOF
+          machine 127.0.0.1
+              login ${{ github.repository_owner }}
+              password ${{ secrets.GH_PAT_TOKEN }}
+          EOF
+          echo "netrc-file = /etc/nix/netrc" | sudo tee -a /etc/nix/nix.conf >/dev/null
+          sudo systemctl restart nix-daemon.service
+      # not required if using the fast oranc docker setup
+      # but can't live without nothing-but-nix
+      # and nothing-but-nix removes docker (yeah you can change the cleave level to allow docker but I need the full cut)
+      # so nothing-but-nix > oranc via docker
+      # ideally removing docker should not impact the running docker service
+      # but ip resolution fails after a while
+      - name: install and run oranc
+        run: |
+          # ideally will get substituted, what oranc-action does inside
+          # if it fails to substitute, then oranc-action likely will too
+          nix build github:linyinfeng/oranc/main \
+            --extra-substituters "https://linyinfeng.cachix.org" \
+            --extra-trusted-public-keys "linyinfeng.cachix.org-1:sPYQXcNrnCf7Vr7T0YmjXz5dMZ7aOKG3EqLja0xr9MM="
+          ./result/bin/oranc server --listen "127.0.0.1:9999" &
+      - uses: linyinfeng/oranc-action@main
+        with:
+          repositoryPart1: ${{ github.repository_owner }}
+          repositoryPart2: oranc-test
+          orancServerType: "url"
+          orancServerUrl: "http://127.0.0.1:9999"
+          # can't use this because we remove docker with nothing-but-nix
+          # orancServerContainer: "${{ job.services.oranc.id }}"
+          initialize: "true"
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GH_PAT_TOKEN }}
+          signingKey: ${{ secrets.NIX_SIGNING_KEY }} # I think private key
+          orancCliExtraArgs: "--excluded-signing-key-pattern '%5E$' --already-signed"
+      - run: nix config show substituters
+      # TODO might have to remove this
       - uses: DeterminateSystems/magic-nix-cache-action@9934a5f127967bcd92e99961e365730ba57253de # main
+      - run: nix flake prefetch-inputs . || true
       - run: nix build .#systemConfigs.gha && sudo ./result/bin/activate
       - run: nix build .#homeConfigurations."runner".activationPackage
       - run: nix run .#home-manager -- switch --flake . -b bak
