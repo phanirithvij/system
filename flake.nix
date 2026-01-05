@@ -100,22 +100,22 @@
     ##   as well as https://github.com/phanirithvij/patch2pr
 
     # losslesscut pr
-    nixpkgs-patch-385535.url = "https://github.com/NixOS/nixpkgs/pull/385535.patch?full_index=1";
-    nixpkgs-patch-385535.flake = false;
+    #nixpkgs-patch-385535.url = "https://github.com/NixOS/nixpkgs/pull/385535.patch?full_index=1";
+    #nixpkgs-patch-385535.flake = false;
     # octotail package (mine)
-    nixpkgs-patch-419929.url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
-    nixpkgs-patch-419929.flake = false;
-    # goupile modue (check if different from vm, mine)
-    nixpkgs-patch-470416.url = "https://github.com/NixOS/nixpkgs/pull/470416.patch?full_index=1";
-    nixpkgs-patch-470416.flake = false;
+    #nixpkgs-patch-419929.url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
+    #nixpkgs-patch-419929.flake = false;
+    # octotail returns dependency tests fix
+    #nixpkgs-patch-476911.url = "https://github.com/NixOS/nixpkgs/pull/476911.patch?full_index=1";
+    #nixpkgs-patch-476911.flake = false;
     # debug stage-1 boot issue
-    nixpkgs-patch-10.url = ./nixos/patches/0001-try-debug-mnt-issue.patch;
-    nixpkgs-patch-10.flake = false;
+    #nixpkgs-patch-10.url = ./nixos/patches/0001-try-debug-mnt-issue.patch;
+    #nixpkgs-patch-10.flake = false;
 
     # TODO disabling for now because of rl-2511 notes conflict
     # opengist module (mine, its complex with createDBLocal etc.)
-    #nixpkgs-patch-10.url = "https://github.com/phanirithvij/nixpkgs/commit/34be2e80d57c2fb93ece547d9b28947ae56cac92.patch?full_index=1";
-    #nixpkgs-patch-10.flake = false;
+    #nixpkgs-patch-11.url = "https://github.com/phanirithvij/nixpkgs/commit/34be2e80d57c2fb93ece547d9b28947ae56cac92.patch?full_index=1";
+    #nixpkgs-patch-11.flake = false;
 
     home-manager-patch-10.url = ./home/patches/docs-manpages-parallel.patch;
     home-manager-patch-10.flake = false;
@@ -124,10 +124,24 @@
 
     ### nixpkgs-patcher patches
 
+    # NOTE: patches are applied via applyPatches in this section
+    # move to nixpkgs-patch-* to use nix-patcher cli, more efficient if there are no patches in this section at all
+    # also if some patch fails to apply via nix-patcher, no choice but to use this.
+    # if we can't even use this due to binaries in patch files or some other issue
+    # then just have to maintain them in tree like in pkgs/binary (can also have them in nixos-patched-manual, and rebase commits to nixos-patched)
+
     # TODO review https://github.com/NixOS/nixpkgs/pull/428674
     # opengist module (new)
     #pr-428674-nixpkgs-patch.url = "https://github.com/NixOS/nixpkgs/pull/428674.patch?full_index=1";
     #pr-428674-nixpkgs-patch.flake = false;
+
+    # goupile module (mine, fails with security enabled in vm, nix-patcher fails)
+    #pr-470416-nixpkgs-patch.url = "https://github.com/NixOS/nixpkgs/pull/470416.patch?full_index=1";
+    #pr-470416-nixpkgs-patch.flake = false;
+
+    # invoiceplane module (removed in 25.11, nix-patcher and nixpkgs-patcher both fail)
+    #pr-452167-nixpkgs-patch.url = "https://github.com/NixOS/nixpkgs/pull/452167.patch?full_index=1";
+    #pr-452167-nixpkgs-patch.flake = false;
 
     ### end nixpkgs-patcher patches
 

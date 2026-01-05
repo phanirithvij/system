@@ -9,6 +9,8 @@ _: {
   programs.shfmt.enable = true;
   programs.shellcheck.enable = true;
 
+  programs.black.enable = true;
+
   # mdformat broken https://github.com/executablebooks/mdformat/issues/112
   # use manual dprint fmt
   #programs.mdformat.enable = true;

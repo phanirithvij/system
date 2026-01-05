@@ -1,0 +1,117 @@
+on:
+  workflow_dispatch:
+    inputs:
+      pr_numbers:
+        description: "Space-separated PR numbers (e.g., 123456 789012)"
+        required: true
+        type: string
+      fork_repo:
+        description: "Your nixpkgs fork (e.g., phanirithvij/nixpkgs)"
+        default: "phanirithvij/nixpkgs"
+        type: string
+      target_branch:
+        description: "Your nixpkgs main branch (e.g., nixos-unstable-patched)"
+        default: "nixos-patched"
+        type: string
+      base_branch:
+        description: "Your nixpkgs base branch to apply prs on top of (e.g. nixos-unstable)"
+        default: "nixos-unstable"
+        type: string
+
+  push:
+    branches:
+      - main
+    paths:
+      - "nixpkgs-pr-pins.json"
+      - "flake.lock"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          path: dotfiles
+
+      - name: Get config
+        id: config
+        run: |
+          FORK_REPO="${{ github.event.inputs.fork_repo }}"
+          FORK_REPO="${FORK_REPO:-phanirithvij/nixpkgs}"
+
+          TARGET_BRANCH="${{ github.event.inputs.target_branch }}"
+          TARGET_BRANCH="${TARGET_BRANCH:-nixos-patched}"
+
+          echo "fork_repo=$FORK_REPO" >> $GITHUB_OUTPUT
+          echo "target_branch=$TARGET_BRANCH" >> $GITHUB_OUTPUT
+
+      - name: Get nixpkgs revision
+        id: nixpkgs
+        working-directory: dotfiles
+        run: |
+          if [ -f flake.lock ]; then
+            REV=$(jq -r '.nodes["nixpkgs-upstream"].locked.rev // .nodes.nixpkgs.locked.rev' flake.lock)
+            BASE="${{ github.event.inputs.base_branch }}"
+          else
+            REV="${{ github.event.inputs.base_branch }}"
+            BASE="${{ github.event.inputs.base_branch }}"
+          fi
+          echo "revision=$REV" >> $GITHUB_OUTPUT
+          echo "base=$BASE" >> $GITHUB_OUTPUT
+
+      - name: Checkout nixpkgs
+        uses: actions/checkout@v6
+        with:
+          repository: NixOS/nixpkgs
+          token: ${{ secrets.GH_PAT_TOKEN }}
+          fetch-depth: 100
+          path: nixpkgs
+          ref: master
+
+      - name: Configure git
+        working-directory: nixpkgs
+        run: |
+          git fetch --depth=1 origin ${{ steps.nixpkgs.outputs.revision }}
+          git checkout ${{ steps.nixpkgs.outputs.revision }}
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote add fork https://x-access-token:${{ secrets.GH_PAT_TOKEN }}@github.com/${{ steps.config.outputs.fork_repo }}.git
+
+      - name: Create branch
+        working-directory: nixpkgs
+        run: |
+          git checkout -b ${{ steps.config.outputs.target_branch }} ${{ steps.nixpkgs.outputs.revision }}
+
+      - name: Add new PRs (manual trigger only)
+        if: github.event_name == 'workflow_dispatch'
+        working-directory: nixpkgs
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
+        run: |
+          IFS=" " read -ra PRS <<< "${{ github.event.inputs.pr_numbers }}"
+          cp ../dotfiles/nixpkgs-pr-pins.json .
+          ../dotfiles/scripts/nixpkgs-pr-pin.py add "${PRS[@]}"
+          cp nixpkgs-pr-pins.json ../dotfiles/
+
+      - name: Apply PRs
+        working-directory: nixpkgs
+        env:
+          GH_TOKEN: ${{ secrets.GH_PAT_TOKEN }}
+        run: |
+          cp ../dotfiles/nixpkgs-pr-pins.json .
+          ../dotfiles/scripts/nixpkgs-pr-pin.py apply
+
+      - name: Push to fork
+        working-directory: nixpkgs
+        run: |
+          git push fork ${{ steps.config.outputs.target_branch }} --force
+
+      - name: Commit pins to dotfiles (manual trigger only)
+        if: github.event_name == 'workflow_dispatch'
+        working-directory: dotfiles
+        run: |
+          git add nixpkgs-pr-pins.json
+          git commit -m "chore: add PRs ${{ github.event.inputs.pr_numbers }}" || true
+          git push

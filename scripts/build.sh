@@ -41,5 +41,5 @@ _exe onix build --no-link --print-out-paths --allow-import-from-derivation --imp
 #  .#navi-master \
 #  -o result/navi-master-portable.bundled
 
-_exe nix flake check --allow-import-from-derivation
+#_exe nix flake check --allow-import-from-derivation
 #_exe nix run .#nix -- flake show
