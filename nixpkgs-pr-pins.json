@@ -1,0 +1,150 @@
+{
+  "version": "1.0",
+  "pins": {
+    "385535": {
+      "pr": "385535",
+      "base_branch": "master",
+      "head_ref": "losslesscut",
+      "head_sha": "418252b2bfe8b0998eefc834d70ca97624d44b04",
+      "title": "losslesscut: init at 3.64.0",
+      "url": "https://github.com/NixOS/nixpkgs/pull/385535",
+      "pinned_at": "2026-01-06T04:11:08.198142+00:00",
+      "commits": [
+        {
+          "sha": "418252b2bfe8b0998eefc834d70ca97624d44b04",
+          "message": "losslesscut: init at 3.64.0",
+          "author": "KSJ2000",
+          "date": "2025-02-27 13:48:19 +0200"
+        }
+      ]
+    },
+    "452167": {
+      "pr": "452167",
+      "base_branch": "master",
+      "head_ref": "invoiceplane-restore",
+      "head_sha": "652f755cc15c91b59b1bddce6ff3ad0b73e68037",
+      "title": "invoiceplane: init at 1.7.0-beta-1",
+      "url": "https://github.com/NixOS/nixpkgs/pull/452167",
+      "pinned_at": "2026-01-06T04:11:20.352102+00:00",
+      "commits": [
+        {
+          "sha": "f2fe3d55b76ee03ebb5be3527583d208542f8421",
+          "message": "invoiceplane: init at 1.7.0-beta-1",
+          "author": "Jonas Heinrich",
+          "date": "2025-10-15 08:00:34 +0200"
+        },
+        {
+          "sha": "fe304131e4968e7e293009475c54261f46c45e38",
+          "message": "nixos/tests/invoiceplane: init",
+          "author": "Jonas Heinrich",
+          "date": "2025-10-15 08:01:44 +0200"
+        },
+        {
+          "sha": "652f755cc15c91b59b1bddce6ff3ad0b73e68037",
+          "message": "nixos/invoiceplane: init",
+          "author": "Jonas Heinrich",
+          "date": "2025-10-15 08:02:08 +0200"
+        }
+      ]
+    },
+    "476911": {
+      "pr": "476911",
+      "base_branch": "master",
+      "head_ref": "yutto",
+      "head_sha": "a805c0b2d40aa3e50a2458d0e9a3f255ca008659",
+      "title": "python3Packages.returns: fix test and re-enable mypy tests",
+      "url": "https://github.com/NixOS/nixpkgs/pull/476911",
+      "pinned_at": "2026-01-06T04:11:29.382323+00:00",
+      "commits": [
+        {
+          "sha": "179e59f6796bdff9b5c217476fd5e4e454f2da45",
+          "message": "python3Packages.returns: fix test and re-enable mypy tests",
+          "author": "linsui",
+          "date": "2026-01-05 01:35:57 +0800"
+        },
+        {
+          "sha": "3ff3622372f2259a9eac20d7e5e8eede7220f07a",
+          "message": "python3Packages.trio-asyncio: disable on python 3.14",
+          "author": "linsui",
+          "date": "2026-01-06 01:26:13 +0800"
+        },
+        {
+          "sha": "a805c0b2d40aa3e50a2458d0e9a3f255ca008659",
+          "message": "python3Packages.pytest-aio: 1.9.0 -> 2.0.0",
+          "author": "linsui",
+          "date": "2026-01-06 01:26:35 +0800"
+        }
+      ]
+    },
+    "419929": {
+      "pr": "419929",
+      "base_branch": "master",
+      "head_ref": "octotail",
+      "head_sha": "429d01150f4f1767d21e852b9dabb236fdf6813a",
+      "title": "octotail: init at 1.0.17",
+      "url": "https://github.com/NixOS/nixpkgs/pull/419929",
+      "pinned_at": "2026-01-06T04:11:41.137854+00:00",
+      "commits": [
+        {
+          "sha": "f747f495c2bbef1da0f123e11c263d12910c7dec",
+          "message": "python3Packages.pyppeteer: 1.0.2 -> 2.0.0",
+          "author": "phanirithvij",
+          "date": "2025-06-25 20:50:18 +0530"
+        },
+        {
+          "sha": "57563e4230441cd3a37a9738844d247b09b41861",
+          "message": "python3Packages.pyppeteer-stealth: init at 2.7.4",
+          "author": "phanirithvij",
+          "date": "2025-06-25 20:59:45 +0530"
+        },
+        {
+          "sha": "429d01150f4f1767d21e852b9dabb236fdf6813a",
+          "message": "octotail: init at 1.0.17",
+          "author": "phanirithvij",
+          "date": "2025-06-25 20:46:23 +0530"
+        }
+      ]
+    },
+    "470416": {
+      "pr": "470416",
+      "base_branch": "master",
+      "head_ref": "goupile-module",
+      "head_sha": "1c3fc70bb59ade2c40c1ebdb5c91176c1a6f7d52",
+      "title": "WIP nixos/goupile: init; goupile: init at 3.11.1",
+      "url": "https://github.com/NixOS/nixpkgs/pull/470416",
+      "pinned_at": "2026-01-06T04:11:50.819914+00:00",
+      "commits": [
+        {
+          "sha": "92168e434bf3401012cdcc5a294f580cf086c441",
+          "message": "goupile: init at 3.11.1",
+          "author": "phanirithvij",
+          "date": "2025-12-13 11:55:25 +0530"
+        },
+        {
+          "sha": "689a5dc917418b232f0aeb3fe111093670899748",
+          "message": "WIP nixos/goupile: init",
+          "author": "phanirithvij",
+          "date": "2025-12-14 11:03:58 +0530"
+        },
+        {
+          "sha": "7cd1374a52e05610cafe0930aa3d5692effeff91",
+          "message": "WIP notes, removed at the end",
+          "author": "phanirithvij",
+          "date": "2025-12-18 11:54:57 +0530"
+        },
+        {
+          "sha": "a3c583afe21cd29b55e096bcb16a4f78400c7b92",
+          "message": "WIP temp debug drv, remove later",
+          "author": "phanirithvij",
+          "date": "2025-12-25 10:09:58 +0530"
+        },
+        {
+          "sha": "1c3fc70bb59ade2c40c1ebdb5c91176c1a6f7d52",
+          "message": "WIP",
+          "author": "phanirithvij",
+          "date": "2025-12-27 10:55:39 +0530"
+        }
+      ]
+    }
+  }
+}
