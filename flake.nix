@@ -287,7 +287,7 @@
                 let
                   name = "${lib.getName pkg}-${lib.getVersion pkg}";
                   byName = builtins.elem name [
-                    "beekeeper-studio-5.3.4" # Electron version 31 is EOL, hm
+                    "beekeeper-studio-5.5.3" # Electron version 32 is EOL, hm
                   ];
                 in
                 if byName then lib.warn "Allowing insecure package: ${name}" true else false;
