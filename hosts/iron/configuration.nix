@@ -40,6 +40,7 @@ in
     ../../nixos/applications/ntfy-rss.nix
     # ../../nixos/applications/opengist.nix
     ../../nixos/applications/reaction
+    ../../nixos/applications/selfhosted/invoiceplane.nix
     ../../nixos/applications/selfhosted/jackett.nix
     ../../nixos/applications/selfhosted/mariadb-dolphie.nix
     ../../nixos/applications/selfhosted/qbittorrent.nix
