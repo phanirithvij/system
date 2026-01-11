@@ -21,7 +21,7 @@ in
     ncurses5
     #diffutils
     #findutils
-    utillinux
+    util-linux
     #tzdata
     hostname
     #man
