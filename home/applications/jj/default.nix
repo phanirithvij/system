@@ -6,6 +6,6 @@
 
     pkgs.jjui
     #pkgs.lazyjj #nur-pkgs unstable
-    pkgs.jj-fzf
+    #pkgs.jj-fzf # FIXME: broken
   ];
 }

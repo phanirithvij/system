@@ -233,6 +233,8 @@
                       byName = builtins.elem pname [
                         "textual-window"
                         "pendulum"
+                        "nvidia-x11"
+                        "nvidia-settings"
                       ];
                     in
                     if byName then lib.warn "NurPkgs allowing unfree package: ${pname}" true else false;
@@ -268,7 +270,6 @@
                   byName = builtins.elem pname [
                     "spotify" # in lazyapps used in home-manager
                     "hplip" # printer
-                    "nvidia-x11"
                     "cloudflare-warp"
                     "nvidia-persistenced"
                     "plexmediaserver"
@@ -276,9 +277,10 @@
                     "steam"
                     "steam-unwrapped"
                     "honey-home"
-                    "nvidia-settings"
                     "discord"
                     "zoom"
+                    "nvidia-x11"
+                    "nvidia-settings"
                   ];
                 in
                 if byName then lib.warn "Allowing unfree package: ${pname}" true else false;
@@ -366,7 +368,6 @@
         treefmtCfg =
           (inputs.treefmt-nix.lib.evalModule pkgs (import ./treefmt.nix { inherit pkgs; })).config.build;
         hm = inputs.home-manager.packages.${system}.default;
-        sysm = inputs.system-manager.packages.${system}.default;
         nixp = inputs.nix-patcher.packages.${system}.nix-patcher;
         nh' = allSystemsJar.nurPkgs.${system}.nh;
         nom' = allSystemsJar.nurPkgs.${system}.flakePkgs.nix-output-monitor;
@@ -390,8 +391,6 @@
               #inherit nix-schema;
               navi-master = pkgs.navi;
               home-manager = hm;
-              # TODO optional if system is linux
-              system-manager = sysm;
               nix-patcher = nixp;
               nvidia-offload = allSystemsJar.nvidia-offload.${system};
             }
@@ -459,10 +458,10 @@
             packages = inputs.self.checks.${system}.git-hooks-check.enabledPackages; # these don't show up in menu
             extraCommands = [ ]; # should be in the format list of attrs devshell expects
             devshell = import inputs.devshell { nixpkgs = pkgs; };
-          }).shell.overrideAttrs # devshell is a `derivation` which has no overrideAttrs (it is an stdenv.mkdrv thing)
-            (o: {
+          }).shell.overrideAttrs
+            (prev: {
               name = "system";
-              shellHook = o.shellHook + inputs.self.checks.${system}.git-hooks-check.shellHook;
+              shellHook = prev.shellHook + inputs.self.checks.${system}.git-hooks-check.shellHook;
             });
       }
     )
@@ -520,11 +519,9 @@
           inputs.lazy-apps.homeModules.default
         ];
         hm = inputs.home-manager.packages.${system}.default;
-        sysm = inputs.system-manager.packages.${system}.default;
         toolsModule = {
           environment.systemPackages = [
             hm
-            sysm
             #(pkgs.nix-schema { inherit system; })
           ];
         };
