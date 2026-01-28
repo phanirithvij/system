@@ -22,7 +22,7 @@
   users.users.nixos = {
     #extraGroups = [ "networkmanager" ];
     home = "/home/nixos";
-    initialHashedPassword = lib.mkForce "nixos";
+    password = lib.mkForce "nixos";
   };
 
   environment.systemPackages = with pkgs; [
