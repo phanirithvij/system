@@ -1103,11 +1103,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1769617824,
-        "narHash": "sha256-OFgTjYpAdltDrm9vC8MjlHv7Aef30EYlSRugElqOPrs=",
+        "lastModified": 1769620862,
+        "narHash": "sha256-9rnd5LEZR/4JAMvsS/oot+KArJX0tfWVuEWJPeithUE=",
         "owner": "phanirithvij",
         "repo": "nur-packages",
-        "rev": "a19cf782da8d1fc132cbe944e561763714887f93",
+        "rev": "e34d3daf0eb5296e6d0f50a366946f565fe1a00b",
         "type": "github"
       },
       "original": {
