@@ -74,7 +74,7 @@
       };
   };
 
-  nix.distributedBuilds = true;
+  nix.distributedBuilds = false;
 
   nix.buildMachines = [
     {
