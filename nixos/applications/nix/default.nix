@@ -69,8 +69,32 @@
         # https://github.com/NixOS/nix/issues/8953#issuecomment-1919310666
         # global flake-registry, don't need it really
         flake-registry = "";
+
+        builders-use-substitutes = true;
       };
   };
+
+  nix.distributedBuilds = true;
+
+  nix.buildMachines = [
+    {
+      hostName = "makemake.ngi.nixos.org"; # TODO how to ensure I use it only for ngipkgs work
+      sshUser = "remotebuild";
+      sshKey = "/home/rithvij/.ssh/id_ed25519";
+      # got this via base64 -w0 makemake.pub
+      # makemake.pub is `ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID4ejRuAQPx6AbuS1u+Q7UUi1TIwkY2S//kjgpBxYNfU remotebuild@makemake.ngi.nixos.org`
+      # got that from ~/.ssh/known_hosts after trying it with `nom build -f . collabora-desktop --builders "ssh-ng://remotebuild@makemake.ngi.nixos.org" --max-jobs 0`
+      publicHostKey = "c3NoLWVkMjU1MTkgQUFBQUMzTnphQzFsWkRJMU5URTVBQUFBSUQ0ZWpSdUFRUHg2QWJ1UzF1K1E3VVVpMVRJd2tZMlMvL2tqZ3BCeFlOZlUgcmVtb3RlYnVpbGRAbWFrZW1ha2UubmdpLm5peG9zLm9yZwo="; # makemake with user@host
+      inherit (pkgs.stdenv.hostPlatform) system;
+      supportedFeatures = [
+        "nixos-test"
+        "benchmark"
+        "big-parallel"
+        "kvm"
+        "ca-derivations"
+      ];
+    }
+  ];
 
   sops.secrets.github_pat.owner = config.users.users.rithvij.name;
   sops.templates.nix_access_tokens = {
