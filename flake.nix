@@ -53,6 +53,10 @@
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    gowt.url = "git+file:///shed/Projects/own/ownix/go-wt";
+    gowt.inputs.flake-utils.follows = "flake-utils";
+    gowt.inputs.nixpkgs.follows = "nixpkgs";
+
     oranc.url = "github:linyinfeng/oranc/main";
     oranc.inputs.flake-parts.follows = "flake-parts";
     oranc.inputs.nixpkgs.follows = "nixpkgs";
@@ -316,6 +320,11 @@
               };
             })
             ++ [ inputs.niri.overlays.niri ]
+            ++ [
+              (_: _: {
+                gwt = inputs.gowt.packages.${system}.default;
+              })
+            ]
             ++ (builtins.attrValues
               (import "${inputs.nur-pkgs}" {
                 # pkgs here is not being used in nur-pkgs overlays

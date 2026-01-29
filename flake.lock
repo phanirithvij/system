@@ -293,6 +293,29 @@
         "type": "github"
       }
     },
+    "gowt": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769725755,
+        "narHash": "sha256-Jqal7aCAcBhphz6u4oOCUhqV6ErqQXr6d1q1e8nYuXQ=",
+        "ref": "refs/heads/main",
+        "rev": "a4d3c5f982554aa3a1fdae7de7bf3ee7e4e88fad",
+        "revCount": 1,
+        "type": "git",
+        "url": "file:///shed/Projects/own/ownix/go-wt"
+      },
+      "original": {
+        "type": "git",
+        "url": "file:///shed/Projects/own/ownix/go-wt"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -1180,6 +1203,7 @@
         "flake-schemas": "flake-schemas",
         "flake-utils": "flake-utils",
         "git-hooks": "git-hooks",
+        "gowt": "gowt",
         "home-manager": "home-manager",
         "home-manager-patch-10": "home-manager-patch-10",
         "home-manager-upstream": "home-manager-upstream",

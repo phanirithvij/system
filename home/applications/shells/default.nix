@@ -13,6 +13,7 @@ in
     ./bash.nix
     ./fish.nix
     ./lf.nix
+    ./gowt.nix
   ];
 
   home.packages = lib.optional (system == "x86_64-linux") pkgs.boxxy;
