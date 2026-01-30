@@ -11,5 +11,8 @@
     #pr-tracker #should be autoadded via nurpkgs
     nurPkgs.flakePkgs.yaml2nix
     flake-inputs.nix-patcher.packages.${system}.nix-patcher
+    lazyPkgs.nixfmt
+    lazyPkgs.nixpkgs-review
+    lazyPkgs.nix-eval-jobs
   ];
 }
