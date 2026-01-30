@@ -122,6 +122,7 @@ let
     "microfetch"
     "neovide"
     "nethogs"
+    "nixfmt"
     "nitrogen"
     "n-m3u8dl-re"
     "oh-my-git"
