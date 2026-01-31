@@ -8,7 +8,7 @@ _: {
     ./empty.nix
     ./tty.nix
     #./plasma.nix
-    #./niri.nix
+    ./niri.nix
     #./hyprland.nix
     #./cinnamon.nix
     #./deepin.nix # for nostalgia, removed from nixpkgs at some point
