@@ -53,7 +53,8 @@
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
-    gowt.url = "git+file:///shed/Projects/own/ownix/go-wt";
+    #gowt.url = "git+file:///shed/Projects/own/ownix/go-wt";
+    gowt.url = "github:phanirithvij/gowt";
     gowt.inputs.flake-utils.follows = "flake-utils";
     gowt.inputs.nixpkgs.follows = "nixpkgs";
 
