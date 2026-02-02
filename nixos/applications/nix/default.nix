@@ -6,6 +6,7 @@
   ...
 }:
 {
+  imports = [ ./ccache.nix ];
   nix = {
     # https://discourse.nixos.org/t/24-05-add-flake-to-nix-path/46310/14
     # https://discourse.nixos.org/t/where-is-nix-path-supposed-to-be-set/16434/5
