@@ -46,21 +46,7 @@
         allow-import-from-derivation = false; # default is true
         trace-import-from-derivation = true; # trace if I do use it
         allowed-uris = "github: gitlab: git+ssh:// https://github.com/";
-        experimental-features = [
-          "flakes"
-          "nix-command"
-          "auto-allocate-uids"
-          "cgroups"
-          # "ca-derivations" # breaks nix develop based update scripts
-        ];
-        auto-allocate-uids = true;
-        system-features = [
-          "benchmark"
-          "big-parallel"
-          "kvm"
-          "nixos-test"
-          "uid-range"
-        ];
+        experimental-features = "nix-command flakes"; # ca-derivations - breaks nix develop based update scripts
         auto-optimise-store = true;
         trusted-users = [
           "@wheel"
