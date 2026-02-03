@@ -119,11 +119,11 @@ in
   # by default uses 50% of ram as swap, make it 90%
   # note the obvious: without compression it makes no sense to make ram into swap
   zramSwap = {
-    enable = true;
+    enable = false;
     memoryPercent = 90;
   };
   services.swapspace = {
-    enable = true;
+    enable = false;
     settings.cooldown = 20;
     extraArgs = [
       "-P"
