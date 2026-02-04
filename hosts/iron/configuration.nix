@@ -317,6 +317,14 @@ in
     binfmt = true;
   };
 
+  services.flatpak.enable = true;
+  # flatpak requires an xdg portal
+  # TODO but I have it enabled in the xfce desktop profile, why isn't that picked up?
+  # I guess for one of the specialisations?
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+  xdg.portal.config.common.default = "*";
+
   sops.secrets.rithvij_user_passwd = {
     neededForUsers = true;
   };
