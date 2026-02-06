@@ -13,6 +13,9 @@
     flake-inputs.nix-patcher.packages.${system}.nix-patcher
     lazyPkgs.nixfmt
     lazyPkgs.nixpkgs-review
+    lazyPkgs.nix-diff
     lazyPkgs.nix-eval-jobs
+    lazyPkgs.nix-init
+    lazyPkgs.nix-sweep
   ];
 }
