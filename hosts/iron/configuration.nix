@@ -272,6 +272,8 @@ in
 
   powerManagement.cpuFreqGovernor = "performance";
 
+  services.power-profiles-daemon.enable = true;
+
   hardware.opentabletdriver.enable = true;
 
   # TODO learn what rtkit is
