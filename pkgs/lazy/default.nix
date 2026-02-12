@@ -150,6 +150,7 @@ let
     "syncplay"
     "tdl"
     "telegram-desktop"
+    "tellico" # recc by fedi
     "termshark"
     "tesseract"
     "tg-archive"
