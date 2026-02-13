@@ -2,8 +2,15 @@
   lib,
   pkgs,
   config,
+  flake-inputs,
   ...
 }:
+let
+  modetc = import flake-inputs.modetc {
+    inherit pkgs;
+    linux = config.boot.kernelPackages;
+  };
+in
 {
   # this enables all firmware
   # imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
@@ -50,11 +57,32 @@
   boot.kernelModules = [
     "kvm-intel"
     "v4l2loopback"
+    "modetc"
   ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
-  boot.supportedFilesystems = [ "btrfs" ];
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.v4l2loopback
+    modetc.module
+  ];
+  boot.extraModprobeConfig = ''
+    options modetc homedir=/home/rithvij default_rule=var/
+  '';
 
+  # TODO lots of weird limitations (16, default_rule, no regex, etc.)
+  # TODO figure out how to do nix store path rewrites AS WELL with modetc
+  # TODO multiple instances of this thing
+  # NOTE: nix-profile required for home-manager
+  # .var required for steam bwrap
+  # let xdg compliant things stay the same, not worth it to move them
+  environment.etc."modetc.conf".text = ''
+    .nix-	.nix-
+    .local	.local
+    .config	.config
+    .cache	.cache
+    .var	.var
+  '';
+
+  boot.supportedFilesystems = [ "btrfs" ];
   # TODO blogpost of sort doing this migration step by step
   # ext4 to btrfs
   # reboot check everything works

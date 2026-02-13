@@ -152,6 +152,11 @@
 
     ###### END PATCHES #######
 
+    # dotfiles relocator kernel module
+    # maintain own fork without any changes, because author's selfhosted repo can go down (from my experience)
+    modetc.url = "github:phanirithvij/modetc-fork/master";
+    modetc.flake = false;
+
     # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
     flake-schemas.url = "github:DeterminateSystems/flake-schemas/main";
 

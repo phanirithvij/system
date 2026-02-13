@@ -780,6 +780,23 @@
         "type": "github"
       }
     },
+    "modetc": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1769966770,
+        "narHash": "sha256-H/6bFLnOMRd7pYLr7PtMJLGMVB5L98+QQjQsCNSt/+o=",
+        "owner": "phanirithvij",
+        "repo": "modetc-fork",
+        "rev": "03885391ba3ae2052b901cbe25964533c6ac16ee",
+        "type": "github"
+      },
+      "original": {
+        "owner": "phanirithvij",
+        "ref": "master",
+        "repo": "modetc-fork",
+        "type": "github"
+      }
+    },
     "navi_config": {
       "flake": false,
       "locked": {
@@ -1298,6 +1315,7 @@
         "home-manager-upstream": "home-manager-upstream",
         "hyprland": "hyprland",
         "lazy-apps": "lazy-apps",
+        "modetc": "modetc",
         "navi_config": "navi_config",
         "niri": "niri",
         "nix-index-database": "nix-index-database",
