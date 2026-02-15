@@ -7,7 +7,6 @@
 {
   imports = map (path: nixosModulesPath + path) [
     "/services/networking/syncplay.nix"
-    "/services/networking/firewall.nix"
     "/services/networking/nftables.nix"
   ];
   config = {

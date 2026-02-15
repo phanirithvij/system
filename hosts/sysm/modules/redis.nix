@@ -11,7 +11,6 @@ in
 {
   imports = map (path: nixosModulesPath + path) [
     "/services/databases/redis.nix"
-    "/services/networking/firewall.nix"
     "/services/networking/nftables.nix"
   ];
   config = {
