@@ -679,6 +679,7 @@
           ${linuxhost} = nixosSystem {
             inherit (pkgs) lib;
             inherit system pkgs;
+            trackDependencies = true;
             modules = [
               versionModule
               toolsModule
