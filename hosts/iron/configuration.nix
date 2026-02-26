@@ -413,6 +413,9 @@ in
 
       mosh
       eternal-terminal
+
+      # oddlama/nixos-config-tui
+      nixos-config
     ];
     variables.VISUAL = "nvim";
     # TODO sessionVariables vs variables what's the diff
@@ -421,7 +424,7 @@ in
   # https://wiki.nixos.org/wiki/Man_pages
   documentation.dev.enable = true;
   documentation.man.enable = true;
-  documentation.man.generateCaches = lib.mkForce false; # programs.fish enables it
+  documentation.man.cache.enable = lib.mkForce false; # programs.fish enables it
 
   # comes enabled in graphical-desktop.nix module
   # don't need it, also takes up a good amount of space
