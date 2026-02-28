@@ -1,11 +1,56 @@
 on:
   workflow_dispatch:
+    inputs:
+      linux:
+        description: "Run on Linux (ubuntu-latest)"
+        type: boolean
+        default: false
+      linux-arm:
+        description: "Run on Linux ARM (ubuntu-24.04-arm)"
+        type: boolean
+        default: false
+      macos:
+        description: "Run on macOS Apple Silicon (macos-latest)"
+        type: boolean
+        default: true
+      macos-old:
+        description: "Run on macOS Intel (macos-13)"
+        type: boolean
+        default: false
 
 jobs:
+  # 1. Evaluate inputs and build a JSON matrix
+  prepare:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: |
+          MATRIX="["
+          [ "${{ inputs.linux }}" == "true" ] && MATRIX+="\"ubuntu-latest\","
+          [ "${{ inputs.linux-arm }}" == "true" ] && MATRIX+="\"ubuntu-24.04-arm\","
+          [ "${{ inputs.macos }}" == "true" ] && MATRIX+="\"macos-latest\","
+          [ "${{ inputs.macos-old }}" == "true" ] && MATRIX+="\"macos-13\","
+
+          # Strip the trailing comma and close the JSON array
+          MATRIX="${MATRIX%,}]"
+
+          # Failsafe: if everything was unchecked, default to macos-latest
+          if [ "$MATRIX" == "[]" ]; then
+            MATRIX='["macos-latest"]'
+          fi
+
+          echo "Built Matrix: $MATRIX"
+          echo "matrix=$MATRIX" >> $GITHUB_OUTPUT
+
+  # 2. Consume the JSON matrix dynamically
   builder:
+    needs: prepare
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, ubuntu-24.04-arm]
+        os: ${{ fromJson(needs.prepare.outputs.matrix) }}
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
@@ -13,6 +58,7 @@ jobs:
           persist-credentials: false
       - name: save gh access token for later
         run: echo "ENV_GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}" >> $GITHUB_ENV
+
       # todo system-manager and hm switch, both are slow
       - uses: tailscale/github-action@6cae46e2d796f265265cfcf628b72a32b4d7cade # v3.3.0
         with:
@@ -21,17 +67,24 @@ jobs:
           tags: tag:ci
           version: latest
           use-cache: "true"
-      - uses: cachix/install-nix-action@7ec16f2c061ab07b235a7245e06ed46fe9a1cab6 # master
-        with:
-          nix_path: nixpkgs=channel:nixos-unstable
-          # below being set via sysm's nix.settings
-          #extra_nix_config: |
-          # system-features = kvm benchmark big-parallel nixos-test uid-range
-        # FIXME: fairly broken
+
+      #- uses: cachix/install-nix-action@7ec16f2c061ab07b235a7245e06ed46fe9a1cab6 # master
+      #  with:
+      #    nix_path: nixpkgs=channel:nixos-unstable
+
+      # Because cachix nix is not working on macos properly with darwin-rebuild
+      #- uses: DeterminateSystems/nix-installer-action@main
+
+      # Determinate nix gives error with, nix.enable = false; and linux builder can't be used on darwin
+      - uses: samueldr/lix-gha-installer-action@latest
+
+      # FIXME: fairly broken
       - uses: DeterminateSystems/magic-nix-cache-action@9934a5f127967bcd92e99961e365730ba57253de # main
+
       - name: change node name
         run: |
           sudo tailscale set --hostname="gha-system-$(nix-instantiate --raw --eval --expr 'builtins.currentSystem')"
+
       - name: ssh setup
         run: |
           mkdir -p ~/.ssh
@@ -40,34 +93,57 @@ jobs:
           echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIE57GFyCOihS1pDvAe6fzldbm2xdNfAe4VhZXYh1w5sv" >> ~/.ssh/authorized_keys
           echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8/+FK1TAZV7p1a92/ykOXqPGt34rsiHxXLgVG3b/3x" >> ~/.ssh/authorized_keys
 
-          # https://askubuntu.com/a/649959
-          # https://unix.stackexchange.com/q/548327
           chmod go-w ~/
           chmod 700 ~/.ssh
           chmod 600 ~/.ssh/authorized_keys
 
-          # default shell to fish
-          sudo apt install fish
-          sudo chsh -s $(which fish) $(whoami)
+          # default shell to fish - OS specific handling
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            sudo apt update && sudo apt install -y fish tmux
+          elif [ "$RUNNER_OS" = "macOS" ]; then
+            brew install fish tmux
+          fi
+
+          # chsh requires the shell to be in /etc/shells first on macOS
+          FISH_PATH=$(which fish)
+          if ! grep -q "$FISH_PATH" /etc/shells; then
+            echo "$FISH_PATH" | sudo tee -a /etc/shells
+          fi
+          sudo chsh -s "$FISH_PATH" $(whoami)
+
           fish -c "curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher && fisher install lilyball/nix-env.fish"
 
-          # set password just in case
-          echo -e "root:${USER_PASSWD}\nrunner:${USER_PASSWD}" | sudo chpasswd
+          # set password just in case - OS specific handling
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            echo -e "root:${USER_PASSWD}\nrunner:${USER_PASSWD}" | sudo chpasswd
+          elif [ "$RUNNER_OS" = "macOS" ]; then
+            sudo sysadminctl -adminUser $(whoami) -newPassword "${USER_PASSWD}"
+            sudo sysadminctl -adminUser root -newPassword "${USER_PASSWD}" || echo "Skipping root password change on macOS"
+          fi
         env:
-          # hint clash of clans username
           USER_PASSWD: ${{ secrets.GHA_RUNNER_PASSWD }}
-      - name: setup sysm config with vnc
+
+      - name: setup sysm/darwin config
         run: |
-          pushd hosts/sysm/gha-vnc
-          nix build -L .#systemConfigs.default --impure
-          cp /etc/nix/nix.conf nix.conf.old && cat nix.conf.old
-          sudo rm /etc/nix/nix.conf # interferes with sysm activation
-          sudo ./result/bin/activate
-          sudo systemctl restart nix-daemon # reflect on new settings
-          popd
+          if [ "$RUNNER_OS" = "Linux" ]; then
+            pushd hosts/sysm/gha-vnc
+            nix build -L .#systemConfigs.default --impure
+            cp /etc/nix/nix.conf nix.conf.old && cat nix.conf.old
+            sudo rm /etc/nix/nix.conf # interferes with sysm activation
+            sudo ./result/bin/activate
+            sudo systemctl restart nix-daemon # reflect on new settings
+            popd
+            nix profile install nixpkgs#{qimgv,alacritty}
+          elif [ "$RUNNER_OS" = "macOS" ]; then
+            echo "system-manager is systemd-only. Handling macOS configuration..."
+
+            # NOTE: If you have a nix-darwin config for this runner, uncomment and adjust:
+            # nix build -L .#darwinConfigurations.your-darwin-host.system --impure
+            # ./result/sw/bin/darwin-rebuild switch --flake .#your-darwin-host
+          fi
+
       - name: install utils
-        run: nix profile add nixpkgs#{lf,viddy,ripgrep,nix-output-monitor,fzf,neovim,gdu,duf,lazygit,micro,qimgv,alacritty}
-        # required to keep it alive
+        run: nix profile install nixpkgs#{lf,viddy,ripgrep,nix-output-monitor,fzf,neovim,gdu,duf,lazygit,micro}
+
       - name: noop
         run: while true; do sleep 10; done;
-        # uses: fawazahmed0/action-debug@v2
