@@ -1,5 +1,6 @@
 { pkgs, ... }:
 {
+  home.packages = [ pkgs.xsel ]; # for copying patches to clipboard feature inside lazygit
   programs.lazygit = {
     enable = true;
     settings = {
