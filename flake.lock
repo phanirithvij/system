@@ -814,6 +814,28 @@
         "type": "github"
       }
     },
+    "nimi": {
+      "inputs": {
+        "nix2container": "nix2container",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1774008115,
+        "narHash": "sha256-hq30WyJ3AsrUOS5yWaXDmLM34YblRadQTidfUzTKZxw=",
+        "owner": "weyl-ai",
+        "repo": "nimi",
+        "rev": "d47f6d735b768d234d19c27d540c3e6fb4d450a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "weyl-ai",
+        "ref": "master",
+        "repo": "nimi",
+        "type": "github"
+      }
+    },
     "niri": {
       "inputs": {
         "niri-stable": "niri-stable",
@@ -996,6 +1018,27 @@
         "owner": "Mic92",
         "ref": "main",
         "repo": "nix-update",
+        "type": "github"
+      }
+    },
+    "nix2container": {
+      "inputs": {
+        "nixpkgs": [
+          "nimi",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773987955,
+        "narHash": "sha256-vgxwF/GS9lRC9s211RnmJaGKHIUexMiRs7Eslh11E08=",
+        "owner": "nlewo",
+        "repo": "nix2container",
+        "rev": "20d339590c3c36252514a57b0241c47bcd8a08ce",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nlewo",
+        "repo": "nix2container",
         "type": "github"
       }
     },
@@ -1317,6 +1360,7 @@
         "lazy-apps": "lazy-apps",
         "modetc": "modetc",
         "navi_config": "navi_config",
+        "nimi": "nimi",
         "niri": "niri",
         "nix-index-database": "nix-index-database",
         "nix-on-droid": "nix-on-droid",

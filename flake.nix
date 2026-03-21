@@ -42,6 +42,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nimi.url = "github:weyl-ai/nimi/master";
+    nimi.inputs.nixpkgs.follows = "nixpkgs";
+
     wrapper-manager.url = "github:viperML/wrapper-manager/master";
 
     # lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # upstream
