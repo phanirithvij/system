@@ -384,11 +384,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1771050200,
-        "narHash": "sha256-tczPnonOe4QHIzQYvma0mWYiEvPl86o61SOAC71f6GA=",
+        "lastModified": 1774085404,
+        "narHash": "sha256-A1CVUqy9lOZKSsvDryFQOxMZZkTGwYH4CBLr2M2aBfY=",
         "owner": "phanirithvij",
         "repo": "home-manager",
-        "rev": "4ffb94214308c7494485ad5d10e542600e5fec8f",
+        "rev": "02346c800886ab9f743b1771de4fb881b0ea07f2",
         "type": "github"
       },
       "original": {
@@ -822,16 +822,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1774008115,
-        "narHash": "sha256-hq30WyJ3AsrUOS5yWaXDmLM34YblRadQTidfUzTKZxw=",
-        "owner": "weyl-ai",
+        "lastModified": 1774101419,
+        "narHash": "sha256-OXlxD2tiGaHPiwTi7QB4c9mkI+Lsaspzr72EW8+rS3A=",
+        "owner": "phanirithvij",
         "repo": "nimi",
-        "rev": "d47f6d735b768d234d19c27d540c3e6fb4d450a3",
+        "rev": "2305f7aa995892cc0947a75359b1f5479f4fc9d1",
         "type": "github"
       },
       "original": {
-        "owner": "weyl-ai",
-        "ref": "master",
+        "owner": "phanirithvij",
+        "ref": "fix-hm-class",
         "repo": "nimi",
         "type": "github"
       }
@@ -1089,11 +1089,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1773510525,
-        "narHash": "sha256-+pAaXBi+T2qK17DaP1p7XsYq/M11lYfek23hVZbORN4=",
+        "lastModified": 1774120609,
+        "narHash": "sha256-oHgYCVEgsOxa53skj+RoQZmpUeC5YOgS6tjsHZgaduo=",
         "owner": "phanirithvij",
         "repo": "nixpkgs",
-        "rev": "5d42eb261aa0134975afca893883727528672b33",
+        "rev": "f645671e507f335b57888ecb5054304981b7bb61",
         "type": "github"
       },
       "original": {
