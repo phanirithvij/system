@@ -145,6 +145,7 @@ let
     "rclone-browser"
     "remmina"
     "scrcpy"
+    "simplescreenrecorder"
     "steam"
     "steam-run"
     "syncplay"
