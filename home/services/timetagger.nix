@@ -1,0 +1,3 @@
+{
+  services.timetagger.enable = true;
+}

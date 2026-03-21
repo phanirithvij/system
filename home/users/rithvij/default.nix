@@ -49,6 +49,9 @@ in
 
     ../../services/password_manager.nix
     ../../services/ssh.nix
+    ../../services/timetagger.nix
+
+    ../../modules/timetagger.nix
 
     ../../specialisations
   ];
