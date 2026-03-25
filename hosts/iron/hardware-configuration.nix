@@ -48,6 +48,11 @@ in
     # (compressFirmwareZstd linux-firmware) # original nixpkgs equivalent
   ];
 
+  # also https://github.com/NixOS/nixpkgs/pull/453196#issue-3528670010
+  # thanks @eljamm for recommending this
+  services.scx.scheduler = "scx_bpfland";
+  services.scx.enable = true;
+
   boot.initrd.availableKernelModules = [
     "xhci_pci"
     "ahci"

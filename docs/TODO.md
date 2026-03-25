@@ -7,6 +7,10 @@ see ./todos folder as well
 
 ## TODO
 
+- [x] scx scheduler for slowing down builds while doing other things on the
+      desktop
+  - [ ] maybe this can fix the dell AC charging issue under a lot of cpu usage
+    - doubt it, it is a user space scheduler
 - [ ] run snitch maybe?
 - [ ] nix-monitored, https://github.com/search?q=nix-monitored&type=code
 - [ ] restructure repo to use divnix/std or hive
