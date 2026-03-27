@@ -1,3 +1,9 @@
+/*
+  From https://github.com/rnl-dei/nixrnl/blob/master/profiles/proxy-cache.nix Licensed MIT
+  Modified with the help of claude https://claude.ai/share/3352af68-3276-4b50-91d9-d41c332330d2
+
+  Not being used by me, but I plan to.
+*/
 {
   pkgs,
   config,
