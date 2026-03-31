@@ -7,10 +7,15 @@ see ./todos folder as well
 
 ## TODO
 
+- [ ] Check
+      https://chrisdown.name/2026/03/24/zswap-vs-zram-when-to-use-what.html
+      suggested by ju1m
 - [x] scx scheduler for slowing down builds while doing other things on the
       desktop
-  - [ ] maybe this can fix the dell AC charging issue under a lot of cpu usage
+  - [x] ~~maybe this can fix the dell AC charging issue under a lot of cpu
+        usage~~
     - doubt it, it is a user space scheduler
+    - Nope, when cpu utilisation is high it still the same
 - [ ] run snitch maybe?
 - [ ] nix-monitored, https://github.com/search?q=nix-monitored&type=code
 - [ ] restructure repo to use divnix/std or hive
