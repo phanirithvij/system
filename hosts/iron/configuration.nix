@@ -156,6 +156,8 @@ in
     # needs to be used with prime sync
     #modesetting.enable = true;
     # my gpu's driver can be production
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+    # mine is 470 I thought, but it is broken so idk
     #package = config.boot.kernelPackages.nvidiaPackages.legacy_470;
     # https://discourse.nixos.org/t/struggling-with-nvidia-prime/13794/3
     prime = {
