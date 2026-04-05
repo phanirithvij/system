@@ -8,11 +8,11 @@ on:
       linux-arm:
         description: "Run on Linux ARM (ubuntu-24.04-arm)"
         type: boolean
-        default: false
+        default: true
       macos:
         description: "Run on macOS Apple Silicon (macos-latest)"
         type: boolean
-        default: true
+        default: false
       macos-old:
         description: "Run on macOS Intel (macos-13)"
         type: boolean
