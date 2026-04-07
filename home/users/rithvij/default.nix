@@ -118,7 +118,6 @@ in
     remote-touchpad
     #redbean ape com
 
-    python3
     libnotify # notify-send
     # TODO dunst
 
