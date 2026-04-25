@@ -4,7 +4,7 @@
     # TODO checkout https://github.com/blitz/hydrasect
     # useful for git bisecting, use path:/abs/path instead for the same
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs/nixos-unstable?shallow=1";
-    nixpkgs.url = "github:phanirithvij/nixpkgs/nixos-patched"; # managed via nix-patcher
+    nixpkgs.url = "github:phanirithvij/nixpkgs/nixos-patched-bisect"; # managed via nix-patcher
     nixpkgs-upstream.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-patcher.url = "github:phanirithvij/nixpkgs-patcher/main";
