@@ -64,6 +64,13 @@ in
     "v4l2loopback"
     "modetc"
   ];
+  # 6.18.23 ok
+  # 6.18.24 broken (kernel NULL)
+  # 6.19.13 ok
+  # 6.19.14 broken (kernel NULL)
+  # 7.0     broken (runtime failure with ssh-add ~/.ssh/id_..)
+  # 7.0.1   broken (kernel NULL)
+  #boot.kernelPackages = pkgs.linuxPackages_6_19;
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.extraModulePackages = [
     config.boot.kernelPackages.v4l2loopback
