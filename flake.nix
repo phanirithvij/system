@@ -48,8 +48,8 @@
     wrapper-manager.url = "github:viperML/wrapper-manager/master";
 
     # lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # upstream
-    # lazy-apps.url = "git+file:///shed/Projects/nixer/core/lazy-apps?shallow=1";
-    lazy-apps.url = "github:phanirithvij/lazy-apps/master"; # hard fork
+    lazy-apps.url = "git+file:///shed/Projects/nixer/core/lazy-apps?shallow=1";
+    # lazy-apps.url = "github:phanirithvij/lazy-apps/master"; # hard fork
     lazy-apps.inputs.nixpkgs.follows = "nixpkgs";
     lazy-apps.inputs.pre-commit-hooks.follows = "git-hooks";
 
@@ -96,64 +96,8 @@
     nix-patcher.inputs.nixpkgs.follows = "nixpkgs";
     # it can also manage other flake inputs forks
 
-    ###### PATCHES #######
-
-    ### nix-patcher patches
-
-    # follow https://github.com/NixOS/nix/issues/3920
-
-    ## NOTE
-    ## nix-patcher fails to work due to various reasons
-    ##   I fixed some issues in https://github.com/phanirithvij/nix-patcher
-    ##   as well as https://github.com/phanirithvij/patch2pr
-
-    # losslesscut pr
-    #nixpkgs-patch-385535.url = "https://github.com/NixOS/nixpkgs/pull/385535.patch?full_index=1";
-    #nixpkgs-patch-385535.flake = false;
-    # octotail package (mine)
-    #nixpkgs-patch-419929.url = "https://github.com/NixOS/nixpkgs/pull/419929.patch?full_index=1";
-    #nixpkgs-patch-419929.flake = false;
-    # octotail returns dependency tests fix
-    #nixpkgs-patch-476911.url = "https://github.com/NixOS/nixpkgs/pull/476911.patch?full_index=1";
-    #nixpkgs-patch-476911.flake = false;
-    # debug stage-1 boot issue
-    #nixpkgs-patch-10.url = ./nixos/patches/0001-try-debug-mnt-issue.patch;
-    #nixpkgs-patch-10.flake = false;
-
-    # TODO disabling for now because of rl-2511 notes conflict
-    # opengist module (mine, its complex with createDBLocal etc.)
-    #nixpkgs-patch-11.url = "https://github.com/phanirithvij/nixpkgs/commit/34be2e80d57c2fb93ece547d9b28947ae56cac92.patch?full_index=1";
-    #nixpkgs-patch-11.flake = false;
-
     home-manager-patch-10.url = ./home/patches/docs-manpages-parallel.patch;
     home-manager-patch-10.flake = false;
-
-    ### end nix-patcher patches
-
-    ### nixpkgs-patcher patches
-
-    # NOTE: patches are applied via applyPatches in this section
-    # move to nixpkgs-patch-* to use nix-patcher cli, more efficient if there are no patches in this section at all
-    # also if some patch fails to apply via nix-patcher, no choice but to use this.
-    # if we can't even use this due to binaries in patch files or some other issue
-    # then just have to maintain them in tree like in pkgs/binary (can also have them in nixos-patched-manual, and rebase commits to nixos-patched)
-
-    # TODO review https://github.com/NixOS/nixpkgs/pull/428674
-    # opengist module (new)
-    #pr-428674-nixpkgs-patch.url = "https://github.com/NixOS/nixpkgs/pull/428674.patch?full_index=1";
-    #pr-428674-nixpkgs-patch.flake = false;
-
-    # goupile module (mine, fails with security enabled in vm, nix-patcher fails)
-    #pr-470416-nixpkgs-patch.url = "https://github.com/NixOS/nixpkgs/pull/470416.patch?full_index=1";
-    #pr-470416-nixpkgs-patch.flake = false;
-
-    # invoiceplane module (removed in 25.11, nix-patcher and nixpkgs-patcher both fail)
-    #pr-452167-nixpkgs-patch.url = "https://github.com/NixOS/nixpkgs/pull/452167.patch?full_index=1";
-    #pr-452167-nixpkgs-patch.flake = false;
-
-    ### end nixpkgs-patcher patches
-
-    ###### END PATCHES #######
 
     # dotfiles relocator kernel module
     # maintain own fork without any changes, because author's selfhosted repo can go down (from my experience)
@@ -166,10 +110,7 @@
     # https://github.com/hyprwm/Hyprland/issues/9314#issuecomment-2634051281
     hyprland.url = "https://github.com/hyprwm/Hyprland.git";
     hyprland.type = "git";
-    hyprland.submodules = true; # inputs.self.submodules exists, and inputs.xxx.submodules is only for type git?
-    # as per https://github.com/mightyiam/input-branches#the-setup
-    # that thing also has issues, https://github.com/NixOS/nix/issues/13571
-    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1&ref=main"; # FIXME doesn't work with nix-patcher
+    hyprland.submodules = true;
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.inputs.pre-commit-hooks.follows = "git-hooks";
 
@@ -178,9 +119,7 @@
     niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
     # Indirect dependencies, dedup
-
     systems.url = "github:nix-systems/default-linux/main";
-    #systems.url = "github:nix-systems/default/main";
 
     crane.url = "github:ipetkov/crane/master";
 
@@ -210,134 +149,174 @@
     nix-update.inputs.treefmt-nix.follows = "treefmt-nix";
   };
 
-  # TODO some overlay for fzf with this patch applied
-  # https://github.com/junegunn/fzf/pull/3918/files
-
   outputs =
     inputs:
-    inputs.flake-utils.lib.eachDefaultSystem (
-      system:
-      let
-        getFlakeInputs = system: inputs // { nixpkgs' = patched.nixpkgs'; };
-        # so nixpkgs-patcher
-        patched = inputs.nixpkgs-patcher.lib {
-          nixpkgsPatcher.inputs = inputs;
-          nixpkgsPatcher.patchInputRegex = ".*-nixpkgs-patch$"; # default: "^nixpkgs-patch-.*"
-          modules = [ { nixpkgs.hostPlatform = system; } ]; # without this, impure will be required
-        };
-
-        lib = import (patched.nixpkgs' + "/lib");
-
-        pkgs = import patched.nixpkgs' {
-          inherit system overlays;
-          config = {
-            nvidia.acceptLicense = true;
-            allowUnfreePredicate =
-              pkg:
-              let
-                pname = lib.getName pkg;
-                byName = builtins.elem pname [
-                  "spotify" # in lazyapps used in home-manager
-                  "hplip" # printer
-                  "cloudflare-warp"
-                  "nvidia-persistenced"
-                  "plexmediaserver"
-                  "p7zip"
-                  "steam"
-                  "steam-unwrapped"
-                  "honey-home"
-                  "discord"
-                  "zoom"
-                  "nvidia-x11"
-                  "nvidia-settings"
-                ];
-              in
-              if byName then lib.warn "Allowing unfree package: ${pname}" true else false;
-            allowInsecurePredicate =
-              pkg:
-              let
-                name = "${lib.getName pkg}-${lib.getVersion pkg}";
-                byName = builtins.elem name [
-                  "beekeeper-studio-5.5.7" # Electron version 32 is EOL, hm
-                ];
-              in
-              if byName then lib.warn "Allowing insecure package: ${name}" true else false;
+    let
+      allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (
+        system:
+        let
+          # so nixpkgs-patcher
+          patched = inputs.nixpkgs-patcher.lib {
+            nixpkgsPatcher.inputs = inputs;
+            nixpkgsPatcher.patchInputRegex = ".*-nixpkgs-patch$"; # default: "^nixpkgs-patch-.*"
+            modules = [ { nixpkgs.hostPlatform = system; } ]; # without this, impure will be required
           };
-        };
 
-        args = {
-          inherit pkgs system lib;
-          flake-inputs = inputs // {
-            inherit (patched) nixpkgs';
+          lib = import (patched.nixpkgs' + "/lib");
+
+          pkgs = import patched.nixpkgs' {
+            inherit system overlays;
+            config = {
+              nvidia.acceptLicense = true;
+              allowUnfreePredicate =
+                pkg:
+                let
+                  pname = lib.getName pkg;
+                  byName = builtins.elem pname [
+                    "spotify" # in lazyapps used in home-manager
+                    "hplip" # printer
+                    "cloudflare-warp"
+                    "nvidia-persistenced"
+                    "plexmediaserver"
+                    "p7zip"
+                    "steam"
+                    "steam-unwrapped"
+                    "honey-home"
+                    "discord"
+                    "zoom"
+                    "nvidia-x11"
+                    "nvidia-settings"
+                  ];
+                in
+                if byName then lib.warn "Allowing unfree package: ${pname}" true else false;
+              allowInsecurePredicate =
+                pkg:
+                let
+                  name = "${lib.getName pkg}-${lib.getVersion pkg}";
+                  byName = builtins.elem name [
+                    "beekeeper-studio-5.5.7" # Electron version 32 is EOL, hm
+                  ];
+                in
+                if byName then lib.warn "Allowing insecure package: ${name}" true else false;
+            };
           };
-        };
-        wrappedPkgs = import ./pkgs/wrapped-pkgs args;
-        binaryPkgs = import ./pkgs/binary args;
-        boxxyPkgs = import ./pkgs/boxxy args;
-        lazyPkgs = import ./pkgs/lazy args;
-        nurPkgs = import ./pkgs/nurpkgs.nix args;
-        nvidia-offload = import ./pkgs/nvidia-offload.nix args;
 
-        overlays =
-          (import ./lib/overlays {
-            inherit system;
+          args = {
+            inherit pkgs system lib;
             flake-inputs = inputs // {
               inherit (patched) nixpkgs';
             };
-          })
-          ++ [ inputs.niri.overlays.niri ]
-          ++ [
-            (_: _: {
-              gwt = inputs.gowt.packages.${system}.default;
-            })
-          ]
-          ++ (builtins.attrValues
-            (import "${inputs.nur-pkgs}" { }).overlays
-          )
-          ++ [
-            (final: prev: {
-              inherit
-                wrappedPkgs
-                lazyPkgs
-                nurPkgs
-                boxxyPkgs
-                binaryPkgs
-                nvidia-offload
-                ;
-              lib = prev.lib // {
-                mine = {
-                  unNestAttrs = import ./lib/unnest.nix { inherit pkgs; };
-                  GPUOffloadApp = final.callPackage ./lib/gpu-offload.nix { };
-                };
+          };
+          wrappedPkgs = import ./pkgs/wrapped-pkgs args;
+          binaryPkgs = import ./pkgs/binary args;
+          boxxyPkgs = import ./pkgs/boxxy args;
+          lazyPkgs = import ./pkgs/lazy args;
+          nurPkgs = import ./pkgs/nurpkgs.nix args;
+          nvidia-offload = import ./pkgs/nvidia-offload.nix args;
+
+          overlays =
+            (import ./lib/overlays {
+              inherit system;
+              flake-inputs = inputs // {
+                inherit (patched) nixpkgs';
               };
             })
-          ];
+            ++ [ inputs.niri.overlays.niri ]
+            ++ [
+              (_: _: {
+                gwt = inputs.gowt.packages.${system}.default;
+              })
+            ]
+            ++ (builtins.attrValues
+              (import "${inputs.nur-pkgs}" { }).overlays
+            )
+            ++ [
+              (final: prev: {
+                inherit
+                  wrappedPkgs
+                  lazyPkgs
+                  nurPkgs
+                  boxxyPkgs
+                  binaryPkgs
+                  nvidia-offload
+                  ;
+                lib = prev.lib // {
+                  mine = {
+                    unNestAttrs = import ./lib/unnest.nix { inherit pkgs; };
+                    GPUOffloadApp = final.callPackage ./lib/gpu-offload.nix { };
+                  };
+                };
+              })
+            ];
 
-        hmlib = pkgs.lib.extend (_: _: inputs.home-manager.lib // { inherit (pkgs.lib) mine; });
+          hmlib = pkgs.lib.extend (_: _: inputs.home-manager.lib // { inherit (pkgs.lib) mine; });
 
-        treefmtCfg =
-          (inputs.treefmt-nix.lib.evalModule pkgs (import ./treefmt.nix { inherit pkgs; })).config.build;
-        hm = inputs.home-manager.packages.${system}.default;
-        nixp = inputs.nix-patcher.packages.${system}.nix-patcher;
-        nh' = nurPkgs.nh;
-        nom' = nurPkgs.flakePkgs.nix-output-monitor;
+          treefmtCfg =
+            (inputs.treefmt-nix.lib.evalModule pkgs (import ./treefmt.nix { inherit pkgs; })).config.build;
+          hm = inputs.home-manager.packages.${system}.default;
+          nixp = inputs.nix-patcher.packages.${system}.nix-patcher;
+          nh' = nurPkgs.nh;
+          nom' = nurPkgs.flakePkgs.nix-output-monitor;
 
-        lazyApps = lib.mine.unNestAttrs lazyPkgs;
+          lazyApps = lib.mine.unNestAttrs lazyPkgs;
+        in
+        {
+          inherit
+            pkgs
+            overlays
+            wrappedPkgs
+            binaryPkgs
+            boxxyPkgs
+            lazyPkgs
+            nurPkgs
+            nvidia-offload
+            lazyApps
+            hmlib
+            treefmtCfg
+            hm
+            nixp
+            nh'
+            nom'
+            ;
+          inherit (patched) nixpkgs' args';
+        }
+      );
+    in
+    inputs.flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        inherit (allSystemsJar.${system})
+          pkgs
+          lazyApps
+          wrappedPkgs
+          boxxyPkgs
+          binaryPkgs
+          nurPkgs
+          nvidia-offload
+          treefmtCfg
+          hm
+          nixp
+          nh'
+          nom'
+          ;
+        inherit (pkgs) lib;
       in
       {
         inherit
           pkgs
-          overlays
+          lazyApps
           wrappedPkgs
-          binaryPkgs
           boxxyPkgs
-          lazyPkgs
+          binaryPkgs
           nurPkgs
           nvidia-offload
-          lazyApps
           ;
-        inherit (patched) nixpkgs' args';
-        inherit hmlib;
+        inherit (allSystemsJar.${system})
+          overlays
+          nixpkgs'
+          args'
+          hmlib
+          ;
 
         packages =
           let
@@ -412,13 +391,7 @@
     )
     // (
       let
-        # Previously I used flake-utils.eachDefaultSystemPassThrough
-        # but that functions in a way
-        #  which allows only the last entry in the `defaultSystems` defined in flake-utils is used
-        # and even with --impure, on aarch64-linux there is a check https://github.com/numtide/flake-utils/pull/119/files#diff-25f00f391a440414afdc84d7191b5892db3492e1c0b9a45f9063be83e21d75e4R55
-        # which lets aarch64-linux to be in the defaultSystems[3] and not last one in the list
-        # TODO follow https://github.com/NixOS/nix/issues/3843
-        system = builtins.currentSystem or "x86_64-linux";
+        system = "x86_64-linux";
 
         user = "rithvij";
         uzer = "rithviz";
@@ -426,14 +399,16 @@
         liveuser = "nixos";
 
         linuxhost = "iron";
-        hostdroid = "localhost"; # not possible to change it
+        hostdroid = "localhost";
         livehost = "nixos";
 
-        pkgs = allSystemsJar.pkgs.${system};
-        nixpkgs' = allSystemsJar.nixpkgs'.${system};
-        args' = allSystemsJar.args'.${system};
+        pkgs = allSystemsJar.${system}.pkgs;
+        nixpkgs' = allSystemsJar.${system}.nixpkgs';
+        args' = allSystemsJar.${system}.args';
 
         nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
+
+        getFlakeInputs = system: inputs // { nixpkgs' = allSystemsJar.${system}.nixpkgs'; };
 
         hmAliasModules = (import ./home/applications/alias-groups.nix { inherit pkgs; }).aliasModules;
         homeConfig =
@@ -444,12 +419,11 @@
             system ? "x86_64-linux",
           }:
           inputs.home-manager.lib.homeManagerConfiguration {
-            pkgs = allSystemsJar.pkgs.${system};
+            pkgs = allSystemsJar.${system}.pkgs;
             modules = [ ./home/users/${username} ] ++ modules ++ hmAliasModules;
-            # TODO sharedModules sops
             extraSpecialArgs = {
               flake-inputs = getFlakeInputs system;
-              lib = allSystemsJar.hmlib.${system};
+              lib = allSystemsJar.${system}.hmlib;
               inherit system;
               inherit username;
               inherit hostname;
@@ -467,14 +441,12 @@
         toolsModule = {
           environment.systemPackages = [
             hm
-            #(pkgs.nix-schema { inherit system; })
           ];
         };
         overlayModule = {
-          nixpkgs.overlays = allSystemsJar.overlays.${system};
+          nixpkgs.overlays = allSystemsJar.${system}.overlays;
         };
         versionModule = {
-          # NOTE: these while good to have, will FOR SURE rebuild the whole system for every new commit in nixpkgs and current repo respectively
           system.nixos.revision = inputs.nixpkgs.rev or inputs.nixpkgs.shortRev;
           system.configurationRevision = inputs.self.rev or "dirty";
         };
@@ -516,54 +488,44 @@
         systemConfigs = {
           gha = inputs.system-manager.lib.makeSystemConfig {
             modules = [ ./hosts/sysm/gha/configuration.nix ];
-            overlays = allSystemsJar.overlays.${system};
+            overlays = allSystemsJar.${system}.overlays;
             extraSpecialArgs = {
-              inherit (pkgs) lib; # for GPUOffloadApp
-              # NOTE and TODO:
-              # system-manager likely needs nixGL not nvidia-offload
-              # home-manager also has some nixGL stuff
-              # nixGL also has alternatives https://github.com/soupglasses/nix-system-graphics#comparison-table
+              inherit (pkgs) lib;
             };
           };
-          # TODO rename vps
           vps = inputs.system-manager.lib.makeSystemConfig {
             modules = [ ./hosts/sysm/vps/configuration.nix ];
-            overlays = allSystemsJar.overlays.${system};
+            overlays = allSystemsJar.${system}.overlays;
             extraSpecialArgs = {
               inherit (pkgs) lib;
             };
           };
         };
         homeConfigurations = {
-          # nixos main
           ${user} = homeConfig {
             username = user;
             hostname = linuxhost;
             modules = nix-index-hm-modules ++ common-hm-modules;
             inherit system;
           };
-          # non-nixos linux
           ${uzer} = homeConfig {
             username = uzer;
             hostname = linuxhost;
             modules = nix-index-hm-modules ++ common-hm-modules;
             inherit system;
           };
-          # nix-on-droid
           "${droid}@${hostdroid}" = homeConfig {
             username = droid;
-            hostname = "nod"; # NOTE: nod = nix-on-droid, not the real hostname (it is localhost i.e. ${hostdroid})
+            hostname = "nod";
             modules = common-hm-modules;
-            system = builtins.currentSystem or "aarch64-linux";
+            system = "aarch64-linux";
           };
-          # nixos live user
           "${liveuser}@${livehost}" = homeConfig {
             username = liveuser;
             hostname = livehost;
             modules = common-hm-modules;
             inherit system;
           };
-          # TODO different repo with npins?
           runner = homeConfig {
             username = "runner";
             hostname = "unknown";
@@ -584,7 +546,6 @@
               toolsModule
               overlayModule
               inputs.sops-nix.nixosModules.sops
-              # home-manager baked in
               inputs.home-manager.nixosModules.home-manager
               inputs.lazy-apps.nixosModules.default
               {
@@ -593,7 +554,7 @@
                   useUserPackages = true;
                   users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
-                    lib = allSystemsJar.hmlib.${system};
+                    lib = allSystemsJar.${system}.hmlib;
                     flake-inputs = getFlakeInputs system;
                     username = liveuser;
                     hostname = livehost;
@@ -620,7 +581,6 @@
               ./nixos/modules/rustical.nix
               inputs.lazy-apps.nixosModules.default
               {
-                # prevent the patched nixpkgs from gc as well, not just flake inputs
                 system.extraDependencies = [ nixpkgs' ];
               }
             ]
@@ -628,7 +588,7 @@
             specialArgs = {
               inherit (pkgs) lib;
               flake-inputs = getFlakeInputs system;
-              inherit system; # TODO needed?
+              inherit system;
               username = user;
               hostname = linuxhost;
             };
@@ -643,7 +603,6 @@
               inputs.sops-nix.nixosModules.sops
               inputs.nixos-wsl.nixosModules.default
               ./hosts/wsl/configuration.nix
-              # home-manager baked in
               inputs.home-manager.nixosModules.home-manager
               inputs.lazy-apps.nixosModules.default
               {
@@ -652,9 +611,9 @@
                   useUserPackages = true;
                   users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
-                    lib = allSystemsJar.hmlib.${system};
+                    lib = allSystemsJar.${system}.hmlib;
                     flake-inputs = getFlakeInputs system;
-                    username = liveuser; # TODO wsl separate home config
+                    username = liveuser;
                     hostname = livehost;
                     inherit system;
                   };
@@ -666,19 +625,17 @@
             specialArgs = {
               inherit (pkgs) lib;
               flake-inputs = getFlakeInputs system;
-              inherit system; # TODO needed?
+              inherit system;
               username = "nixos";
               hostname = "nixos";
             };
           };
         };
-        # keep all nix-on-droid hosts in same state
-        # TODO host level customisations and hostvars
         nixOnDroidConfigurations =
           let
-            system = builtins.currentSystem or "aarch64-linux";
+            system = "aarch64-linux";
             mdroid = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-              pkgs = allSystemsJar.pkgs.${system};
+              pkgs = allSystemsJar.${system}.pkgs;
               extraSpecialArgs = {
                 flake-inputs = getFlakeInputs system;
                 hmSharedModules = hmAliasModules;
