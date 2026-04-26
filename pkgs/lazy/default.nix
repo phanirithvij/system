@@ -198,7 +198,7 @@ let
       (map (lib.removeSuffix ".nix"))
       (map (s: lib.removePrefix "${builtins.toString dir}/" s))
     ];
-  packages = lib.genAttrs (listNixfilesInDir ./.) lib.id;
+  packages = listNixfilesInDir ./.;
   nixpkgsPkgs = lib.listToAttrs (
     builtins.map (name: {
       inherit name;
@@ -209,12 +209,11 @@ let
       };
     }) pkgsList
   );
-  lazyPkgs = combine (
-    lib.attrValues (
-      lib.mapAttrs (
-        n: v: lib.attrsets.setAttrByPath (lib.path.subpath.components n) (import ./${v}.nix cargs)
-      ) packages
-    )
+  lazyPkgs = lib.listToAttrs (
+    builtins.map (name: {
+      inherit name;
+      value = import ./${name}.nix cargs;
+    }) packages
   );
 in
 if repl then

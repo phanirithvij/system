@@ -11,9 +11,8 @@
 
     #nur-pkgs.url = "git+file:///shed/Projects/nur-packages";
     nur-pkgs.url = "github:phanirithvij/nur-packages/master";
+    nur-pkgs.inputs.nixpkgs.follows = "nixpkgs";
     nur-pkgs.inputs.nix-update.follows = "nix-update";
-    #follows shouldn't be used as cachix cache becomes useless
-    #nur-pkgs.inputs.nixpkgs.follows = "nixpkgs";
     # TODO in nur-pkgs gha we build for nixos-unstable and nixpkgs-unstable
     # but what if nur-pkgs.flake.inputs.nixpkgs is outdated? does cache still work?
 
@@ -178,10 +177,10 @@
     niri.inputs.nixpkgs.follows = "nixpkgs";
     niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
 
-    ### Indirect dependencies, dedup
+    # Indirect dependencies, dedup
 
-    #systems.url = "github:nix-systems/default-linux/main";
-    systems.url = "github:nix-systems/default/main";
+    systems.url = "github:nix-systems/default-linux/main";
+    #systems.url = "github:nix-systems/default/main";
 
     crane.url = "github:ipetkov/crane/master";
 
@@ -216,224 +215,153 @@
 
   outputs =
     inputs:
-    let
-      getFlakeInputs = system: inputs // { nixpkgs' = allSystemsJar.nixpkgs'.${system}; };
-      allSystemsJar = inputs.flake-utils.lib.eachDefaultSystem (
-        system:
-        let
-          inherit (legacyPackages) lib;
-          args = {
-            inherit pkgs system lib;
-            flake-inputs = inputs // {
-              inherit (patched) nixpkgs';
-            };
-          };
-          legacyPackages = inputs.nixpkgs.legacyPackages.${system};
-          wrappedPkgs = import ./pkgs/wrapped-pkgs args;
-          binaryPkgs = import ./pkgs/binary args;
-          boxxyPkgs = import ./pkgs/boxxy args;
-          lazyPkgs = import ./pkgs/lazy args;
-          nurPkgs = import ./pkgs/nurpkgs.nix (
-            args
-            // {
-              # 2nd nixpkgs evaluation, override pkgs
-              pkgs = import inputs.nur-pkgs.inputs.nixpkgs {
-                inherit system;
-                config = {
-                  allowUnfreePredicate =
-                    pkg:
-                    let
-                      pname = lib.getName pkg;
-                      byName = builtins.elem pname [
-                        "textual-window"
-                        "pendulum"
-                        "nvidia-x11"
-                        "nvidia-settings"
-                      ];
-                    in
-                    if byName then lib.warn "NurPkgs allowing unfree package: ${pname}" true else false;
-                };
-              };
-            }
-          );
-          nvidia-offload = import ./pkgs/nvidia-offload.nix args;
-
-          # so nixpkgs-patcher
-          # PROS:
-          # - handles system arg
-          # - can cram in flake inputs to auto track hashes
-          # - supports fetchpatch2 supplied patches instead of cramming patches in flake inputs
-          patched = inputs.nixpkgs-patcher.lib {
-            nixpkgsPatcher.inputs = inputs;
-            nixpkgsPatcher.patchInputRegex = ".*-nixpkgs-patch$"; # default: "^nixpkgs-patch-.*"
-            modules = [ { nixpkgs.hostPlatform = system; } ]; # without this, impure will be required
-          };
-
-          pkgs = import patched.nixpkgs' {
-            inherit system overlays;
-            config = {
-              nvidia.acceptLicense = true;
-              # allowlist of unfree pkgs, for home-manager too
-              # https://github.com/viperML/dotfiles/blob/43152b279e609009697346b53ae7db139c6cc57f/packages/default.nix#L64
-              # TODO these warnings should ideally be in nixpkgs itself (allow disabling viewing traces)
-              # TODO before that, why is eval done 3 times (try nh home switch)?
-              allowUnfreePredicate =
-                pkg:
-                let
-                  pname = lib.getName pkg;
-                  byName = builtins.elem pname [
-                    "spotify" # in lazyapps used in home-manager
-                    "hplip" # printer
-                    "cloudflare-warp"
-                    "nvidia-persistenced"
-                    "plexmediaserver"
-                    "p7zip"
-                    "steam"
-                    "steam-unwrapped"
-                    "honey-home"
-                    "discord"
-                    "zoom"
-                    "nvidia-x11"
-                    "nvidia-settings"
-                  ];
-                in
-                if byName then lib.warn "Allowing unfree package: ${pname}" true else false;
-              allowInsecurePredicate =
-                pkg:
-                let
-                  name = "${lib.getName pkg}-${lib.getVersion pkg}";
-                  byName = builtins.elem name [
-                    "beekeeper-studio-5.5.7" # Electron version 32 is EOL, hm
-                  ];
-                in
-                if byName then lib.warn "Allowing insecure package: ${name}" true else false;
-
-              packageOverrides = _: {
-                # No need to do this anymore
-                # A pr to home-manager for better default behavior was merged a while ago
-                # see https://github.com/nix-community/home-manager/pull/5930
-                /*
-                  espanso = pkgs.espanso.override {
-                    x11Support = false;
-                    waylandSupport = true;
-                  };
-                */
-              };
-            };
-          };
-
-          overlays =
-            (import ./lib/overlays {
-              inherit system;
-              flake-inputs = inputs // {
-                inherit (patched) nixpkgs';
-              };
-            })
-            ++ [ inputs.niri.overlays.niri ]
-            ++ [
-              (_: _: {
-                gwt = inputs.gowt.packages.${system}.default;
-              })
-            ]
-            ++ (builtins.attrValues
-              (import "${inputs.nur-pkgs}" {
-                # pkgs here is not being used in nur-pkgs overlays
-                #inherit pkgs; # WIP maybe get overlays from nurPkgs.overlays?
-              }).overlays
-            )
-            ++ [
-              # wrappedPkgs imported into pkgs as pkgs.wrappedPkgs
-              # no need to pass them around
-              (final: prev: {
-                inherit wrappedPkgs;
-                inherit lazyPkgs;
-                inherit nurPkgs;
-                inherit boxxyPkgs;
-                inherit binaryPkgs;
-                inherit nvidia-offload;
-                lib = prev.lib // {
-                  mine = {
-                    unNestAttrs = import ./lib/unnest.nix { inherit pkgs; };
-                    GPUOffloadApp = final.callPackage ./lib/gpu-offload.nix { };
-                  };
-                };
-              })
-            ];
-        in
-        {
-          # nixpkgs overlays to lib don't apply, need to re-add them
-          # home-manager lib is required to use lib.mine in home-manager config
-          # https://github.com/nix-community/home-manager/issues/5980
-          hmlib = pkgs.lib.extend (_: _: inputs.home-manager.lib // { inherit (pkgs.lib) mine; });
-          inherit
-            pkgs
-            overlays
-            wrappedPkgs
-            binaryPkgs
-            boxxyPkgs
-            lazyPkgs
-            nurPkgs
-            nvidia-offload
-            ;
-          inherit (patched) nixpkgs' args';
-        }
-      );
-    in
     inputs.flake-utils.lib.eachDefaultSystem (
       system:
       let
-        pkgs = allSystemsJar.pkgs.${system};
-        inherit (pkgs) lib;
+        getFlakeInputs = system: inputs // { nixpkgs' = patched.nixpkgs'; };
+        # so nixpkgs-patcher
+        patched = inputs.nixpkgs-patcher.lib {
+          nixpkgsPatcher.inputs = inputs;
+          nixpkgsPatcher.patchInputRegex = ".*-nixpkgs-patch$"; # default: "^nixpkgs-patch-.*"
+          modules = [ { nixpkgs.hostPlatform = system; } ]; # without this, impure will be required
+        };
+
+        lib = import (patched.nixpkgs' + "/lib");
+
+        pkgs = import patched.nixpkgs' {
+          inherit system overlays;
+          config = {
+            nvidia.acceptLicense = true;
+            allowUnfreePredicate =
+              pkg:
+              let
+                pname = lib.getName pkg;
+                byName = builtins.elem pname [
+                  "spotify" # in lazyapps used in home-manager
+                  "hplip" # printer
+                  "cloudflare-warp"
+                  "nvidia-persistenced"
+                  "plexmediaserver"
+                  "p7zip"
+                  "steam"
+                  "steam-unwrapped"
+                  "honey-home"
+                  "discord"
+                  "zoom"
+                  "nvidia-x11"
+                  "nvidia-settings"
+                ];
+              in
+              if byName then lib.warn "Allowing unfree package: ${pname}" true else false;
+            allowInsecurePredicate =
+              pkg:
+              let
+                name = "${lib.getName pkg}-${lib.getVersion pkg}";
+                byName = builtins.elem name [
+                  "beekeeper-studio-5.5.7" # Electron version 32 is EOL, hm
+                ];
+              in
+              if byName then lib.warn "Allowing insecure package: ${name}" true else false;
+          };
+        };
+
+        args = {
+          inherit pkgs system lib;
+          flake-inputs = inputs // {
+            inherit (patched) nixpkgs';
+          };
+        };
+        wrappedPkgs = import ./pkgs/wrapped-pkgs args;
+        binaryPkgs = import ./pkgs/binary args;
+        boxxyPkgs = import ./pkgs/boxxy args;
+        lazyPkgs = import ./pkgs/lazy args;
+        nurPkgs = import ./pkgs/nurpkgs.nix args;
+        nvidia-offload = import ./pkgs/nvidia-offload.nix args;
+
+        overlays =
+          (import ./lib/overlays {
+            inherit system;
+            flake-inputs = inputs // {
+              inherit (patched) nixpkgs';
+            };
+          })
+          ++ [ inputs.niri.overlays.niri ]
+          ++ [
+            (_: _: {
+              gwt = inputs.gowt.packages.${system}.default;
+            })
+          ]
+          ++ (builtins.attrValues
+            (import "${inputs.nur-pkgs}" { }).overlays
+          )
+          ++ [
+            (final: prev: {
+              inherit
+                wrappedPkgs
+                lazyPkgs
+                nurPkgs
+                boxxyPkgs
+                binaryPkgs
+                nvidia-offload
+                ;
+              lib = prev.lib // {
+                mine = {
+                  unNestAttrs = import ./lib/unnest.nix { inherit pkgs; };
+                  GPUOffloadApp = final.callPackage ./lib/gpu-offload.nix { };
+                };
+              };
+            })
+          ];
+
+        hmlib = pkgs.lib.extend (_: _: inputs.home-manager.lib // { inherit (pkgs.lib) mine; });
+
         treefmtCfg =
           (inputs.treefmt-nix.lib.evalModule pkgs (import ./treefmt.nix { inherit pkgs; })).config.build;
         hm = inputs.home-manager.packages.${system}.default;
         nixp = inputs.nix-patcher.packages.${system}.nix-patcher;
-        nh' = allSystemsJar.nurPkgs.${system}.nh;
-        nom' = allSystemsJar.nurPkgs.${system}.flakePkgs.nix-output-monitor;
-        #nix-schema = pkgs.nix-schema { inherit system; }; # nur-pkgs overlay, cachix cache
+        nh' = nurPkgs.nh;
+        nom' = nurPkgs.flakePkgs.nix-output-monitor;
 
-        lazyApps = lib.mine.unNestAttrs allSystemsJar.lazyPkgs.${system};
+        lazyApps = lib.mine.unNestAttrs lazyPkgs;
       in
       {
-        inherit lazyApps allSystemsJar;
-        apps = {
-          /*
-            nix = {
-              type = "app";
-              program = "${nix-schema}/bin/nix-schema";
-            };
-          */
-        };
+        inherit
+          pkgs
+          overlays
+          wrappedPkgs
+          binaryPkgs
+          boxxyPkgs
+          lazyPkgs
+          nurPkgs
+          nvidia-offload
+          lazyApps
+          ;
+        inherit (patched) nixpkgs' args';
+        inherit hmlib;
+
         packages =
           let
             _pkgs = {
-              #inherit nix-schema;
               navi-master = pkgs.navi;
               home-manager = hm;
               nix-patcher = nixp;
-              nvidia-offload = allSystemsJar.nvidia-offload.${system};
+              nvidia-offload = nvidia-offload;
             }
             // lazyApps
-            // allSystemsJar.wrappedPkgs.${system}
-            // allSystemsJar.boxxyPkgs.${system}
-            // allSystemsJar.binaryPkgs.${system}
+            // wrappedPkgs
+            // boxxyPkgs
+            // binaryPkgs
             // (lib.filterAttrs (_: v: lib.isDerivation v && !(v ? meta && v.meta.broken)) (
-              lib.mine.unNestAttrs allSystemsJar.nurPkgs.${system}
+              lib.mine.unNestAttrs nurPkgs
             ));
           in
           _pkgs;
 
-        inherit pkgs inputs; # just for inspection
-
-        # NEVER ever run `nix fmt` run `treefmt`
-        #formatter = treefmtCfg.wrapper;
         checks = {
           formatting = treefmtCfg.check inputs.self;
           git-hooks-check = inputs.git-hooks.lib.${system}.run {
             src = lib.cleanSource ./.;
             hooks = {
-              # ideally the formatting check from above can be used but they don't really go together
-              # one can do nix build .#checks.system.formatting but that is beyond slow
               treefmt = {
                 enable = true;
                 stages = [ "pre-push" ];
@@ -444,7 +372,6 @@
                 always_run = true;
                 stages = [ "prepare-commit-msg" ];
                 entry = builtins.toString (
-                  # if all are md files, skip ci
                   pkgs.writeShellScript "skip-ci-md" ''
                     COMMIT_MSG_FILE=$1
                     STAGED_FILES=$(git diff --cached --name-only)
@@ -474,14 +401,13 @@
               cachix
               xc
             ];
-            packages = inputs.self.checks.${system}.git-hooks-check.enabledPackages; # these don't show up in menu
-            extraCommands = [ ]; # should be in the format list of attrs devshell expects
+            packages = inputs.self.checks.${system}.git-hooks-check.enabledPackages;
+            extraCommands = [ ];
             devshell = import inputs.devshell { nixpkgs = pkgs; };
-          }).shell.overrideAttrs
-            (prev: {
-              name = "system";
-              shellHook = prev.shellHook + inputs.self.checks.${system}.git-hooks-check.shellHook;
-            });
+          }).shell.overrideAttrs (prev: {
+            name = "system";
+            shellHook = prev.shellHook + inputs.self.checks.${system}.git-hooks-check.shellHook;
+          });
       }
     )
     // (
