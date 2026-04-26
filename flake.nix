@@ -258,7 +258,8 @@
           nh' = nurPkgs.nh;
           nom' = nurPkgs.flakePkgs.nix-output-monitor;
 
-          lazyApps = lib.mine.unNestAttrs lazyPkgs;
+          unNestAttrs = import ./lib/unnest.nix { inherit pkgs lib; };
+          lazyApps = unNestAttrs lazyPkgs;
         in
         {
           inherit
@@ -277,6 +278,7 @@
             nixp
             nh'
             nom'
+            unNestAttrs
             ;
           inherit (patched) nixpkgs' args';
         }
@@ -285,20 +287,20 @@
     inputs.flake-utils.lib.eachDefaultSystem (
       system:
       let
-        inherit (allSystemsJar.${system})
-          pkgs
-          lazyApps
-          wrappedPkgs
-          boxxyPkgs
-          binaryPkgs
-          nurPkgs
-          nvidia-offload
-          treefmtCfg
-          hm
-          nixp
-          nh'
-          nom'
-          ;
+        pkgs = allSystemsJar.pkgs.${system};
+        lazyApps = allSystemsJar.lazyApps.${system};
+        wrappedPkgs = allSystemsJar.wrappedPkgs.${system};
+        boxxyPkgs = allSystemsJar.boxxyPkgs.${system};
+        binaryPkgs = allSystemsJar.binaryPkgs.${system};
+        nurPkgs = allSystemsJar.nurPkgs.${system};
+        nvidia-offload = allSystemsJar.nvidia-offload.${system};
+        treefmtCfg = allSystemsJar.treefmtCfg.${system};
+        hm = allSystemsJar.hm.${system};
+        nixp = allSystemsJar.nixp.${system};
+        nh' = allSystemsJar.nh'.${system};
+        nom' = allSystemsJar.nom'.${system};
+        unNestAttrs = allSystemsJar.unNestAttrs.${system};
+
         inherit (pkgs) lib;
       in
       {
@@ -311,7 +313,7 @@
           nurPkgs
           nvidia-offload
           ;
-        inherit (allSystemsJar.${system})
+        inherit (allSystemsJar)
           overlays
           nixpkgs'
           args'
@@ -331,7 +333,7 @@
             // boxxyPkgs
             // binaryPkgs
             // (lib.filterAttrs (_: v: lib.isDerivation v && !(v ? meta && v.meta.broken)) (
-              lib.mine.unNestAttrs nurPkgs
+              unNestAttrs nurPkgs
             ));
           in
           _pkgs;
@@ -402,13 +404,13 @@
         hostdroid = "localhost";
         livehost = "nixos";
 
-        pkgs = allSystemsJar.${system}.pkgs;
-        nixpkgs' = allSystemsJar.${system}.nixpkgs';
-        args' = allSystemsJar.${system}.args';
+        pkgs = allSystemsJar.pkgs.${system};
+        nixpkgs' = allSystemsJar.nixpkgs'.${system};
+        args' = allSystemsJar.args'.${system};
 
         nixosSystem = import (nixpkgs' + "/nixos/lib/eval-config.nix");
 
-        getFlakeInputs = system: inputs // { nixpkgs' = allSystemsJar.${system}.nixpkgs'; };
+        getFlakeInputs = system: inputs // { nixpkgs' = allSystemsJar.nixpkgs'.${system}; };
 
         hmAliasModules = (import ./home/applications/alias-groups.nix { inherit pkgs; }).aliasModules;
         homeConfig =
@@ -419,11 +421,11 @@
             system ? "x86_64-linux",
           }:
           inputs.home-manager.lib.homeManagerConfiguration {
-            pkgs = allSystemsJar.${system}.pkgs;
+            pkgs = allSystemsJar.pkgs.${system};
             modules = [ ./home/users/${username} ] ++ modules ++ hmAliasModules;
             extraSpecialArgs = {
               flake-inputs = getFlakeInputs system;
-              lib = allSystemsJar.${system}.hmlib;
+              lib = allSystemsJar.hmlib.${system};
               inherit system;
               inherit username;
               inherit hostname;
@@ -444,7 +446,7 @@
           ];
         };
         overlayModule = {
-          nixpkgs.overlays = allSystemsJar.${system}.overlays;
+          nixpkgs.overlays = allSystemsJar.overlays.${system};
         };
         versionModule = {
           system.nixos.revision = inputs.nixpkgs.rev or inputs.nixpkgs.shortRev;
@@ -488,14 +490,14 @@
         systemConfigs = {
           gha = inputs.system-manager.lib.makeSystemConfig {
             modules = [ ./hosts/sysm/gha/configuration.nix ];
-            overlays = allSystemsJar.${system}.overlays;
+            overlays = allSystemsJar.overlays.${system};
             extraSpecialArgs = {
               inherit (pkgs) lib;
             };
           };
           vps = inputs.system-manager.lib.makeSystemConfig {
             modules = [ ./hosts/sysm/vps/configuration.nix ];
-            overlays = allSystemsJar.${system}.overlays;
+            overlays = allSystemsJar.overlays.${system};
             extraSpecialArgs = {
               inherit (pkgs) lib;
             };
@@ -554,7 +556,7 @@
                   useUserPackages = true;
                   users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
-                    lib = allSystemsJar.${system}.hmlib;
+                    lib = allSystemsJar.hmlib.${system};
                     flake-inputs = getFlakeInputs system;
                     username = liveuser;
                     hostname = livehost;
@@ -611,7 +613,7 @@
                   useUserPackages = true;
                   users.nixos = ./home/users/nixos;
                   extraSpecialArgs = {
-                    lib = allSystemsJar.${system}.hmlib;
+                    lib = allSystemsJar.hmlib.${system};
                     flake-inputs = getFlakeInputs system;
                     username = liveuser;
                     hostname = livehost;
@@ -635,7 +637,7 @@
           let
             system = "aarch64-linux";
             mdroid = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-              pkgs = allSystemsJar.${system}.pkgs;
+              pkgs = allSystemsJar.pkgs.${system};
               extraSpecialArgs = {
                 flake-inputs = getFlakeInputs system;
                 hmSharedModules = hmAliasModules;
