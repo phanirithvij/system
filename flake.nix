@@ -227,9 +227,7 @@
                 gwt = inputs.gowt.packages.${system}.default;
               })
             ]
-            ++ (builtins.attrValues
-              (import "${inputs.nur-pkgs}" { }).overlays
-            )
+            ++ (builtins.attrValues (import "${inputs.nur-pkgs}" { }).overlays)
             ++ [
               (final: prev: {
                 inherit
@@ -326,7 +324,7 @@
               navi-master = pkgs.navi;
               home-manager = hm;
               nix-patcher = nixp;
-              nvidia-offload = nvidia-offload;
+              inherit nvidia-offload;
             }
             // lazyApps
             // wrappedPkgs
@@ -385,10 +383,11 @@
             packages = inputs.self.checks.${system}.git-hooks-check.enabledPackages;
             extraCommands = [ ];
             devshell = import inputs.devshell { nixpkgs = pkgs; };
-          }).shell.overrideAttrs (prev: {
-            name = "system";
-            shellHook = prev.shellHook + inputs.self.checks.${system}.git-hooks-check.shellHook;
-          });
+          }).shell.overrideAttrs
+            (prev: {
+              name = "system";
+              shellHook = prev.shellHook + inputs.self.checks.${system}.git-hooks-check.shellHook;
+            });
       }
     )
     // (
