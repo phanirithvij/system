@@ -7,6 +7,7 @@ in
   services.plex.enable = true;
   services.navidrome = {
     enable = true;
+    openFirewall = true;
     settings = {
       inherit (hostvars) MusicFolder;
     };
