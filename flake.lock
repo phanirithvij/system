@@ -783,16 +783,16 @@
     "modetc": {
       "flake": false,
       "locked": {
-        "lastModified": 1777362171,
-        "narHash": "sha256-3yD24e07RHBc5UdDk25/fjdT3iGpNi0cN7o6hw8wRSs=",
+        "lastModified": 1777573772,
+        "narHash": "sha256-F+/IX0Ka6kTxyEpeUkFFq9jC4uEtTqZVHSJsAKdAuw0=",
         "owner": "phanirithvij",
         "repo": "modetc-fork",
-        "rev": "f571c4efbff8fb2f26752ad9a439937a41503ea6",
+        "rev": "1ee7486c41d4a4d847f19cde7035a7121e1f0fc7",
         "type": "github"
       },
       "original": {
         "owner": "phanirithvij",
-        "ref": "master",
+        "ref": "local",
         "repo": "modetc-fork",
         "type": "github"
       }
@@ -1089,16 +1089,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1777147142,
-        "narHash": "sha256-yTpUazQvJ/IbGX2amVjU7gGX0YktstkPymF1oFGCmks=",
+        "lastModified": 1777101655,
+        "narHash": "sha256-rADyy0IaCnyanWXFhrhkHj0+o2G2Y1Kb72MNUtjyj4A=",
         "owner": "phanirithvij",
         "repo": "nixpkgs",
-        "rev": "0129f6c580b0bac52210a78665cc10ae4fd4425b",
+        "rev": "087dff059492f6d6f24cb2c390756edf87dc3104",
         "type": "github"
       },
       "original": {
         "owner": "phanirithvij",
-        "ref": "nixos-patched-bisect",
+        "ref": "nixos-patched",
         "repo": "nixpkgs",
         "type": "github"
       }

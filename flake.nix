@@ -4,7 +4,7 @@
     # TODO checkout https://github.com/blitz/hydrasect
     # useful for git bisecting, use path:/abs/path instead for the same
     #nixpkgs.url = "git+file:///shed/Projects/nixhome/nixpkgs/nixos-unstable?shallow=1";
-    nixpkgs.url = "github:phanirithvij/nixpkgs/nixos-patched-bisect";
+    nixpkgs.url = "github:phanirithvij/nixpkgs/nixos-patched";
     nixpkgs-upstream.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
     nixpkgs-patcher.url = "github:phanirithvij/nixpkgs-patcher/main";
@@ -158,7 +158,7 @@
 
     # dotfiles relocator kernel module
     # maintain own fork without any changes, because author's selfhosted repo can go down (from my experience)
-    modetc.url = "github:phanirithvij/modetc-fork/master";
+    modetc.url = "github:phanirithvij/modetc-fork/local";
     modetc.flake = false;
 
     # nix client with schema support: see https://github.com/NixOS/nix/pull/8892
