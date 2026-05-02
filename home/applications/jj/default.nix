@@ -5,7 +5,7 @@
     pkgs.jujutsu
 
     pkgs.jjui
-    #pkgs.lazyjj #nur-pkgs unstable
+    #pkgs.lazyjj # dropped from nurpkgs, forked to https://github.com/blazingjj/blazingjj
     #pkgs.jj-fzf # FIXME: broken
   ];
 }

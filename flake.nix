@@ -295,6 +295,7 @@
                     "zoom"
                     "nvidia-x11"
                     "nvidia-settings"
+                    "nvidia-kernel-modules"
                   ];
                 in
                 if byName then lib.warn "Allowing unfree package: ${pname}" true else false;
