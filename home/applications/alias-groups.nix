@@ -61,7 +61,7 @@ let
     [
       pkgs.jujutsu
       {
-        laj = "lazyjj";
+        bj = "blazingjj";
         ju = "jjui";
         fjf = "jj-fzf";
       }
