@@ -92,6 +92,9 @@
     nix-index-database.url = "github:nix-community/nix-index-database/main";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
+    forge.url = "github:ngi-nix/forge/master";
+    forge.inputs.nixpkgs.follows = "nixpkgs";
+
     #nix-patcher.url = "path:/shed/Projects/others/nixpkgs-maintain/nix-patcher";
     nix-patcher.url = "github:phanirithvij/nix-patcher/main"; # to manage own nixpkgs fork
     nix-patcher.inputs.nixpkgs.follows = "nixpkgs";

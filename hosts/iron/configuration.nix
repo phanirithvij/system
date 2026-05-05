@@ -45,6 +45,7 @@ in
     ../../nixos/applications/selfhosted/mariadb-dolphie.nix
     ../../nixos/applications/selfhosted/qbittorrent.nix
     ../../nixos/applications/selfhosted/goupile.nix
+    ../../nixos/applications/selfhosted/forge.nix
     # ../../nixos/applications/spotify.nix
     ../../nixos/applications/tui.nix
     ../../nixos/applications/scripts/gh-pr-checkout-shallow.nix
