@@ -377,17 +377,17 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1777903467,
-        "narHash": "sha256-Nx6bm2JtAbWOfYFQmAFWbQcMYEx9KHl+qRoCfjbVWrs=",
-        "owner": "ngi-nix",
-        "repo": "forge",
-        "rev": "cacd664362a92e9a5b6db484f765659c8a28876c",
+        "lastModified": 1778039068,
+        "narHash": "sha256-QGdd6T/+NXxKH8pnMI+khmmJ4M1jNC3lP2uWXdkJMA4=",
+        "owner": "phanirithvij",
+        "repo": "nix-forge",
+        "rev": "848b9ebff783c91a9c6a89fd2edeba3872e37c8a",
         "type": "github"
       },
       "original": {
-        "owner": "ngi-nix",
-        "ref": "master",
-        "repo": "forge",
+        "owner": "phanirithvij",
+        "ref": "expose-nixosmodule",
+        "repo": "nix-forge",
         "type": "github"
       }
     },
