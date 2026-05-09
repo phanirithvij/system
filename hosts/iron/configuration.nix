@@ -322,7 +322,7 @@ in
     binfmt = true;
   };
 
-  services.flatpak.enable = true;
+  #services.flatpak.enable = true;
   # flatpak requires an xdg portal
   # TODO but I have it enabled in the xfce desktop profile, why isn't that picked up?
   # I guess for one of the specialisations?
