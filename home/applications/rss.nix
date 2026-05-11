@@ -67,6 +67,7 @@
         "https://myme.no/atom-feed.xml"
         "https://nixos.mayflower.consulting/blog/index.xml"
         "https://notashelf.dev/rss.xml"
+        "https://www.rousette.org.uk/index.xml"
         "https://thedroneely.com/posts/rss.xml"
         "https://trofi.github.io/feed/rss.xml"
         "https://gitlab.com/thelinuxcast/my-dots/-/commits/master/nixos?format=atom"
