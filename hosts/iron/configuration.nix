@@ -351,6 +351,7 @@ in
       ];
       #shell = pkgs.fish; # chsh equivalent
       shell = pkgs.bash;
+      packages = [ pkgs.collabora-desktop ];
     };
   programs.fish.enable = true;
 
