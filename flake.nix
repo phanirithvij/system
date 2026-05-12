@@ -696,7 +696,6 @@
               inputs.sops-nix.nixosModules.sops
               inputs.niri.nixosModules.niri
               ./hosts/${linuxhost}/configuration.nix
-              ./nixos/modules/rustical.nix
               inputs.lazy-apps.nixosModules.default
               {
                 # prevent the patched nixpkgs from gc as well, not just flake inputs
