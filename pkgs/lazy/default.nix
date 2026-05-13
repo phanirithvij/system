@@ -216,6 +216,7 @@ let
       ) packages
     )
   );
+  allLazyApps = nixpkgsPkgs // lazyPkgs;
 in
 if repl then
   {
@@ -226,9 +227,8 @@ if repl then
       lazyPkgs
       mkLazyApp
       nixpkgsPkgs
-      desktopItems
-      getDesktopItems
+      allLazyApps
       ;
   }
 else
-  nixpkgsPkgs // lazyPkgs
+  allLazyApps
