@@ -887,10 +887,10 @@
         ]
       },
       "locked": {
-        "lastModified": 1778656177,
-        "narHash": "sha256-IormBV2zQwbM3QCZvrtRwcW9Ulv3lV4v0yz4Rdq4NBs=",
+        "lastModified": 1778660091,
+        "narHash": "sha256-rE+bBfQqA+OZsxifNKiiFjsCr+uTBbEbhMP1h85xWdM=",
         "ref": "refs/heads/vibed",
-        "rev": "306b0cb7c0f7bc401859b862a8f58b188de0107f",
+        "rev": "d6c9e30497956a9e560d3489b6c0371e8f2df2d2",
         "shallow": true,
         "type": "git",
         "url": "file:///shed/Projects/nixer/core/lazy-apps"

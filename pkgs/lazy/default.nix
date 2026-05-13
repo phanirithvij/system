@@ -27,41 +27,12 @@ let
   # cargs = args // {
   cargs = { inherit mkLazyApp pkgs; };
 
-  appIcons = lib.fileset.toSource {
-    # TODO figure out a way to filter for only valid icon types, svg, png etc.
-    fileset = lib.fileset.fileFilter (file: !file.hasExt "nix") ./desktopItems;
-    root = ./appIcons;
-  };
-
-  # there is no perfect structure to app icons like desktop files
-  # TODO find the valid paths they could be
-  getAppIcons =
-    name:
-    lib.optional (builtins.pathExists "${appIcons}/${name}") "${appIcons}/${name}"
-    ++ lib.optionals (builtins.pathExists "${appIcons}/${name}") (
-      lib.filesystem.listFilesRecursive "${appIcons}/${name}"
-    );
-
-  desktopItems = lib.fileset.toSource {
-    fileset = lib.fileset.fileFilter (file: file.hasExt "desktop") ./desktopItems;
-    root = ./desktopItems;
-  };
-
-  getDesktopItems =
-    name:
-    lib.optional (builtins.pathExists "${desktopItems}/${name}.desktop") "${desktopItems}/${name}.desktop"
-    ++ lib.optionals (builtins.pathExists "${desktopItems}/${name}") (
-      lib.filesystem.listFilesRecursive "${desktopItems}/${name}"
-    );
-
   mkLazyApp =
     { pkg, ... }@args:
     let
-      exe = args.exe or (lazy-app.override { inherit pkg; }).exeName;
-      desktopItems = getDesktopItems exe;
       lPkg = lazy-app.override (
         {
-          inherit pkg desktopItems;
+          inherit pkg;
         }
         // args
       );
