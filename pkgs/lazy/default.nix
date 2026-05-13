@@ -4,20 +4,16 @@
   pkgs ? import <nixpkgs> { },
   system ? "x86_64-linux",
   flake-inputs ? {
-    lazy-apps.packages.${system}.lazy-app =
-      (
-        # IFD? what about npins imports?
-        # TODO: flake-inputs
-        (import (
-          pkgs.fetchFromGitHub {
-            owner = "phanirithvij";
-            repo = "lazy-apps";
-            rev = "master";
-            hash = "sha256-3U87bUzrRfo59ciATj016CIgg21WKh8L6oYDitarpgg=";
-          }
-        )).mkLazyApps
-          { inherit pkgs; }
-      ).lazy-app;
+    lazy-apps.packages.${system} =
+      (import (
+        pkgs.fetchFromGitHub {
+          owner = "phanirithvij";
+          repo = "lazy-apps";
+          rev = "master";
+          hash = "sha256-3U87bUzrRfo59ciATj016CIgg21WKh8L6oYDitarpgg=";
+        }
+      )).mkLazyApps
+        { inherit pkgs; };
   },
   repl ? false, # cd pkgs/lazy; env NIXPKGS_ALLOW_UNFREE=1 nix repl -f default.nix --arg repl true --impure
 }:
@@ -61,13 +57,13 @@ let
   mkLazyApp =
     { pkg, ... }@args:
     let
-      exe = args.exe or lPkg.exeName;
+      exe = args.exe or (lazy-app.override { inherit pkg; }).exeName;
       desktopItems = getDesktopItems exe;
       lPkg = lazy-app.override (
         {
           inherit pkg desktopItems;
         }
-        // (removeAttrs args [ "exe" ]) # override desktopItems from args
+        // args
       );
     in
     lPkg;
@@ -216,7 +212,7 @@ let
       ) packages
     )
   );
-  allLazyApps = (flake-inputs.lazy-apps.packages.${system}.mkLazyApps { inherit pkgs; }).checkCollisions (
+  allLazyApps = flake-inputs.lazy-apps.packages.${system}.checkCollisions (
     nixpkgsPkgs // lazyPkgs
   );
 in

@@ -2,4 +2,5 @@
 { mkLazyApp, pkgs, ... }:
 mkLazyApp {
   pkg = pkgs.tesseract;
+  exe = "jupyter-workspace";
 }
