@@ -76,7 +76,7 @@ in
     #lazyPkgs.joplin # slow node tui app
 
     #ctpv
-    lazyPkgs.blobdrop
+    # lazyPkgs.blobdrop # moved to programs.lazy-apps.applications
 
     glow # markdown previewer in terminal
     python3Packages.grip # markdown preview in browser
@@ -87,24 +87,9 @@ in
     bluetui
     #overskride
 
-    lazyPkgs.gping
-
-    lazyPkgs.devbox
-    lazyPkgs.n-m3u8dl-re
-
     # desktop apps
     #microsoft-edge # for its bing ai integration (slow af)
     qbittorrent
-    lazyPkgs.qimgv
-    # lazyPkgs.losslesscut
-    lazyPkgs.beekeeper-studio
-    lazyPkgs.koreader
-    lazyPkgs.localsend
-    lazyPkgs.rclone-browser
-    lazyPkgs.spotify
-    lazyPkgs.tor-browser
-    lazyPkgs.yacreader
-    lazyPkgs.subtitlecomposer
 
     ffmpeg-headless
     sqlite-interactive
@@ -150,6 +135,25 @@ in
 
     (lib.mine.GPUOffloadApp config.programs.firefox.package "firefox")
   ];
+
+  programs.lazy-apps = {
+    enable = true;
+    applications = with pkgs.lazyPkgs; [
+      blobdrop
+      gping
+      devbox
+      n-m3u8dl-re
+      qimgv
+      beekeeper-studio
+      koreader
+      localsend
+      rclone-browser
+      spotify
+      tor-browser
+      yacreader
+      subtitlecomposer
+    ];
+  };
 
   programs.bottom.enable = true;
   programs.bottom.package = pkgs.lazyPkgs.bottom;
