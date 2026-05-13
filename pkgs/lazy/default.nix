@@ -124,7 +124,7 @@ let
     "tg-archive"
     "tmsu"
     "tym"
-    "ungoogled-chromium"
+    # "ungoogled-chromium" # now in ungoogled-chromium.nix
     "variety"
     "vhs"
     "w3m"
@@ -171,7 +171,6 @@ let
       inherit name;
       value = mkLazyApp {
         pkg = lib.getAttrFromPath (lib.splitString "." name) pkgs;
-        exe = name;
         debugLogs = true;
       };
     }) pkgsList
