@@ -49,8 +49,8 @@
     wrapper-manager.url = "github:viperML/wrapper-manager/master";
 
     # lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # upstream
-    # lazy-apps.url = "git+file:///shed/Projects/nixer/core/lazy-apps?shallow=1";
-    lazy-apps.url = "github:phanirithvij/lazy-apps/master"; # hard fork
+    lazy-apps.url = "git+file:///shed/Projects/nixer/core/lazy-apps?shallow=1";
+    #lazy-apps.url = "github:phanirithvij/lazy-apps/master"; # hard fork
     lazy-apps.inputs.nixpkgs.follows = "nixpkgs";
     lazy-apps.inputs.pre-commit-hooks.follows = "git-hooks";
 

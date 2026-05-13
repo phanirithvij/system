@@ -887,18 +887,18 @@
         ]
       },
       "locked": {
-        "lastModified": 1765130494,
-        "narHash": "sha256-3U87bUzrRfo59ciATj016CIgg21WKh8L6oYDitarpgg=",
-        "owner": "phanirithvij",
-        "repo": "lazy-apps",
-        "rev": "116fa1b4e9c75e28162936a17feaf357082966fc",
-        "type": "github"
+        "lastModified": 1777199502,
+        "narHash": "sha256-O+FH1h4rxTj4DM9HAZrMAMbaY0kO7oTQb4LM4VOFVlg=",
+        "ref": "refs/heads/vibed",
+        "rev": "d68d48eda86b5b9be7df3bc66b945024b854b6af",
+        "shallow": true,
+        "type": "git",
+        "url": "file:///shed/Projects/nixer/core/lazy-apps"
       },
       "original": {
-        "owner": "phanirithvij",
-        "ref": "master",
-        "repo": "lazy-apps",
-        "type": "github"
+        "shallow": true,
+        "type": "git",
+        "url": "file:///shed/Projects/nixer/core/lazy-apps"
       }
     },
     "modetc": {
