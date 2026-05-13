@@ -6,7 +6,7 @@
       runtimeInputs = with pkgs; [
         zstd
         coreutils
-        asciinema_3
+        asciinema
         pkgs.wrappedPkgs.tmux
       ];
       text = builtins.readFile ../../../scripts/trex.sh;
