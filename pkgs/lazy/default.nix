@@ -216,7 +216,9 @@ let
       ) packages
     )
   );
-  allLazyApps = nixpkgsPkgs // lazyPkgs;
+  allLazyApps = (flake-inputs.lazy-apps.packages.${system}.mkLazyApps { inherit pkgs; }).checkCollisions (
+    nixpkgsPkgs // lazyPkgs
+  );
 in
 if repl then
   {
