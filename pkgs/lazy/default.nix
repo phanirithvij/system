@@ -182,9 +182,7 @@ let
       ) packages
     )
   );
-  allLazyApps = flake-inputs.lazy-apps.packages.${system}.checkCollisions (
-    nixpkgsPkgs // lazyPkgs
-  );
+  allLazyApps = flake-inputs.lazy-apps.packages.${system}.checkCollisions (nixpkgsPkgs // lazyPkgs);
 in
 if repl then
   {
