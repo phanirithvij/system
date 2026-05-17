@@ -235,7 +235,7 @@ in
 
   password_mgr.enable = true;
 
-  home.stateVersion = "25.05";
+  home.stateVersion = "26.05";
 
   programs.home-manager.enable = true;
 }
