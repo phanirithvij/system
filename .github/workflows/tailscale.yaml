@@ -14,7 +14,7 @@ on:
         type: boolean
         default: false
       macos-old:
-        description: "Run on macOS Intel (macos-13)"
+        description: "Run on macOS Intel (macos-15)"
         type: boolean
         default: false
 
@@ -31,7 +31,7 @@ jobs:
           [ "${{ inputs.linux }}" == "true" ] && MATRIX+="\"ubuntu-latest\","
           [ "${{ inputs.linux-arm }}" == "true" ] && MATRIX+="\"ubuntu-24.04-arm\","
           [ "${{ inputs.macos }}" == "true" ] && MATRIX+="\"macos-latest\","
-          [ "${{ inputs.macos-old }}" == "true" ] && MATRIX+="\"macos-13\","
+          [ "${{ inputs.macos-old }}" == "true" ] && MATRIX+="\"macos-15-intel\","
 
           # Strip the trailing comma and close the JSON array
           MATRIX="${MATRIX%,}]"
