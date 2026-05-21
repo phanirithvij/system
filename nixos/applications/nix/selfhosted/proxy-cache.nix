@@ -16,7 +16,7 @@
     # TODO move to nur-pkgs and overlay it
     package = pkgs.caddy.withPlugins {
       plugins = [ "github.com/caddyserver/cache-handler@v0.16.0" ];
-      hash = "sha256-2RCgYzr5tPjrAXDhYk8++48ZxdnmOXII368DufVomSQ=";
+      hash = "sha256-g37K8Cf0cfYkvNIJaF7Gkux2W11v5J8SlqaKAruChtQ=";
     };
     virtualHosts."proxy-cache.${config.networking.fqdn}" = {
       extraConfig = ''
