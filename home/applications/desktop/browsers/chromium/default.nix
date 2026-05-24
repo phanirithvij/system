@@ -61,6 +61,12 @@
           id = "hlepfoohegkhhmjieoechaddaejaokhf";
           hash = "sha256-+dKFa5tx4cRft/q4pPldUznWgamojMjXb2xRfAN3kFU=";
         })
+        (createChromiumExtension {
+          # floccus bookmark sync
+          version = "5.9.1";
+          id = "fnaicdffflnofjppbagibeoednhnbjhg";
+          hash = "sha256-+/cyGI5sj6V9OitbBeOl/pkM//Vj/qACXpgkn8TETz0=";
+        })
       ];
   };
 }
