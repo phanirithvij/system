@@ -67,6 +67,12 @@
           id = "fnaicdffflnofjppbagibeoednhnbjhg";
           hash = "sha256-+/cyGI5sj6V9OitbBeOl/pkM//Vj/qACXpgkn8TETz0=";
         })
+        (createChromiumExtension {
+          # kagi search
+          version = "1.2.2.5";
+          id = "cdglnehniifkbagbbombnjghhcihifij";
+          hash = "sha256-weiUUUiZeeIlz/k/d9VDSKNwcQtmAahwSIHt7Frwh7E=";
+        })
       ];
   };
 }
