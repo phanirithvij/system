@@ -52,5 +52,6 @@
       config.common.default = "*";
     };
     services.blueman.enable = true; # by default no bt gui
+    services.gnome.gnome-keyring.enable = false; # I use keepassxc
   };
 }
