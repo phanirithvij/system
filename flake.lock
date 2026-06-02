@@ -904,11 +904,11 @@
     "modetc": {
       "flake": false,
       "locked": {
-        "lastModified": 1777623225,
-        "narHash": "sha256-F+/IX0Ka6kTxyEpeUkFFq9jC4uEtTqZVHSJsAKdAuw0=",
+        "lastModified": 1778841577,
+        "narHash": "sha256-SRxwg3ovMPIWdgkw+09wka9QngBhzYjBcxYGvcUpBo4=",
         "owner": "phanirithvij",
         "repo": "modetc-fork",
-        "rev": "6b61bece303ec09fae297f466a65ad7ea8ef8f23",
+        "rev": "a3903d9c69e6c315c814bf86e101c1cbfdf02265",
         "type": "github"
       },
       "original": {
