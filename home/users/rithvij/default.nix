@@ -113,7 +113,7 @@ in
     cargo-update # needed?
     sccache # needed?
     cargo-binstall # needed?
-    pipx # needed?
+    #pipx # Broken temporarily needed?
     trash-cli # there is a rustrewrite for this, trashy maybe
     remote-touchpad
     #redbean ape com
