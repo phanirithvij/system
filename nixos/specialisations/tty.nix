@@ -34,17 +34,15 @@
       # and [Ctrl] + [-]
       services.kmscon = {
         enable = true;
-        hwRender = true;
-        extraConfig = ''
-          font-size=14
-        '';
-        fonts = [
-          {
-            name = "JetBrainsMono Nerd Font";
-            package = pkgs.nerd-fonts.jetbrains-mono;
-          }
-        ];
+        config = {
+          font-size = 14;
+          font-name = "JetBrainsMono Nerd Font";
+          hwaccel = true;
+        };
       };
+      fonts.packages = [
+        pkgs.nerd-fonts.jetbrains-mono
+      ];
     };
   };
 }
