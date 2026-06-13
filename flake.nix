@@ -209,7 +209,6 @@
     };
 
     nix-update.url = "github:Mic92/nix-update/main";
-    nix-update.inputs.flake-parts.follows = "flake-parts";
     nix-update.inputs.nixpkgs.follows = "nixpkgs";
     nix-update.inputs.treefmt-nix.follows = "treefmt-nix";
   };
