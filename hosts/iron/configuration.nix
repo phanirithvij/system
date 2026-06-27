@@ -477,6 +477,11 @@ in
       8096 # jellyfin
     ];
   };
+
+  # Supposedly better than default openresolv
+  # Also had to run `sudo tailscale up --accept-dns=true` once
+  services.resolved.enable = true;
+
   networking.nameservers = nameservers;
   networking.networkmanager.insertNameservers = [ "1.1.1.1" ];
 
