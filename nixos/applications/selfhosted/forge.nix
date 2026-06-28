@@ -4,5 +4,5 @@
   ...
 }:
 {
-  imports = [ flake-inputs.forge.packages.${system}.ironcalc-app.nixosModules.default ];
+  imports = [ flake-inputs.forge.packages.${system}.apps.ironcalc.nixosModules.default ];
 }
