@@ -1,7 +1,6 @@
 _: {
   imports = [
     ../../applications/scripts/copy.nix
-    ../../applications/scripts/hm-remote.nix
     ../../applications/scripts/home-manager-switch-specialisation.nix
     ../../applications/scripts/lazygit_fzf.nix
     ../../applications/scripts/nix-prefetch-patch.nix

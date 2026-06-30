@@ -392,6 +392,7 @@
         hm = inputs.home-manager.packages.${system}.default;
         nixp = inputs.nix-patcher.packages.${system}.nix-patcher;
         nh' = allSystemsJar.nurPkgs.${system}.nh;
+        hm-remote' = pkgs.callPackage ./scripts/nixinternal/hm-remote.nix { };
         nom' = allSystemsJar.nurPkgs.${system}.flakePkgs.nix-output-monitor;
         #nix-schema = pkgs.nix-schema { inherit system; }; # nur-pkgs overlay, cachix cache
 
@@ -476,6 +477,7 @@
               nom'
               cachix
               xc
+              hm-remote'
             ];
             packages = inputs.self.checks.${system}.git-hooks-check.enabledPackages; # these don't show up in menu
             extraCommands = [ ]; # should be in the format list of attrs devshell expects
