@@ -10,9 +10,10 @@
   ...
 }:
 {
-  networking.fqdn = "localhost:3239";
+  # TODO this looks wrong
+  # networking.fqdn = "localhost:3239";
   services.caddy = {
-    enable = true;
+    enable = false; # TODO caddy shouldn't run on port 80
     # TODO move to nur-pkgs and overlay it
     package = pkgs.caddy.withPlugins {
       plugins = [ "github.com/caddyserver/cache-handler@v0.16.0" ];
