@@ -7,11 +7,12 @@
   services.pixelfed = {
     enable = true;
     domain = "iron.tail4aa8d.ts.net";
-    nginx = {
-      forceSSL = true;
-      sslCertificate = "/etc/ssl/certs/pixelfed.crt";
-      sslCertificateKey = "/etc/ssl/private/pixelfed.key";
-    };
+    nginx.listen = [
+      {
+        port = 9393;
+        addr = "127.0.0.1";
+      }
+    ];
     # not a real secret
     secretFile = pkgs.writeText "dont-do-it-like-this" ''
       APP_KEY="base64:x/cMhKq1nL8e2V0rA5zP4vG7tB9wD2xF5yH8sJ1kMNo="
