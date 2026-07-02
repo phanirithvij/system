@@ -1,6 +1,8 @@
 { pkgs, ... }:
 {
+  xdg.configFile."fastfetch/config.jsonc".source = ./config/fastfetch/config.jsonc;
   home.packages = with pkgs.lazyPkgs; [
+    fastfetch
     fx
     hledger
     k9s
