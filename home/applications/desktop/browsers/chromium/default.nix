@@ -41,31 +41,31 @@
           # ublock origin
           version = "1.71.0";
           id = "cjpalhdlnbpafiamejdnhcphjbkeiagm";
-          hash = "sha256-VJ1fsew67rnYSg2Z8pqUlMtqYKjNA8Lmk6s5vqMyPBw=";
+          hash = "sha256-b18FKOXz5mGKbIMd5TvmXz95KQ7fTT44Qzk46xGCQ/I=";
         })
         (createChromiumExtension {
           # dark reader
           version = "4.9.125";
           id = "eimadpbcbfnmbkopoojfekhnkhdbieeh";
-          hash = "sha256-jAhpgyVucHif6fJ2VUJoOtPAcHUh7BdAEMr9JpdocBY=";
+          hash = "sha256-463iwFM5XippqdzU3J5c9asDc2XC6xbZlnLL2gCvilM=";
         })
         (createChromiumExtension {
           # search by image
           version = "8.5.2";
           id = "cnojnbdhbhnkbcieeekonklommdnndci";
-          hash = "sha256-tXmra22r8lM9WE/F2dM9gvLqG6xeUg4Q9PrwizJSKKs=";
+          hash = "sha256-zp7xrEAQ544OZV98dP/aAxhsBQAsLKqfFAqzn9NRQSY=";
         })
         (createChromiumExtension {
           # refined github
           version = "26.5.13";
           id = "hlepfoohegkhhmjieoechaddaejaokhf";
-          hash = "sha256-+dKFa5tx4cRft/q4pPldUznWgamojMjXb2xRfAN3kFU=";
+          hash = "sha256-+JF3aJ86r2RoKD8bFYLDi0ONPlyiTH9JrYdJ5Z106Ao=";
         })
         (createChromiumExtension {
           # floccus bookmark sync
           version = "5.9.1";
           id = "fnaicdffflnofjppbagibeoednhnbjhg";
-          hash = "sha256-+/cyGI5sj6V9OitbBeOl/pkM//Vj/qACXpgkn8TETz0=";
+          hash = "sha256-tIJVy4GCWxY1uIHge4Z3f511MTNhRMZTYToXf/u9yTg=";
         })
         (createChromiumExtension {
           # kagi search
