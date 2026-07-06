@@ -21,7 +21,7 @@ in
 
   hardware.firmware = with pkgs; [
     (compressFirmwareZstd wireless-regdb)
-    pkgs.nurPkgs.linux-firmware-iron-zstd # custom filtered firmware files
+    pkgs.nurPkgs.all.linux-firmware-iron-zstd # custom filtered firmware files
     # (compressFirmwareZstd linux-firmware) # original nixpkgs equivalent
   ];
 

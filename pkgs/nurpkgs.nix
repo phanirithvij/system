@@ -48,6 +48,8 @@ let
       # skip individual packages by name
       byName = builtins.elem n [
         "overlayShell" # not useful here
+        "linux-firmware-iron-zstd" # should not end up in leaves
+        "linux-firmware-nixus-zstd"
       ];
       byNameNoWarn = builtins.elem n [
         "unstablePkgs"
