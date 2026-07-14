@@ -8,7 +8,7 @@ let
 in
 {
   imports = [
-    (import ./navi.nix (args // { inherit wifipassFile; }))
+    #(import ./navi.nix (args // { inherit wifipassFile; }))
     (import ./espanso.nix (args // { inherit wifipassFile; }))
   ];
   # TODO buku server, buku webext etc?

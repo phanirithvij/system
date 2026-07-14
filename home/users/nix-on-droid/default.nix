@@ -1,18 +1,19 @@
 {
   pkgs, # BUG, remove pkgs here and it won't show up in args.pkgs
-  config,
   username,
   ...
-}@args:
+}:
 {
   imports = [
-    (import ../../applications/bookmarks/navi.nix (
-      args
-      // {
-        inherit pkgs;
-        wifipassFile = config.sops.secrets.wifi_password_file.path;
-      }
-    ))
+    /*
+      (import ../../applications/bookmarks/navi.nix (
+        args
+        // {
+          inherit pkgs;
+          wifipassFile = config.sops.secrets.wifi_password_file.path;
+        }
+      ))
+    */
     ../../applications/direnv.nix
     ../../applications/editors
     ../../applications/git
