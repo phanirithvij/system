@@ -95,6 +95,10 @@
 
     forge.url = "github:ngi-nix/forge/master";
     forge.inputs.nixpkgs.follows = "nixpkgs";
+    forge.inputs.nimi.follows = "forge-nimi";
+
+    forge-nimi.url = "github:ngi-nix/nimi/ngi-patches";
+    forge-nimi.inputs.nixpkgs.follows = "nixpkgs";
 
     #nix-patcher.url = "path:/shed/Projects/others/nixpkgs-maintain/nix-patcher";
     nix-patcher.url = "github:phanirithvij/nix-patcher/main"; # to manage own nixpkgs fork
