@@ -42,7 +42,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nimi.url = "github:weyl-ai/nimi/master";
+    #nimi.url = "github:weyl-ai/nimi/master";
+    # https://github.com/weyl-ai/nimi/pull/22
+    nimi.url = "github:phanirithvij/nimi/fixes";
     nimi.inputs.nixpkgs.follows = "nixpkgs";
 
     wrapper-manager.url = "github:viperML/wrapper-manager/master";

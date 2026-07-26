@@ -944,16 +944,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1776191855,
-        "narHash": "sha256-F+dH5LUBY27zIfA6aPQ5jGQSVMoy+4fiuv2oIKdlVcE=",
-        "owner": "weyl-ai",
+        "lastModified": 1785061699,
+        "narHash": "sha256-RdwVS9CRTdhod2KHklH5/Rdgw8LGhpxR4p6XeNr5s88=",
+        "owner": "phanirithvij",
         "repo": "nimi",
-        "rev": "6ab31237f98bd39e2659a24db12316a37d560d32",
+        "rev": "0b3989dfae82d5575ddb1d652aee125e56d14b06",
         "type": "github"
       },
       "original": {
-        "owner": "weyl-ai",
-        "ref": "master",
+        "owner": "phanirithvij",
+        "ref": "fixes",
         "repo": "nimi",
         "type": "github"
       }
