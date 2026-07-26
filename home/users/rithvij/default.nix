@@ -219,7 +219,8 @@ in
   programs.gallery-dl.enable = true;
   programs.jq.enable = true;
 
-  programs.poetry.enable = true;
+  # broken for now
+  #programs.poetry.enable = true;
 
   programs.ripgrep.enable = true;
 
