@@ -4,7 +4,6 @@
     enable = true;
     gitCredentialHelper.enable = true;
     extensions = with pkgs; [
-      gh-actions-cache
       gh-eco
       gh-f
       gh-i

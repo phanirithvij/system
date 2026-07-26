@@ -10,7 +10,6 @@ from pathlib import Path
 from typing import Dict, List, Optional
 from datetime import datetime, timezone
 
-
 LOCKFILE = "nixpkgs-pr-pins.json"
 UPSTREAM_REPO = "NixOS/nixpkgs"
 
@@ -189,7 +188,9 @@ class PRPinTool:
                 )
 
                 if result.returncode != 0:
-                    print(f"⚠️  Conflict in PR #{pr_number}, commit {commit['sha'][:7]}")
+                    print(
+                        f"⚠️  Conflict in PR #{pr_number}, commit {commit['sha'][:7]}"
+                    )
 
                     if skip_on_conflict:
                         print(f"Skipping rest of PR #{pr_number}")

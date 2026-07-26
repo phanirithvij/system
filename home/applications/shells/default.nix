@@ -43,7 +43,9 @@ in
   programs.fzf = {
     enable = true;
     defaultCommand = "${pkgs.fd}/bin/fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
-    fileWidgetCommand = "${pkgs.fd}/bin/fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
+    fileWidget.command = "${pkgs.fd}/bin/fd --type f --strip-cwd-prefix --hidden --follow --exclude .git";
+    # I use atuin for ctl-r
+    historyWidget.command = "";
     tmux.enableShellIntegration = true; # for sesh
   };
   programs.starship = {
