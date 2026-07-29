@@ -230,13 +230,26 @@ in
   # fonts.enableDefaultPackages = lib.mkForce false; # enabled in graphical-desktop.nix
   # TODO bloated, strace alacritty and wezterm to determine required font files
   # remove the rest, cache this package in nur
-  fonts.packages = with pkgs.nerd-fonts; [
-    #fira-code
-    #fira-mono
-    jetbrains-mono
+  fonts.packages = with pkgs; [
+    #nerd-fonts.fira-code
+    #nerd-fonts.fira-mono
+    nerd-fonts.jetbrains-mono
     #pkgs.cascadia-code
     #pkgs.source-code-pro
+
+    # https://discourse.nixos.org/t/display-braille-characters-btop-25-11-kde-plasma/75017/3
+    # fonts.enableDefaultPackages
+    dejavu_fonts
+    # freefont_ttf # Braille in btop is bad
+    gyre-fonts # TrueType substitutes for standard PostScript fonts
+    liberation_ttf
+    unifont
+    noto-fonts-cjk-sans
+    noto-fonts-cjk-serif
+    noto-fonts-color-emoji
   ];
+  # https://discourse.nixos.org/t/display-braille-characters-btop-25-11-kde-plasma/75017/3
+  fonts.enableDefaultPackages = false;
   # https://github.com/NixOS/nixpkgs/issues/386413 | ladybird
   fonts.fontDir.enable = true;
 
