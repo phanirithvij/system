@@ -73,6 +73,12 @@
           id = "cdglnehniifkbagbbombnjghhcihifij";
           hash = "sha256-weiUUUiZeeIlz/k/d9VDSKNwcQtmAahwSIHt7Frwh7E=";
         })
+        (createChromiumExtension {
+          # unhook
+          version = "1.6.9";
+          id = "khncfooichmfjbepaaaebmommgaepoid";
+          hash = "sha256-hiKyaY3/CLquJqjDY49STmbfwSVi5yhpSBn6HvLigCM=";
+        })
       ];
   };
 }
