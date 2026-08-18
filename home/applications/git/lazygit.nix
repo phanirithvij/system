@@ -3,6 +3,7 @@
   home.packages = [ pkgs.xsel ]; # for copying patches to clipboard feature inside lazygit
   programs.lazygit = {
     enable = true;
+    package = pkgs.nurPkgs.lazygit;
     settings = {
       # TODO EDITOR and VISUAL not working clearly a bug
       # found this hack via https://github.com/jesseduffield/lazygit/issues/514#issuecomment-2616748964

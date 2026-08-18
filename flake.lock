@@ -1419,11 +1419,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1785568434,
-        "narHash": "sha256-Odk/WSs7jxEC7x2nKZSvgLJ0fnY7Xl8HQu/sffdPgjo=",
+        "lastModified": 1787032687,
+        "narHash": "sha256-2tltpwbcO4J6SLfDGDSoGEzrKoHwDjLxb+AZi5bhb1Y=",
         "owner": "phanirithvij",
         "repo": "nur-packages",
-        "rev": "f6cbba895c3a41396f37c3a0914ebd1064e7042b",
+        "rev": "a1085796c4f14ce23682c387117874264490a9fd",
         "type": "github"
       },
       "original": {
