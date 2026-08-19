@@ -130,7 +130,6 @@ let
     "nix-eval-jobs"
     "nix-init"
     "nix-sweep"
-    "nitrogen"
     "n-m3u8dl-re"
     "oh-my-git"
     "onboard"

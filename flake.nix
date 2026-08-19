@@ -42,9 +42,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    #nimi.url = "github:weyl-ai/nimi/master";
-    # https://github.com/weyl-ai/nimi/pull/22
-    nimi.url = "github:phanirithvij/nimi/fixes";
+    nimi.url = "github:weyl-ai/nimi/master";
     nimi.inputs.nixpkgs.follows = "nixpkgs";
 
     wrapper-manager.url = "github:viperML/wrapper-manager/master";
@@ -693,7 +691,8 @@
           ${linuxhost} = nixosSystem {
             inherit (pkgs) lib;
             inherit system pkgs;
-            trackDependencies = true;
+            # oddlama's thunk origins thing disabled for now
+            #trackDependencies = true;
             modules = [
               versionModule
               toolsModule

@@ -18,7 +18,6 @@
           pkgs.gst_all_1.gst-libav
         ];
       }))
-      plata-theme
       # TODO rofi custom theme, keybinds
       # xfce independant!
       rofi

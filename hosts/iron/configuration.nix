@@ -433,7 +433,7 @@ in
       eternal-terminal
 
       # oddlama/nixos-config-tui
-      nixos-config
+      # nixos-config
     ];
     variables.VISUAL = "nvim";
     # TODO sessionVariables vs variables what's the diff
