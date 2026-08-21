@@ -7,8 +7,9 @@ _: {
     #./xfce # now the default config
     ./empty.nix
     ./tty.nix
+    ./mangowm.nix # recc by stepbrobd in SoN meet
     #./plasma.nix
-    ./niri.nix
+    #./niri.nix # Disabled due to https://github.com/sodiboo/niri-flake/issues/1851
     #./hyprland.nix
     #./cinnamon.nix
     #./deepin.nix # for nostalgia, removed from nixpkgs at some point

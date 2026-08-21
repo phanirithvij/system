@@ -180,9 +180,12 @@
     hyprland.inputs.nixpkgs.follows = "nixpkgs";
     hyprland.inputs.pre-commit-hooks.follows = "git-hooks";
 
-    niri.url = "github:sodiboo/niri-flake/main";
-    niri.inputs.nixpkgs.follows = "nixpkgs";
-    niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+    #niri.url = "github:sodiboo/niri-flake/main";
+    #niri.inputs.nixpkgs.follows = "nixpkgs";
+    #niri.inputs.nixpkgs-stable.follows = "nixpkgs-stable";
+
+    mangowm.url = "github:mangowm/mango/main";
+    mangowm.inputs.nixpkgs.follows = "nixpkgs";
 
     ### Indirect dependencies, dedup
 
@@ -335,7 +338,7 @@
                 inherit (patched) nixpkgs';
               };
             })
-            ++ [ inputs.niri.overlays.niri ]
+            #++ [ inputs.niri.overlays.niri ]
             ++ [
               (_: _: {
                 gwt = inputs.gowt.packages.${system}.default;
@@ -698,7 +701,8 @@
               toolsModule
               overlayModule
               inputs.sops-nix.nixosModules.sops
-              inputs.niri.nixosModules.niri
+              #inputs.niri.nixosModules.niri
+              inputs.mangowm.nixosModules.mango
               ./hosts/${linuxhost}/configuration.nix
               inputs.lazy-apps.nixosModules.default
               {
