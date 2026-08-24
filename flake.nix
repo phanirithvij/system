@@ -300,6 +300,7 @@
                     "steam-unwrapped"
                     "honey-home"
                     "discord"
+                    "discord-unwrapped"
                     "zoom"
                     "nvidia-x11"
                     "nvidia-settings"
