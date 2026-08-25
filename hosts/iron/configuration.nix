@@ -453,6 +453,11 @@ in
     package = pkgs.gitFull;
   };
 
+  services.geoclue2 = {
+    enable = true;
+    geoProviderUrl = "http://iron:8080/v1/geolocate";
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
