@@ -73,10 +73,10 @@ jobs:
       #    nix_path: nixpkgs=channel:nixos-unstable
 
       # Because cachix nix is not working on macos properly with darwin-rebuild
-      #- uses: DeterminateSystems/nix-installer-action@main
+      - uses: DeterminateSystems/nix-installer-action@main
 
       # Determinate nix gives error with, nix.enable = false; and linux builder can't be used on darwin
-      - uses: samueldr/lix-gha-installer-action@latest
+      #- uses: samueldr/lix-gha-installer-action@latest
 
       # FIXME: fairly broken
       - uses: DeterminateSystems/magic-nix-cache-action@9934a5f127967bcd92e99961e365730ba57253de # main
@@ -127,7 +127,7 @@ jobs:
         run: |
           if [ "$RUNNER_OS" = "Linux" ]; then
             pushd hosts/sysm/gha-vnc
-            nix build -L .#systemConfigs.default --impure
+            nix build --extra-experimental-features "nix-command flakes" -L .#systemConfigs.default --impure
             cp /etc/nix/nix.conf nix.conf.old && cat nix.conf.old
             sudo rm /etc/nix/nix.conf # interferes with sysm activation
             sudo ./result/bin/activate
@@ -138,7 +138,7 @@ jobs:
             echo "system-manager is systemd-only. Handling macOS configuration..."
 
             # NOTE: If you have a nix-darwin config for this runner, uncomment and adjust:
-            # nix build -L .#darwinConfigurations.your-darwin-host.system --impure
+            # nix build --extra-experimental-features "nix-command flakes" -L .#darwinConfigurations.your-darwin-host.system --impure
             # ./result/sw/bin/darwin-rebuild switch --flake .#your-darwin-host
           fi
 
