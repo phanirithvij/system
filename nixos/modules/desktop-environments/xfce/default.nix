@@ -34,6 +34,8 @@
       xfce4-whiskermenu-plugin
       xfce4-clipman-plugin
       xfce4-panel-profiles
+      xfce4-timer-plugin
+      xfce4-time-out-plugin
 
       # https://www.reddit.com/r/xfce/comments/yya1j6/comment/iwu1okj
       # https://www.reddit.com/r/xfce/comments/ibx257/windows_number_shortcut
