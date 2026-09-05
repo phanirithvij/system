@@ -45,7 +45,7 @@
     nimi.url = "github:weyl-ai/nimi/master";
     nimi.inputs.nixpkgs.follows = "nixpkgs";
 
-    wrapper-manager.url = "github:viperML/wrapper-manager/master";
+    wrapper-manager.url = "git+https://codeberg.org/viperML/wrapper-manager?ref=master";
 
     # lazy-apps.url = "sourcehut:~rycee/lazy-apps"; # upstream
     # lazy-apps.url = "git+file:///shed/Projects/nixer/core/lazy-apps?shallow=1";
@@ -313,7 +313,7 @@
                 let
                   name = "${lib.getName pkg}-${lib.getVersion pkg}";
                   byName = builtins.elem name [
-                    "beekeeper-studio-5.5.7" # Electron version 32 is EOL, hm
+                    "beekeeper-studio-6.0.5" # Uses Electron 39.8.1, which was EOL on March 13 2026, with several known CVEs, hm
                   ];
                 in
                 if byName then lib.warn "Allowing insecure package: ${name}" true else false;

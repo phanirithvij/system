@@ -29,7 +29,11 @@
           config = {
             nix.settings = {
               system-features = [ "uid-range" ];
-              experimental-features = "nix-command flakes ca-derivations";
+              experimental-features = [
+                "nix-command"
+                "flakes"
+                "ca-derivations"
+              ];
               allowed-users = [ "*" ];
               trusted-users = [ "runner" ];
               build-users-group = "nixbld";
