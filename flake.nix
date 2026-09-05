@@ -692,34 +692,41 @@
             ]
             ++ args'.modules;
           };
-          ${linuxhost} = nixosSystem {
-            inherit (pkgs) lib;
-            inherit system pkgs;
-            # oddlama's thunk origins thing disabled for now
-            #trackDependencies = true;
-            modules = [
-              versionModule
-              toolsModule
-              overlayModule
-              inputs.sops-nix.nixosModules.sops
-              #inputs.niri.nixosModules.niri
-              inputs.mangowm.nixosModules.mango
-              ./hosts/${linuxhost}/configuration.nix
-              inputs.lazy-apps.nixosModules.default
-              {
-                # prevent the patched nixpkgs from gc as well, not just flake inputs
-                system.extraDependencies = [ nixpkgs' ];
-              }
-            ]
-            ++ args'.modules;
-            specialArgs = {
+          ${linuxhost} =
+            let
+              hm-remote' = pkgs.callPackage ./scripts/nixinternal/hm-remote.nix { };
+            in
+            nixosSystem {
               inherit (pkgs) lib;
-              flake-inputs = getFlakeInputs system;
-              inherit system; # TODO needed?
-              username = user;
-              hostname = linuxhost;
+              inherit system pkgs;
+              # oddlama's thunk origins thing disabled for now
+              #trackDependencies = true;
+              modules = [
+                versionModule
+                toolsModule
+                overlayModule
+                inputs.sops-nix.nixosModules.sops
+                #inputs.niri.nixosModules.niri
+                inputs.mangowm.nixosModules.mango
+                ./hosts/${linuxhost}/configuration.nix
+                inputs.lazy-apps.nixosModules.default
+                {
+                  # prevent the patched nixpkgs from gc as well, not just flake inputs
+                  system.extraDependencies = [ nixpkgs' ];
+                }
+                {
+                  environment.systemPackages = [ hm-remote' ];
+                }
+              ]
+              ++ args'.modules;
+              specialArgs = {
+                inherit (pkgs) lib;
+                flake-inputs = getFlakeInputs system;
+                inherit system; # TODO needed?
+                username = user;
+                hostname = linuxhost;
+              };
             };
-          };
           wsl = nixosSystem {
             inherit system pkgs;
             inherit (pkgs) lib;
