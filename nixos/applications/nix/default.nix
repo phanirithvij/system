@@ -46,15 +46,9 @@
         allow-import-from-derivation = false; # default is true
         trace-import-from-derivation = true; # trace if I do use it
         allowed-uris = "github: gitlab: git+ssh:// https://github.com/";
-        system-features = [
-          "uid-range" # for nspawn nixos tests
-        ];
-        auto-allocate-uids = true; # required for uid-range
         experimental-features = [
           "nix-command"
           "flakes"
-          "auto-allocate-uids" # required for nix.settings.auto-allocate-uids
-          "cgroups" # required for nspawn nixos tests
         ]; # ca-derivations - breaks nix develop based update scripts
         auto-optimise-store = true;
         trusted-users = [
