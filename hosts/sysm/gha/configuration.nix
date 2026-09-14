@@ -5,10 +5,10 @@
 }:
 {
   imports = [
-    ../modules/redis.nix
+    #../modules/redis.nix
     ../modules/swapspace.nix
-    ../modules/tmate-ssh-server.nix
-    ../modules/cloudflared.nix
+    #../modules/tmate-ssh-server.nix
+    #../modules/cloudflared.nix
   ];
   config = {
     nixpkgs.hostPlatform = "x86_64-linux";
@@ -41,16 +41,17 @@
       enable = true;
       settings.cooldown = 5;
     };
-    services.redis = {
-      package = pkgs.valkey;
-      servers.redrum = {
-        enable = true;
-        port = 6379;
-        user = "runner"; # TODO make it work with users.users.redis-redrum
-      };
-    };
-    services.tmate-ssh-server.enable = true;
-    services.tmate-ssh-server.host = ''"$(cat /etc/ngrok-tcp-hostname)"''; # will work at runtime?
+    #services.redis = {
+    #  package = pkgs.valkey;
+    #  servers.redrum = {
+    #    enable = true;
+    #    port = 6379;
+    #    user = "runner"; # TODO make it work with users.users.redis-redrum
+    #  };
+    #};
+    # TODO tmate is dead, alternative is upterm, tailscale, goteleport, ngrok
+    #services.tmate-ssh-server.enable = false;
+    #services.tmate-ssh-server.host = ''"$(cat /etc/ngrok-tcp-hostname)"''; # will work at runtime?
     # systemd.services.tmate-ssh-server.enable = lib.mkForce false; # TODO generate service file but disable?
   };
 }
