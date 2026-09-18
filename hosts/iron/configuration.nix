@@ -215,6 +215,11 @@ in
 
   networking.hostName = hostname;
   networking.networkmanager.enable = true;
+  networking.hosts = {
+    # https://github.com/repology/repology-rs/issues/560#issuecomment-5665179068
+    "92.63.176.157" = [ "repology.org" ];
+    "2a03:6f01:1:2::f159" = [ "repology.org" ];
+  };
   # https://kokada.dev/blog/an-unordered-list-of-hidden-gems-inside-nixos/
   #networking.networkmanager.wifi.backend = "iwd";
   # TODO get the iwd thing to work properly
