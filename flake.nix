@@ -313,7 +313,8 @@
                 let
                   name = "${lib.getName pkg}-${lib.getVersion pkg}";
                   byName = builtins.elem name [
-                    "beekeeper-studio-6.0.5" # Uses Electron 39.8.1, which was EOL on March 13 2026, with several known CVEs, hm
+                    "beekeeper-studio-6.1.1" # Uses Electron 39.8.1, which was EOL on March 13 2026, with several known CVEs, hm
+                    "electron-41.10.6" # Used by jitsi meet, hm
                   ];
                 in
                 if byName then lib.warn "Allowing insecure package: ${name}" true else false;
