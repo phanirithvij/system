@@ -72,6 +72,7 @@ in
     .config	.config
     .cache	.cache
     .var	.var
+    .Xresources	.Xresources
   '';
 
   boot.supportedFilesystems = [ "btrfs" ];
