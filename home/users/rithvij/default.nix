@@ -94,7 +94,8 @@ in
 
     # desktop apps
     #microsoft-edge # for its bing ai integration (slow af)
-    qbittorrent
+    #qbittorrent # using from nur
+    nurPkgs.qbittorrent
     lazyPkgs.qimgv
     # lazyPkgs.losslesscut
     lazyPkgs.beekeeper-studio
