@@ -252,7 +252,11 @@ in
     noto-fonts-cjk-sans
     noto-fonts-cjk-serif
     noto-fonts-color-emoji
+    lohit-fonts.telugu
   ];
+  i18n.inputMethod.ibus.engines = with pkgs.ibus-engines; [ m17n ];
+  i18n.inputMethod.type = "ibus";
+
   # https://discourse.nixos.org/t/display-braille-characters-btop-25-11-kde-plasma/75017/3
   fonts.enableDefaultPackages = false;
   # https://github.com/NixOS/nixpkgs/issues/386413 | ladybird
