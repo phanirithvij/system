@@ -68,12 +68,6 @@
           hash = "sha256-tIJVy4GCWxY1uIHge4Z3f511MTNhRMZTYToXf/u9yTg=";
         })
         (createChromiumExtension {
-          # kagi search
-          version = "1.2.2.5";
-          id = "cdglnehniifkbagbbombnjghhcihifij";
-          hash = "sha256-weiUUUiZeeIlz/k/d9VDSKNwcQtmAahwSIHt7Frwh7E=";
-        })
-        (createChromiumExtension {
           # unhook
           version = "1.6.9";
           id = "khncfooichmfjbepaaaebmommgaepoid";
