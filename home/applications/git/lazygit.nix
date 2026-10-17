@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   home.packages = [ pkgs.xsel ]; # for copying patches to clipboard feature inside lazygit
   programs.lazygit = {
@@ -13,10 +13,10 @@
         commit = {
           signOff = true;
         };
-        pagers = [
+        diffRenderers = [
           {
             colorArg = "always";
-            pager = "${pkgs.delta}/bin/delta --dark --paging=never";
+            command = "${lib.getExe pkgs.delta} --dark --paging=never";
           }
         ];
         autoFetch = false;
