@@ -199,6 +199,30 @@
         "type": "github"
       }
     },
+    "erosanix": {
+      "inputs": {
+        "flake-compat": [
+          "flake-compat"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1792246424,
+        "narHash": "sha256-Pp9qZ4wzxSjRLvP6tvA793re7Xru3g1lsQ9gbQtEE5g=",
+        "owner": "emmanuelrosa",
+        "repo": "erosanix",
+        "rev": "4b42b0275ca7e2b17e3fce55bd3e6d33560ca8f6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "emmanuelrosa",
+        "ref": "master",
+        "repo": "erosanix",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -1534,6 +1558,7 @@
         "crane": "crane",
         "devshell": "devshell",
         "devshell-lib": "devshell-lib",
+        "erosanix": "erosanix",
         "flake-compat": "flake-compat",
         "flake-parts": "flake-parts",
         "flake-schemas": "flake-schemas",
@@ -1566,6 +1591,7 @@
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
         "ssh-keys": "ssh-keys",
+        "sumatrapdf-nix": "sumatrapdf-nix",
         "system-manager": "system-manager",
         "systems": "systems_5",
         "treefmt-nix": "treefmt-nix_2",
@@ -1663,6 +1689,30 @@
       "original": {
         "type": "file",
         "url": "https://github.com/phanirithvij.keys"
+      }
+    },
+    "sumatrapdf-nix": {
+      "inputs": {
+        "erosanix": [
+          "erosanix"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1773327969,
+        "narHash": "sha256-dE8BDR9oWjIiKk1TnLpoQnBDwKwFn2YH3gFilWO91Yk=",
+        "owner": "emmanuelrosa",
+        "repo": "sumatrapdf-nix",
+        "rev": "d0016ea2332f4a3a6cd6c6b53c43bb19816fa41b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "emmanuelrosa",
+        "ref": "master",
+        "repo": "sumatrapdf-nix",
+        "type": "github"
       }
     },
     "system-manager": {

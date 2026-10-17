@@ -56,10 +56,21 @@
     sops-nix.url = "github:Mic92/sops-nix/master";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
 
+    # TODO eljamm/gowt
     #gowt.url = "git+file:///shed/Projects/own/ownix/go-wt";
     gowt.url = "github:phanirithvij/gowt";
     gowt.inputs.flake-utils.follows = "flake-utils";
     gowt.inputs.nixpkgs.follows = "nixpkgs";
+
+    # awesome!
+    sumatrapdf-nix.url = "github:emmanuelrosa/sumatrapdf-nix/master";
+    sumatrapdf-nix.inputs.nixpkgs.follows = "nixpkgs";
+    sumatrapdf-nix.inputs.erosanix.follows = "erosanix";
+
+    # TODO vliv, cdisplayex, win-only things?
+    erosanix.url = "github:emmanuelrosa/erosanix/master";
+    erosanix.inputs.nixpkgs.follows = "nixpkgs";
+    erosanix.inputs.flake-compat.follows = "flake-compat";
 
     oranc.url = "github:linyinfeng/oranc/main";
     oranc.inputs.flake-parts.follows = "flake-parts";
@@ -344,6 +355,7 @@
             ++ [
               (_: _: {
                 gwt = inputs.gowt.packages.${system}.default;
+                sumatrapdf = inputs.sumatrapdf-nix.packages.${system}.default;
               })
             ]
             ++ (builtins.attrValues

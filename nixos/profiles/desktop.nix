@@ -1,1 +1,6 @@
-_: { imports = [ ../applications/games.nix ]; }
+_: {
+  imports = [
+    ../applications/games.nix
+    ../applications/books/sumatrapdf.nix
+  ];
+}
