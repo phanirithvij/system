@@ -73,6 +73,12 @@
           id = "khncfooichmfjbepaaaebmommgaepoid";
           hash = "sha256-hiKyaY3/CLquJqjDY49STmbfwSVi5yhpSBn6HvLigCM=";
         })
+        (createChromiumExtension {
+          # hister
+          version = "0.32.0";
+          id = "cciilamhchpmbdnniabclekddabkifhb";
+          hash = "sha256-Ocq4jY/OK4Jki4dXS/BvrDEZHyAqqTo3erPVSB+eHOs=";
+        })
       ];
   };
 }
