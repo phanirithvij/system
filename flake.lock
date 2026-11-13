@@ -991,11 +991,11 @@
     "modetc": {
       "flake": false,
       "locked": {
-        "lastModified": 1793988213,
-        "narHash": "sha256-GcWYH6NZnMgaybQsIfaV2kJEF4tzhHYx0heSXhoOf5c=",
+        "lastModified": 1794417580,
+        "narHash": "sha256-jGCWxjn8uW/dnh77kOf+HTCkeD8vt/HxcjaBMwRAfJE=",
         "owner": "phanirithvij",
         "repo": "modetc-fork",
-        "rev": "e87abb606e514a7fe75df08940d7c0d5686ad9cc",
+        "rev": "0d486e106dd508376d476d5b274892dba44e0f75",
         "type": "github"
       },
       "original": {
