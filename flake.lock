@@ -434,9 +434,6 @@
         "elm2nix": "elm2nix",
         "flake-parts": "flake-parts_2",
         "import-tree": "import-tree",
-        "nimi": [
-          "forge-nimi"
-        ],
         "nix-utils": "nix-utils",
         "nixpkgs": [
           "nixpkgs"
@@ -444,16 +441,16 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1793880998,
-        "narHash": "sha256-NDkunCIEAFwpzM39BG2c6EYjcdDeHcOabcCkISjF73M=",
-        "owner": "ngi-nix",
+        "lastModified": 1794641901,
+        "narHash": "sha256-PXKDjhEHtsrLL7KLtFTChShpS7WBV+2ZimpCqhsW3OY=",
+        "owner": "phanirithvij",
         "repo": "forge",
-        "rev": "b65d6fef63c3593ff51ebbf55023d7daccf9c669",
+        "rev": "2124dc3f9c18c4cd0c5cf3ef479b3b3ab546b60e",
         "type": "github"
       },
       "original": {
-        "owner": "ngi-nix",
-        "ref": "master",
+        "owner": "phanirithvij",
+        "ref": "hister",
         "repo": "forge",
         "type": "github"
       }

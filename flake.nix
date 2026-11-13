@@ -102,9 +102,8 @@
     nix-index-database.url = "github:nix-community/nix-index-database/main";
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
 
-    forge.url = "github:ngi-nix/forge/master";
+    forge.url = "github:phanirithvij/forge/hister";
     forge.inputs.nixpkgs.follows = "nixpkgs";
-    forge.inputs.nimi.follows = "forge-nimi";
 
     forge-nimi.url = "github:ngi-nix/nimi/ngi-patches";
     forge-nimi.inputs.nixpkgs.follows = "nixpkgs";

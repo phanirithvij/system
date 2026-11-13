@@ -3,6 +3,12 @@
   system,
   ...
 }:
+let
+  forge = flake-inputs.forge.packages.${system};
+in
 {
-  imports = [ flake-inputs.forge.packages.${system}.apps.ironcalc.nixosModules.default ];
+  imports = [
+    forge.apps.ironcalc.nixosModules.default
+    forge.apps.hister.nixosModules.default
+  ];
 }
